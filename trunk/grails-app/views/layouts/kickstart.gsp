@@ -36,7 +36,7 @@
    		<g:pageProperty name="page.header" />
 	</g:if>
 	<g:else>
-		<g:render template="/layouts/header"/>														
+		<g:render template="/layouts/header"/>												
 	</g:else>
 
 	<!-- use different templates for HTML structure based on layout (e.g., grid or fluid; Default is grid) -->
