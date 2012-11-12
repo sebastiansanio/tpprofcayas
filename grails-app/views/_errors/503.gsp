@@ -22,11 +22,7 @@
 					<a href="./" class="btn btn-large btn-primary">
 						<i class="icon-chevron-left icon-white"></i>
 						Back to Home
-					</a>
-					<a href="/contact" class="btn btn-large btn-success">
-						<i class="icon-envelope"></i>
-						Contact Support
-					</a>					
+					</a>				
 				</div>
 			</div>
 		</div>

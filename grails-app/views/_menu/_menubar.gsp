@@ -5,6 +5,7 @@
 	<g:set var="menutype" value="nav nav-tabs" />
 </g:elseif>
 
+
 <!-- position of menu: LTR (left-to-right, European) or RTL (right-to-left, Oriental) -->
 <g:if test="${session.menuposition == 'right' && session.layout == 'grid'}">
 	<g:set var="menuposition" value="pull-right" />
