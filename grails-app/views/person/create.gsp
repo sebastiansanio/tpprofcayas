@@ -1,25 +1,25 @@
-<%@ page import="kickstartwithbootstrapgrailsplugin._DemoPage" %>
+<%@ page import="stakeholder.Person" %>
 <!doctype html>
 <html>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
-	<g:set var="entityName" value="${message(code: '_DemoPage.label', default: '_DemoPage')}" />
+	<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 
 <body>
 
-<section id="create-_DemoPage" class="first">
+<section id="create-person" class="first">
 
-	<g:hasErrors bean="${_DemoPageInstance}">
+	<g:hasErrors bean="${personInstance}">
 	<div class="alert alert-error">
-		<g:renderErrors bean="${_DemoPageInstance}" as="list" />
+		<g:renderErrors bean="${personInstance}" as="list" />
 	</div>
 	</g:hasErrors>
 	
-	<g:form action="save" class="form-horizontal"  enctype="multipart/form-data">
+	<g:form action="save" class="form-horizontal" >
 		<fieldset class="form">
 			<g:render template="form"/>
 		</fieldset>

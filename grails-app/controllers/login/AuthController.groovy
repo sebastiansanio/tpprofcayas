@@ -13,8 +13,15 @@ class AuthController {
     def index = { redirect(action: "login", params: params) }
 
     def login = {
-        return [ username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
-    }
+        if(SecurityUtils.subject.isAuthenticated()){
+			def targetUri = params.targetUri ?: "/home"
+			redirect(uri: targetUri)
+        }
+		else{
+			return [ username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
+    	}
+	}
+			
 
     def signIn = {
         def authToken = new UsernamePasswordToken(params.username, params.password as String)
