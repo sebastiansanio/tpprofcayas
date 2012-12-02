@@ -1,26 +1,24 @@
 package wish
 
 import stakeholder.*
+import task.PaymentTerm;
+
 
 class Wish {
 
-	/* Default (injected) attributes of GORM */
-//	Long	id
-//	Long	version
-	
-	Date	dateCreated
-	Date	lastUpdated
-
+	Date dateCreated
+	Date lastUpdated
+	Date wishDate
 	String supplierOrder
-	
 	Long opNumber
-	
 	Stakeholder customer
 	Stakeholder supplier
 	Stakeholder shipper
+	String note
+	
 		
-	static hasOne		= [load:Load]	// tells GORM to associate another domain object as an owner in a 1-1 mapping
-	static hasMany		= [tasks:Task]	// tells GORM to associate other domain objects for a 1-n or n-m mapping
+	static hasOne		= [load:Load]	
+	static hasMany		= [tasks:Task]	
 	
     static mapping = {
     }

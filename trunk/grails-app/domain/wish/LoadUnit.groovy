@@ -3,15 +3,13 @@ package wish
 import product.*
 
 class LoadUnit {
-
-//	Long	id
-//	Long	version
 	
 	Date	dateCreated
 	Date	lastUpdated
 	Product product
 	Load load
-	float quantity
+	BigDecimal quantity
+	BigDecimal unitPrice
 	
 	
 //	static belongsTo	= []	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
