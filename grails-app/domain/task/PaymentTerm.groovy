@@ -1,12 +1,13 @@
 package task
-import wish.*
 
-class Payment extends Task {
+import wish.Wish;
+
+class PaymentTerm {
 
 //	Date	dateCreated
 //	Date	lastUpdated
 	
-	static belongsTo	= [paymentTerm: PaymentTerm,paymentStatus: PaymentStatus,priceCondition: PriceCondition,currency:Currency]
+	static hasMany		= [payments:Payment]
 	
     static mapping = {
     }
@@ -14,6 +15,7 @@ class Payment extends Task {
 	static constraints = {
     }
 	
+//	@Override	// Override toString for a nicer / more descriptive UI 
 //	public String toString() {
 //		return "${name}";
 //	}

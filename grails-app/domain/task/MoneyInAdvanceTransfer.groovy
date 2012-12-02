@@ -1,18 +1,9 @@
-package wish
+package task
+import wish.*
 
-/**
- * Document
- * A domain class describes the data object and it's mapping to the database
- */
-class Document {
-
-	/* Default (injected) attributes of GORM */
-//	Long	id
-//	Long	version
+class MoneyInAdvanceTransfer extends Task {
 	
-	/* Automatic timestamping of GORM */
-//	Date	dateCreated
-//	Date	lastUpdated
+	BigDecimal amountTransfered
 	
 //	static belongsTo	= []	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
 //	static hasOne		= []	// tells GORM to associate another domain object as an owner in a 1-1 mapping
@@ -25,10 +16,6 @@ class Document {
 	static constraints = {
     }
 	
-	/*
-	 * Methods of the Domain Class
-	 */
-//	@Override	// Override toString for a nicer / more descriptive UI 
 //	public String toString() {
 //		return "${name}";
 //	}
