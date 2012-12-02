@@ -1,15 +1,7 @@
 package stakeholder
 
-/**
- * Person
- * A domain class describes the data object and it's mapping to the database
- */
-class Person {
+class Stakeholder {
 
-	/* Default (injected) attributes of GORM */
-//	Long	id
-//	Long	version
-	
 	Date	dateCreated
 	Date	lastUpdated
 	
