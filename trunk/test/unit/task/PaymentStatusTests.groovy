@@ -1,4 +1,4 @@
-package stakeholder
+package task
 
 
 
@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Person)
-class PersonTests {
+@TestFor(PaymentStatus)
+class PaymentStatusTests {
 
     void testSomething() {
        fail "Implement me"

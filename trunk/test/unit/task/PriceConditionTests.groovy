@@ -1,4 +1,4 @@
-package wish
+package task
 
 
 
@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Djai)
-class DjaiTests {
+@TestFor(PriceCondition)
+class PriceConditionTests {
 
     void testSomething() {
        fail "Implement me"
