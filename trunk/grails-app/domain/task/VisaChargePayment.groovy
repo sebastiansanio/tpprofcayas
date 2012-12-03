@@ -1,13 +1,11 @@
-package wish
+package task
+import wish.*
+import modal.*
 
-abstract class Task {
+class VisaChargePayment extends Task {
 
-	Date	dateCreated
-	Date	lastUpdated
-	
-	Date estimatedDate
-	Date finnishDate
-	String note
+	Currency currency
+	BigDecimal amount
 	
 //	static belongsTo	= []	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
 //	static hasOne		= []	// tells GORM to associate another domain object as an owner in a 1-1 mapping
@@ -15,12 +13,15 @@ abstract class Task {
 //	static mappedBy		= []	// specifies which property should be used in a mapping 
 	
     static mapping = {
-		tablePerHierarchy false
     }
     
 	static constraints = {
     }
 	
+	/*
+	 * Methods of the Domain Class
+	 */
+//	@Override	// Override toString for a nicer / more descriptive UI 
 //	public String toString() {
 //		return "${name}";
 //	}

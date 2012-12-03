@@ -2,10 +2,7 @@ class UrlMappings {
 
 	static mappings = {
 		
-		/* 
-		 * Pages without controller 
-		 */
-//		"/"				(view:"/index")
+
 		"/about"		(view:"/siteinfo/about")
 		"/blog"			(view:"/siteinfo/blog")
 		"/systeminfo"	(view:"/siteinfo/systeminfo")
@@ -13,10 +10,7 @@ class UrlMappings {
 		"/terms"		(view:"/siteinfo/terms")
 		"/imprint"		(view:"/siteinfo/imprint")
 		
-		/* 
-		 * Pages with controller
-		 * WARN: No domain/controller should be named "api" or "mobile" or "web"!
-		 */
+
         "/"	{
 			controller	= 'Auth'
 			action		= { 'login' }

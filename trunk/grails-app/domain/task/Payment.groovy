@@ -3,9 +3,7 @@ import wish.*
 
 class Payment extends Task {
 
-//	Date	dateCreated
-//	Date	lastUpdated
-	
+
 	static belongsTo	= [paymentTerm: PaymentTerm,paymentStatus: PaymentStatus,priceCondition: PriceCondition,currency:Currency]
 	
     static mapping = {

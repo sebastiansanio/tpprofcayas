@@ -4,9 +4,7 @@ import wish.Wish;
 
 class PaymentTerm {
 
-//	Date	dateCreated
-//	Date	lastUpdated
-	
+
 	static hasMany		= [payments:Payment]
 	
     static mapping = {

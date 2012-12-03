@@ -1,6 +1,8 @@
 package task
 import wish.*
 
+import modal.*
+
 class Departure extends Task{
 	
 //	static belongsTo	= []	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
@@ -8,16 +10,15 @@ class Departure extends Task{
 //	static hasMany		= []	// tells GORM to associate other domain objects for a 1-n or n-m mapping
 //	static mappedBy		= []	// specifies which property should be used in a mapping 
 	
+	String shipName
+	Port port
+	
     static mapping = {
     }
     
 	static constraints = {
     }
 	
-	/*
-	 * Methods of the Domain Class
-	 */
-//	@Override	// Override toString for a nicer / more descriptive UI 
 //	public String toString() {
 //		return "${name}";
 //	}
