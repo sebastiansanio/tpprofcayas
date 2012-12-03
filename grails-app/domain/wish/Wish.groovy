@@ -14,6 +14,7 @@ class Wish {
 	Stakeholder customer
 	Stakeholder supplier
 	Stakeholder shipper
+	Stakeholder fordwarder
 	String note
 	
 		
