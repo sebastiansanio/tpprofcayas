@@ -11,6 +11,8 @@ class PaymentStatus {
     }
     
 	static constraints = {
+		name blank:false
+		description nullable:true
     }
 	
 	public String toString() {
