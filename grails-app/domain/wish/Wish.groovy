@@ -1,25 +1,32 @@
 package wish
 
 import stakeholder.*
-import task.PaymentTerm;
 
 
 class Wish {
 
 	Date dateCreated
 	Date lastUpdated
-	Date wishDate
-	String supplierOrder
+	
 	Long opNumber
 	Stakeholder customer
 	Stakeholder supplier
 	Stakeholder shipper
+	String artDescription
+	String supplierOrder
+	PriceCondition priceCondition
+	BigDecimal totalFob
+	Currency currency
+	BigDecimal conversion
+	BigDecimal currencyFob
+	Date deliveryDate
+	Date estimatedTimeOfDeparture
+	Date estimatedTimeOfArrival
+	Date wishDate
+	
 	Stakeholder fordwarder
 	String note
-	
-		
-	static hasOne		= [load:Load]	
-	static hasMany		= [tasks:Task]	
+	Load load
 	
     static mapping = {
     }
