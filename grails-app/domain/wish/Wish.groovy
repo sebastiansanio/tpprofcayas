@@ -1,6 +1,7 @@
 package wish
 
 import stakeholder.*
+import modal.*
 
 
 class Wish {
@@ -23,10 +24,51 @@ class Wish {
 	Date estimatedTimeOfDeparture
 	Date estimatedTimeOfArrival
 	Date wishDate
-	
-	Stakeholder fordwarder
+	Date dateOfMoneyInAdvanceTransfer
+	PaymentTerm paymentTerm
+	WishStatus wishStatus
+	PaymentStatus paymentStatus
+	String requiredDocuments //TODO
+	Stakeholder customsBroker
+	String customsBrokerRefNumber
 	String note
-	Load load
+	String afipRequirement //TODO
+	String visaChargePayment //TODO
+	String criterionValue //TODO
+	String licenses //TODO
+	String djaiStatus //TODO
+	String djaiPresented //TODO
+	String cartonPrintingInfo //TODO
+	String shippingMarks //TODO
+	String customerLogoPunch //TODO
+	String ciTaxAndCuitVerification //TODO
+	String hsCodeToBeWritter //TODO
+	BigDecimal amountOfMoneyInAdvanceTransfered
+	Date swiftSentToSupplier //TODO
+	BigDecimal moneyBalance
+	Date dateOfBalancePayment
+	String picturesOfPrintingBoxesAndLoad //TODO
+	String picturesOfLoadingContainer //TODO
+	Country sourceCountry
+	Port port
+	String shipName //TODO
+	String docDraftToBeApprovedBeforeDelivery //TODO
+	Stakeholder forwarder
+	Stakeholder agent
+	BigDecimal freightQuote
+	String forwarderRefNumber
+	BigDecimal loadSecuredPercent
+	BigDecimal cbm
+	BigDecimal grossWeight
+	int palletsQuantity
+	String typeOfFreight //TODO
+	String previousDocumentationCopy //TODO
+	String documentatioStatus //TODO
+	String blNumber //TODO
+	String dispatchNumber //TODO
+	long bill
+	
+	
 	
     static mapping = {
     }
@@ -38,10 +80,6 @@ class Wish {
 		load nullable: true
 	}
 	
-	/*
-	 * Methods of the Domain Class
-	 */
-//	@Override	// Override toString for a nicer / more descriptive UI 
 //	public String toString() {
 //		return "${name}";
 //	}
