@@ -43,7 +43,7 @@ class Wish {
 	String customerLogoPunch //TODO
 	String ciTaxAndCuitVerification //TODO
 	String hsCodeToBeWritter //TODO
-	BigDecimal amountOfMoneyInAdvanceTransfered
+	BigDecimal amountOfMoneyInAdvanceTransferred
 	Date swiftSentToSupplier //TODO
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
@@ -77,7 +77,7 @@ class Wish {
     	customer nullable:false
 		supplier nullable:true
 		shipper nullable: true
-		load nullable: true
+		
 	}
 	
 //	public String toString() {
