@@ -2,10 +2,10 @@
 This menu is used to show function that can be triggered on the content (an object or list of objects).
 -->
 
-<%-- Only show the "Pills" navigation menu if a controller exists (but not for home) --%>
+
 <g:if test="${	params.controller != null
 			&&	params.controller != ''
-			&&	params.controller != 'home'
+			&&	params.controller != 'main'
 }">
 	<ul id="Menu" class="nav nav-pills">
 

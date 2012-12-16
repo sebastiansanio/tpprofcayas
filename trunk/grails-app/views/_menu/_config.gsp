@@ -5,7 +5,7 @@
 		</a>
 		<ul class="dropdown-menu">
 			<li class="controller">
-				<a tabindex="-1" href="#"><b>Visual Style</b></a>
+				<a tabindex="-1" href="#"><b>${message(code: 'visualstyle.label')}</b></a>
 			</li>
 			<li class="dropdown-submenu">
 				<a href="#" class="dropdown-toggle">
