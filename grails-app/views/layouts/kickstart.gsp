@@ -10,21 +10,25 @@
     <meta name="description"	content="">
     <meta name="author"			content="">
     
-	<link rel="shortcut icon"		href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
+	<link rel="shortcut icon"		href="${resource(plugin: 'kickstart-with-bootstrap', dir:'images',file:'favicon.ico')}" type="image/x-icon" />
 	
 	<link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon.png">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-72x72.png"	sizes="72x72">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-114x114.png"	sizes="114x114">
 	
-	<r:require modules="jquery, ${session.skin ? session.skin : 'bootstrap'}, bootstrap_utils"/>
+	<%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
+	<r:require modules="jquery"/>
+	<r:require modules="${session.skin ? session.skin            : 'bootstrap'}"/>
+	<r:require modules="${session.skin ? session.skin + '_utils' : 'bootstrap_utils'}"/>
+
 	<r:layoutResources />
 	<g:layoutHead />
-	
+
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-    
+
 	<%-- For Javascript see end of body --%>
 </head>
 
@@ -36,12 +40,12 @@
    		<g:pageProperty name="page.header" />
 	</g:if>
 	<g:else>
-		<g:render template="/layouts/header"/>												
+		<g:render template="/layouts/header"/>														
 	</g:else>
 
 	<!-- use different templates for HTML structure based on layout (e.g., grid or fluid; Default is grid) -->
 	<g:if test="${session.layout == 'fluid'}">
-		<g:render template="/layouts/content_${session.layout}"	plugin="SPECTRAwebPlugin"/>														
+		<g:render template="/layouts/content_${session.layout}"/>														
 	</g:if>
 	<g:else>
 		<g:render template="/layouts/content_grid"/>														
@@ -55,14 +59,17 @@
 		<g:render template="/layouts/footer"/>														
 	</g:else>
 
-	<!-- Insert a modal dialog for registering -->
-	<g:render template="/_common/modals/registerDialog" model="[item: item]"/>
+	<!-- Enable to insert additional components (e.g., modals, javascript, etc.) by any individual page -->
+	<g:if test="${ pageProperty(name:'page.include.bottom') }">
+   		<g:pageProperty name="page.include.bottom" />
+	</g:if>
+	<g:else>
+		<!-- Insert a modal dialog for registering (for an open site registering is possible on any page) -->
+		<g:render template="/_common/modals/registerDialog" model="[item: item]"/>
+	</g:else>
 	
-<!-- Included Javascript files -->
-<r:layoutResources />
-<!-- Application-specific functionality -->
-<script src="${resource(dir:'js',			file:'application.js')}"></script>
-
+	<!-- Included Javascript files and other resources -->
+	<r:layoutResources />
 </body>
 
 </html>
