@@ -13,8 +13,6 @@
 				<g:form controller="auth" action="signIn" method="post" accept-charset="UTF-8">
 					<input style="margin-bottom: 15px;" type="text" placeholder="${message(code: 'default.username.label')}" id="username" name="username">
 					<input style="margin-bottom: 15px;" type="password" placeholder="${message(code: 'default.password.label')}" id="password" name="password">
-					<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
-					<label class="string optional" for="user_remember_me"> ${message(code: 'default.rememberme.label')}</label>
 					<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="${message(code: 'default.signin.label')}">
 				</g:form>
 			</li>

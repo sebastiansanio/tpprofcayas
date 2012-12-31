@@ -12,7 +12,7 @@ grails.project.dependency.resolution = {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
         // excludes 'ehcache'
     }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
 
     repositories {
@@ -30,11 +30,22 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+		mavenRepo "http://people.apache.org/repo/m2-snapshot-repository/"
+		mavenRepo "http://repository.jboss.org/nexus/content/groups/public/"
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
+        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
+		
+		runtime 'org.jbpm:jbpm-bpmn2:5.2.0.Final'
+		runtime ('org.drools:drools-persistence-jpa:5.3.1.Final') {
+			transitive = false
+		}
+		runtime ('org.drools:drools-core:5.3.1.Final') {
+			transitive = false
+		}
         // runtime 'mysql:mysql-connector-java:5.1.20'
+		runtime 'com.sun.xml.bind:jaxb-xjc:2.2.4'
+		runtime 'com.sun.xml.bind:jaxb-impl:2.2.4'
     }
 
     plugins {
@@ -42,16 +53,14 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.8.0"
         runtime ":resources:1.1.6"
 
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0"
-        //runtime ":cached-resources:1.0"
-        //runtime ":yui-minify-resources:0.1.4"
 
         build ":tomcat:$grailsVersion"
-
-		compile ":kickstart-with-bootstrap:0.8.9"
+		compile ':cache:1.0.0'
+		
 		compile ":shiro:1.1.4"
-
-        compile ':cache:1.0.0'
+		compile ":kickstart-with-bootstrap:0.8.9"
+		compile ':joda-time:1.4'
+		compile ':export:1.5'
+		compile ':excel-import:1.0.0'
     }
 }
