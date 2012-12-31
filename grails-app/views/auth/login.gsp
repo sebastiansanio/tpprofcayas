@@ -21,10 +21,7 @@
           <td>${message(code: 'default.password.label')}</td>
           <td><input type="password" name="password" value="" /></td>
         </tr>
-        <tr>
-          <td>${message(code: 'default.rememberme.label')}</td>
-          <td><g:checkBox name="rememberMe" value="${rememberMe}" /></td>
-        </tr>
+
         <tr>
           <td />
           <td><input type="submit" value="${message(code: 'default.signin.label')}" /></td>
