@@ -1,4 +1,4 @@
-<ul class="nav pull-right">
+<%--<ul class="nav pull-right">
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><g:message code="default.admin.label"/><b class="caret"></b></a>
 		<ul class="dropdown-menu">
@@ -20,3 +20,4 @@
 		</ul>
 	</li>
 </ul>
+--%>
