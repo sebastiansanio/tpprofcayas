@@ -20,6 +20,7 @@
 	<r:require modules="jquery"/>
 	<r:require modules="${session.skin ? session.skin            : 'bootstrap'}"/>
 	<r:require modules="${session.skin ? session.skin + '_utils' : 'bootstrap_utils'}"/>
+	<r:require module="export"/>
 
 	<r:layoutResources />
 	<g:layoutHead />
