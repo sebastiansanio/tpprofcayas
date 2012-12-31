@@ -68,8 +68,6 @@ class Wish {
 	String dispatchNumber //TODO
 	long bill
 	
-	
-	
     static mapping = {
     }
     
