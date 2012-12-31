@@ -8,7 +8,7 @@ class Stakeholder {
 	String name
 	
 	static belongsTo	= StakeholderRole
-	static hasMany		= [contacts:Contact,stakeholderRoles:StakeholderRole]	// tells GORM to associate other domain objects for a 1-n or n-m mapping
+	static hasMany		= [contacts:Contact,stakeholderRoles:StakeholderRole]	
 	
     static mapping = {
 		name blank:false
