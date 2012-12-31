@@ -13,7 +13,7 @@ class Wish {
 	Stakeholder customer
 	Stakeholder supplier
 	Stakeholder shipper
-	String artDescription
+	String artDescription //TODO
 	String supplierOrder
 	PriceCondition priceCondition
 	BigDecimal totalFob
@@ -72,9 +72,6 @@ class Wish {
     }
     
 	static constraints = {
-    	customer nullable:false
-		supplier nullable:true
-		shipper nullable: true
 		
 	}
 	
