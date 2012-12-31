@@ -1,27 +1,25 @@
 <%@ page import="wish.Wish" %>
 
-
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'customer', 'error')} required">
 				<label for="customer" class="control-label"><g:message code="wish.customer.label" default="Customer" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="customer" name="customer.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${wishInstance?.customer?.id}" class="many-to-one"/>
+					<g:select id="customer" name="customer.id" from="${stakeholder.StakeholderRole.findByName(stakeholder.StakeholderRole.customerLabel)?.stakeholders}" optionKey="id" required="" value="${wishInstance?.customer?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'customer', 'error')}</span>
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'supplier', 'error')} ">
-				<label for="supplier" class="control-label"><g:message code="wish.supplier.label" default="Supplier" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'supplier', 'error')} required">
+				<label for="supplier" class="control-label"><g:message code="wish.supplier.label" default="Supplier" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="supplier" name="supplier.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" value="${wishInstance?.supplier?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<g:select id="supplier" name="supplier.id" from="${stakeholder.StakeholderRole.findByName(stakeholder.StakeholderRole.supplierLabel)?.stakeholders}" optionKey="id" required="" value="${wishInstance?.supplier?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'supplier', 'error')}</span>
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'shipper', 'error')} ">
-				<label for="shipper" class="control-label"><g:message code="wish.shipper.label" default="Shipper" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'shipper', 'error')} required">
+				<label for="shipper" class="control-label"><g:message code="wish.shipper.label" default="Shipper" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="shipper" name="shipper.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" value="${wishInstance?.shipper?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<g:select id="shipper" name="shipper.id" from="${stakeholder.StakeholderRole.findByName(stakeholder.StakeholderRole.shipperLabel)?.stakeholders}" optionKey="id" required="" value="${wishInstance?.shipper?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'shipper', 'error')}</span>
 				</div>
 			</div>
@@ -37,7 +35,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'agent', 'error')} required">
 				<label for="agent" class="control-label"><g:message code="wish.agent.label" default="Agent" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="agent" name="agent.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${wishInstance?.agent?.id}" class="many-to-one"/>
+					<g:select id="agent" name="agent.id" from="${stakeholder.StakeholderRole.findByName(stakeholder.StakeholderRole.agentLabel)?.stakeholders}" optionKey="id" required="" value="${wishInstance?.agent?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'agent', 'error')}</span>
 				</div>
 			</div>
@@ -141,7 +139,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'customsBroker', 'error')} required">
 				<label for="customsBroker" class="control-label"><g:message code="wish.customsBroker.label" default="Customs Broker" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="customsBroker" name="customsBroker.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${wishInstance?.customsBroker?.id}" class="many-to-one"/>
+					<g:select id="customsBroker" name="customsBroker.id" from="${stakeholder.StakeholderRole.findByName(stakeholder.StakeholderRole.customsBrokerLabel)?.stakeholders}" optionKey="id" required="" value="${wishInstance?.customsBroker?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'customsBroker', 'error')}</span>
 				</div>
 			</div>
@@ -237,7 +235,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'forwarder', 'error')} required">
 				<label for="forwarder" class="control-label"><g:message code="wish.forwarder.label" default="Forwarder" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="forwarder" name="forwarder.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${wishInstance?.forwarder?.id}" class="many-to-one"/>
+					<g:select id="forwarder" name="forwarder.id" from="${stakeholder.StakeholderRole.findByName(stakeholder.StakeholderRole.forwarderLabel)?.stakeholders}" optionKey="id" required="" value="${wishInstance?.forwarder?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'forwarder', 'error')}</span>
 				</div>
 			</div>
