@@ -6,6 +6,10 @@ import modal.*
 
 class Wish {
 
+	
+	static hasMany		= [firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
+	
+	
 	Date dateCreated
 	Date lastUpdated
 	
@@ -13,46 +17,54 @@ class Wish {
 	Stakeholder customer
 	Stakeholder supplier
 	Stakeholder shipper
-	String artDescription //TODO
+	Load load
 	String supplierOrder
 	PriceCondition priceCondition
 	BigDecimal totalFob
 	Currency currency
 	BigDecimal conversion
 	BigDecimal currencyFob
+	
+	int estimatedDeliveryTerm
+	Date estimatedDeliveryDate
 	Date deliveryDate
+	
 	Date estimatedTimeOfDeparture
+	Date timeOfDeparture
+	
 	Date estimatedTimeOfArrival
+	Date timeOfArrival
+	
 	Date wishDate
 	Date dateOfMoneyInAdvanceTransfer
 	PaymentTerm paymentTerm
 	WishStatus wishStatus
 	PaymentStatus paymentStatus
-	String requiredDocuments //TODO
+
 	Stakeholder customsBroker
 	String customsBrokerRefNumber
 	String note
-	String afipRequirement //TODO
-	String visaChargePayment //TODO
-	String criterionValue //TODO
-	String licenses //TODO
-	String djaiStatus //TODO
-	String djaiPresented //TODO
-	String cartonPrintingInfo //TODO
-	String shippingMarks //TODO
+
+	BigDecimal visaChargePayment
+	CriterionValue criterionValue
+	boolean licenses
+	Date djaiPresentedDate
+	
+	String cartonPrintingInfo 
+	ShippingMark shippingMark
 	String customerLogoPunch //TODO
 	String ciTaxAndCuitVerification //TODO
-	String hsCodeToBeWritter //TODO
+	String hsCodeToBeWritten 
 	BigDecimal amountOfMoneyInAdvanceTransferred
-	Date swiftSentToSupplier //TODO
+	Date swiftSentToSupplierDate
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
-	String picturesOfPrintingBoxesAndLoad //TODO
-	String picturesOfLoadingContainer //TODO
+	boolean picturesOfPrintingBoxesAndLoadReceived //TODO
+	boolean picturesOfLoadingContainerReveived //TODO
 	Country sourceCountry
 	Port port
-	String shipName //TODO
-	String docDraftToBeApprovedBeforeDelivery //TODO
+	Ship ship
+	boolean docDraftApproved
 	Stakeholder forwarder
 	Stakeholder agent
 	BigDecimal freightQuote
@@ -60,19 +72,18 @@ class Wish {
 	BigDecimal loadSecuredPercent
 	BigDecimal cbm
 	BigDecimal grossWeight
+	BigDecimal netWeight
 	int palletsQuantity
-	String typeOfFreight //TODO
-	String previousDocumentationCopy //TODO
-	String documentatioStatus //TODO
-	String blNumber //TODO
-	String dispatchNumber //TODO
+	TypeOfFreight typeOfFreight
+	long blNumber
+	long dispatchNumber
 	long bill
 	
     static mapping = {
     }
     
 	static constraints = {
-		
+		estimatedDeliveryDate nullable:true
 	}
 	
 //	public String toString() {
