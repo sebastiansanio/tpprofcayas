@@ -9,6 +9,7 @@ class Draft {
     }
     
 	static constraints = {
+		draft size: 1..9999999
     }
 	
 	/*
