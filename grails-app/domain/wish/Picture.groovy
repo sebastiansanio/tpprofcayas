@@ -1,6 +1,5 @@
 package wish
 
-
 class Picture {
 
 	byte[] image
@@ -10,6 +9,7 @@ class Picture {
     }
     
 	static constraints = {
+		image size: 1..9999999
     }
 	
 	/*

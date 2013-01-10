@@ -13,6 +13,7 @@ class BootStrap {
 		user.addToPermissions("color:*")
 		user.addToPermissions("main:*")
 		user.addToPermissions("wish:*")
+		user.addToPermissions("picture:*")
 		user.save()
 		
 		
