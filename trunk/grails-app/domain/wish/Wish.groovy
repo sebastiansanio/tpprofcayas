@@ -48,19 +48,22 @@ class Wish {
 	BigDecimal visaChargePayment
 	CriterionValue criterionValue
 	boolean licenses
-	Date djaiPresentedDate
+	
+	long djaiNumber
+	Date formalizationDate
+	Date extendedDjai
 	
 	String cartonPrintingInfo 
 	ShippingMark shippingMark
-	String customerLogoPunch //TODO
-	String ciTaxAndCuitVerification //TODO
+	boolean customerLogoPunch
+	boolean ciTaxAndCuitVerification
 	String hsCodeToBeWritten 
 	BigDecimal amountOfMoneyInAdvanceTransferred
 	Date swiftSentToSupplierDate
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
-	boolean picturesOfPrintingBoxesAndLoadReceived //TODO
-	boolean picturesOfLoadingContainerReveived //TODO
+	boolean picturesOfPrintingBoxesAndLoadReceived
+	boolean picturesOfLoadingContainerReveived
 	Country sourceCountry
 	Port port
 	Ship ship
