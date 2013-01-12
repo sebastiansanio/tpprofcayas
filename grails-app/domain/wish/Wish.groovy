@@ -13,38 +13,45 @@ class Wish {
 	Date lastUpdated
 	
 	Long opNumber
-	Stakeholder customer
-	Stakeholder supplier
-	Stakeholder shipper
+	Long clientOpNumber
+	Customer customer
+	Supplier supplier
+	Shipper shipper
+	
 	Load load
+	
 	String supplierOrder
 	PriceCondition priceCondition
-	BigDecimal totalFob
+	//BigDecimal totalFob
+	
 	Currency currency
 	BigDecimal conversion
 	BigDecimal currencyFob
 	
 	int estimatedDeliveryTerm
-	Date estimatedDeliveryDate
-	Date deliveryDate
+	Date estimatedDeliveryDate //Esta fecha se calcula
+	Date deliveryDate //Fecha real
 	
-	Date estimatedTimeOfDeparture
-	Date timeOfDeparture
+	Date estimatedTimeOfDeparture 
+	Date timeOfDeparture //Fecha real
 	
 	Date estimatedTimeOfArrival
-	Date timeOfArrival
+	Date timeOfArrival //Fecha real
 	
 	Date wishDate
 	Date dateOfMoneyInAdvanceTransfer
 	PaymentTerm paymentTerm
+	
 	WishStatus wishStatus
 	PaymentStatus paymentStatus
 
-	Stakeholder customsBroker
+	CustomsBroker customsBroker
 	String customsBrokerRefNumber
 	String note
 
 	BigDecimal visaChargePayment
+	VisaChargePaymentConcept visaChargePaymentConcept
+	
 	CriterionValue criterionValue
 	boolean licenses
 	
@@ -55,6 +62,7 @@ class Wish {
 	String cartonPrintingInfo 
 	ShippingMark shippingMark
 	boolean customerLogoPunch
+	
 	boolean ciTaxAndCuitVerification
 	String hsCodeToBeWritten 
 	BigDecimal amountOfMoneyInAdvanceTransferred
@@ -67,16 +75,19 @@ class Wish {
 	Port port
 	Ship ship
 	boolean docDraftApproved
-	Stakeholder forwarder
-	Stakeholder agent
+	Forwarder forwarder
+	Agent agent
 	BigDecimal freightQuote
 	String forwarderRefNumber
+	
 	BigDecimal loadSecuredPercent
+	
 	BigDecimal cbm
 	BigDecimal grossWeight
 	BigDecimal netWeight
 	int palletsQuantity
 	TypeOfFreight typeOfFreight
+	
 	long blNumber
 	long dispatchNumber
 	long bill

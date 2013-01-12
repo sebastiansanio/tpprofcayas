@@ -18,37 +18,16 @@
 		<tbody>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.customer.label" default="Customer" /></td>
+				<td valign="top" class="name"><g:message code="wish.estimatedDeliveryDate.label" default="Estimated Delivery Date" /></td>
 				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${wishInstance?.customer?.id}">${wishInstance?.customer?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.supplier.label" default="Supplier" /></td>
-				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${wishInstance?.supplier?.id}">${wishInstance?.supplier?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.shipper.label" default="Shipper" /></td>
-				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${wishInstance?.shipper?.id}">${wishInstance?.shipper?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.afipRequirement.label" default="Afip Requirement" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "afipRequirement")}</td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.estimatedDeliveryDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.agent.label" default="Agent" /></td>
 				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${wishInstance?.agent?.id}">${wishInstance?.agent?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value"><g:link controller="agent" action="show" id="${wishInstance?.agent?.id}">${wishInstance?.agent?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -56,13 +35,6 @@
 				<td valign="top" class="name"><g:message code="wish.amountOfMoneyInAdvanceTransferred.label" default="Amount Of Money In Advance Transferred" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "amountOfMoneyInAdvanceTransferred")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.artDescription.label" default="Art Description" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "artDescription")}</td>
 				
 			</tr>
 		
@@ -97,7 +69,14 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.ciTaxAndCuitVerification.label" default="Ci Tax And Cuit Verification" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "ciTaxAndCuitVerification")}</td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.ciTaxAndCuitVerification}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.clientOpNumber.label" default="Client Op Number" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "clientOpNumber")}</td>
 				
 			</tr>
 		
@@ -111,7 +90,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.criterionValue.label" default="Criterion Value" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "criterionValue")}</td>
+				<td valign="top" class="value"><g:link controller="criterionValue" action="show" id="${wishInstance?.criterionValue?.id}">${wishInstance?.criterionValue?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -130,16 +109,23 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.customer.label" default="Customer" /></td>
+				
+				<td valign="top" class="value"><g:link controller="customer" action="show" id="${wishInstance?.customer?.id}">${wishInstance?.customer?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.customerLogoPunch.label" default="Customer Logo Punch" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "customerLogoPunch")}</td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.customerLogoPunch}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.customsBroker.label" default="Customs Broker" /></td>
 				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${wishInstance?.customsBroker?.id}">${wishInstance?.customsBroker?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value"><g:link controller="customsBroker" action="show" id="${wishInstance?.customsBroker?.id}">${wishInstance?.customsBroker?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -186,30 +172,36 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.djaiPresented.label" default="Djai Presented" /></td>
+				<td valign="top" class="name"><g:message code="wish.djaiNumber.label" default="Djai Number" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "djaiPresented")}</td>
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "djaiNumber")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.djaiStatus.label" default="Djai Status" /></td>
+				<td valign="top" class="name"><g:message code="wish.docDraftApproved.label" default="Doc Draft Approved" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "djaiStatus")}</td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.docDraftApproved}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "docDraftToBeApprovedBeforeDelivery")}</td>
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.docDraftToBeApprovedBeforeDelivery}" var="d">
+						<li><g:link controller="draft" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.documentatioStatus.label" default="Documentatio Status" /></td>
+				<td valign="top" class="name"><g:message code="wish.estimatedDeliveryTerm.label" default="Estimated Delivery Term" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "documentatioStatus")}</td>
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "estimatedDeliveryTerm")}</td>
 				
 			</tr>
 		
@@ -228,9 +220,36 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.extendedDjai.label" default="Extended Djai" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.extendedDjai}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.firstStageRequiredDocuments}" var="f">
+						<li><g:link controller="document" action="show" id="${f.id}">${f?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.formalizationDate.label" default="Formalization Date" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.formalizationDate}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.forwarder.label" default="Forwarder" /></td>
 				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${wishInstance?.forwarder?.id}">${wishInstance?.forwarder?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value"><g:link controller="forwarder" action="show" id="${wishInstance?.forwarder?.id}">${wishInstance?.forwarder?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -256,9 +275,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.hsCodeToBeWritter.label" default="Hs Code To Be Writter" /></td>
+				<td valign="top" class="name"><g:message code="wish.hsCodeToBeWritten.label" default="Hs Code To Be Written" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "hsCodeToBeWritter")}</td>
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "hsCodeToBeWritten")}</td>
 				
 			</tr>
 		
@@ -272,7 +291,14 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.licenses.label" default="Licenses" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "licenses")}</td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.licenses}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.load.label" default="Load" /></td>
+				
+				<td valign="top" class="value"><g:link controller="load" action="show" id="${wishInstance?.load?.id}">${wishInstance?.load?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -287,6 +313,13 @@
 				<td valign="top" class="name"><g:message code="wish.moneyBalance.label" default="Money Balance" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "moneyBalance")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.netWeight.label" default="Net Weight" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "netWeight")}</td>
 				
 			</tr>
 		
@@ -328,14 +361,40 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "picturesOfLoadingContainer")}</td>
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.picturesOfLoadingContainer}" var="p">
+						<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesAndLoad.label" default="Pictures Of Printing Boxes And Load" /></td>
+				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReveived.label" default="Pictures Of Loading Container Reveived" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "picturesOfPrintingBoxesAndLoad")}</td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfLoadingContainerReveived}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.picturesOfPrintingBoxes}" var="p">
+						<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
 				
 			</tr>
 		
@@ -347,13 +406,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.previousDocumentationCopy.label" default="Previous Documentation Copy" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "previousDocumentationCopy")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.priceCondition.label" default="Price Condition" /></td>
 				
 				<td valign="top" class="value"><g:link controller="priceCondition" action="show" id="${wishInstance?.priceCondition?.id}">${wishInstance?.priceCondition?.encodeAsHTML()}</g:link></td>
@@ -361,23 +413,36 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.requiredDocuments.label" default="Required Documents" /></td>
+				<td valign="top" class="name"><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "requiredDocuments")}</td>
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.secondStageRequiredDocuments}" var="s">
+						<li><g:link controller="document" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.shipName.label" default="Ship Name" /></td>
+				<td valign="top" class="name"><g:message code="wish.ship.label" default="Ship" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "shipName")}</td>
+				<td valign="top" class="value"><g:link controller="ship" action="show" id="${wishInstance?.ship?.id}">${wishInstance?.ship?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.shippingMarks.label" default="Shipping Marks" /></td>
+				<td valign="top" class="name"><g:message code="wish.shipper.label" default="Shipper" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "shippingMarks")}</td>
+				<td valign="top" class="value"><g:link controller="shipper" action="show" id="${wishInstance?.shipper?.id}">${wishInstance?.shipper?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.shippingMark.label" default="Shipping Mark" /></td>
+				
+				<td valign="top" class="value"><g:link controller="shippingMark" action="show" id="${wishInstance?.shippingMark?.id}">${wishInstance?.shippingMark?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -389,6 +454,13 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.supplier.label" default="Supplier" /></td>
+				
+				<td valign="top" class="value"><g:link controller="supplier" action="show" id="${wishInstance?.supplier?.id}">${wishInstance?.supplier?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.supplierOrder.label" default="Supplier Order" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "supplierOrder")}</td>
@@ -396,23 +468,30 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.swiftSentToSupplier.label" default="Swift Sent To Supplier" /></td>
+				<td valign="top" class="name"><g:message code="wish.swiftSentToSupplierDate.label" default="Swift Sent To Supplier Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${wishInstance?.swiftSentToSupplier}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.swiftSentToSupplierDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.totalFob.label" default="Total Fob" /></td>
+				<td valign="top" class="name"><g:message code="wish.timeOfArrival.label" default="Time Of Arrival" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "totalFob")}</td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.timeOfArrival}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.timeOfDeparture.label" default="Time Of Departure" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.timeOfDeparture}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.typeOfFreight.label" default="Type Of Freight" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "typeOfFreight")}</td>
+				<td valign="top" class="value"><g:link controller="typeOfFreight" action="show" id="${wishInstance?.typeOfFreight?.id}">${wishInstance?.typeOfFreight?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -420,6 +499,13 @@
 				<td valign="top" class="name"><g:message code="wish.visaChargePayment.label" default="Visa Charge Payment" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "visaChargePayment")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.visaChargePaymentConcept.label" default="Visa Charge Payment Concept" /></td>
+				
+				<td valign="top" class="value"><g:link controller="visaChargePaymentConcept" action="show" id="${wishInstance?.visaChargePaymentConcept?.id}">${wishInstance?.visaChargePaymentConcept?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		

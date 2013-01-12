@@ -2,29 +2,19 @@ package wish
 
 import org.springframework.dao.DataIntegrityViolationException
 
-
-
-
+/**
+ * WishController
+ * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
+ */
 class WishController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	def exportService
-	
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list() {
-		
-		if(params?.format && params.format != "html"){
-			response.contentType = grailsApplication.config.grails.mime.types[params.format]
-			response.setHeader("Content-disposition", "attachment; filename=books.${params.extension}")
-
-			exportService.export(params.format, response.outputStream,Wish.list(params), [:], [:])
-		}
-		
-		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
