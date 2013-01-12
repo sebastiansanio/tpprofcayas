@@ -16,43 +16,24 @@ class BootStrap {
 		user.addToPermissions("picture:*")
 		user.save()
 		
+								
+		def customer = new Customer(name:"PLACASUR")
+		customer.save()
 		
-		def customerRole = new StakeholderRole(name:StakeholderRole.customerLabel)
-		customerRole.save()
-		def supplierRole = new StakeholderRole(name:StakeholderRole.supplierLabel)
-		supplierRole.save()
-		def shipperRole = new StakeholderRole(name:StakeholderRole.shipperLabel)
-		shipperRole.save()
-		def customsBrokerRole = new StakeholderRole(name:StakeholderRole.customsBrokerLabel)
-		customsBrokerRole.save()
-		def forwarderRole = new StakeholderRole(name:StakeholderRole.forwarderLabel)
-		forwarderRole.save()
-		def agentRole = new StakeholderRole(name:StakeholderRole.agentLabel)
-		agentRole.save()
-						
-		def stakeholder = new Stakeholder(name:"PLACASUR")
-		stakeholder.addToStakeholderRoles(customerRole)
-		stakeholder.save()
+		def supplier = new Supplier(name:"HAI HUI")
+		supplier.save()
 		
-		stakeholder = new Stakeholder(name:"HAI HUI")
-		stakeholder.addToStakeholderRoles(supplierRole)
-		stakeholder.save()
+		def shipper = new Shipper(name:"GUANGZHOU ANIMAL")
+		shipper.save()
 		
-		stakeholder = new Stakeholder(name:"GUANGZHOU ANIMAL")
-		stakeholder.addToStakeholderRoles(shipperRole)
-		stakeholder.save()
+		def customsBroker = new CustomsBroker(name:"LEWKOWICK")
+		customsBroker.save()
 		
-		stakeholder = new Stakeholder(name:"LEWKOWICK")
-		stakeholder.addToStakeholderRoles(customsBrokerRole)
-		stakeholder.save()
+		def forwarder = new Forwarder(name:"AirSeaLand")
+		forwarder.save()
 		
-		stakeholder = new Stakeholder(name:"AirSeaLand")
-		stakeholder.addToStakeholderRoles(forwarderRole)
-		stakeholder.save()
-		
-		stakeholder = new Stakeholder(name:"SUNSHOW")
-		stakeholder.addToStakeholderRoles(agentRole)
-		stakeholder.save()
+		def agent = new Agent(name:"SUNSHOW")
+		agent.save()
 		
 		
 		def country = new Country(name:"CHINA")
