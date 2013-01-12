@@ -8,8 +8,7 @@ class Wish {
 
 	
 	static hasMany		= [firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
-	
-	
+		
 	Date dateCreated
 	Date lastUpdated
 	
@@ -88,6 +87,8 @@ class Wish {
 	static constraints = {
 		estimatedDeliveryDate nullable:true
 	}
+	
+	
 	
 //	public String toString() {
 //		return "${name}";

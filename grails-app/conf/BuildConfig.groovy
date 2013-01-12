@@ -57,6 +57,7 @@ grails.project.dependency.resolution = {
         build ":tomcat:$grailsVersion"
 		compile ':cache:1.0.0'
 		
+		compile ":lesscss-resources:1.3.0.3"
 		compile ":shiro:1.1.4"
 		compile ":kickstart-with-bootstrap:0.8.9"
 		compile ':joda-time:1.4'
