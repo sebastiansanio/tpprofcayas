@@ -17,17 +17,17 @@
 		<thead>
 			<tr>
 			
-				<g:sortableColumn property="estimatedDeliveryDate" title="${message(code: 'wish.estimatedDeliveryDate.label', default: 'Estimated Delivery Date')}" />
+				<g:sortableColumn property="opNumber" title="${message(code: 'wish.opNumber.label', default: 'Op Number')}" />
 			
-				<th><g:message code="wish.agent.label" default="Agent" /></th>
+				<g:sortableColumn property="customerOpNumber" title="${message(code: 'wish.customerOpNumber.label', default: 'Customer Op Number')}" />
 			
-				<g:sortableColumn property="amountOfMoneyInAdvanceTransferred" title="${message(code: 'wish.amountOfMoneyInAdvanceTransferred.label', default: 'Amount Of Money In Advance Transferred')}" />
+				<th><g:message code="wish.customer.label" default="Customer" /></th>
 			
-				<g:sortableColumn property="bill" title="${message(code: 'wish.bill.label', default: 'Bill')}" />
+				<th><g:message code="wish.supplier.label" default="Supplier" /></th>
 			
-				<g:sortableColumn property="blNumber" title="${message(code: 'wish.blNumber.label', default: 'Bl Number')}" />
+				<th><g:message code="wish.shipper.label" default="Shipper" /></th>
 			
-				<g:sortableColumn property="cartonPrintingInfo" title="${message(code: 'wish.cartonPrintingInfo.label', default: 'Carton Printing Info')}" />
+				<g:sortableColumn property="supplierOrder" title="${message(code: 'wish.supplierOrder.label', default: 'Supplier Order')}" />
 			
 			</tr>
 		</thead>
@@ -35,17 +35,17 @@
 		<g:each in="${wishInstanceList}" status="i" var="wishInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${wishInstance.id}">${fieldValue(bean: wishInstance, field: "estimatedDeliveryDate")}</g:link></td>
+				<td><g:link action="show" id="${wishInstance.id}">${fieldValue(bean: wishInstance, field: "opNumber")}</g:link></td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "agent")}</td>
+				<td>${fieldValue(bean: wishInstance, field: "customerOpNumber")}</td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "amountOfMoneyInAdvanceTransferred")}</td>
+				<td>${fieldValue(bean: wishInstance, field: "customer")}</td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "bill")}</td>
+				<td>${fieldValue(bean: wishInstance, field: "supplier")}</td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "blNumber")}</td>
+				<td>${fieldValue(bean: wishInstance, field: "shipper")}</td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "cartonPrintingInfo")}</td>
+				<td>${fieldValue(bean: wishInstance, field: "supplierOrder")}</td>
 			
 			</tr>
 		</g:each>
