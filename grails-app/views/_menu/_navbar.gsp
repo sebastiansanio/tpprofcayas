@@ -8,10 +8,10 @@
             	<span class="icon-bar"></span>
 			</a>
 
-			<a class="brand" href="${createLink(uri: '/')}">
+			<a class="brand" href="${createLink(uri: '/')}"><%--
 				<img class="logo" src="${resource(dir:'images',file:'logo.jpg')}" alt="${meta(name:'app.name')}" />
 				${meta(name:'app.name')}
-				<small> v${meta(name:'app.version')}</small>
+				--%><small> Versión ${meta(name:'app.version')}</small>
 			</a>
 
        		<div class="nav-collapse"><%--

@@ -5,33 +5,36 @@
   <title>${message(code: 'appname.label')}</title>
 </head>
 <body>
+<br/>
+<div class="row-fluid">
 
-<hr/>
-<div class="row">
-<div class="offset4 span4">
-  <g:form action="signIn">
-    <input type="hidden" name="targetUri" value="${targetUri}" />
-    <table>
-      <tbody>
-        <tr>
-          <td>${message(code: 'default.username.label')}</td>
-          <td><input type="text" name="username" value="${username}" /></td>
-        </tr>
-        <tr>
-          <td>${message(code: 'default.password.label')}</td>
-          <td><input type="password" name="password" value="" /></td>
-        </tr>
-
-        <tr>
-          <td />
-          <td><input type="submit" value="${message(code: 'default.signin.label')}" /></td>
-        </tr>
-      </tbody>
-    </table>
+<div class="span4">
+  <g:form controller="auth" action="signIn">
+    	
+       	<div class="row-fluid">
+			<label class="span8" for="username"><g:message code="default.username.label" default="Username" /></label>
+       	</div>
+       	<div class="row-fluid">
+			<g:field class="span8" type="text" name="username" value="${username}"/>
+		</div>
+       
+       	<div class="row-fluid">
+			<label class="span8" for="username"><g:message code="default.password.label" default="Password" /></label>
+		</div>
+		<div class="row-fluid">
+			<g:field class="span8" type="password" name="password" value=""/>
+		</div>
+		
+		<div class="row-fluid">
+			<g:actionSubmit class="span8" action="signIn" value="${message(code: 'default.signin.label', default: 'Sign in')}" />
+        </div>
   </g:form>
-  </div>
-  </div>
-<hr/>
+</div>
+<div class="span8">
 
+</div>
+
+</div>
+  
 </body>
 </html>
