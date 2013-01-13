@@ -6,14 +6,13 @@ import modal.*
 
 class Wish {
 
-	
-	static hasMany		= [firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
-		
 	Date dateCreated
 	Date lastUpdated
 	
+	static hasMany		= [notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
+	
 	Long opNumber
-	Long clientOpNumber
+	Long customerOpNumber
 	Customer customer
 	Supplier supplier
 	Shipper shipper
@@ -22,21 +21,20 @@ class Wish {
 	
 	String supplierOrder
 	PriceCondition priceCondition
-	//BigDecimal totalFob
 	
 	Currency currency
 	BigDecimal conversion
 	BigDecimal currencyFob
 	
 	int estimatedDeliveryTerm
-	Date estimatedDeliveryDate //Esta fecha se calcula
-	Date deliveryDate //Fecha real
+	Date estimatedDeliveryDate
+	Date deliveryDate
 	
 	Date estimatedTimeOfDeparture 
-	Date timeOfDeparture //Fecha real
+	Date timeOfDeparture
 	
 	Date estimatedTimeOfArrival
-	Date timeOfArrival //Fecha real
+	Date timeOfArrival
 	
 	Date wishDate
 	Date dateOfMoneyInAdvanceTransfer
@@ -47,7 +45,6 @@ class Wish {
 
 	CustomsBroker customsBroker
 	String customsBrokerRefNumber
-	String note
 
 	BigDecimal visaChargePayment
 	VisaChargePaymentConcept visaChargePaymentConcept
@@ -96,7 +93,68 @@ class Wish {
     }
     
 	static constraints = {
+		opNumber nullable:false,unique:true
+		customerOpNumber validator: { val,obj ->
+			if(obj.customer.hasOpNumber(val)) return ['invalid.customerOpNumber']
+		}
+		customer nullable:false
+		supplier nullable:false
+		shipper nullable:false
+		supplierOrder nullable:true,blank:true
+		priceCondition nullable:true
+		currency nullable:true
+		conversion nullable:true
+		currencyFob nullable:true
+		estimatedDeliveryTerm nullable:true
 		estimatedDeliveryDate nullable:true
+		deliveryDate nullable:true
+		estimatedTimeOfDeparture nullable:true
+		timeOfDeparture nullable:true
+		estimatedTimeOfArrival nullable:true
+		timeOfArrival nullable:true
+		wishDate nullable:false
+		dateOfMoneyInAdvanceTransfer nullable:true
+		paymentTerm nullable:true
+		wishStatus nullable:true
+		paymentStatus nullable:true
+		customsBroker nullable:true
+		customsBrokerRefNumber nullable:true,blank:true
+		visaChargePayment nullable:true
+		visaChargePaymentConcept nullable:true,blank:true
+		criterionValue nullable:true
+		licenses nullable:false
+		djaiNumber nullable:false,blank:false
+		formalizationDate nullable:false
+		extendedDjai nullable:true
+		cartonPrintingInfo nullable:true,blank:true
+		shippingMark nullable:true
+		customerLogoPunch nullable:true
+		ciTaxAndCuitVerification nullable:true
+		hsCodeToBeWritten nullable:true,blank:true
+		amountOfMoneyInAdvanceTransferred nullable:true
+		swiftSentToSupplierDate nullable:true
+		moneyBalance nullable:true
+		dateOfBalancePayment nullable:true
+		picturesOfPrintingBoxesAndLoadReceived nullable:true
+		picturesOfLoadingContainerReveived nullable:true
+		sourceCountry nullable:true
+		port nullable:true
+		ship nullable:true
+		docDraftApproved nullable:true
+		forwarder nullable:true
+		agent nullable:true
+		freightQuote nullable:true
+		forwarderRefNumber blank:true,nullable:true
+		loadSecuredPercent nullable:true
+		cbm nullable:true
+		grossWeight nullable:true
+		netWeight nullable:true
+		palletsQuantity nullable:true
+		typeOfFreight nullable:true
+		blNumber nullable:true
+		dispatchNumber nullable:true
+		bill nullable:true		
+		load nullable:true
 	}
 	
 	

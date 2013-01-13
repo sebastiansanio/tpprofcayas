@@ -7,7 +7,7 @@ class Stakeholder {
 	
 	String name
 	
-	static hasMany		= [contacts:Contact]	
+	static hasMany	= [contacts:Contact]	
 	
     static mapping = {
 		name blank:false
