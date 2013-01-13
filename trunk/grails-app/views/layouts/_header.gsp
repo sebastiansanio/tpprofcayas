@@ -1,8 +1,10 @@
-<header id="Header" class="jumbotron masthead">
-	<!--  class="inner" -->
-	<div>
-		<div class="container">
-			<h1 class="title"><g:layoutTitle /></h1>
-		</div>
+<header id="Header">
+	<div class="row-fluid">
+		
+		<br/>
+		<img class="offset5 span2" src="${resource(dir:'images',file:'logo2.png')}" alt="${meta(name:'app.name')}" />					
+		<br/>
+		<br/>
+		<br/>
 	</div>
 </header>
