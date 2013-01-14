@@ -27,7 +27,7 @@ class AlertManagerService {
 		Resource myResourceGlobals = ResourceFactory.newReaderResource((Reader) new StringReader(myGlobals))	
 		kbuilder.add(myResourceGlobals,ResourceType.DRL)
 		
-		String myResources = """dialect "java" rule "Wish" when wish: Wish (wish.getCustomerOpNumber()<4) then System.out.println(wish.getOpNumber()); end""";
+		String myResources = """dialect "java" rule "Wish" when wish: Wish (wish.getCustomerOpNumber()<4) then System.out.println(wish.getOpNumber());System.out.println(wish.getDate("dateCreated")); end""";
 		Resource myResource = ResourceFactory.newReaderResource((Reader) new StringReader(myResources))	
 		kbuilder.add(myResource,ResourceType.DRL)
 		
@@ -41,7 +41,7 @@ class AlertManagerService {
 		final StatefulKnowledgeSession ksession = knowledgeBase.newStatefulKnowledgeSession()
 				
 		def activeWishes = Wish.findAll().each{
-			if(!it.isActive()){
+			if(it.isActive()){
 				ksession.insert(it)
 			}
 			
