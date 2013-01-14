@@ -158,7 +158,7 @@ class Wish {
 	}
 	
 	def getPendingAlerts(){
-		return alerts.findAll{
+		return alerts.findAll().findAll{
 			it.isPending()
 		}
 	}
