@@ -104,4 +104,6 @@ class WishController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	
 }

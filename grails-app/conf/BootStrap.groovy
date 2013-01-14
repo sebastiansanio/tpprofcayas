@@ -8,12 +8,8 @@ class BootStrap {
 
     def init = { servletContext ->
 		def user = new User(username:"cayas", passwordHash: new Sha256Hash("cayas").toHex())
-		user.addToPermissions("product:*")
-		user.addToPermissions("family:*")
-		user.addToPermissions("color:*")
-		user.addToPermissions("main:*")
-		user.addToPermissions("wish:*")
-		user.addToPermissions("picture:*")
+		user.addToPermissions("*:*")
+
 		user.save()
 		
 								

@@ -18,7 +18,14 @@ class Alert {
 		dateFinalized nullable:true
     }
 	
+	boolean isPending(){
+		return (dateFinalized == null)
+	}
+	
 	public String toString() {
 		return alertType.toString()
 	}
+	
+	
+	
 }
