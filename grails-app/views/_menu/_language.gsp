@@ -8,13 +8,16 @@
 		</a>
 		<ul class="dropdown-menu dropdown-menu-dark">
 
-			<!-- assuming that the default locale is English -->
+			<li><a class="js-language-link" title="Español" data-lang-code="es" href="${currentURL+'?lang=es'}">
+				<img class="" src="${resource(plugin: 'kickstart-with-bootstrap', dir: 'images/flags',file: 'es.png')}"/>
+				<g:message code="language.es" default="es"/> ${currentlURL }
+			</a></li>
+
 			<li><a class="js-language-link" title="English" data-lang-code="en" href="${currentURL+'?lang=en'}">
 				<img class="" src="${resource(plugin: 'kickstart-with-bootstrap', dir: 'images/flags',file: 'en.png')}"/>
 				<g:message code="language.en" default="en"/> ${currentlURL }
-			</a></li>
+			</a></li><%--
 
-			<li class="divider"></li>
 
 			<!-- get list of all locales available due to an existing property-file in /grails-app/i18n (set once in Bootstrap.groovy) -->
 			<g:set var="allLocales" value="${grailsApplication.config.grails.i18n.locales}"/>
@@ -25,6 +28,6 @@
 				</a></li>
 			</g:each>
 
-		</ul>
+		--%></ul>
 	</li>
 </ul>
