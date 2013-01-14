@@ -94,9 +94,7 @@ class Wish {
     
 	static constraints = {
 		opNumber nullable:false,unique:true
-		customerOpNumber validator: { val,obj ->
-			if(obj.customer.hasOpNumber(val)) return ['invalid.customerOpNumber']
-		}
+		customerOpNumber nullable:false
 		customer nullable:false
 		supplier nullable:false
 		shipper nullable:false
@@ -167,6 +165,10 @@ class Wish {
 		return true
 	}
 		
+	Date getDate(String whichDate){
+		return this[whichDate]
+		
+	}
 	
 //	public String toString() {
 //		return "${name}";
