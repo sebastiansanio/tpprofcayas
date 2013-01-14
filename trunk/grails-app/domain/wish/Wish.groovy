@@ -2,14 +2,14 @@ package wish
 
 import stakeholder.*
 import modal.*
-
+import alert.Alert
 
 class Wish {
 
 	Date dateCreated
 	Date lastUpdated
 	
-	static hasMany		= [notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
+	static hasMany		= [alerts: Alert,notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
 	
 	Long opNumber
 	Long customerOpNumber
@@ -157,7 +157,16 @@ class Wish {
 		load nullable:true
 	}
 	
+	def getPendingAlerts(){
+		return alerts.findAll{
+			it.isPending()
+		}
+	}
 	
+	boolean isActive(){
+		return true
+	}
+		
 	
 //	public String toString() {
 //		return "${name}";

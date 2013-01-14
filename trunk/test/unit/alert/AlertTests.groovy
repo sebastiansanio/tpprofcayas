@@ -1,4 +1,4 @@
-package stakeholder
+package alert
 
 
 
@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(StakeholderRole)
-class StakeholderRoleTests {
+@TestFor(Alert)
+class AlertTests {
 
     void testSomething() {
        fail "Implement me"
