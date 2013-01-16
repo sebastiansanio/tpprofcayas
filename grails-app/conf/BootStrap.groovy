@@ -1,4 +1,5 @@
 import org.apache.shiro.crypto.hash.Sha256Hash
+import alert.AlertType
 import login.*
 import modal.*
 import wish.*
@@ -52,7 +53,10 @@ class BootStrap {
 		
 		def currency = new Currency(name:"DOLAR")
 		currency.save()
-    }
+		
+		def alertType = new AlertType(description:"Vencimiento de la Djai",nameOfEstimatedDateField:"formalizationDate",daysOfOffset:180,nameOfCompletionField:"timeOfArrival",alertTerm:10)
+    	alertType.save()
+	}
     def destroy = {
     }
 }

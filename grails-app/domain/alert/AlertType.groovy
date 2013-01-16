@@ -3,8 +3,9 @@ package alert
 class AlertType {
 
 	String description
-	Long term
+	int alertTerm
 	String nameOfEstimatedDateField
+	int daysOfOffset
 	String nameOfCompletionField
 	
 	static hasMany		= [alerts:Alert]	
@@ -14,9 +15,10 @@ class AlertType {
     
 	static constraints = {
 		description blank:false,nullable:false
-		term nullable:false
 		nameOfEstimatedDateField blank:false,nullable:false
+		daysOfOffset nullable:false
 		nameOfCompletionField blank:false,nullable:false
+		alertTerm nullable:false
     }
 	
 	public String toString() {

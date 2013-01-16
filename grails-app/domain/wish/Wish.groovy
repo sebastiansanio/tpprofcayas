@@ -3,6 +3,7 @@ package wish
 import stakeholder.*
 import modal.*
 import alert.Alert
+import alert.AlertType
 
 class Wish {
 
@@ -93,8 +94,8 @@ class Wish {
     }
     
 	static constraints = {
-		opNumber nullable:false,unique:true
-		customerOpNumber nullable:false
+		opNumber unique:true
+		customerOpNumber unique: 'opNumber'
 		customer nullable:false
 		supplier nullable:false
 		shipper nullable:false
@@ -155,9 +156,9 @@ class Wish {
 		load nullable:true
 	}
 	
-	def getPendingAlerts(){
+	def getActiveAlerts(){
 		return alerts.findAll().findAll{
-			it.isPending()
+			it.isActive()
 		}
 	}
 	
@@ -165,8 +166,15 @@ class Wish {
 		return true
 	}
 		
-	Date getDate(String whichDate){
-		return this[whichDate]
+	Date getDate(String dateField){
+		return this[dateField]
+		
+	}
+	
+	void generateAlert(AlertType alertType,Date deadline){
+		def activeAlerts = getActiveAlerts()
+		if(!(alertType.id in activeAlerts.alertType.id))
+			addToAlerts(new Alert(alertType:alertType,deadline:deadline))
 		
 	}
 	

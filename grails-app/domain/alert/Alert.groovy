@@ -5,6 +5,7 @@ class Alert {
 
 	AlertType alertType		
 	Date dateCreated
+	Date deadline
 	Date dateFinalized
 	
 	static belongsTo	= [wish:Wish]	
@@ -15,10 +16,16 @@ class Alert {
 	static constraints = {
 		alertType nullable:false
 		wish nullable:false
+		deadline nullable:false
 		dateFinalized nullable:true
     }
 	
-	boolean isPending(){
+	void finalize(){
+		Date today = new Date()
+		dateFinalized = today.clearTime() 
+	}
+	
+	boolean isActive(){
 		return (dateFinalized == null)
 	}
 	
