@@ -95,7 +95,7 @@ class Wish {
     
 	static constraints = {
 		opNumber unique:true
-		customerOpNumber unique: 'opNumber'
+		customerOpNumber unique: 'customer'
 		customer nullable:false
 		supplier nullable:false
 		shipper nullable:false

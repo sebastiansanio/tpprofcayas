@@ -23,7 +23,7 @@ class AlertManagerService {
 		
 	}
 	
-    def updateAlerts() {
+    def generateAlerts() {
 	
 		def activeWishes = Wish.findAll().each{
 			if(it.isActive()){
@@ -40,10 +40,19 @@ class AlertManagerService {
 				}
 			}
 		}
+
+    }
+	
+	def finalizeAlerts(){
+		Date today = new Date()
+		today = today.clearTime()
 		def activeAlerts = getActiveAlerts()
 		activeAlerts.each{activeAlert->
-			if(activeAlert.wish.getDate(activeAlert.alertType.nameOfCompletionField)!=null)
+			if(activeAlert.wish.getDate(activeAlert.alertType.nameOfCompletionField)!=null){
 				activeAlert.finalize()
-		}		
-    }
+			}else if(activeAlert.wish.getDate(activeAlert.alertType.nameOfEstimatedDateField) + activeAlert.alertType.daysOfOffset  > today + activeAlert.alertType.alertTerm){
+				activeAlert.finalize()
+			}	
+		}
+	}
 }
