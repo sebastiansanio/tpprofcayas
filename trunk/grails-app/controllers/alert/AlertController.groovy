@@ -16,7 +16,12 @@ class AlertController {
     def list() {
 		alertManagerService.updateAlerts()
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [alertInstanceList: Alert.list(params), alertInstanceTotal: Alert.count()]
+		if(params.sort==null) 
+			params.sort = "deadline"
+		if(params.order==null)
+			params.order = "asc"
+		
+        [alertInstanceList: alertManagerService.getActiveAlerts(params), alertInstanceTotal: alertManagerService.getActiveAlerts().size()]
     }
 
 }

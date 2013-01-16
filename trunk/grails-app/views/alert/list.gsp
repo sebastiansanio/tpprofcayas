@@ -21,9 +21,10 @@
 			
 				<th><g:message code="alert.wish.label" default="Wish" /></th>
 			
-				<g:sortableColumn property="dateFinalized" title="${message(code: 'alert.dateFinalized.label', default: 'Date Finalized')}" />
+				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
 			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'alert.dateCreated.label', default: 'Date Created')}" />
+				<th><g:message code="wish.alertsQuantity.label" default="Alerts Quantity" /></th>
+			
 			
 			</tr>
 		</thead>
@@ -31,13 +32,14 @@
 		<g:each in="${alertInstanceList}" status="i" var="alertInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${alertInstance.id}">${fieldValue(bean: alertInstance, field: "alertType")}</g:link></td>
+				<td>${fieldValue(bean: alertInstance, field: "alertType")}</td>
 			
-				<td>${fieldValue(bean: alertInstance, field: "wish")}</td>
+				<td><g:link controller="wish" action="show" id="${alertInstance.wish.id}">${fieldValue(bean: alertInstance, field: "wish")}</g:link></td>
 			
-				<td><g:formatDate date="${alertInstance.dateFinalized}" /></td>
+				<td><g:formatDate format="dd/MM/yyyy" date="${alertInstance.deadline}" /></td>
 			
-				<td><g:formatDate date="${alertInstance.dateCreated}" /></td>
+				<td>${alertInstance.wish.getActiveAlerts().size()}</td>
+			
 			
 			</tr>
 		</g:each>
