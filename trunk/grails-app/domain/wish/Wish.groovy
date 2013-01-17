@@ -171,10 +171,6 @@ class Wish {
 		return true
 	}
 		
-	Date getDate(String dateField){
-		return this[dateField]
-		
-	}
 	
 	void generateAlert(AlertType alertType,Date deadline){
 		def activeAlerts = getActiveAlerts()

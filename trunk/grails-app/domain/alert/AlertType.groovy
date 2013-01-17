@@ -22,10 +22,10 @@ class AlertType {
     }
 	
 	public void checkWish(Wish wish){
-		Date completionField = wish.getDate(nameOfCompletionField)
+		Date completionField = wish[nameOfCompletionField]
 		if (completionField != null)
 			return
-		Date estimatedDate = wish.getDate(nameOfEstimatedDateField)		
+		Date estimatedDate = wish[nameOfEstimatedDateField]		
 		if (estimatedDate == null)
 			return
 		Date today = new Date()

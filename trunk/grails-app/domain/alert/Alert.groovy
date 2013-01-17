@@ -30,9 +30,9 @@ class Alert {
 	
 	void check(){
 				
-		if(wish.getDate(alertType.nameOfCompletionField)!=null){
+		if(wish[alertType.nameOfCompletionField]!=null){
 			finalize("Actividad realizada")
-		}else if(wish.getDate(alertType.nameOfEstimatedDateField) != deadline){
+		}else if(wish[alertType.nameOfEstimatedDateField] != deadline){
 			finalize("Cambio de fecha")
 		}
 	}
