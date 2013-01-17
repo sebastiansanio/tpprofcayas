@@ -7,6 +7,7 @@ class Alert {
 	Date dateCreated
 	Date deadline
 	Date dateFinalized
+	String finalizedReason
 	
 	static belongsTo	= [wish:Wish]	
 	
@@ -18,11 +19,22 @@ class Alert {
 		wish nullable:false
 		deadline nullable:false
 		dateFinalized nullable:true
+		finalizedReason nullable:true,inList: ["Actividad realizada","Cambio de fecha"]
     }
 	
-	void finalize(){
+	void finalize(String reason){
 		Date today = new Date()
-		dateFinalized = today.clearTime() 
+		dateFinalized = today
+		finalizedReason = reason
+	}
+	
+	void check(){
+				
+		if(wish.getDate(alertType.nameOfCompletionField)!=null){
+			finalize("Actividad realizada")
+		}else if(wish.getDate(alertType.nameOfEstimatedDateField) != deadline){
+			finalize("Cambio de fecha")
+		}
 	}
 	
 	boolean isActive(){

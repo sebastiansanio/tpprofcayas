@@ -23,36 +23,37 @@ class AlertManagerService {
 		
 	}
 	
-    def generateAlerts() {
+	def generateAlerts(Wish wish){
+		def alertTypes = AlertType.findAll()
+		alertTypes.each{alertType ->
+			alertType.checkWish(wish)
+		}
+		
+	}
 	
-		def activeWishes = Wish.findAll().each{
-			if(it.isActive()){
-			}	
+    def generateAllAlerts() {
+		def activeWishes = Wish.findAll().findAll{
+			it.isActive()	
 		}
 		def alertTypes = AlertType.findAll()
-		Date today = new Date()
-		today = today.clearTime()
-		
-		activeWishes.each{activeWish ->
-			alertTypes.each{alertType ->				
-				if(activeWish.getDate(alertType.nameOfEstimatedDateField)!=null && activeWish.getDate(alertType.nameOfCompletionField)==null && activeWish.getDate(alertType.nameOfEstimatedDateField) + alertType.daysOfOffset  <= today + alertType.alertTerm){
-					activeWish.generateAlert(alertType,activeWish.getDate(alertType.nameOfEstimatedDateField) + alertType.daysOfOffset) 
-				}
-			}
+		activeWishes.each{wish ->
+			generateAlerts(wish)
 		}
-
     }
 	
-	def finalizeAlerts(){
-		Date today = new Date()
-		today = today.clearTime()
-		def activeAlerts = getActiveAlerts()
-		activeAlerts.each{activeAlert->
-			if(activeAlert.wish.getDate(activeAlert.alertType.nameOfCompletionField)!=null){
-				activeAlert.finalize()
-			}else if(activeAlert.wish.getDate(activeAlert.alertType.nameOfEstimatedDateField) + activeAlert.alertType.daysOfOffset  > today + activeAlert.alertType.alertTerm){
-				activeAlert.finalize()
-			}	
+	def checkAlerts(Wish wish){
+		wish.alerts.each{
+			it.check()
+		}
+	}
+	
+	def checkAllAlerts() {
+		def activeWishes = Wish.findAll().findAll{
+			it.isActive()
+			
+		}
+		activeWishes.each{wish ->
+			checkAlerts(wish)
 		}
 	}
 }
