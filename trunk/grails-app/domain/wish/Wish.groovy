@@ -56,6 +56,11 @@ class Wish {
 	long djaiNumber
 	Date formalizationDate
 	Date extendedDjai
+	Date getDjaiExpirationDate(){
+		
+		return formalizationDate+180
+	}
+	
 	
 	String cartonPrintingInfo 
 	ShippingMark shippingMark
@@ -175,7 +180,6 @@ class Wish {
 		def activeAlerts = getActiveAlerts()
 		if(!(alertType.id in activeAlerts.alertType.id))
 			addToAlerts(new Alert(alertType:alertType,deadline:deadline))
-		
 	}
 	
 //	public String toString() {

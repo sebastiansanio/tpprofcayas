@@ -14,8 +14,8 @@ class AlertController {
     }
 
     def list() {
-		alertManagerService.finalizeAlerts()
-		alertManagerService.generateAlerts()
+		alertManagerService.checkAllAlerts()
+		alertManagerService.generateAllAlerts()
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		if(params.sort==null) 
 			params.sort = "deadline"
