@@ -48,12 +48,12 @@ class AlertManagerService {
 	}
 	
 	def checkAllAlerts() {
-		def activeWishes = Wish.findAll().findAll{
+		def activeAlerts = Alert.findAll().findAll{
 			it.isActive()
 			
 		}
-		activeWishes.each{wish ->
-			checkAlerts(wish)
+		activeAlerts.each{
+			it.check()
 		}
 	}
 }
