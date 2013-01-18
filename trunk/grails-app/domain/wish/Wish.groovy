@@ -175,7 +175,7 @@ class Wish {
 	void generateAlert(AlertType alertType,Date deadline){
 		def activeAlerts = getActiveAlerts()
 		if(!(alertType.id in activeAlerts.alertType.id))
-			addToAlerts(new Alert(alertType:alertType,deadline:deadline))
+			addToAlerts(new Alert(alertType:alertType,deadline:deadline,checked:false))
 	}
 	
 //	public String toString() {

@@ -8,6 +8,7 @@ class Alert {
 	Date deadline
 	Date dateFinalized
 	String finalizedReason
+	boolean checked
 	
 	static belongsTo	= [wish:Wish]	
 	
