@@ -9,8 +9,14 @@ class BootStrap {
 
     def init = { servletContext ->
 		def user = new User(username:"cayas", passwordHash: new Sha256Hash("cayas").toHex())
-		user.addToPermissions("*:*")
-
+		user.addToPermissions("alert:*")
+		user.addToPermissions("color:*")
+		user.addToPermissions("family:*")
+		user.addToPermissions("main:*")
+		user.addToPermissions("picture:*")
+		user.addToPermissions("product:*")
+		user.addToPermissions("wish:*")
+		
 		user.save()
 		
 								
@@ -56,6 +62,12 @@ class BootStrap {
 		
 		def alertType = new AlertType(description:"Vencimiento de la Djai",nameOfEstimatedDateField:"djaiExpirationDate",nameOfCompletionField:"timeOfArrival",alertTerm:10)
     	alertType.save()
+		alertType = new AlertType(description:"Salida del barco",nameOfEstimatedDateField:"estimatedTimeOfDeparture",nameOfCompletionField:"timeOfDeparture",alertTerm:5)
+		alertType.save()
+		alertType = new AlertType(description:"Llegada del barco",nameOfEstimatedDateField:"estimatedTimeOfArrival",nameOfCompletionField:"timeOfArrival",alertTerm:5)
+		alertType.save()
+		
+		
 	}
     def destroy = {
     }
