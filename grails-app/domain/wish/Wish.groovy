@@ -99,8 +99,8 @@ class Wish {
     }
     
 	static constraints = {
-		opNumber unique:true
-		customerOpNumber unique: 'customer'
+		opNumber unique:true,min:0L
+		customerOpNumber unique: 'customer',min:0L
 		customer nullable:false
 		supplier nullable:false
 		shipper nullable:false
@@ -109,7 +109,7 @@ class Wish {
 		currency nullable:true
 		conversion nullable:true
 		currencyFob nullable:true
-		estimatedDeliveryTerm nullable:true
+		estimatedDeliveryTerm nullable:true,min:0
 		estimatedDeliveryDate nullable:true
 		deliveryDate nullable:true
 		estimatedTimeOfDeparture nullable:true

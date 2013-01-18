@@ -1,7 +1,7 @@
 <%@ page import="wish.Wish" %>
 
-
-
+<div class="row-fluid">
+  <div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'opNumber', 'error')} required">
 				<label for="opNumber" class="control-label"><g:message code="wish.opNumber.label" default="Op Number" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -81,7 +81,6 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'currencyFob', 'error')}</span>
 				</div>
 			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedDeliveryTerm', 'error')} required">
 				<label for="estimatedDeliveryTerm" class="control-label"><g:message code="wish.estimatedDeliveryTerm.label" default="Estimated Delivery Term" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -104,7 +103,7 @@
 					<bs:datePicker name="deliveryDate" precision="day"  value="${wishInstance?.deliveryDate}" default="none" noSelection="['': '']" />
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')}</span>
 				</div>
-			</div>
+			</div>			
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')} ">
 				<label for="estimatedTimeOfDeparture" class="control-label"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></label>
@@ -161,6 +160,9 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'paymentTerm', 'error')}</span>
 				</div>
 			</div>
+
+	</div>
+	<div class="span4">
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'wishStatus', 'error')} ">
 				<label for="wishStatus" class="control-label"><g:message code="wish.wishStatus.label" default="Wish Status" /></label>
@@ -338,6 +340,10 @@
 				</div>
 			</div>
 
+	</div>
+
+	<div class="span4">		
+
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')} ">
 				<label for="sourceCountry" class="control-label"><g:message code="wish.sourceCountry.label" default="Source Country" /></label>
 				<div class="controls">
@@ -507,14 +513,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'notes', 'error')} ">
-				<label for="notes" class="control-label"><g:message code="wish.notes.label" default="Notes" /></label>
-				<div class="controls">
-					<g:select name="notes" from="${modal.Note.list()}" multiple="multiple" optionKey="id" size="5" value="${wishInstance?.notes*.id}" class="many-to-many"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'notes', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')} ">
 				<label for="picturesOfLoadingContainer" class="control-label"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></label>
 				<div class="controls">
@@ -547,4 +545,17 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')}</span>
 				</div>
 			</div>
+	</div>
+</div>		
 
+<div class="row-fluid">
+  <div class="span4">
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'notes', 'error')} ">
+				<label for="notes" class="control-label"><g:message code="wish.notes.label" default="Notes" /></label>
+				<div class="controls">
+					<g:select class="input-xxlarge" name="notes" from="${modal.Note.list()}" multiple="multiple" optionKey="id" size="5" value="${wishInstance?.notes*.id}" class="many-to-many"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'notes', 'error')}</span>
+				</div>
+			</div>
+	</div>		
+</div>
