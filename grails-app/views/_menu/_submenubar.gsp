@@ -3,19 +3,19 @@
 
 <g:if test="${	params.controller != null
 			&&	params.controller != ''
-			&&	params.controller != 'main'
+
 }">
 	<ul id="Menu" class="nav nav-pills">
 
 		<g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />
 		
-						
-		<li class="${ params.action == "list" ? 'active' : '' }">
-			<g:link action="list"><i class="icon-th-list"></i> <g:message code="default.list.label" args="[entityName]"/></g:link>
-		</li>
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":list") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/list')}">									
+			<li class="${ params.action == "list" ? 'active' : '' }">
+				<g:link action="list"><i class="icon-th-list"></i> <g:message code="default.list.label" args="[entityName]"/></g:link>
+			</li>
+		</g:if>
 		
-		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":create") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/create')}">
-			
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":create") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/create')}">			
 			<li class="${ params.action == "create" ? 'active' : '' }">
 				<g:link action="create"><i class="icon-plus"></i> <g:message code="default.new.label"  args="[entityName]"/></g:link>
 			</li>
