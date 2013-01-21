@@ -2,6 +2,14 @@
 
 
 
+			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'image', 'error')} required">
+				<label for="image" class="control-label"><g:message code="picture.image.label" default="Image" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<input type="file" id="image" name="image" />
+					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'image', 'error')}</span>
+				</div>
+			</div>
+
 			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'description', 'error')} ">
 				<label for="description" class="control-label"><g:message code="picture.description.label" default="Description" /></label>
 				<div class="controls">
@@ -10,11 +18,11 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'image', 'error')} required">
-				<label for="image" class="control-label"><g:message code="picture.image.label" default="Image" /><span class="required-indicator">*</span></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'wish', 'error')} required">
+				<label for="wish" class="control-label"><g:message code="picture.wish.label" default="Wish" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<input type="file" id="image" name="image" />
-					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'image', 'error')}</span>
+					<g:select id="wish" name="wish.id" from="${wish.Wish.list()}" optionKey="id" required="" value="${pictureInstance?.wish?.id}" class="many-to-one"/>
+					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'wish', 'error')}</span>
 				</div>
 			</div>
 

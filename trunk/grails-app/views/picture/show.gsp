@@ -18,6 +18,11 @@
 		<tbody>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="picture.image.label" default="Image" /></td>
+				<img src="${createLink(controller: 'picture',action: 'viewPicture',id: pictureInstance.id)}" />
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="picture.description.label" default="Description" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: pictureInstance, field: "description")}</td>
@@ -25,11 +30,10 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="picture.image.label" default="Image" /></td>
+				<td valign="top" class="name"><g:message code="picture.wish.label" default="Wish" /></td>
 				
-				<img src="${createLink(controller: 'picture',action: 'viewPicture',id: pictureInstance.id)}" />
+				<td valign="top" class="value"><g:link controller="wish" action="show" id="${pictureInstance?.wish?.id}">${pictureInstance?.wish?.encodeAsHTML()}</g:link></td>
 				
-
 			</tr>
 		
 		</tbody>

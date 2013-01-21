@@ -332,6 +332,20 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxes', 'error')} ">
+				<label for="picturesOfPrintingBoxes" class="control-label"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></label>
+				<div class="controls">
+					<ul class="one-to-many">
+						<g:each in="${wishInstance?.picturesOfPrintingBoxes?}" var="p">
+    						<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+							<li class="add">
+						<g:link controller="picture" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'picture.label', default: 'Picture')])}</g:link>
+							</li>
+					</ul>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxes', 'error')}</span>
+				</div>
+			</div>
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReveived', 'error')} ">
 				<label for="picturesOfLoadingContainerReveived" class="control-label"><g:message code="wish.picturesOfLoadingContainerReveived.label" default="Pictures Of Loading Container Reveived" /></label>
 				<div class="controls">
@@ -340,6 +354,20 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')} ">
+				<label for="picturesOfLoadingContainer" class="control-label"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></label>
+				<div class="controls">
+					<ul class="one-to-many">
+						<g:each in="${wishInstance?.picturesOfLoadingContainer?}" var="p">
+    						<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+							<li class="add">
+						<g:link controller="picture" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'picture.label', default: 'Picture')])}</g:link>
+							</li>
+					</ul>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')}</span>
+				</div>
+			</div>
 	</div>
 
 	<div class="span4">		
@@ -513,34 +541,17 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')} ">
-				<label for="picturesOfLoadingContainer" class="control-label"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></label>
-				<div class="controls">
-					<g:select name="picturesOfLoadingContainer" from="${wish.Picture.list()}" multiple="multiple" optionKey="id" size="5" value="${wishInstance?.picturesOfLoadingContainer*.id}" class="many-to-many"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxes', 'error')} ">
-				<label for="picturesOfPrintingBoxes" class="control-label"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></label>
-				<div class="controls">
-					<g:select name="picturesOfPrintingBoxes" from="${wish.Picture.list()}" multiple="multiple" optionKey="id" size="5" value="${wishInstance?.picturesOfPrintingBoxes*.id}" class="many-to-many"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxes', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')} ">
 				<label for="secondStageRequiredDocuments" class="control-label"><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents" /></label>
 				<div class="controls">
-					
-<ul class="one-to-many">
-<g:each in="${wishInstance?.secondStageRequiredDocuments?}" var="s">
-    <li><g:link controller="document" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="document" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'document.label', default: 'Document')])}</g:link>
-</li>
-</ul>
+					<ul class="one-to-many">
+						<g:each in="${wishInstance?.secondStageRequiredDocuments?}" var="s">
+    						<li><g:link controller="document" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+						</g:each>
+							<li class="add">
+						<g:link controller="document" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'document.label', default: 'Document')])}</g:link>
+							</li>
+					</ul>
 
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')}</span>
 				</div>

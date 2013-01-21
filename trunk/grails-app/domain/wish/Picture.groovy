@@ -4,7 +4,7 @@ class Picture {
 
 	byte[] image
 	String description
-	
+	static belongsTo	= [wish: Wish]
     static mapping = {
     }
     
