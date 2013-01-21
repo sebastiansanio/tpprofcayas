@@ -105,5 +105,25 @@ class WishController {
         }
     }
 	
-	
+		def viewPhotoContainer() {
+		
+		def wishInstance = Wish.get(params.id)
+       	if (!wishInstance) {
+				flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
+			return
+		}
+		
+		render(view: "viewPhoto", model: [wishInstance: wishInstance])
+	}
+
+	def viewPhotoBoxes() {
+		
+		def wishInstance = Wish.get(params.id)
+       	if (!wishInstance) {
+				flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
+			return
+		}
+		
+		render(view: "viewPhoto", model: [pictureWish: wishInstance.picturesOfPrintingBoxes])
+	}
 }
