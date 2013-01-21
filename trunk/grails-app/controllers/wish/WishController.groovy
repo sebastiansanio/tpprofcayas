@@ -113,7 +113,7 @@ class WishController {
 			return
 		}
 		
-		render(view: "viewPhoto", model: [wishInstance: wishInstance])
+		render(view: "viewPhoto", model: [wishInstance: wishInstance.picturesOfLoadingContainer])
 	}
 
 	def viewPhotoBoxes() {
