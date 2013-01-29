@@ -8,7 +8,6 @@ class Contact {
 	boolean sendMails
 	
 	Date	dateCreated
-//	Date	lastUpdated
 	
 	static belongsTo	= [stakeholder:Stakeholder]	
 	
