@@ -13,8 +13,7 @@ class Product {
 	
 	Date	dateCreated
 	Date	lastUpdated
-	
-	static belongsTo	= Load	
+		
 	static hasMany		= [loadsUnits: LoadUnit]	
 	
     static mapping = {

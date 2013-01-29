@@ -7,93 +7,77 @@ import alert.AlertType
 
 class Wish {
 
+	static hasMany		= [loadUnits: LoadUnit, alerts: Alert,notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]
+	List loadUnits
+	List notes
+	List firstStageRequiredDocuments
+	List secondStageRequiredDocuments
+	List picturesOfPrintingBoxes
+	List picturesOfLoadingContainer
+	List docDraftToBeApprovedBeforeDelivery
+	
 	Date dateCreated
 	Date lastUpdated
-	
-	static hasMany		= [alerts: Alert,notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]	
-	
 	Long opNumber
 	Long customerOpNumber
 	Customer customer
 	Supplier supplier
 	Shipper shipper
-	
-	Load load
-	
 	String supplierOrder
 	PriceCondition priceCondition
-	
 	Currency currency
 	BigDecimal conversion
 	BigDecimal currencyFob
-	
-	int estimatedDeliveryTerm
 	Date estimatedDeliveryDate
 	Date deliveryDate
-	
 	Date estimatedTimeOfDeparture 
 	Date timeOfDeparture
-	
 	Date estimatedTimeOfArrival
 	Date timeOfArrival
-	
 	Date wishDate
 	Date dateOfMoneyInAdvanceTransfer
 	PaymentTerm paymentTerm
-	
 	WishStatus wishStatus
 	PaymentStatus paymentStatus
-
 	CustomsBroker customsBroker
 	String customsBrokerRefNumber
-
 	BigDecimal visaChargePayment
 	VisaChargePaymentConcept visaChargePaymentConcept
-	
 	CriterionValue criterionValue
 	boolean licenses
-	
 	long djaiNumber
-	Date formalizationDate
-	Date extendedDjai
-	Date getDjaiExpirationDate(){
-		
-		return formalizationDate+180
-	}
-	
-	
-	String cartonPrintingInfo 
+	Date djaiFormalizationDate
+	Date djaiExtendedRequested
+	Date djaiExtendedExpiration
 	ShippingMark shippingMark
 	boolean customerLogoPunch
-	
-	boolean ciTaxAndCuitVerification
+	Date taxRegistryNumberAndCuitVerification
 	String hsCodeToBeWritten 
 	BigDecimal amountOfMoneyInAdvanceTransferred
 	Date swiftSentToSupplierDate
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
-	boolean picturesOfPrintingBoxesAndLoadReceived
-	boolean picturesOfLoadingContainerReveived
+	Date picturesOfPrintingBoxesAndLoadReceived
+	Date picturesOfLoadingContainerReveived
 	Country sourceCountry
 	Port port
 	Ship ship
-	boolean docDraftApproved
+	Date docDraftApproved
 	Forwarder forwarder
 	Agent agent
 	BigDecimal freightQuote
 	String forwarderRefNumber
-	
 	BigDecimal loadSecuredPercent
-	
 	BigDecimal cbm
 	BigDecimal grossWeight
 	BigDecimal netWeight
-	int palletsQuantity
+	Integer palletsQuantity
 	TypeOfFreight typeOfFreight
-	
-	long blNumber
-	long dispatchNumber
-	long bill
+	String blNumber
+	String dispatchNumber
+	String bill
+	Date billDate
+	Date finnishDate	
 	
     static mapping = {
     }
@@ -109,7 +93,6 @@ class Wish {
 		currency nullable:true
 		conversion nullable:true
 		currencyFob nullable:true
-		estimatedDeliveryTerm nullable:true,min:0
 		estimatedDeliveryDate nullable:true
 		deliveryDate nullable:true
 		estimatedTimeOfDeparture nullable:true
@@ -128,12 +111,12 @@ class Wish {
 		criterionValue nullable:true
 		licenses nullable:false
 		djaiNumber nullable:false,blank:false
-		formalizationDate nullable:false
-		extendedDjai nullable:true
-		cartonPrintingInfo nullable:true,blank:true
+		djaiFormalizationDate nullable:false
+		djaiExtendedRequested nullable:true
+		djaiExtendedExpiration nullable:true
 		shippingMark nullable:true
 		customerLogoPunch nullable:true
-		ciTaxAndCuitVerification nullable:true
+		taxRegistryNumberAndCuitVerification nullable:true	
 		hsCodeToBeWritten nullable:true,blank:true
 		amountOfMoneyInAdvanceTransferred nullable:true
 		swiftSentToSupplierDate nullable:true
@@ -158,7 +141,8 @@ class Wish {
 		blNumber nullable:true
 		dispatchNumber nullable:true
 		bill nullable:true		
-		load nullable:true
+		billDate nullable:true
+		finnishDate nullable:true
 	}
 	
 	def getActiveAlerts(){
@@ -168,9 +152,12 @@ class Wish {
 	}
 	
 	boolean isActive(){
-		return true
+		return finnishDate == null
 	}
 		
+	Date getDjaiExpirationDate(){
+		return formalizationDate+180
+	}
 	
 	void generateAlert(AlertType alertType,Date deadline){
 		def activeAlerts = getActiveAlerts()
