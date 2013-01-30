@@ -7,7 +7,6 @@ class Customer extends Stakeholder{
 	String address
 	String cuit
 		
-	
 	static hasMany		= [wishes: Wish]
 	
     static mapping = {

@@ -5,10 +5,8 @@ import modal.DocumentType
 class Document {
 
 	DocumentType documentType
-	boolean received
+	Date received
 	String trackingNumber
-	
-	static belongsTo	= [wish:Wish]
 	
     static mapping = {
     }
