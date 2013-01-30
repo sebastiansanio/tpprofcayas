@@ -24,7 +24,7 @@
 								<p>${picture.description}</p>
 							</div>
 						</div>
-					</g:if>
+					</g:if> 
 					<g:else>
 						<div class="item">
 							<img src="${createLink(controller: 'picture', action: 'viewPicture',id: picture.id)}" width="300" height="300"/>

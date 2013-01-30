@@ -16,31 +16,28 @@ class BootStrap {
 		user.addToPermissions("picture:*")
 		user.addToPermissions("product:*")
 		user.addToPermissions("wish:*")
-		
 		user.save()
-		
-								
-		def customer = new Customer(name:"PLACASUR")
-		customer.save()
-		
-		def supplier = new Supplier(name:"HAI HUI")
-		supplier.save()
-		
-		def shipper = new Shipper(name:"GUANGZHOU ANIMAL")
-		shipper.save()
-		
-		def customsBroker = new CustomsBroker(name:"LEWKOWICK")
-		customsBroker.save()
-		
-		def forwarder = new Forwarder(name:"AirSeaLand")
-		forwarder.save()
-		
-		def agent = new Agent(name:"SUNSHOW")
-		agent.save()
-		
 		
 		def country = new Country(name:"CHINA")
 		country.save()
+								
+		def customer = new Customer(name:"PLACASUR",country:country,address:".",cuit:"30-34948484-4")
+		customer.save()
+		
+		def supplier = new Supplier(name:"HAI HUI",country:country,address:".",taxRegistryNumber:"2312232")
+		supplier.save()
+		
+		def shipper = new Shipper(name:"GUANGZHOU ANIMAL",country:country)
+		shipper.save(failOnError:true)
+		
+		def customsBroker = new CustomsBroker(name:"LEWKOWICK",country:country)
+		customsBroker.save()
+		
+		def forwarder = new Forwarder(name:"AirSeaLand",country:country)
+		forwarder.save(failOnError:true)
+		
+		def agent = new Agent(name:"SUNSHOW",country:country)
+		agent.save()
 		
 		def port = new Port(country:country,name:"GUANGZHOU")
 		port.save()

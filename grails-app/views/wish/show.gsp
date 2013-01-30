@@ -88,13 +88,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.estimatedDeliveryTerm.label" default="Estimated Delivery Term" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "estimatedDeliveryTerm")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.estimatedDeliveryDate.label" default="Estimated Delivery Date" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.estimatedDeliveryDate}" /></td>
@@ -221,23 +214,23 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.formalizationDate.label" default="Formalization Date" /></td>
+				<td valign="top" class="name"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${wishInstance?.formalizationDate}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.extendedDjai.label" default="Extended Djai" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${wishInstance?.extendedDjai}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.djaiFormalizationDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.cartonPrintingInfo.label" default="Carton Printing Info" /></td>
+				<td valign="top" class="name"><g:message code="wish.djaiExtendedRequested.label" default="Djai Extended Requested" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "cartonPrintingInfo")}</td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.djaiExtendedRequested}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.djaiExtendedExpiration.label" default="Djai Extended Expiration" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.djaiExtendedExpiration}" /></td>
 				
 			</tr>
 		
@@ -256,9 +249,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.ciTaxAndCuitVerification.label" default="Ci Tax And Cuit Verification" /></td>
+				<td valign="top" class="name"><g:message code="wish.taxRegistryNumberAndCuitVerification.label" default="Tax Registry Number And Cuit Verification" /></td>
 				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.ciTaxAndCuitVerification}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.taxRegistryNumberAndCuitVerification}" /></td>
 				
 			</tr>
 		
@@ -300,45 +293,17 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></td>
 				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
-				
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.aapicturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<g:link class="btn btn-primary" action="viewPhotoBoxes" id="${wishInstance.id}">Ver fotos</g:link>
-					<ul>
-					<g:each in="${wishInstance.picturesOfPrintingBoxes}" var="p">
-						<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReveived.label" default="Pictures Of Loading Container Reveived" /></td>
 				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfLoadingContainerReveived}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfLoadingContainerReveived}" /></td>
 				
 			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<g:link class="btn btn-primary" action="viewPhotoContainer" id="${wishInstance.id}">Ver fotos</g:link>
-					<ul>
-					<g:each in="${wishInstance.picturesOfLoadingContainer}" var="p">
-						<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-				
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.sourceCountry.label" default="Source Country" /></td>
 				
@@ -363,7 +328,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.docDraftApproved.label" default="Doc Draft Approved" /></td>
 				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.docDraftApproved}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.docDraftApproved}" /></td>
 				
 			</tr>
 		
@@ -459,9 +424,29 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.load.label" default="Load" /></td>
+				<td valign="top" class="name"><g:message code="wish.billDate.label" default="Bill Date" /></td>
 				
-				<td valign="top" class="value"><g:link controller="load" action="show" id="${wishInstance?.load?.id}">${wishInstance?.load?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.billDate}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.finnishDate.label" default="Finnish Date" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.finnishDate}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.alerts.label" default="Alerts" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.alerts}" var="a">
+						<li><g:link controller="alert" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
 		
@@ -506,6 +491,19 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.loadUnits.label" default="Load Units" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.loadUnits}" var="l">
+						<li><g:link controller="loadUnit" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.notes.label" default="Notes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -516,6 +514,34 @@
 					</ul>
 				</td>
 				
+			</tr>
+		
+					<tr class="prop">
+					<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>
+	
+					<td valign="top" style="text-align: left;" class="value">
+						<g:link class="btn btn-primary" action="viewPhotoContainer" id="${wishInstance.id}">Ver fotos</g:link>
+						<ul>
+						<g:each in="${wishInstance.picturesOfLoadingContainer}" var="p">
+							<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
+	
+				</tr>			
+		
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
+	
+					<td valign="top" style="text-align: left;" class="value">
+						<g:link class="btn btn-primary" action="viewPhotoBoxes" id="${wishInstance.id}">Ver fotos</g:link>
+						<ul>
+						<g:each in="${wishInstance.picturesOfPrintingBoxes}" var="p">
+							<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
 			</tr>
 		
 			<tr class="prop">

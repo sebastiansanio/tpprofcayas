@@ -8,12 +8,11 @@ import alert.AlertType
 class Wish {
 
 	static hasMany		= [loadUnits: LoadUnit, alerts: Alert,notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]
+	
 	List loadUnits
 	List notes
 	List firstStageRequiredDocuments
 	List secondStageRequiredDocuments
-	List picturesOfPrintingBoxes
-	List picturesOfLoadingContainer
 	List docDraftToBeApprovedBeforeDelivery
 	
 	Date dateCreated
@@ -79,15 +78,13 @@ class Wish {
 	Date billDate
 	Date finnishDate	
 	
-    static mapping = {
-    }
     
 	static constraints = {
 		opNumber unique:true,min:0L
 		customerOpNumber unique: 'customer',min:0L
 		customer nullable:false
 		supplier nullable:false
-		shipper nullable:false
+		shipper nullable:true
 		supplierOrder nullable:true,blank:true
 		priceCondition nullable:true
 		currency nullable:true
