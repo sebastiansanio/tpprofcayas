@@ -21,6 +21,9 @@
 	<r:require modules="${session.skin ? session.skin            : 'bootstrap'}"/>
 	<r:require modules="${session.skin ? session.skin + '_utils' : 'bootstrap_utils'}"/>
 	<r:require module="export"/>
+	
+	<g:javascript src="bootstrap-lightbox.min.js" />
+	<link type="text/css" href="${createLinkTo(dir:'css',file:'bootstrap-lightbox.min.css')}" />
 
 	<r:layoutResources />
 	<g:layoutHead />
