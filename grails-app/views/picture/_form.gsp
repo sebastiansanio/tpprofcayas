@@ -18,11 +18,4 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'wish', 'error')} required">
-				<label for="wish" class="control-label"><g:message code="picture.wish.label" default="Wish" /><span class="required-indicator">*</span></label>
-				<div class="controls">
-					<g:select id="wish" name="wish.id" from="${wish.Wish.list()}" optionKey="id" required="" value="${pictureInstance?.wish?.id}" class="many-to-one"/>
-					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'wish', 'error')}</span>
-				</div>
-			</div>
 

@@ -2,10 +2,7 @@ package wish
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * WishController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
 class WishController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -105,25 +102,21 @@ class WishController {
         }
     }
 	
-		def viewPhotoContainer() {
-		
+	def viewPhotoContainer() {	
 		def wishInstance = Wish.get(params.id)
        	if (!wishInstance) {
 				flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
 			return
 		}
-		
-		render(view: "viewPhoto", model: [wishInstance: wishInstance.picturesOfLoadingContainer])
+		render(view: "viewPhoto", model: [pictureWish: wishInstance.picturesOfLoadingContainer])
 	}
 
 	def viewPhotoBoxes() {
-		
 		def wishInstance = Wish.get(params.id)
        	if (!wishInstance) {
 				flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
 			return
 		}
-		
 		render(view: "viewPhoto", model: [pictureWish: wishInstance.picturesOfPrintingBoxes])
 	}
 }

@@ -15,7 +15,7 @@
 	<div id="myCarousel" class="carousel slide">  
             <!-- Carousel items -->  
 		<div class="carousel-inner"> 
-				<center> 
+
        			<g:each in="${pictureWish}" var="picture" status="i">	
 					<g:if test="${i == 0}">
 					     <div class="active item">
@@ -34,7 +34,6 @@
 						</div> 
 					</g:else>
 				</g:each>
-				</center> 
 		</div>  
   	<!-- Carousel nav -->  
   		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>  

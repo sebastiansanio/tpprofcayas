@@ -19,7 +19,6 @@
 			
 				<g:sortableColumn property="image" title="${message(code: 'picture.image.label', default: 'Image')}" />
 			
-				<th><g:message code="picture.wish.label" default="Wish" /></th>
 			
 			</tr>
 		</thead>
@@ -29,7 +28,6 @@
 			
 				<td><g:link action="show" id="${pictureInstance.id}">${fieldValue(bean: pictureInstance, field: "description")}</g:link></td>
 			
-				<td>${fieldValue(bean: pictureInstance, field: "wish")}</td>
 			
 			</tr>
 		</g:each>

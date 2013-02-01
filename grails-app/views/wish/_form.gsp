@@ -558,39 +558,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')} ">
-				<label for="picturesOfLoadingContainer" class="control-label"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></label>
-				<div class="controls">
-					
-<ul class="one-to-many">
-<g:each in="${wishInstance?.picturesOfLoadingContainer?}" var="p">
-    <li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="picture" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'picture.label', default: 'Picture')])}</g:link>
-</li>
-</ul>
-
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainer', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxes', 'error')} ">
-				<label for="picturesOfPrintingBoxes" class="control-label"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></label>
-				<div class="controls">
-					
-<ul class="one-to-many">
-<g:each in="${wishInstance?.picturesOfPrintingBoxes?}" var="p">
-    <li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="picture" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'picture.label', default: 'Picture')])}</g:link>
-</li>
-</ul>
-
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxes', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')} ">
 				<label for="secondStageRequiredDocuments" class="control-label"><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents" /></label>
@@ -601,5 +568,18 @@
 			</div>
 </div>
 
+
+<div class="span12">
+	<g:render template="picturesBoxes" model="['wishInstance':wishInstance]" /> 
+</div>			
+<div class="span12">
+	<g:render template="picturesContainer" model="['wishInstance':wishInstance]" /> 
+</div>			
+	
+
+
+
 </div>
+
+
 

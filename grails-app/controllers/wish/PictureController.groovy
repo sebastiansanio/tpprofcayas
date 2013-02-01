@@ -2,10 +2,6 @@ package wish
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * PictureController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
 class PictureController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -74,6 +70,8 @@ class PictureController {
                 return
             }
         }
+		
+		System.out.println(params)
 
         pictureInstance.properties = params
 
