@@ -29,12 +29,6 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="picture.wish.label" default="Wish" /></td>
-				
-				<td valign="top" class="value"><g:link controller="wish" action="show" id="${pictureInstance?.wish?.id}">${pictureInstance?.wish?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
 		
 		</tbody>
 	</table>

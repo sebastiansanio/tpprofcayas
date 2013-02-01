@@ -19,7 +19,7 @@
 	</div>
 	</g:hasErrors>
 	
-	<g:form action="save" class="form-horizontal" >
+	<g:form action="save" class="form-horizontal" enctype="multipart/form-data">
 		<fieldset class="form">
 			<g:render template="form"/>
 		</fieldset>

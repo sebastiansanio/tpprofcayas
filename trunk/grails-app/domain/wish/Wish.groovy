@@ -13,6 +13,8 @@ class Wish {
 	List notes
 	List firstStageRequiredDocuments
 	List secondStageRequiredDocuments
+	List picturesOfPrintingBoxes
+	List picturesOfLoadingContainer
 	List docDraftToBeApprovedBeforeDelivery
 	
 	Date dateCreated
@@ -153,7 +155,7 @@ class Wish {
 	}
 		
 	Date getDjaiExpirationDate(){
-		return formalizationDate+180
+		return djaiFormalizationDate+180
 	}
 	
 	void generateAlert(AlertType alertType,Date deadline){
