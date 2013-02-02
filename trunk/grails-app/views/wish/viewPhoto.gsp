@@ -19,7 +19,7 @@
        			<g:each in="${pictureWish}" var="picture" status="i">	
 					<g:if test="${i == 0}">
 					     <div class="active item">
-							<img src="${createLink(controller: 'picture', action: 'viewPicture',id: picture.id)}" width="300" height="300"/>
+							<img src="${createLink(action: 'viewPicture',id: picture.id)}" width="300" height="300"/>
                    			<div class="carousel-caption">
 								<p>${picture.description}</p>
 							</div>
@@ -27,7 +27,7 @@
 					</g:if> 
 					<g:else>
 						<div class="item">
-							<img src="${createLink(controller: 'picture', action: 'viewPicture',id: picture.id)}" width="300" height="300"/>
+							<img src="${createLink(action: 'viewPicture',id: picture.id)}" width="300" height="300"/>
 						    <div class="carousel-caption">
 								<p>${picture.description}</p>
 							</div>

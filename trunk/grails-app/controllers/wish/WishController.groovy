@@ -119,4 +119,12 @@ class WishController {
 		}
 		render(view: "viewPhoto", model: [pictureWish: wishInstance.picturesOfPrintingBoxes])
 	}
+	
+	def viewPicture(){
+		def picture = Picture.get(params.id)
+		response.setHeader("Content-disposition", "attachment; filename=${params.id}")
+		response.outputStream << picture.image
+		response.outputStream.flush()
+		return
+	}
 }

@@ -10,7 +10,7 @@
 		var htmlId = "picturesOfLoadingContainer" + picturesOfLoadingContainerCount;
 		
 		var deleteIcon = "${resource(dir:'images/skin',file:'database_delete.png')}";
-		var templateHtml = "<div class='span12' id='" + htmlId + "' name='" + htmlId +"'>";	
+		var templateHtml = "<div class='row' id='" + htmlId + "' name='" + htmlId +"'>";	
 		templateHtml += "${message(code:'picture.image.label')}";
 		templateHtml += "<input type='file' id='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].image' name='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].image' />";
 		templateHtml += "${message(code:'picture.description.label')}";
@@ -24,7 +24,7 @@
 	
 </script>
 
-<div id="picturesOfLoadingContainerChildList">
+<div class="row-fluid" id="picturesOfLoadingContainerChildList">
 	
 	<g:each var="pictureInstance" in="${wishInstance?.picturesOfLoadingContainer}" status="i">
 	
@@ -40,4 +40,4 @@
 	
 	
 </div>
-<input type="button" value="${message(code:'picturesOfLoadingContainer.add')}" onClick="addPicturesOfLoadingContainer();" />
+<input type="button" class="btn btn-inverse" value="${message(code:'picturesOfLoadingContainer.add')}" onClick="addPicturesOfLoadingContainer();" />

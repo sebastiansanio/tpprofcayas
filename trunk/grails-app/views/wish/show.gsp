@@ -298,9 +298,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReveived.label" default="Pictures Of Loading Container Reveived" /></td>
+				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfLoadingContainerReveived}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfLoadingContainerReceived}" /></td>
 				
 			</tr>
 		
