@@ -59,7 +59,7 @@ class Wish {
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
 	Date picturesOfPrintingBoxesAndLoadReceived
-	Date picturesOfLoadingContainerReveived
+	Date picturesOfLoadingContainerReceived
 	Country sourceCountry
 	Port port
 	Ship ship
@@ -122,7 +122,7 @@ class Wish {
 		moneyBalance nullable:true
 		dateOfBalancePayment nullable:true
 		picturesOfPrintingBoxesAndLoadReceived nullable:true
-		picturesOfLoadingContainerReveived nullable:true
+		picturesOfLoadingContainerReceived nullable:true
 		sourceCountry nullable:true
 		port nullable:true
 		ship nullable:true

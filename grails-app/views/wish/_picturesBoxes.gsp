@@ -10,7 +10,7 @@
 		var htmlId = "pictureOfPrintingBoxes" + picturesOfPrintingBoxesCount;
 		
 		var deleteIcon = "${resource(dir:'images/skin',file:'database_delete.png')}";
-		var templateHtml = "<div class='span12' id='" + htmlId + "' name='" + htmlId +"'>";	
+		var templateHtml = "<div class='row' id='" + htmlId + "' name='" + htmlId +"'>";	
 		templateHtml += "${message(code:'picture.image.label')}";
 		templateHtml += "<input type='file' id='picturesOfPrintingBoxes["+picturesOfPrintingBoxesCount+"].image' name='picturesOfPrintingBoxes["+picturesOfPrintingBoxesCount+"].image' />";
 		templateHtml += "${message(code:'picture.description.label')}";
@@ -21,23 +21,20 @@
 				
 	}
 
-	
 </script>
 
-<div id="picturesOfPrintingBoxesChildList">
+<div class="row-fluid" id="picturesOfPrintingBoxesChildList">
 	
 	<g:each var="pictureInstance" in="${wishInstance?.picturesOfPrintingBoxes}" status="i">
 	
-	<div class="row">
-		
+		<div class="row">
 			<g:message code="picture.label" default="Image" />:
 			<g:message code="picture.description.label" default="Description" />
 			<g:textField name="picturesOfPrintingBoxes[${i}].description" value="${pictureInstance?.description}"/>
 			<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'description', 'error')}</span>
-	
-	</div>
+		</div>
 	</g:each>
 	
 	
 </div>
-<input type="button" value="${message(code:'picturesOfPrintingBoxes.add')}" onClick="addPicturesOfPrintingBoxes();" />
+<input type="button" class="btn btn-inverse" value="${message(code:'picturesOfPrintingBoxes.add')}" onClick="addPicturesOfPrintingBoxes();" />
