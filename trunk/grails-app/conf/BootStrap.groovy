@@ -8,15 +8,43 @@ import stakeholder.*
 class BootStrap {
 
     def init = { servletContext ->
+		
+		def roleAdmin = new Role(name:"Admin")
+		roleAdmin.addToPermissions("*:*")
+		roleAdmin.save()
+	
+		def roleOperator = new Role(name:"Operador")
+		roleOperator.addToPermissions("alert:*")
+		roleOperator.addToPermissions("color:*")
+		roleOperator.addToPermissions("family:*")
+		roleOperator.addToPermissions("main:*")
+		roleOperator.addToPermissions("picture:*")
+		roleOperator.addToPermissions("product:*")
+		roleOperator.addToPermissions("wish:*")
+		roleOperator.save()
+		
+		def roleManager = new Role(name:"Gestor")
+		roleManager.addToPermissions("alert:*")
+		roleManager.addToPermissions("alertType:*")
+		roleManager.addToPermissions("color:*")
+		roleManager.addToPermissions("family:*")
+		roleManager.addToPermissions("main:*")
+		roleManager.addToPermissions("picture:*")
+		roleManager.addToPermissions("product:*")
+		roleManager.addToPermissions("wish:*")
+		roleManager.save()
+		
+		def admin = new User(username:"admin", passwordHash: new Sha256Hash("admin").toHex())
+		admin.addToRoles(roleAdmin)
+		admin.save()
+		
 		def user = new User(username:"cayas", passwordHash: new Sha256Hash("cayas").toHex())
-		user.addToPermissions("alert:*")
-		user.addToPermissions("color:*")
-		user.addToPermissions("family:*")
-		user.addToPermissions("main:*")
-		user.addToPermissions("picture:*")
-		user.addToPermissions("product:*")
-		user.addToPermissions("wish:*")
+		user.addToRoles(roleOperator)
 		user.save()
+		
+		def manager = new User(username:"manager", passwordHash: new Sha256Hash("manager").toHex())
+		manager.addToRoles(roleManager)
+		manager.save()
 		
 		def country = new Country(name:"CHINA")
 		country.save()

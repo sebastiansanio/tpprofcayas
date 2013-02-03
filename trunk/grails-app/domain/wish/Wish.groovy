@@ -78,7 +78,7 @@ class Wish {
 	String dispatchNumber
 	String bill
 	Date billDate
-	Date finnishDate	
+	Date finnishDate
 	
     
 	static constraints = {
@@ -164,7 +164,7 @@ class Wish {
 			addToAlerts(new Alert(alertType:alertType,deadline:deadline,checked:false))
 	}
 	
-//	public String toString() {
-//		return "${name}";
-//	}
+	public String toString() {
+		return opNumber
+	}
 }

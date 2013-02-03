@@ -232,7 +232,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')} required">
 				<label for="djaiFormalizationDate" class="control-label"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<bs:datePicker name="djaiFormalizationDate" precision="day"  value="${wishInstance?.djaiFormalizationDate}"  />
+					<bs:datePicker dateFormat="dd/MM/yyyy" name="djaiFormalizationDate" precision="day"  value="${wishInstance?.djaiFormalizationDate}"  />
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')}</span>
 				</div>
 			</div>
