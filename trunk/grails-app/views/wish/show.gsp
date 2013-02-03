@@ -76,14 +76,14 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.conversion.label" default="Conversion" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "conversion")}</td>
-				
+				<td valign="top" class="value"><g:formatNumber number="${wishInstance.conversion}" minFractionDigits="2" />   </td>
+							
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.currencyFob.label" default="Currency Fob" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "currencyFob")}</td>
+				<td valign="top" class="value"><g:formatNumber number="${wishInstance.currencyFob}" minFractionDigits="2" /> </td>
 				
 			</tr>
 		
@@ -398,7 +398,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.typeOfFreight.label" default="Type Of Freight" /></td>
 				
-				<td valign="top" class="value"><g:link controller="typeOfFreight" action="show" id="${wishInstance?.typeOfFreight?.id}">${wishInstance?.typeOfFreight?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value">${wishInstance?.typeOfFreight?.encodeAsHTML()}</td>
 				
 			</tr>
 		
@@ -520,7 +520,7 @@
 					<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>
 	
 					<td valign="top" style="text-align: left;" class="value">
-						<g:link class="btn btn-primary" action="viewPhotoContainer" id="${wishInstance.id}">Ver fotos</g:link>
+						<g:link class="btn btn-primary" action="viewPhotoContainer" id="${wishInstance.id}">${message(code:'viewPhotos.label')}</g:link>
 						<ul>
 						<g:each in="${wishInstance.picturesOfLoadingContainer}" var="p">
 							<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
@@ -535,7 +535,7 @@
 				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
 	
 					<td valign="top" style="text-align: left;" class="value">
-						<g:link class="btn btn-primary" action="viewPhotoBoxes" id="${wishInstance.id}">Ver fotos</g:link>
+						<g:link class="btn btn-primary" action="viewPhotoBoxes" id="${wishInstance.id}">${message(code:'viewPhotos.label')}</g:link>
 						<ul>
 						<g:each in="${wishInstance.picturesOfPrintingBoxes}" var="p">
 							<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>

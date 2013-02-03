@@ -1,5 +1,7 @@
 package wish
 
+import java.io.OutputStream;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 
@@ -18,22 +20,12 @@ class WishController {
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
+
 	def export() {
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
 		
-		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder"]
-		Map labels = ["opNumber":message(code:"wish.opNumber.label"),"customerOpNumber":message(code:"wish.customerOpNumber.label"),
-			"customer":message(code:"wish.customer.label"),"supplier":message(code:"wish.supplier.label"),"shipper":message(code:"wish.shipper.label"),
-			"supplierOrder":message(code:"wish.supplierOrder.label")]
-		
-		
-		Map formatters
-		Map parameters = [title: message(code:'wish.label')]
-		
-		
-		exportService.export(params.format,response.outputStream,Wish.list(params),fields,labels,formatters,parameters)	
-		
+		exportWish(params.format,response.outputStream)
 		
 	}
 
@@ -42,14 +34,7 @@ class WishController {
 		File file = new File("${message(code:'wish.label')}.${params.extension}")
 		OutputStream outputStream = new FileOutputStream(file)
 		
-		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder"]
-		Map labels = ["opNumber":message(code:"wish.opNumber.label"),"customerOpNumber":message(code:"wish.customerOpNumber.label"),
-			"customer":message(code:"wish.customer.label"),"supplier":message(code:"wish.supplier.label"),"shipper":message(code:"wish.shipper.label"),
-			"supplierOrder":message(code:"wish.supplierOrder.label")]
-		Map formatters
-		Map parameters = [title: message(code:'wish.label')]
-		exportService.export(params.format,outputStream,Wish.list(params),fields,labels,formatters,parameters)
-		
+		exportWish(params.format,outputStream)
 		
 		sendMail {
 			multipart true
@@ -69,6 +54,7 @@ class WishController {
     }
 
     def save() {
+		
         def wishInstance = new Wish(params)
         if (!wishInstance.save(flush: true)) {
             render(view: "create", model: [wishInstance: wishInstance])
@@ -102,7 +88,8 @@ class WishController {
     }
 
     def update() {
-        def wishInstance = Wish.get(params.id)
+        
+		def wishInstance = Wish.get(params.id)
         if (!wishInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
             redirect(action: "list")
@@ -175,4 +162,24 @@ class WishController {
 		response.outputStream.flush()
 		return
 	}
+	
+	def exportWish(String format,OutputStream outputStream) {
+		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder","priceCondition","currency","conversion",
+			"currencyFob","estimatedDeliveryDate","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture"]
+		Map labels = ["opNumber":message(code:"wish.opNumber.label"),"customerOpNumber":message(code:"wish.customerOpNumber.label"),
+			"customer":message(code:"wish.customer.label"),"supplier":message(code:"wish.supplier.label"),"shipper":message(code:"wish.shipper.label"),
+			"supplierOrder":message(code:"wish.supplierOrder.label"),"priceCondition":message(code:"wish.priceCondition.label"),
+			"currency":message(code:"wish.currency.label"),"conversion":message(code:"wish.conversion.label"),
+			"currencyFob":message(code:"wish.currencyFob.label"),"estimatedDeliveryDate":message(code:"wish.estimatedDeliveryDate.label"),
+			"deliveryDate":message(code:"wish.deliveryDate.label"),"estimatedTimeOfDeparture":message(code:"wish.estimatedTimeOfDeparture.label"),
+			"timeOfDeparture":message(code:"wish.timeOfDeparture.label")]
+		
+		def dateFormatter = {domain, value->
+			return value?.format("dd/MM/yyyy")
+		}
+		Map formatters = ["estimatedDeliveryDate":dateFormatter,"deliveryDate":dateFormatter,"estimatedTimeOfDeparture":dateFormatter,"timeOfDeparture":dateFormatter]
+		Map parameters = [title: message(code:'wish.label')]
+		exportService.export(format,outputStream,Wish.list(),fields,labels,formatters,parameters)
+	}
+	
 }
