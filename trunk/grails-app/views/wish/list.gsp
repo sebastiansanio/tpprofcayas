@@ -54,7 +54,13 @@
 	<div class="pagination">
 		<bs:paginate total="${wishInstanceTotal}" />
 	</div>
+
+	
+
 </section>
+
+<export:formats action="export" formats="['csv','excel','ods','pdf']"/>
+
 
 </body>
 
