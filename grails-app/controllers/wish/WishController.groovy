@@ -5,6 +5,8 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class WishController {
 
+	def exportService
+	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -15,7 +17,53 @@ class WishController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
+	
+	def export() {
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
+		
+		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder"]
+		Map labels = ["opNumber":message(code:"wish.opNumber.label"),"customerOpNumber":message(code:"wish.customerOpNumber.label"),
+			"customer":message(code:"wish.customer.label"),"supplier":message(code:"wish.supplier.label"),"shipper":message(code:"wish.shipper.label"),
+			"supplierOrder":message(code:"wish.supplierOrder.label")]
+		
+		
+		Map formatters
+		Map parameters = [title: message(code:'wish.label')]
+		
+		
+		exportService.export(params.format,response.outputStream,Wish.list(params),fields,labels,formatters,parameters)	
+		
+		
+	}
 
+	def sendMail(){
+		
+		File file = new File("${message(code:'wish.label')}.${params.extension}")
+		OutputStream outputStream = new FileOutputStream(file)
+		
+		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder"]
+		Map labels = ["opNumber":message(code:"wish.opNumber.label"),"customerOpNumber":message(code:"wish.customerOpNumber.label"),
+			"customer":message(code:"wish.customer.label"),"supplier":message(code:"wish.supplier.label"),"shipper":message(code:"wish.shipper.label"),
+			"supplierOrder":message(code:"wish.supplierOrder.label")]
+		Map formatters
+		Map parameters = [title: message(code:'wish.label')]
+		exportService.export(params.format,outputStream,Wish.list(params),fields,labels,formatters,parameters)
+		
+		
+		sendMail {
+			multipart true
+			to "sebastiansanio@outlook.com"
+			subject "${message(code:'wish.label')}"
+			body "${message(code:'wish.label')}"
+			attachBytes file.getName(),'application/vnd.ms-excel',file.readBytes()
+				
+		}
+		file.delete()
+		redirect(action: "list")
+		
+	}
+	
     def create() {
         [wishInstance: new Wish(params)]
     }

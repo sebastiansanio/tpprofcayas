@@ -93,5 +93,14 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+grails.mail.host = "smtp.gmail.com"
+grails.mail.port = 465
+grails.mail.username = "operaciones.cayas@gmail.com"
+grails.mail.password = "Cayas5854"
+grails.mail.props = ["mail.transport.protocol":"smtps",
+			 "mail.smtps.host":"smtp.gmail.com",
+			 "mail.smtps.port":"465",
+			 "mail.smtps.auth":"true"]
+
 grails.config.defaults.locations = [KickstartResources]
 grails.config.defaults.locations = [KickstartResources]
