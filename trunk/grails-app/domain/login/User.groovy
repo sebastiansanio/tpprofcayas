@@ -14,4 +14,8 @@ class User {
     static constraints = {
         username(nullable: false, blank: false, unique: true)
     }
+	
+	String toString(){
+		return username
+	}
 }

@@ -14,7 +14,7 @@ class AuthController {
 
     def login = {
         if(SecurityUtils.subject.isAuthenticated()){
-			def targetUri = params.targetUri ?: "/alert"
+			def targetUri = params.targetUri ?: "/main"
 			redirect(uri: targetUri)
         }
 		else{
