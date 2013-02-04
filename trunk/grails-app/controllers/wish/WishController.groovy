@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class WishController {
 
 	def exportService
+	def wishPermissionService
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -164,20 +165,16 @@ class WishController {
 	}
 	
 	def exportWish(String format,OutputStream outputStream) {
-		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder","priceCondition","currency","conversion",
-			"currencyFob","estimatedDeliveryDate","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture"]
-		Map labels = ["opNumber":message(code:"wish.opNumber.label"),"customerOpNumber":message(code:"wish.customerOpNumber.label"),
-			"customer":message(code:"wish.customer.label"),"supplier":message(code:"wish.supplier.label"),"shipper":message(code:"wish.shipper.label"),
-			"supplierOrder":message(code:"wish.supplierOrder.label"),"priceCondition":message(code:"wish.priceCondition.label"),
-			"currency":message(code:"wish.currency.label"),"conversion":message(code:"wish.conversion.label"),
-			"currencyFob":message(code:"wish.currencyFob.label"),"estimatedDeliveryDate":message(code:"wish.estimatedDeliveryDate.label"),
-			"deliveryDate":message(code:"wish.deliveryDate.label"),"estimatedTimeOfDeparture":message(code:"wish.estimatedTimeOfDeparture.label"),
-			"timeOfDeparture":message(code:"wish.timeOfDeparture.label")]
+		List fields = wishPermissionService.getFields()
+		Map formatters = wishPermissionService.getFormatters()
 		
-		def dateFormatter = {domain, value->
-			return value?.format("dd/MM/yyyy")
+		Map labels = new HashMap()
+		
+		fields.each{
+			labels.put(it, message(code:"wish."+it+".label"))			
 		}
-		Map formatters = ["estimatedDeliveryDate":dateFormatter,"deliveryDate":dateFormatter,"estimatedTimeOfDeparture":dateFormatter,"timeOfDeparture":dateFormatter]
+				
+
 		Map parameters = [title: message(code:'wish.label')]
 		exportService.export(format,outputStream,Wish.list(),fields,labels,formatters,parameters)
 	}
