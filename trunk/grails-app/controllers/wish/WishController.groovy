@@ -1,14 +1,13 @@
 package wish
 
 import java.io.OutputStream;
-
+import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
 
 
 class WishController {
 
-	def exportService
-	def wishPermissionService
+	def wishExportService
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -26,23 +25,23 @@ class WishController {
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
 		
-		exportWish(params.format,response.outputStream)
+		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request))
 		
 	}
 
 	def sendMail(){
 		
-		File file = new File("${message(code:'wish.label')}.${params.extension}")
+		File file = new File("${message(code:'wish.label')}"+new Date()+".${params.extension}")
 		OutputStream outputStream = new FileOutputStream(file)
 		
-		exportWish(params.format,outputStream)
+		wishExportService.exportWish(params.format,outputStream,RequestContextUtils.getLocale(request))
 		
 		sendMail {
 			multipart true
 			to "sebastiansanio@outlook.com"
 			subject "${message(code:'wish.label')}"
 			body "${message(code:'wish.label')}"
-			attachBytes file.getName(),'application/vnd.ms-excel',file.readBytes()
+			attachBytes "${message(code:'wish.label')}.${params.extension}",'application/vnd.ms-excel',file.readBytes()
 				
 		}
 		file.delete()
@@ -163,20 +162,6 @@ class WishController {
 		response.outputStream.flush()
 		return
 	}
-	
-	def exportWish(String format,OutputStream outputStream) {
-		List fields = wishPermissionService.getFields()
-		Map formatters = wishPermissionService.getFormatters()
-		
-		Map labels = new HashMap()
-		
-		fields.each{
-			labels.put(it, message(code:"wish."+it+".label"))			
-		}
-				
 
-		Map parameters = [title: message(code:'wish.label')]
-		exportService.export(format,outputStream,Wish.list(),fields,labels,formatters,parameters)
-	}
 	
 }
