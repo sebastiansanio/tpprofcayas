@@ -1,6 +1,6 @@
 package wish
 
-import java.math.BigDecimal;
+import java.io.OutputStream;
 import java.util.Date;
 
 import modal.Country;
@@ -9,15 +9,22 @@ import modal.Port;
 import modal.Ship;
 import modal.ShippingMark;
 import modal.TypeOfFreight;
+import org.springframework.context.MessageSource
 import stakeholder.Agent;
 import stakeholder.CustomsBroker;
 import stakeholder.Forwarder;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware
 
-class WishPermissionService {
+
+class WishExportService implements MessageSourceAware {
 
     static transactional = true
-
-    def getFields() {
+	def exportService
+	MessageSource messageSource
+	
+	def exportWish(String format,OutputStream outputStream,Locale locale) {
+		
 		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder","priceCondition","currency","conversion",
 			"currencyFob","estimatedDeliveryDate","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","paymentStatus","customsBroker",
@@ -29,13 +36,7 @@ class WishPermissionService {
 			"ship","docDraftApproved","forwarder","agent","freightQuote","forwarderRefNumber","loadSecuredPercent",
 			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber","bill",
 			"billDate","finnishDate"
-			]
-		
-		return fields
-
-    }
-	
-	def getFormatters(){
+		]
 		
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
@@ -46,6 +47,18 @@ class WishPermissionService {
 			"dateOfBalancePayment":dateFormatter,"picturesOfPrintingBoxesAndLoadReceived":dateFormatter,"picturesOfLoadingContainerReceived":dateFormatter,
 			"docDraftApproved":dateFormatter,"billDate":dateFormatter,"finnishDate":dateFormatter]
 		
-		return formatters
+		Map labels = new HashMap()
+		
+		
+		
+		fields.each{
+			labels.put(it, messageSource.getMessage("wish."+it+".label",null,locale))
+		}
+				
+		
+		Map parameters = [title: messageSource.getMessage("wish.label",null,locale)]
+		exportService.export(format,outputStream,Wish.list(),fields,labels,formatters,parameters)
+		
 	}
+
 }
