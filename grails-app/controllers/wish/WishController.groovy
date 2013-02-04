@@ -3,6 +3,8 @@ package wish
 import java.io.OutputStream;
 import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
+import login.User
+import org.apache.shiro.SecurityUtils
 
 
 class WishController {
@@ -24,8 +26,8 @@ class WishController {
 	def export() {
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
-		
-		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request))
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),user)
 		
 	}
 
@@ -33,8 +35,8 @@ class WishController {
 		
 		File file = new File("${message(code:'wish.label')}"+new Date()+".${params.extension}")
 		OutputStream outputStream = new FileOutputStream(file)
-		
-		wishExportService.exportWish(params.format,outputStream,RequestContextUtils.getLocale(request))
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		wishExportService.exportWish(params.format,outputStream,RequestContextUtils.getLocale(request),user)
 		
 		sendMail {
 			multipart true
@@ -46,7 +48,6 @@ class WishController {
 		}
 		file.delete()
 		redirect(action: "list")
-		
 	}
 	
     def create() {

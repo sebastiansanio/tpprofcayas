@@ -3,17 +3,16 @@ package wish
 import java.io.OutputStream;
 import java.util.Date;
 
+import login.User
 import modal.Country;
 import modal.CriterionValue;
 import modal.Port;
 import modal.Ship;
 import modal.ShippingMark;
-import modal.TypeOfFreight;
+import modal.TypeOfFreight
 import org.springframework.context.MessageSource
-import stakeholder.Agent;
-import stakeholder.CustomsBroker;
-import stakeholder.Forwarder;
-import org.springframework.context.MessageSource;
+import stakeholder.*
+import org.springframework.context.MessageSource
 import org.springframework.context.MessageSourceAware
 
 
@@ -23,8 +22,9 @@ class WishExportService implements MessageSourceAware {
 	def exportService
 	MessageSource messageSource
 	
-	def exportWish(String format,OutputStream outputStream,Locale locale) {
+	def getFields(User user){
 		
+				
 		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder","priceCondition","currency","conversion",
 			"currencyFob","estimatedDeliveryDate","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","paymentStatus","customsBroker",
@@ -37,6 +37,12 @@ class WishExportService implements MessageSourceAware {
 			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber","bill",
 			"billDate","finnishDate"
 		]
+		return fields
+	}
+	
+	
+	def exportWish(String format,OutputStream outputStream,Locale locale,User user) {
+		List fields = getFields(user)
 		
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
@@ -49,16 +55,12 @@ class WishExportService implements MessageSourceAware {
 		
 		Map labels = new HashMap()
 		
-		
-		
 		fields.each{
 			labels.put(it, messageSource.getMessage("wish."+it+".label",null,locale))
 		}
-				
 		
 		Map parameters = [title: messageSource.getMessage("wish.label",null,locale)]
 		exportService.export(format,outputStream,Wish.list(),fields,labels,formatters,parameters)
-		
 	}
 
 }
