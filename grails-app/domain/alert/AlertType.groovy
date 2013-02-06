@@ -6,6 +6,7 @@ class AlertType {
 
 	String description
 	int alertTerm
+	int frequency
 	String nameOfEstimatedDateField
 	String nameOfCompletionField
 	

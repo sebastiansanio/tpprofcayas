@@ -10,11 +10,19 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'user', 'error')} ">
-				<label for="user" class="control-label"><g:message code="customer.user.label" default="User" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'telephone', 'error')} ">
+				<label for="telephone" class="control-label"><g:message code="customer.telephone.label" default="Telephone" /></label>
 				<div class="controls">
-					<g:select id="user" name="user.id" from="${login.User.list()}" optionKey="id" value="${customerInstance?.user?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'user', 'error')}</span>
+					<g:textField name="telephone" value="${customerInstance?.telephone}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'telephone', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'email', 'error')} ">
+				<label for="email" class="control-label"><g:message code="customer.email.label" default="Email" /></label>
+				<div class="controls">
+					<g:field type="email" name="email" value="${customerInstance?.email}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'email', 'error')}</span>
 				</div>
 			</div>
 
@@ -25,8 +33,6 @@
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'address', 'error')}</span>
 				</div>
 			</div>
-
-
 
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'country', 'error')} required">
 				<label for="country" class="control-label"><g:message code="customer.country.label" default="Country" /><span class="required-indicator">*</span></label>
@@ -44,4 +50,20 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'wishes', 'error')} ">
+				<label for="wishes" class="control-label"><g:message code="customer.wishes.label" default="Wishes" /></label>
+				<div class="controls">
+					
+<ul class="one-to-many">
+<g:each in="${customerInstance?.wishes?}" var="w">
+    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="wish" action="create" params="['customer.id': customerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+</li>
+</ul>
+
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'wishes', 'error')}</span>
+				</div>
+			</div>
 

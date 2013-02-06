@@ -19,6 +19,8 @@
 			
 				<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
 			
+				<th><g:message code="user.stakeholder.label" default="Stakeholder" /></th>
+			
 				<g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Date Created')}" />
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'user.lastUpdated.label', default: 'Last Updated')}" />
@@ -31,6 +33,8 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
 				<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
+			
+				<td>${fieldValue(bean: userInstance, field: "stakeholder")}</td>
 			
 				<td><g:formatDate date="${userInstance.dateCreated}" /></td>
 			

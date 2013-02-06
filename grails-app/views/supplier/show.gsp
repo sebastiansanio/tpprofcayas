@@ -25,9 +25,16 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.user.label" default="User" /></td>
+				<td valign="top" class="name"><g:message code="supplier.telephone.label" default="Telephone" /></td>
 				
-				<td valign="top" class="value"><g:link controller="user" action="show" id="${supplierInstance?.user?.id}">${supplierInstance?.user?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "telephone")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.email.label" default="Email" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
 				
 			</tr>
 		
@@ -35,19 +42,6 @@
 				<td valign="top" class="name"><g:message code="supplier.address.label" default="Address" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "address")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.contacts.label" default="Contacts" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${supplierInstance.contacts}" var="c">
-						<li><g:link controller="contact" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
 				
 			</tr>
 		

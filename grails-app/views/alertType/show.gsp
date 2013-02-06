@@ -45,6 +45,25 @@
 				
 			</tr>
 		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="alertType.alerts.label" default="Alerts" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${alertTypeInstance.alerts}" var="a">
+						<li><g:link controller="alert" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="alertType.frequency.label" default="Frequency" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "frequency")}</td>
+				
+			</tr>
 		
 		</tbody>
 	</table>

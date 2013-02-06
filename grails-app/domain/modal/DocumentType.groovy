@@ -3,7 +3,6 @@ package modal
 class DocumentType {
 
 	String name
-	
 		
     static mapping = {
     }

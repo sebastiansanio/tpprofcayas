@@ -8,7 +8,8 @@ class Alert {
 	Date deadline
 	Date dateFinalized
 	String finalizedReason
-	boolean checked
+	
+	Date lastInspected
 	
 	static belongsTo	= [wish:Wish]	
 	
@@ -21,6 +22,7 @@ class Alert {
 		deadline nullable:false
 		dateFinalized nullable:true
 		finalizedReason nullable:true,inList: ["Actividad realizada","Cambio de fecha"]
+		lastInspected nullable:true
     }
 	
 	void finalize(String reason){
@@ -35,6 +37,8 @@ class Alert {
 			finalize("Actividad realizada")
 		}else if(wish[alertType.nameOfEstimatedDateField] != deadline){
 			finalize("Cambio de fecha")
+		}else if(isInspected() && new Date() >= lastInspected + alertType.frequency){
+			lastInspected = null
 		}
 	}
 	
@@ -42,10 +46,17 @@ class Alert {
 		return (dateFinalized == null)
 	}
 	
-	public String toString() {
+	String toString() {
 		return alertType.toString()
 	}
 	
+	void inspected(){
+		lastInspected = new Date().clearTime()
+	}
 	
+	boolean isInspected(){
+		return lastInspected!=null 
+	}
+		
 	
 }

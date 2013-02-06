@@ -25,9 +25,16 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="customer.user.label" default="User" /></td>
+				<td valign="top" class="name"><g:message code="customer.telephone.label" default="Telephone" /></td>
 				
-				<td valign="top" class="value"><g:link controller="user" action="show" id="${customerInstance?.user?.id}">${customerInstance?.user?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "telephone")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customer.email.label" default="Email" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "email")}</td>
 				
 			</tr>
 		
@@ -35,19 +42,6 @@
 				<td valign="top" class="name"><g:message code="customer.address.label" default="Address" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "address")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="customer.contacts.label" default="Contacts" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${customerInstance.contacts}" var="c">
-						<li><g:link controller="contact" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
 				
 			</tr>
 		
