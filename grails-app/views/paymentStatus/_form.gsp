@@ -18,11 +18,20 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: paymentStatusInstance, field: 'whishes', 'error')} ">
-				<label for="whishes" class="control-label"><g:message code="paymentStatus.whishes.label" default="Whishes" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: paymentStatusInstance, field: 'wishes', 'error')} ">
+				<label for="wishes" class="control-label"><g:message code="paymentStatus.wishes.label" default="Wishes" /></label>
 				<div class="controls">
-					<g:select name="whishes" from="${wish.Wish.list()}" multiple="multiple" optionKey="id" size="5" value="${paymentStatusInstance?.whishes*.id}" class="many-to-many"/>
-					<span class="help-inline">${hasErrors(bean: paymentStatusInstance, field: 'whishes', 'error')}</span>
+					
+<ul class="one-to-many">
+<g:each in="${paymentStatusInstance?.wishes?}" var="w">
+    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="wish" action="create" params="['paymentStatus.id': paymentStatusInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+</li>
+</ul>
+
+					<span class="help-inline">${hasErrors(bean: paymentStatusInstance, field: 'wishes', 'error')}</span>
 				</div>
 			</div>
 
