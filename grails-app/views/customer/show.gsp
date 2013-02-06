@@ -82,6 +82,8 @@
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
 					</ul>
+					<export:formats controller="wish" action="exportByStakeholder" params='[id:"${customerInstance.id}"]' formats="['csv','excel','ods','pdf']"/>
+	
 				</td>
 				
 			</tr>

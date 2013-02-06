@@ -73,7 +73,7 @@
 				
 			</tr>
 			
-						<tr class="prop">
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.wishes.label" default="Wishes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -81,13 +81,19 @@
 					<g:each in="${supplierInstance.wishes}" var="w">
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
+						<export:formats controller="wish" action="exportByStakeholder" params='[id:"${supplierInstance.id}"]' formats="['csv','excel','ods','pdf']"/>
+	
 					</ul>
 				</td>
 				
 			</tr>
 		
+		
 		</tbody>
 	</table>
+		
+	
+		
 </section>
 
 </body>
