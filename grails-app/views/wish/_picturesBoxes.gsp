@@ -11,11 +11,22 @@
 		
 		var deleteIcon = "${resource(dir:'images/skin',file:'database_delete.png')}";
 		var templateHtml = "<div class='row' id='" + htmlId + "' name='" + htmlId +"'>";	
+
+		templateHtml += "<div class='control-group'>";
+		templateHtml += "<label for='image' class='control-label'>";
 		templateHtml += "${message(code:'picture.image.label')}";
+		templateHtml += "<div class='controls'>";
 		templateHtml += "<input type='file' id='picturesOfPrintingBoxes["+picturesOfPrintingBoxesCount+"].image' name='picturesOfPrintingBoxes["+picturesOfPrintingBoxesCount+"].image' />";
-		templateHtml += "${message(code:'picture.description.label')}";
-		templateHtml += "<input type='text' name='picturesOfPrintingBoxes["+picturesOfPrintingBoxesCount+"].description' />";
-		templateHtml += "</div>"
+		templateHtml += "</div>";
+		templateHtml += "</div>";
+		
+		templateHtml += "<div class='control-group'>";
+		templateHtml += "<label for='description' class='control-label'> ${message(code:'picture.description.label')} </label>";
+		templateHtml += "<div class='controls'>";
+		templateHtml += "<input type='text' name='picturesOfPrintingBoxes["+picturesOfPrintingBoxesCount+"].description'/>";
+		templateHtml += "</div>";
+		templateHtml += "</div>";
+		templateHtml += "</div>";
 		$("#picturesOfPrintingBoxesChildList").append(templateHtml);			
 		picturesOfPrintingBoxesCount++;
 				
@@ -23,18 +34,15 @@
 
 </script>
 
-<div class="row-fluid" id="picturesOfPrintingBoxesChildList">
+<div id="picturesOfPrintingBoxesChildList">
 	
 	<g:each var="pictureInstance" in="${wishInstance?.picturesOfPrintingBoxes}" status="i">
 	
-		<div class="row">
 			<g:message code="picture.label" default="Image" />:
 			<g:message code="picture.description.label" default="Description" />
 			<g:textField name="picturesOfPrintingBoxes[${i}].description" value="${pictureInstance?.description}"/>
 			<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'description', 'error')}</span>
-		</div>
 	</g:each>
-	
-	
 </div>
+
 <input type="button" class="btn btn-inverse" value="${message(code:'picturesOfPrintingBoxes.add')}" onClick="addPicturesOfPrintingBoxes();" />

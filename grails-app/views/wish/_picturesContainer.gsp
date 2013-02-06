@@ -11,11 +11,23 @@
 		
 		var deleteIcon = "${resource(dir:'images/skin',file:'database_delete.png')}";
 		var templateHtml = "<div class='row' id='" + htmlId + "' name='" + htmlId +"'>";	
+
+		templateHtml += "<div class='control-group'>";
+		templateHtml += "<label for='image' class='control-label'>";
 		templateHtml += "${message(code:'picture.image.label')}";
+		templateHtml += "<div class='controls'>";
 		templateHtml += "<input type='file' id='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].image' name='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].image' />";
-		templateHtml += "${message(code:'picture.description.label')}";
+		templateHtml += "</div>";
+		templateHtml += "</div>";
+		
+		templateHtml += "<div class='control-group'>";
+		templateHtml += "<label for='description' class='control-label'> ${message(code:'picture.description.label')} </label>";
+		templateHtml += "<div class='controls'>";
 		templateHtml += "<input type='text' name='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].description' />";
-		templateHtml += "</div>"
+		templateHtml += "</div>";
+		templateHtml += "</div>";
+		templateHtml += "</div>";
+
 		$("#picturesOfLoadingContainerChildList").append(templateHtml);			
 		picturesOfLoadingContainerCount++;
 				
@@ -24,7 +36,7 @@
 	
 </script>
 
-<div class="row-fluid" id="picturesOfLoadingContainerChildList">
+<div id="picturesOfLoadingContainerChildList">
 	
 	<g:each var="pictureInstance" in="${wishInstance?.picturesOfLoadingContainer}" status="i">
 	
