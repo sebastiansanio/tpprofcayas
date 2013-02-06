@@ -32,11 +32,11 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wishStatus.whishes.label" default="Whishes" /></td>
+				<td valign="top" class="name"><g:message code="wishStatus.wishes.label" default="Wishes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
-					<g:each in="${wishStatusInstance.whishes}" var="w">
+					<g:each in="${wishStatusInstance.wishes}" var="w">
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
 					</ul>

@@ -8,7 +8,7 @@ class WishStatus {
 	String name
 	String description
 	
-	static hasMany = [whishes: Wish]	
+	static hasMany = [wishes: Wish]	
 	
     static mapping = {
     }

@@ -42,6 +42,7 @@ class BootStrap {
 		def roleManager = new Role(name:"Manager")
 		roleManager.addToPermissions("color:*")
 		roleManager.addToPermissions("main:*")
+		roleManager.addToPermissions("subFamily:*")
 		roleManager.addToPermissions("family:*")
 		roleManager.addToPermissions("alertType:*")
 		roleManager.addToPermissions("country:*")
