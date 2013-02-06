@@ -67,6 +67,8 @@
 					<g:each in="${customsBrokerInstance.wishes}" var="w">
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
+						<export:formats controller="wish" action="exportByStakeholder" params='[id:"${customsBrokerInstance.id}"]' formats="['csv','excel','ods','pdf']"/>
+	
 					</ul>
 				</td>
 				
