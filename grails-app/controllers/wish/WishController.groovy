@@ -4,6 +4,7 @@ import java.io.OutputStream;
 import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
 import login.User
+import stakeholder.Stakeholder
 import org.apache.shiro.SecurityUtils
 
 
@@ -27,8 +28,16 @@ class WishController {
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
-		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),user)
+		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request))
+	}
+	
+	
+	def exportByStakeholder() {
 		
+		def stakeholder = Stakeholder.get(params.id)
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
+		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder)
 	}
 
 	def sendMail(){
@@ -36,7 +45,7 @@ class WishController {
 		File file = new File("${message(code:'wish.label')}"+new Date()+".${params.extension}")
 		OutputStream outputStream = new FileOutputStream(file)
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
-		wishExportService.exportWish(params.format,outputStream,RequestContextUtils.getLocale(request),user)
+		wishExportService.exportWish(params.format,outputStream,RequestContextUtils.getLocale(request))
 		
 		sendMail {
 			multipart true
