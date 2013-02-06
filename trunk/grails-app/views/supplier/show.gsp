@@ -72,6 +72,19 @@
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "taxRegistryNumber")}</td>
 				
 			</tr>
+			
+						<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.wishes.label" default="Wishes" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${supplierInstance.wishes}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
 		
 		</tbody>
 	</table>
