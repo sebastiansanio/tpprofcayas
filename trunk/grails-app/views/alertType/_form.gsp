@@ -51,3 +51,11 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'frequency', 'error')} required">
+				<label for="frequency" class="control-label"><g:message code="alertType.frequency.label" default="Frequency" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:field type="number" name="frequency" required="" value="${alertTypeInstance.frequency}"/>
+					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'frequency', 'error')}</span>
+				</div>
+			</div>
+

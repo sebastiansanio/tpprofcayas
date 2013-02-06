@@ -19,15 +19,15 @@
 			
 				<g:sortableColumn property="name" title="${message(code: 'customer.name.label', default: 'Name')}" />
 			
-				<th><g:message code="customer.user.label" default="User" /></th>
+				<g:sortableColumn property="telephone" title="${message(code: 'customer.telephone.label', default: 'Telephone')}" />
+			
+				<g:sortableColumn property="email" title="${message(code: 'customer.email.label', default: 'Email')}" />
 			
 				<g:sortableColumn property="address" title="${message(code: 'customer.address.label', default: 'Address')}" />
 			
 				<th><g:message code="customer.country.label" default="Country" /></th>
 			
 				<g:sortableColumn property="cuit" title="${message(code: 'customer.cuit.label', default: 'Cuit')}" />
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'customer.dateCreated.label', default: 'Date Created')}" />
 			
 			</tr>
 		</thead>
@@ -37,15 +37,15 @@
 			
 				<td><g:link action="show" id="${customerInstance.id}">${fieldValue(bean: customerInstance, field: "name")}</g:link></td>
 			
-				<td>${fieldValue(bean: customerInstance, field: "user")}</td>
+				<td>${fieldValue(bean: customerInstance, field: "telephone")}</td>
+			
+				<td>${fieldValue(bean: customerInstance, field: "email")}</td>
 			
 				<td>${fieldValue(bean: customerInstance, field: "address")}</td>
 			
 				<td>${fieldValue(bean: customerInstance, field: "country")}</td>
 			
 				<td>${fieldValue(bean: customerInstance, field: "cuit")}</td>
-			
-				<td><g:formatDate date="${customerInstance.dateCreated}" /></td>
 			
 			</tr>
 		</g:each>

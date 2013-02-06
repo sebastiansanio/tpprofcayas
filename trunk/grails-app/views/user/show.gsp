@@ -25,6 +25,13 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="user.stakeholder.label" default="Stakeholder" /></td>
+				
+				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${userInstance?.stakeholder?.id}">${userInstance?.stakeholder?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="user.dateCreated.label" default="Date Created" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${userInstance?.dateCreated}" /></td>
@@ -37,7 +44,7 @@
 				<td valign="top" class="value"><g:formatDate date="${userInstance?.lastUpdated}" /></td>
 				
 			</tr>
-		
+
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="user.permissions.label" default="Permissions" /></td>
 				

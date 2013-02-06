@@ -25,6 +25,8 @@
 			
 				<g:sortableColumn property="alertTerm" title="${message(code: 'alertType.alertTerm.label', default: 'Alert Term')}" />
 			
+				<g:sortableColumn property="frequency" title="${message(code: 'alertType.frequency.label', default: 'Frequency')}" />
+			
 			</tr>
 		</thead>
 		<tbody>
@@ -38,6 +40,8 @@
 				<td>${fieldValue(bean: alertTypeInstance, field: "nameOfCompletionField")}</td>
 			
 				<td>${fieldValue(bean: alertTypeInstance, field: "alertTerm")}</td>
+			
+				<td>${fieldValue(bean: alertTypeInstance, field: "frequency")}</td>
 			
 			</tr>
 		</g:each>

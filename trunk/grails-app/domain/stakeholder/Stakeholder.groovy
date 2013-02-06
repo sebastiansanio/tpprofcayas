@@ -10,14 +10,15 @@ class Stakeholder {
 	
 	String name
 	Country country
-	User user
+	String telephone
+	String email
 	
-	List contacts
-	static hasMany	= [contacts:Contact]	
 
 	static constraints = {
 		name blank:false
-		user nullable:true
+		nullable:true
+		telephone blank:true, nullable:true
+		email email:true, blank:true, nullable:true
     }
 	
 	public String toString() {
