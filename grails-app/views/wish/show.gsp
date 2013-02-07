@@ -91,7 +91,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.foreignCurrencyFob.label" default="FOB Divisa" /></td>
 				
-				<td valign="top" class="value"><g:formatNumber number="${wishInstance.foreignCurrencyFob}" minFractionDigits="2" /> </td>
+				<td valign="top" class="value"><g:formatNumber number="${wishInstance.foreignCurrencyFob}" minFractionDigits="2" maxFractionDigits="2" /> </td>
 				
 			</tr>
 		
