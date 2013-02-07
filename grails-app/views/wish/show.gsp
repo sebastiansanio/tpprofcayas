@@ -67,6 +67,14 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.currencyFob.label" default="Currency Fob" /></td>
+				
+				<td valign="top" class="value"><g:formatNumber number="${wishInstance.currencyFob}" minFractionDigits="2" /> </td>
+				
+			</tr>
+		
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.currency.label" default="Currency" /></td>
 				
 				<td valign="top" class="value"><g:link controller="currency" action="show" id="${wishInstance?.currency?.id}">${wishInstance?.currency?.encodeAsHTML()}</g:link></td>
@@ -81,11 +89,14 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.currencyFob.label" default="Currency Fob" /></td>
+				<td valign="top" class="name"><g:message code="wish.foreignCurrencyFob.label" default="FOB Divisa" /></td>
 				
-				<td valign="top" class="value"><g:formatNumber number="${wishInstance.currencyFob}" minFractionDigits="2" /> </td>
+				<td valign="top" class="value"><g:formatNumber number="${wishInstance.foreignCurrencyFob}" minFractionDigits="2" /> </td>
 				
 			</tr>
+		
+		
+		
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.estimatedDeliveryDate.label" default="Estimated Delivery Date" /></td>
