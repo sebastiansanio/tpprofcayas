@@ -90,8 +90,8 @@ class Wish {
 		supplierOrder nullable:true,blank:true
 		priceCondition nullable:true
 		currency nullable:true
-		conversion nullable:false,min:0.0
-		currencyFob nullable:false
+		conversion nullable:false,min:0.0001,scale:4
+		currencyFob nullable:false,scale:4
 		estimatedDeliveryDate nullable:true
 		deliveryDate nullable:true
 		estimatedTimeOfDeparture nullable:true
@@ -155,7 +155,7 @@ class Wish {
 	}
 		
 	BigDecimal getForeignCurrencyFob(){
-		return currencyFob.divide(conversion)
+		return currencyFob.divide(conversion,4)
 	}
 	
 	
