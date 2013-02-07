@@ -105,7 +105,7 @@ class Wish {
 		paymentStatus nullable:true
 		customsBroker nullable:true
 		customsBrokerRefNumber nullable:true,blank:true
-		visaChargePayment nullable:true
+		visaChargePayment nullable:true,scale:4
 		visaChargePaymentConcept nullable:true,blank:true
 		criterionValue nullable:true
 		licenses nullable:false
@@ -117,9 +117,9 @@ class Wish {
 		customerLogoPunch nullable:true
 		taxRegistryNumberAndCuitVerification nullable:true	
 		hsCodeToBeWritten nullable:true,blank:true
-		amountOfMoneyInAdvanceTransferred nullable:true
+		amountOfMoneyInAdvanceTransferred nullable:true,scale:4
 		swiftSentToSupplierDate nullable:true
-		moneyBalance nullable:true
+		moneyBalance nullable:true,scale:4
 		dateOfBalancePayment nullable:true
 		picturesOfPrintingBoxesAndLoadReceived nullable:true
 		picturesOfLoadingContainerReceived nullable:true
@@ -158,7 +158,7 @@ class Wish {
 		return currencyFob.divide(conversion,4)
 	}
 	
-	
+		
 	Date getDjaiExpirationDate(){
 		return djaiFormalizationDate+180
 	}
@@ -166,7 +166,7 @@ class Wish {
 	void generateAlert(AlertType alertType,Date deadline){
 		def activeAlerts = getActiveAlerts()
 		if(!(alertType.id in activeAlerts.alertType.id))
-			addToAlerts(new Alert(alertType:alertType,deadline:deadline,checked:false))
+			addToAlerts(new Alert(alertType:alertType,deadline:deadline))
 	}
 	
 	public String toString() {
