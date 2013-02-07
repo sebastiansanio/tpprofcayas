@@ -356,6 +356,14 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')} ">
+				<label for="picturesOfPrintingBoxesAndLoadReceived" class="control-label"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></label>
+				<div class="controls">
+					<bs:datePicker name="picturesOfPrintingBoxesAndLoadReceived" precision="day"  value="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')}</span>
+				</div>
+			</div>
+
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')} ">
 				<label for="picturesOfLoadingContainerReceived" class="control-label"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></label>
 				<div class="controls">
@@ -363,16 +371,6 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')}</span>
 				</div>
 			</div>
-
-			<div>
-				${message(code:'picturesBoxes.label') } <hr/>
-				<g:render template="picturesBoxes" model="['wishInstance':wishInstance]" /> <hr/>
-			</div>			
-
-			<div>
-				${message(code:'picturesContainer.label') } <hr/>
-				<g:render template="picturesContainer" model="['wishInstance':wishInstance]" /> <hr/>
-			</div>	
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')} ">
 				<label for="sourceCountry" class="control-label"><g:message code="wish.sourceCountry.label" default="Source Country" /></label>
@@ -552,14 +550,4 @@
 	 <hr size="3"/>
 	 
 </div>
-
-
-
-				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')} ">
-				<label for="picturesOfPrintingBoxesAndLoadReceived" class="control-label"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></label>
-				<div class="controls">
-					<bs:datePicker name="picturesOfPrintingBoxesAndLoadReceived" precision="day"  value="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')}</span>
-				</div>
-			</div>
 
