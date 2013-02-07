@@ -90,8 +90,8 @@ class Wish {
 		supplierOrder nullable:true,blank:true
 		priceCondition nullable:true
 		currency nullable:true
-		conversion nullable:true
-		currencyFob nullable:true
+		conversion nullable:false,min:0.0
+		currencyFob nullable:false
 		estimatedDeliveryDate nullable:true
 		deliveryDate nullable:true
 		estimatedTimeOfDeparture nullable:true
@@ -154,6 +154,11 @@ class Wish {
 		return finnishDate == null
 	}
 		
+	BigDecimal getForeignCurrencyFob(){
+		return currencyFob.divide(conversion)
+	}
+	
+	
 	Date getDjaiExpirationDate(){
 		return djaiFormalizationDate+180
 	}
