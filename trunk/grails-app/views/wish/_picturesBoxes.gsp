@@ -42,8 +42,8 @@
 		<div class="modal-footer">
 
 		    <div class="form-actions">
-			<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-            		<button class="btn" type="reset">Cancel</button>
+			<g:submitButton name="createBoxes" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+            		<button class="btn" type="reset" data-dismiss="modal">Cancel</button>
 			</div>
 
 		</div>

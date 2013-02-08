@@ -147,24 +147,6 @@ class WishController {
         }
     }
 	
-	def viewPhotoContainer() {	
-		def wishInstance = Wish.get(params.id)
-       	if (!wishInstance) {
-				flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
-			return
-		}
-		render(view: "viewPhoto", model: [pictureWish: wishInstance.picturesOfLoadingContainer])
-	}
-
-	def viewPhotoBoxes() {
-		def wishInstance = Wish.get(params.id)
-       	if (!wishInstance) {
-				flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
-			return
-		}
-		render(view: "viewPhoto", model: [pictureWish: wishInstance.picturesOfPrintingBoxes])
-	}
-	
 	def viewPicture(){
 		def picture = Picture.get(params.id)
 		response.setHeader("Content-disposition", "attachment; filename=${params.id}")
@@ -173,5 +155,29 @@ class WishController {
 		return
 	}
 
-	
+	def createBoxPicture(){
+		def picture = new Picture(params)
+		def wishInstance = Wish.get(params.idWish)
+	        if (!picture.save(flush: true)) {
+	        	redirect(action: "show", id: wishInstance.id)	
+        	   return
+        	}
+
+		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
+		wishInstance.addToPicturesOfPrintingBoxes(picture)
+	        redirect(action: "show", id: wishInstance.id)	
+	}
+
+	def createContainerPicture(){
+		def picture = new Picture(params)
+		def wishInstance = Wish.get(params.idWish)
+	        if (!picture.save(flush: true)) {
+        	    	  redirect(action: "show", id: wishInstance.id)
+        	   return
+        	}
+
+		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
+		wishInstance.addToPicturesOfLoadingContainer(picture)
+	        redirect(action: "show", id: wishInstance.id)	
+	}
 }

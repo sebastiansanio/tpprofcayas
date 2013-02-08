@@ -58,6 +58,19 @@
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "supplierOrder")}</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.loadUnits.label" default="Load Units" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${wishInstance.loadUnits}" var="l">
+						<li><g:link controller="loadUnit" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.priceCondition.label" default="Price Condition" /></td>
@@ -323,6 +336,23 @@
 				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.picturesOfLoadingContainerReceived}" /></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>
+	
+				<td valign="top" style="text-align: left;" class="value">
+					<g:render template="picturesContainer" model="['wishInstance':wishInstance]"/>
+				</td>
+			</tr>			
+		
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
+	
+				<td valign="top" style="text-align: left;" class="value">
+					<g:render template="picturesBoxes" model="['wishInstance':wishInstance]"/>
+				</td>
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.sourceCountry.label" default="Source Country" /></td>
@@ -471,13 +501,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -504,26 +527,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.lastUpdated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.loadUnits.label" default="Load Units" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${wishInstance.loadUnits}" var="l">
-						<li><g:link controller="loadUnit" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.notes.label" default="Notes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -534,24 +537,6 @@
 					</ul>
 				</td>
 				
-			</tr>
-		
-					<tr class="prop">
-					<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>
-	
-					<td valign="top" style="text-align: left;" class="value">
-						<g:link class="btn btn-primary" action="viewPhotoContainer" id="${wishInstance.id}">${message(code:'viewPhotos.label')}</g:link>
-					</td>
-	
-				</tr>			
-		
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
-	
-					<td valign="top" style="text-align: left;" class="value">
-						<g:render template="picturesBoxes" model="['wishInstance':wishInstance]"/>
-					</td>
 			</tr>
 		
 			<tr class="prop">
@@ -566,6 +551,22 @@
 				</td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.dateCreated}" /></td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.lastUpdated.label" default="Last Updated" /></td>
+				
+				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.lastUpdated}" /></td>
+				
+			</tr>
+
+
 		
 		</tbody>
 	</table>

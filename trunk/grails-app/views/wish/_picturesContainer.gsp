@@ -1,55 +1,104 @@
 <%@ page import="wish.Picture" %>
 <%@ page import="wish.Wish" %>
 
+<p>
+<div id="create-picture-container">
 
-<script type="text/javascript">
+	<!-- Button to trigger modal -->
+	<a href="#modalCreateContainer" role="button" class="btn btn-primary" data-toggle="modal">Agregar foto</a>
+	 
+	<!-- Modal -->
+	<div id="modalCreateContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalCreateContainerLabel" aria-hidden="true">
 
-	var picturesOfLoadingContainerCount = ${wishInstance?.picturesOfLoadingContainer?.size()} + 0;
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="modalCreateContainerLabel">Subir archivo</h3>
+		</div>
 
-	function addPicturesOfLoadingContainer(){
-		var htmlId = "picturesOfLoadingContainer" + picturesOfLoadingContainerCount;
+		<g:form action="createContainerPicture" params="[idWish: wishInstance.id]" class="form-horizontal" enctype="multipart/form-data" >
 		
-		var deleteIcon = "${resource(dir:'images/skin',file:'database_delete.png')}";
-		var templateHtml = "<div class='row' id='" + htmlId + "' name='" + htmlId +"'>";	
-
-		templateHtml += "<div class='control-group'>";
-		templateHtml += "<label for='image' class='control-label'>";
-		templateHtml += "${message(code:'picture.image.label')}";
-		templateHtml += "<div class='controls'>";
-		templateHtml += "<input type='file' id='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].image' name='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].image' />";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
+		<div class="modal-body">
 		
-		templateHtml += "<div class='control-group'>";
-		templateHtml += "<label for='description' class='control-label'> ${message(code:'picture.description.label')} </label>";
-		templateHtml += "<div class='controls'>";
-		templateHtml += "<input type='text' name='picturesOfLoadingContainer["+picturesOfLoadingContainerCount+"].description' />";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
-
-		$("#picturesOfLoadingContainerChildList").append(templateHtml);			
-		picturesOfLoadingContainerCount++;
+			<fieldset class="form">			
 				
-	}
+			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'image', 'error')} required">
+				<label for="image" class="control-label"><g:message code="picture.image.label" default="Image" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<input type="file" id="image" name="image" />
+					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'image', 'error')}</span>
+				</div>
+			</div>
 
-	
-</script>
-
-<div id="picturesOfLoadingContainerChildList">
-	
-	<g:each var="pictureInstance" in="${wishInstance?.picturesOfLoadingContainer}" status="i">
-	
-	<div class="row">
+			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'description', 'error')} required">
+				<label for="description" class="control-label"><g:message code="picture.description.label"  default="Description"/><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:textField name="description" required="" value="${pictureInstance?.description}"/>
+					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'description', 'error')}</span>
+				</div>
+			</div>
+			</fieldset>
+		</div>
 		
-			<g:message code="picture.label" default="Image" />:
-			<g:message code="picture.description.label" default="Description" />
-			<g:textField name="picturesOfLoadingContainer[${i}].description" value="${pictureInstance?.description}"/>
-			<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'description', 'error')}</span>
+		<div class="modal-footer">
+
+		    <div class="form-actions">
+			<g:submitButton name="createContainer" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+            		<button class="btn" type="reset" data-dismiss="modal">Cancel</button>
+			</div>
+
+		</div>
+		</g:form>
 	
 	</div>
-	</g:each>
-	
-	
+
 </div>
-<input type="button" class="btn btn-inverse" value="${message(code:'picturesOfLoadingContainer.add')}" onClick="addPicturesOfLoadingContainer();" />
+</p>
+
+<div id="modal-create-picture-container">
+	<!-- Button to trigger modal -->
+	<a href="#modalPictureContainers" role="button" class="btn btn-primary" data-toggle="modal">Ver fotos</a>
+	 
+	<!-- Modal -->
+	<div id="modalPictureContainers" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	 	<div class="modal-header">
+	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  	</div>
+
+		<div class="modal-body">
+		    
+		    <div id="carouselContainers" class="carousel slide">  
+		            <!-- Carousel items -->  
+				<div class="carousel-inner"> 
+
+		       			<g:each in="${wishInstance.picturesOfLoadingContainer}" var="picture" status="i">	
+							<g:if test="${i == 0}">
+							     <div class="active item">
+									<img src="${createLink(action: 'viewPicture',id: picture.id)}" width="350" height="350"/>
+		                   			<div class="carousel-caption">
+										<p>${picture.description}</p>
+									</div>
+								</div>
+							</g:if> 
+							<g:else>
+								<div class="item">
+									<img src="${createLink(action: 'viewPicture',id: picture.id)}" width="350" height="350"/>
+								    <div class="carousel-caption">
+										<p>${picture.description}</p>
+									</div>
+								</div> 
+							</g:else>
+						</g:each>
+				</div>  
+		  	<!-- Carousel nav -->  
+		  		<a class="carousel-control left" href="#carouselContainers" data-slide="prev">&lsaquo;</a>  
+		 		<a class="carousel-control right" href="#carouselContainers" data-slide="next">&rsaquo;</a>  
+			</div>  
+
+		</div>
+		
+		<div class="modal-footer">
+		    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		</div>
+	</div>
+</div>
+
