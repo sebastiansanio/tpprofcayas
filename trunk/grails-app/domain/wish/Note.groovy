@@ -12,10 +12,10 @@ class Note {
     }
     
 	static constraints = {
-		
+		text nullable:true
     }
 	
 	public String toString() {
-		return text
+		return user.username +": "+ text + " (" + dateCreated.format("dd/MM/yyyy") + ")"
 	}
 }

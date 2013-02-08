@@ -19,5 +19,8 @@ class LoadUnit {
 	static constraints = {
     }
 	
+	String toString(){
+		return product.toString() + " x " + quantity.setScale(2)
+	}
 	
 }
