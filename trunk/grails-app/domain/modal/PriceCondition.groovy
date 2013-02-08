@@ -16,6 +16,7 @@ class PriceCondition {
 	static constraints = {
 		name blank:false
 		description nullable: true
+		
     }
 	
 	public String toString() {

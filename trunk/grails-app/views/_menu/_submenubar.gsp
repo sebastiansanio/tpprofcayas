@@ -15,6 +15,14 @@
 			</li>
 		</g:if>
 		
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":listInspected") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/listInspected')}">									
+			<li class="${ params.action == "listInspected" ? 'active' : '' }">
+				<g:link action="listInspected"><i class="icon-th-list"></i> <g:message code="default.listInspected.label" args="[entityName]"/></g:link>
+			</li>
+		</g:if>
+		
+		
+		
 		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":create") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/create')}">			
 			<li class="${ params.action == "create" ? 'active' : '' }">
 				<g:link action="create"><i class="icon-plus"></i> <g:message code="default.new.label"  args="[entityName]"/></g:link>

@@ -25,6 +25,8 @@
 			
 			
 				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /></th>
+	
+				<th><g:message code="alert.doInspect.label" default="Inspected" /></th>
 			
 			
 			</tr>
@@ -40,6 +42,9 @@
 				<td><g:link controller="wish" action="show" id="${alertInstance.wish.id}">${fieldValue(bean: alertInstance, field: "wish")}</g:link></td>			
 			
 				<td> <a href="#" class="popoverAlerts" rel="popover" data-content="<div><% alertInstance.wish.getActiveAlerts().each{out.println(it.deadline.format("dd/MM/yyyy")+": "+it.toString())} %>" data-original-title="Alertas activas" >${alertInstance.wish.getActiveAlerts().size()}</a></td>
+			 
+			 	<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link> </td>
+			 
 			 
 			</tr>
 		</g:each>
