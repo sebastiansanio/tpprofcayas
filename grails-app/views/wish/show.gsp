@@ -541,11 +541,6 @@
 	
 					<td valign="top" style="text-align: left;" class="value">
 						<g:link class="btn btn-primary" action="viewPhotoContainer" id="${wishInstance.id}">${message(code:'viewPhotos.label')}</g:link>
-						<ul>
-						<g:each in="${wishInstance.picturesOfLoadingContainer}" var="p">
-							<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						</ul>
 					</td>
 	
 				</tr>			
@@ -555,12 +550,7 @@
 				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxes.label" default="Pictures Of Printing Boxes" /></td>
 	
 					<td valign="top" style="text-align: left;" class="value">
-						<g:link class="btn btn-primary" action="viewPhotoBoxes" id="${wishInstance.id}">${message(code:'viewPhotos.label')}</g:link>
-						<ul>
-						<g:each in="${wishInstance.picturesOfPrintingBoxes}" var="p">
-							<li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						</ul>
+						<g:render template="picturesBoxes" model="['wishInstance':wishInstance]"/>
 					</td>
 			</tr>
 		
