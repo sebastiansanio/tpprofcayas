@@ -43,22 +43,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'loadUnits', 'error')} ">
-				<label for="loadUnits" class="control-label"><g:message code="wish.loadUnits.label" default="Load Units" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-					<g:each in="${wishInstance?.loadUnits?}" var="l">
-					    <li><g:link controller="loadUnit" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-
-					<g:link class="btn btn-inverse" controller="loadUnit" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'loadUnit.label', default: 'LoadUnit')])}</g:link>				
-
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'loadUnits', 'error')}</span>
-				</div>
-			</div>
-
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'supplierOrder', 'error')} ">
 				<label for="supplierOrder" class="control-label"><g:message code="wish.supplierOrder.label" default="Supplier Order" /></label>
@@ -557,8 +541,14 @@
 </div>
 
 <div>
-	<h2>Notas</h2>
-	 <hr size="3"/>
+
+	 
+	 <h5>Artículos</h5>
+	 <g:render template="loadUnits" model="['wishInstance':wishInstance]"/>
+	 
+	 <h5>Notas</h5>
+	 <g:render template="notes" model="['wishInstance':wishInstance]"/>
+	 
 	 
 </div>
 

@@ -4,6 +4,7 @@ import login.*
 import modal.*
 import wish.*
 import stakeholder.*
+import product.*
 
 class BootStrap {
 
@@ -87,6 +88,19 @@ class BootStrap {
 		
 		def priceCondition = new PriceCondition(name:"FOB",description:"FOB")
 		priceCondition.save()
+		
+		def color = new Color(description:"BLANCO")
+		color.save()
+		
+		color = new Color(description:"NEGRO")
+		color.save()
+		
+		def product = new Product(descriptionES:"Artículo 1",description:'Product 1',color:color)
+		product.save()
+		
+		def product2 = new Product(descriptionES:"Artículo 2",description:'Product 2',color:color)
+		product2.save()
+		
 		
 		def paymentTerm = new PaymentTerm(name:"100 TT 15 días ETA",percentPaymentAfterDelivery:100,paymentDaysAfterTimeOfArrival:15)
 		paymentTerm.save()
