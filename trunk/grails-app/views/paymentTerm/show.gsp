@@ -25,9 +25,16 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="paymentTerm.description.label" default="Description" /></td>
+				<td valign="top" class="name"><g:message code="paymentTerm.percentPaymentAfterDelivery.label" default="Percent Payment After Delivery" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: paymentTermInstance, field: "description")}</td>
+				<td valign="top" class="value">${fieldValue(bean: paymentTermInstance, field: "percentPaymentAfterDelivery")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="paymentTerm.paymentDaysAfterTimeOfArrival.label" default="Payment Days After Time Of Arrival" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: paymentTermInstance, field: "paymentDaysAfterTimeOfArrival")}</td>
 				
 			</tr>
 		

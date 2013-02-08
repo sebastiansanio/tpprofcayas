@@ -88,7 +88,7 @@ class BootStrap {
 		def priceCondition = new PriceCondition(name:"FOB",description:"FOB")
 		priceCondition.save()
 		
-		def paymentTerm = new PaymentTerm(name:"100 TT 15 días ETA")
+		def paymentTerm = new PaymentTerm(name:"100 TT 15 días ETA",percentPaymentAfterDelivery:100,paymentDaysAfterTimeOfArrival:15)
 		paymentTerm.save()
 		
 		def paymentStatus = new PaymentStatus(name:"A la espera del 100%")

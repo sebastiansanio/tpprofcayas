@@ -19,7 +19,9 @@
 			
 				<g:sortableColumn property="name" title="${message(code: 'paymentTerm.name.label', default: 'Name')}" />
 			
-				<g:sortableColumn property="description" title="${message(code: 'paymentTerm.description.label', default: 'Description')}" />
+				<g:sortableColumn property="percentPaymentAfterDelivery" title="${message(code: 'paymentTerm.percentPaymentAfterDelivery.label', default: 'Percent Payment After Delivery')}" />
+			
+				<g:sortableColumn property="paymentDaysAfterTimeOfArrival" title="${message(code: 'paymentTerm.paymentDaysAfterTimeOfArrival.label', default: 'Payment Days After Time Of Arrival')}" />
 			
 			</tr>
 		</thead>
@@ -29,7 +31,9 @@
 			
 				<td><g:link action="show" id="${paymentTermInstance.id}">${fieldValue(bean: paymentTermInstance, field: "name")}</g:link></td>
 			
-				<td>${fieldValue(bean: paymentTermInstance, field: "description")}</td>
+				<td>${fieldValue(bean: paymentTermInstance, field: "percentPaymentAfterDelivery")}</td>
+			
+				<td>${fieldValue(bean: paymentTermInstance, field: "paymentDaysAfterTimeOfArrival")}</td>
 			
 			</tr>
 		</g:each>

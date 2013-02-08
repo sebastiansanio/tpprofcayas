@@ -5,7 +5,8 @@ import wish.Wish;
 class PaymentTerm {
 
 	String name
-	String description
+	Integer percentPaymentAfterDelivery
+	Integer paymentDaysAfterTimeOfArrival
 	
 	static hasMany = [wishes: Wish]	
 	
@@ -14,8 +15,14 @@ class PaymentTerm {
     
 	static constraints = {
 		name blank:false
-		description nullable:true
+		percentPaymentAfterDelivery nullable: false,min:0,max:100
+		paymentDaysAfterTimeOfArrival nullable:true,min:0
     }
+	
+	
+	Integer getPercentPaymentBeforeDelivery(){
+		return 100 - percentPaymentAfterDelivery
+	}
 	
 	public String toString() {
 		return name;
