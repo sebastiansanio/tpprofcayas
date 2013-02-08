@@ -37,7 +37,7 @@ class Alert {
 			finalize("Actividad realizada")
 		}else if(wish[alertType.nameOfEstimatedDateField] != deadline){
 			finalize("Cambio de fecha")
-		}else if(isInspected() && new Date() >= lastInspected + alertType.frequency){
+		}else if(isInspected() && alertType.frequency!=null && new Date() >= lastInspected + alertType.frequency){
 			lastInspected = null
 		}
 	}

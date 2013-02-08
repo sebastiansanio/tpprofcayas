@@ -463,7 +463,7 @@
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
 					<g:each in="${wishInstance.alerts}" var="a">
-						<li class="alert alert-error">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
+						<li class="alert <% if(!a?.isInspected()) out.println("alert-error") %>">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
 					</g:each>
 					</ul>
 				</td>

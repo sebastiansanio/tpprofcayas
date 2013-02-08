@@ -6,7 +6,7 @@ class AlertType {
 
 	String description
 	int alertTerm
-	int frequency
+	Integer frequency
 	String nameOfEstimatedDateField
 	String nameOfCompletionField
 	
@@ -20,6 +20,7 @@ class AlertType {
 		nameOfEstimatedDateField blank:false,nullable:false
 		nameOfCompletionField blank:false,nullable:false
 		alertTerm nullable:false
+		frequency nullable:true
     }
 	
 	public void checkWish(Wish wish){

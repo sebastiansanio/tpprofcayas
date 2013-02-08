@@ -19,8 +19,11 @@ class AlertManagerService {
     static transactional = true
 
 	def getActiveAlerts(params){
-		return Alert.findAllByDateFinalizedIsNull(params)
-		
+		return Alert.findAllByDateFinalizedIsNullAndLastInspectedIsNull(params)
+	}
+	
+	def getInspectedAlerts(params){
+		return Alert.findAllByDateFinalizedIsNullAndLastInspectedIsNotNull(params)
 	}
 	
 	def generateAlerts(Wish wish){
