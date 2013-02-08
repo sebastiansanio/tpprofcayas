@@ -280,6 +280,15 @@
 				
 			</tr>
 		
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.swiftReceivedDate.label" default="Swift Received Date" /></td>
+				
+				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.swiftReceivedDate}" /></td>
+				
+			</tr>
+		
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.swiftSentToSupplierDate.label" default="Swift Sent To Supplier Date" /></td>
 				

@@ -332,6 +332,17 @@
 			</div>
 
 
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftReceivedDate', 'error')} ">
+				<label for="swiftReceivedDate" class="control-label"><g:message code="wish.swiftReceivedDate.label" default="Swift Received Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="swiftReceivedDate" precision="day"  value="${wishInstance?.swiftReceivedDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'swiftReceivedDate', 'error')}</span>
+				</div>
+			</div>
+
+
+
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')} ">
 				<label for="swiftSentToSupplierDate" class="control-label"><g:message code="wish.swiftSentToSupplierDate.label" default="Swift Sent To Supplier Date" /></label>
 				<div class="controls">

@@ -62,7 +62,7 @@ class WishExportService implements MessageSourceAware {
 			"customsBrokerRefNumber","visaChargePayment","visaChargePaymentConcept","criterionValue","licenses",
 			"djaiNumber","djaiFormalizationDate","djaiExtendedRequested","djaiExtendedExpiration",
 			"shippingMark","customerLogoPunch","taxRegistryNumberAndCuitVerification","hsCodeToBeWritten",
-			"amountOfMoneyInAdvanceTransferred","swiftSentToSupplierDate","moneyBalance","dateOfBalancePayment",
+			"amountOfMoneyInAdvanceTransferred","swiftReceivedDate","swiftSentToSupplierDate","moneyBalance","dateOfBalancePayment",
 			"picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
 			"ship","docDraftApproved","forwarder","agent","freightQuote","forwarderRefNumber","loadSecuredPercent",
 			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber","bill",
@@ -82,7 +82,7 @@ class WishExportService implements MessageSourceAware {
 			"wishDate":dateFormatter,"dateOfMoneyInAdvanceTransfer":dateFormatter,"djaiFormalizationDate":dateFormatter,
 			"djaiExtendedRequested":dateFormatter,"djaiExtendedExpiration":dateFormatter,"taxRegistryNumberAndCuitVerification":dateFormatter,
 			"dateOfBalancePayment":dateFormatter,"picturesOfPrintingBoxesAndLoadReceived":dateFormatter,"picturesOfLoadingContainerReceived":dateFormatter,
-			"docDraftApproved":dateFormatter,"billDate":dateFormatter,"finnishDate":dateFormatter]
+			"docDraftApproved":dateFormatter,"billDate":dateFormatter,"finnishDate":dateFormatter,"swiftReceivedDate":dateFormatter]
 		
 		Map labels = new HashMap()
 		

@@ -55,6 +55,7 @@ class Wish {
 	Date taxRegistryNumberAndCuitVerification
 	String hsCodeToBeWritten 
 	BigDecimal amountOfMoneyInAdvanceTransferred
+	Date swiftReceivedDate
 	Date swiftSentToSupplierDate
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
@@ -118,6 +119,7 @@ class Wish {
 		taxRegistryNumberAndCuitVerification nullable:true	
 		hsCodeToBeWritten nullable:true,blank:true
 		amountOfMoneyInAdvanceTransferred nullable:true,scale:4
+		swiftReceivedDate nullable:true
 		swiftSentToSupplierDate nullable:true
 		moneyBalance nullable:true,scale:4
 		dateOfBalancePayment nullable:true
