@@ -25,7 +25,7 @@ class UserController {
     }
 
     def save() {
-		params.passwordHash = new Sha256Hash(params.passwordHash.toHex())
+		params.passwordHash = new Sha256Hash(params.passwordHash).toHex()
 		
         def userInstance = new User(params)
         if (!userInstance.save(flush: true)) {

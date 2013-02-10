@@ -66,6 +66,7 @@ class WishController {
     def save() {
 		
         def wishInstance = new Wish(params)
+		
         if (!wishInstance.save(flush: true)) {
             render(view: "create", model: [wishInstance: wishInstance])
             return
