@@ -24,6 +24,7 @@ class Wish {
 	Customer customer
 	Supplier supplier
 	Shipper shipper
+	String productDescription
 	String supplierOrder
 	PriceCondition priceCondition
 	Currency currency
@@ -88,6 +89,7 @@ class Wish {
 		customer nullable:false
 		supplier nullable:false
 		shipper nullable:true
+		productDescription nullable:true,blank:true
 		supplierOrder nullable:true,blank:true
 		priceCondition nullable:true
 		currency nullable:true

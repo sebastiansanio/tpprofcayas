@@ -43,6 +43,13 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'productDescription', 'error')} ">
+				<label for="productDescription" class="control-label"><g:message code="wish.productDescription.label" default="Product Description" /></label>
+				<div class="controls">
+					<g:textArea rows="5" cols="70" name="productDescription" value="${wishInstance?.productDescription}"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'productDescription', 'error')}</span>
+				</div>
+			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'supplierOrder', 'error')} ">
 				<label for="supplierOrder" class="control-label"><g:message code="wish.supplierOrder.label" default="Supplier Order" /></label>
