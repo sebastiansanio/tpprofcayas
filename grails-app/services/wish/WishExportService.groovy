@@ -60,7 +60,7 @@ class WishExportService implements MessageSourceAware {
 			"foreignCurrencyFob","estimatedDeliveryDate","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","paymentStatus","customsBroker",
 			"customsBrokerRefNumber","visaChargePayment","visaChargePaymentConcept","criterionValue","licenses",
-			"djaiNumber","djaiFormalizationDate","djaiExtendedRequested","djaiExtendedExpiration",
+			"djaiNumber","djaiFormalizationDate","djaiExpirationDate","djaiExtendedRequested","djaiExtendedExpiration",
 			"shippingMark","customerLogoPunch","taxRegistryNumberAndCuitVerification","hsCodeToBeWritten",
 			"amountOfMoneyInAdvanceTransferred","swiftReceivedDate","swiftSentToSupplierDate","moneyBalance","dateOfBalancePayment",
 			"picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
@@ -78,17 +78,20 @@ class WishExportService implements MessageSourceAware {
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
 		}
-		Map formatters = ["estimatedDeliveryDate":dateFormatter,"deliveryDate":dateFormatter,"estimatedTimeOfDeparture":dateFormatter,"timeOfDeparture":dateFormatter,
-			"wishDate":dateFormatter,"dateOfMoneyInAdvanceTransfer":dateFormatter,"djaiFormalizationDate":dateFormatter,
-			"djaiExtendedRequested":dateFormatter,"djaiExtendedExpiration":dateFormatter,"taxRegistryNumberAndCuitVerification":dateFormatter,
-			"dateOfBalancePayment":dateFormatter,"picturesOfPrintingBoxesAndLoadReceived":dateFormatter,"picturesOfLoadingContainerReceived":dateFormatter,
-			"docDraftApproved":dateFormatter,"billDate":dateFormatter,"finnishDate":dateFormatter,"swiftReceivedDate":dateFormatter]
-		
+
 		Map labels = new HashMap()
+		Map formatters = new HashMap()
 		
+		def wishDomainClass = new Wish().domainClass
+
 		fields.each{
 			labels.put(it, messageSource.getMessage("wish."+it+".label",null,locale))
+			if(wishDomainClass.getPropertyByName(it).type == Date)
+				formatters.put(it, dateFormatter)
 		}
+		
+		System.out.println(formatters.toString())	
+		
 		
 		Map parameters = [title: messageSource.getMessage("wish.label",null,locale)]
 		exportService.export(format,outputStream,wishes,fields,labels,formatters,parameters)
