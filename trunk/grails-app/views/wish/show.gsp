@@ -117,60 +117,52 @@
 		
 		
 		
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.estimatedDeliveryDate.label" default="Estimated Delivery Date" /></td>
-				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.estimatedDeliveryDate}" /></td>
-				
-			</tr>
-		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.deliveryDate.label" default="Delivery Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.deliveryDate}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.deliveryDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.estimatedTimeOfDeparture}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.estimatedTimeOfDeparture}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.timeOfDeparture.label" default="Time Of Departure" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.timeOfDeparture}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.timeOfDeparture}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.estimatedTimeOfArrival.label" default="Estimated Time Of Arrival" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.estimatedTimeOfArrival}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.estimatedTimeOfArrival}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.timeOfArrival.label" default="Time Of Arrival" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.timeOfArrival}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.timeOfArrival}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.wishDate.label" default="Wish Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.wishDate}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.wishDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.dateOfMoneyInAdvanceTransfer.label" default="Date Of Money In Advance Transfer" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.dateOfMoneyInAdvanceTransfer}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.dateOfMoneyInAdvanceTransfer}" /></td>
 				
 			</tr>
 		
@@ -247,21 +239,21 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.djaiFormalizationDate}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.djaiFormalizationDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.djaiExtendedRequested.label" default="Djai Extended Requested" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.djaiExtendedRequested}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.djaiExtendedRequested}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.djaiExtendedExpiration.label" default="Djai Extended Expiration" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.djaiExtendedExpiration}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.djaiExtendedExpiration}" /></td>
 				
 			</tr>
 		
@@ -282,7 +274,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.taxRegistryNumberAndCuitVerification.label" default="Tax Registry Number And Cuit Verification" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.taxRegistryNumberAndCuitVerification}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.taxRegistryNumberAndCuitVerification}" /></td>
 				
 			</tr>
 		
@@ -326,21 +318,21 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.dateOfBalancePayment.label" default="Date Of Balance Payment" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.dateOfBalancePayment}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.dateOfBalancePayment}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.picturesOfLoadingContainerReceived}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfLoadingContainerReceived}" /></td>
 				
 			</tr>
 
@@ -385,7 +377,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.docDraftApproved.label" default="Doc Draft Approved" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.docDraftApproved}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.docDraftApproved}" /></td>
 				
 			</tr>
 		
@@ -483,14 +475,14 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.billDate.label" default="Bill Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" format="dd/MM/yyyy" date="${wishInstance?.billDate}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.billDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.finnishDate.label" default="Finnish Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.finnishDate}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.finnishDate}" /></td>
 				
 			</tr>
 		
@@ -558,11 +550,18 @@
 				</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.hasFeeder.label" default="Has feeder?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.hasFeeder}" /></td>
+				
+			</tr>
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.dateCreated.label" default="Date Created" /></td>
 				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.dateCreated}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.dateCreated}" /></td>
 				
 			</tr>
 
