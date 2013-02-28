@@ -91,14 +91,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedDeliveryDate', 'error')} ">
-				<label for="estimatedDeliveryDate" class="control-label"><g:message code="wish.estimatedDeliveryDate.label" default="Estimated Delivery Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="estimatedDeliveryDate" precision="day"  value="${wishInstance?.estimatedDeliveryDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedDeliveryDate', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')} ">
 				<label for="deliveryDate" class="control-label"><g:message code="wish.deliveryDate.label" default="Delivery Date" /></label>
 				<div class="controls">
@@ -115,11 +107,11 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'timeOfDeparture', 'error')} ">
-				<label for="timeOfDeparture" class="control-label"><g:message code="wish.timeOfDeparture.label" default="Time Of Departure" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'departed', 'error')} ">
+				<label for="departed" class="control-label"><g:message code="wish.departed.label" default="Departed" /></label>
 				<div class="controls">
-					<bs:datePicker name="timeOfDeparture" precision="day"  value="${wishInstance?.timeOfDeparture}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'timeOfDeparture', 'error')}</span>
+					<bs:checkBox name="departed" value="${wishInstance?.departed}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'departed', 'error')}</span>
 				</div>
 			</div>
 
@@ -131,11 +123,11 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'timeOfArrival', 'error')} ">
-				<label for="timeOfArrival" class="control-label"><g:message code="wish.timeOfArrival.label" default="Time Of Arrival" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'arrived', 'error')} ">
+				<label for="arrived" class="control-label"><g:message code="wish.arrived.label" default="Arrived" /></label>
 				<div class="controls">
-					<bs:datePicker name="timeOfArrival" precision="day"  value="${wishInstance?.timeOfArrival}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'timeOfArrival', 'error')}</span>
+					<bs:checkBox name="arrived" value="${wishInstance?.arrived}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'arrived', 'error')}</span>
 				</div>
 			</div>
 
@@ -542,6 +534,14 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'hasFeeder', 'error')} ">
+				<label for="hasFeeder" class="control-label"><g:message code="wish.hasFeeder.label" default="Has feeder" /></label>
+				<div class="controls">
+					<bs:checkBox name="hasFeeder" value="${wishInstance?.hasFeeder}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'hasFeeder', 'error')}</span>
+				</div>
+			</div>
 
 </div>
 	
@@ -550,10 +550,10 @@
 <div>
 
 	 
-	 <h5>Artículos</h5>
+	 <h5><g:message code="wish.loadUnits.label" default="Products" /></h5>
 	 <g:render template="loadUnits" model="['wishInstance':wishInstance]"/>
 	 
-	 <h5>Notas</h5>
+	 <h5><g:message code="wish.notes.label" default="Notes" /></h5>
 	 <g:render template="notes" model="['wishInstance':wishInstance]"/>
 	 
 	 

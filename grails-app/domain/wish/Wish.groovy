@@ -30,12 +30,11 @@ class Wish {
 	Currency currency
 	BigDecimal conversion
 	BigDecimal currencyFob
-	Date estimatedDeliveryDate
 	Date deliveryDate
 	Date estimatedTimeOfDeparture 
-	Date timeOfDeparture
+	boolean departed
 	Date estimatedTimeOfArrival
-	Date timeOfArrival
+	boolean arrived
 	Date wishDate
 	Date dateOfMoneyInAdvanceTransfer
 	PaymentTerm paymentTerm
@@ -81,6 +80,7 @@ class Wish {
 	String bill
 	Date billDate
 	Date finnishDate
+	boolean hasFeeder
 	
     
 	static constraints = {
@@ -95,12 +95,9 @@ class Wish {
 		currency nullable:true
 		conversion nullable:false,min:0.0001,scale:4
 		currencyFob nullable:false,scale:4
-		estimatedDeliveryDate nullable:true
 		deliveryDate nullable:true
 		estimatedTimeOfDeparture nullable:true
-		timeOfDeparture nullable:true
 		estimatedTimeOfArrival nullable:true
-		timeOfArrival nullable:true
 		wishDate nullable:false
 		dateOfMoneyInAdvanceTransfer nullable:true
 		paymentTerm nullable:true
@@ -146,6 +143,20 @@ class Wish {
 		bill nullable:true		
 		billDate nullable:true
 		finnishDate nullable:true
+	}
+	
+	Date getTimeOfDeparture(){
+		if(departed)
+			return estimatedTimeOfDeparture
+		else
+			return null
+	}
+	
+	Date getTimeOfArrival(){
+		if(arrived)
+			return estimatedTimeOfArrival
+		else
+			return null
 	}
 	
 	def getActiveAlerts(){
