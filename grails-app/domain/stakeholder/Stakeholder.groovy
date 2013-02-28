@@ -1,6 +1,7 @@
 package stakeholder
 
 import modal.Country
+import report.Report
 import login.User
 
 class Stakeholder {
@@ -12,6 +13,8 @@ class Stakeholder {
 	Country country
 	String telephone
 	String email
+	Report defaultReport
+	String defaultLocale
 	
 
 	static constraints = {
@@ -19,6 +22,8 @@ class Stakeholder {
 		nullable:true
 		telephone blank:true, nullable:true
 		email email:true, blank:true, nullable:true
+		defaultReport nullable: true
+		defaultLocale nullable: true
     }
 	
 	public String toString() {
