@@ -5,14 +5,14 @@
 <div id="create-picture-container">
 
 	<!-- Button to trigger modal -->
-	<a href="#modalCreateContainer" role="button" class="btn btn-primary" data-toggle="modal">Agregar foto</a>
+	<a href="#modalCreateContainer" role="button" class="btn btn-primary" data-toggle="modal"> ${message(code: 'wish.loadFile.label', default: 'Add file')}</a>
 	 
-	<!-- Modal -->
+	<!-- Modal para cargar las imágenes -->
 	<div id="modalCreateContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalCreateContainerLabel" aria-hidden="true">
 
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="modalCreateContainerLabel">Subir archivo</h3>
+			<h3 id="modalCreateContainerLabel">${message(code: 'wish.uploadFile.label', default: 'Upload file')}</h3>
 		</div>
 
 		<g:form action="createContainerPicture" params="[idWish: wishInstance.id]" class="form-horizontal" enctype="multipart/form-data" >
@@ -53,43 +53,47 @@
 
 </div>
 </p>
+<div id="als"> </div>
 
-<div id="modal-create-picture-container">
+<div id="modal-view-picture-container">
 	<!-- Button to trigger modal -->
-	<a href="#modalPictureContainers" role="button" class="btn btn-primary" data-toggle="modal">Ver fotos</a>
+	<a href="#modalPictureContainers" role="button" class="btn btn-primary" data-toggle="modal">${message( code: 'wish.viewPicture.label', default: 'View picture')}</a>
 	 
 	<!-- Modal -->
-	<div id="modalPictureContainers" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="modalPictureContainers" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalPictureContainerLabel" aria-hidden="true">
 	 	<div class="modal-header">
 	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    	
+  			<!-- menu para editar o eliminar una foto -->
+            <ul class="nav nav-pills">
+            	<li>
+                    <a href="#modalEditContainer" role="button" id="editPhotoContainer"> <i class="icon-pencil"></i> ${message(code: 'default.button.edit.label', default: 'Edit')}</a>
+                </li>
+                <li>
+                     <a href="#modalDeleteContainer" role="button" data-toggle="modal"> <i class="icon-trash"></i> ${message( code: 'default.button.delete.label', default: 'Delete')} </a>
+                </li>
+            </ul>
+            
 	  	</div>
 
 		<div class="modal-body">
-		    
+		    <!-- carousel para mostrar las fotos -->
 		    <div id="carouselContainers" class="carousel slide">  
-		            <!-- Carousel items -->  
-				<div class="carousel-inner"> 
+		        <!-- Carousel items -->  
+				<div id="itemsCarouselContainer" class="carousel-inner"> 
 
-		       			<g:each in="${wishInstance.picturesOfLoadingContainer}" var="picture" status="i">	
-							<g:if test="${i == 0}">
-							     <div class="active item">
-									<img src="${createLink(action: 'viewPicture',id: picture.id)}" width="350" height="350"/>
-		                   			<div class="carousel-caption">
-										<p>${picture.description}</p>
-									</div>
-								</div>
-							</g:if> 
-							<g:else>
-								<div class="item">
-									<img src="${createLink(action: 'viewPicture',id: picture.id)}" width="350" height="350"/>
-								    <div class="carousel-caption">
-										<p>${picture.description}</p>
-									</div>
-								</div> 
-							</g:else>
-						</g:each>
+					<g:each in="${wishInstance.picturesOfLoadingContainer}" var="picture" status="i">
+<!--  poner lo de in wishInstance.picturesOfPrintingBoxes  -->					
+						<div class="<%if((i==0 && idPictureUpdate==null) || (idPictureUpdate!=null && idPictureUpdate==picture.id.toString())) out.println("active ")%>item">
+							<img src="${createLink(action: 'viewPicture',id: picture.id)}"/>
+		                	<div class="carousel-caption">
+								<p>${picture.description}</p>
+							</div>
+						</div>					
+					</g:each>
 				</div>  
-		  	<!-- Carousel nav -->  
+		  
+		  		<!-- Carousel nav -->  
 		  		<a class="carousel-control left" href="#carouselContainers" data-slide="prev">&lsaquo;</a>  
 		 		<a class="carousel-control right" href="#carouselContainers" data-slide="next">&rsaquo;</a>  
 			</div>  
@@ -102,3 +106,79 @@
 	</div>
 </div>
 
+
+<!-- Modal para editar la descripcion -->
+<div id="modalEditContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalEditContainerLabel" aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="modalEditContainerLabel">${message(code: 'wish.editPicture.label', default: 'Edit the image description')}</h3>
+	</div>
+
+	<g:form method="post" action="editPicture" params="[idWish: wishInstance.id]" class="form-horizontal" enctype="multipart/form-data" >
+	<div class="modal-body">
+		<fieldset class="form">
+			<g:hiddenField name="id" id="idCurrentPhotoContainer" />
+			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'description', 'error')} required">
+				<label for="description" class="control-label"><g:message code="picture.description.label"  default="Description"/><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:textField name="description" required="" id="newDescriptionContainer"/>
+					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'description', 'error')}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+
+	<div class="modal-footer">
+		<div class="form-actions">
+	    	<g:submitButton name="editContainer" class="btn btn-primary" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
+          		<button class="btn" type="reset" id="cancelEditPhotoContainerDescription">Cancel</button>
+          	</div>
+	</div>
+	</g:form>
+</div>
+
+<!-- Para ver si llegó a esta página por modificar una foto o era para ver el pedido -->
+<g:if test="${idPictureUpdate != null}">			
+	<g:each in="${wishInstance?.picturesOfLoadingContainer}" var="photo">
+		<g:if test="${idPictureUpdate == photo.id.toString()}">
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modalPictureContainers").modal('show');
+				});	
+			</script>
+		</g:if>
+	</g:each>	
+	<g:each in="${wishInstance?.picturesOfPrintingBoxes}" var="photo">
+		<g:if test="${idPictureUpdate == photo.id.toString()}">
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modalPictureBoxes").modal('show');
+				});	
+			</script>
+		</g:if>
+	</g:each>	
+</g:if>
+				
+<script type="text/javascript">
+	<!-- para la edición de una descripción -->
+    $("#editPhotoContainer").click(function(){
+
+    	$("#carouselContainers").carousel('pause');
+    	
+    	var pathPhoto = $("#itemsCarouselContainer").find(".active").children("img").attr("src").split("/");
+    	var currentPhotoId = pathPhoto[pathPhoto.length-1];
+    	var currentPhotoDescription = $("#itemsCarouselContainer").find(".active").children(".carousel-caption").children("p").text();
+    	    	
+    	$("#newDescriptionContainer").attr("value", currentPhotoDescription);
+    	$("#idCurrentPhotoContainer").attr("value", currentPhotoId);
+        $("#modalPictureContainer").modal('hide');
+        $("#modalEditContainer").modal('show');
+    });
+
+    $("#cancelEditPhotoContainerDescription").click(function(){      
+        $("#modalEditContainer").modal('hide');
+    	$("#modalPictureContainer").modal('show');
+    });
+
+</script>
