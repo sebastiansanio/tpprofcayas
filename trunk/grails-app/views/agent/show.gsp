@@ -39,6 +39,20 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="agent.defaultReport.label" default="Default Report" /></td>
+				
+				<td valign="top" class="value"><g:link controller="report" action="show" id="${agentInstance?.defaultReport?.id}">${agentInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="agent.defaultLocale.label" default="Default Locale" /></td>
+				
+				<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${agentInstance?.defaultLocale?.id}">${agentInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="agent.country.label" default="Country" /></td>
 				
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${agentInstance?.country?.id}">${agentInstance?.country?.encodeAsHTML()}</g:link></td>
@@ -56,6 +70,24 @@
 				<td valign="top" class="name"><g:message code="agent.lastUpdated.label" default="Last Updated" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${agentInstance?.lastUpdated}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="agent.wishes.label" default="Wishes" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${agentInstance.wishes}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+					
+					
+					<export:formats controller="wish" action="exportByStakeholder" params='[id: agentInstance.id]' formats="['csv','excel','ods','pdf']" />
+				
+				</td>
+				
 				
 			</tr>
 		

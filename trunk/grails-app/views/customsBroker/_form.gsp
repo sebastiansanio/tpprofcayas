@@ -26,11 +26,44 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'defaultReport', 'error')} ">
+				<label for="defaultReport" class="control-label"><g:message code="customsBroker.defaultReport.label" default="Default Report" /></label>
+				<div class="controls">
+					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" value="${customsBrokerInstance?.defaultReport?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'defaultReport', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'defaultLocale', 'error')} ">
+				<label for="defaultLocale" class="control-label"><g:message code="customsBroker.defaultLocale.label" default="Default Locale" /></label>
+				<div class="controls">
+					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" value="${customsBrokerInstance?.defaultLocale?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'defaultLocale', 'error')}</span>
+				</div>
+			</div>
+
 			<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'country', 'error')} required">
 				<label for="country" class="control-label"><g:message code="customsBroker.country.label" default="Country" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 					<g:select id="country" name="country.id" from="${modal.Country.list()}" optionKey="id" required="" value="${customsBrokerInstance?.country?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'country', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'wishes', 'error')} ">
+				<label for="wishes" class="control-label"><g:message code="customsBroker.wishes.label" default="Wishes" /></label>
+				<div class="controls">
+					
+<ul class="one-to-many">
+<g:each in="${customsBrokerInstance?.wishes?}" var="w">
+    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="wish" action="create" params="['customsBroker.id': customsBrokerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+</li>
+</ul>
+
+					<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'wishes', 'error')}</span>
 				</div>
 			</div>
 

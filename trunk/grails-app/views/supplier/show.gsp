@@ -39,6 +39,20 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.defaultReport.label" default="Default Report" /></td>
+				
+				<td valign="top" class="value"><g:link controller="report" action="show" id="${supplierInstance?.defaultReport?.id}">${supplierInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.defaultLocale.label" default="Default Locale" /></td>
+				
+				<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${supplierInstance?.defaultLocale?.id}">${supplierInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.address.label" default="Address" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "address")}</td>
@@ -72,7 +86,7 @@
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "taxRegistryNumber")}</td>
 				
 			</tr>
-			
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.wishes.label" default="Wishes" /></td>
 				
@@ -81,19 +95,16 @@
 					<g:each in="${supplierInstance.wishes}" var="w">
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
-						<export:formats controller="wish" action="exportByStakeholder" params='[id:"${supplierInstance.id}"]' formats="['csv','excel','ods','pdf']"/>
-	
 					</ul>
+					
+					<export:formats controller="wish" action="exportByStakeholder" params='[id: supplierInstance.id]' formats="['csv','excel','ods','pdf']" />
+				
 				</td>
 				
 			</tr>
 		
-		
 		</tbody>
 	</table>
-		
-	
-		
 </section>
 
 </body>

@@ -26,6 +26,22 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')} ">
+				<label for="defaultReport" class="control-label"><g:message code="customer.defaultReport.label" default="Default Report" /></label>
+				<div class="controls">
+					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" value="${customerInstance?.defaultReport?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')} ">
+				<label for="defaultLocale" class="control-label"><g:message code="customer.defaultLocale.label" default="Default Locale" /></label>
+				<div class="controls">
+					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" value="${customerInstance?.defaultLocale?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')}</span>
+				</div>
+			</div>
+
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'address', 'error')} ">
 				<label for="address" class="control-label"><g:message code="customer.address.label" default="Address" /></label>
 				<div class="controls">

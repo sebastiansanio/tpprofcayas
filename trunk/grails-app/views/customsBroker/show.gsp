@@ -39,6 +39,20 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customsBroker.defaultReport.label" default="Default Report" /></td>
+				
+				<td valign="top" class="value"><g:link controller="report" action="show" id="${customsBrokerInstance?.defaultReport?.id}">${customsBrokerInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customsBroker.defaultLocale.label" default="Default Locale" /></td>
+				
+				<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${customsBrokerInstance?.defaultLocale?.id}">${customsBrokerInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customsBroker.country.label" default="Country" /></td>
 				
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${customsBrokerInstance?.country?.id}">${customsBrokerInstance?.country?.encodeAsHTML()}</g:link></td>
@@ -59,7 +73,7 @@
 				
 			</tr>
 		
-				<tr class="prop">
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customsBroker.wishes.label" default="Wishes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -67,13 +81,13 @@
 					<g:each in="${customsBrokerInstance.wishes}" var="w">
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
-						<export:formats controller="wish" action="exportByStakeholder" params='[id:"${customsBrokerInstance.id}"]' formats="['csv','excel','ods','pdf']"/>
-	
 					</ul>
+					
+					<export:formats controller="wish" action="exportByStakeholder" params='[id: customsBrokerInstance.id]' formats="['csv','excel','ods','pdf']" />
+				
 				</td>
 				
 			</tr>
-		
 		
 		</tbody>
 	</table>

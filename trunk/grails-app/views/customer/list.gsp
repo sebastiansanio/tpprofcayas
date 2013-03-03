@@ -23,11 +23,11 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'customer.email.label', default: 'Email')}" />
 			
+				<th><g:message code="customer.defaultReport.label" default="Default Report" /></th>
+			
+				<th><g:message code="customer.defaultLocale.label" default="Default Locale" /></th>
+			
 				<g:sortableColumn property="address" title="${message(code: 'customer.address.label', default: 'Address')}" />
-			
-				<th><g:message code="customer.country.label" default="Country" /></th>
-			
-				<g:sortableColumn property="cuit" title="${message(code: 'customer.cuit.label', default: 'Cuit')}" />
 			
 			</tr>
 		</thead>
@@ -41,11 +41,11 @@
 			
 				<td>${fieldValue(bean: customerInstance, field: "email")}</td>
 			
+				<td>${fieldValue(bean: customerInstance, field: "defaultReport")}</td>
+			
+				<td>${fieldValue(bean: customerInstance, field: "defaultLocale")}</td>
+			
 				<td>${fieldValue(bean: customerInstance, field: "address")}</td>
-			
-				<td>${fieldValue(bean: customerInstance, field: "country")}</td>
-			
-				<td>${fieldValue(bean: customerInstance, field: "cuit")}</td>
 			
 			</tr>
 		</g:each>

@@ -4,8 +4,8 @@ import java.io.OutputStream;
 import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
 import login.User
-import stakeholder.Stakeholder
 import org.apache.shiro.SecurityUtils
+import stakeholder.*
 
 
 class WishController {
@@ -19,6 +19,8 @@ class WishController {
     }
 
     def list() {
+		
+		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }

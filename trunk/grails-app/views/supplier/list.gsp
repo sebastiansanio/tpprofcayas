@@ -23,11 +23,11 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'supplier.email.label', default: 'Email')}" />
 			
+				<th><g:message code="supplier.defaultReport.label" default="Default Report" /></th>
+			
+				<th><g:message code="supplier.defaultLocale.label" default="Default Locale" /></th>
+			
 				<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: 'Address')}" />
-			
-				<th><g:message code="supplier.country.label" default="Country" /></th>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'supplier.dateCreated.label', default: 'Date Created')}" />
 			
 			</tr>
 		</thead>
@@ -41,11 +41,11 @@
 			
 				<td>${fieldValue(bean: supplierInstance, field: "email")}</td>
 			
+				<td>${fieldValue(bean: supplierInstance, field: "defaultReport")}</td>
+			
+				<td>${fieldValue(bean: supplierInstance, field: "defaultLocale")}</td>
+			
 				<td>${fieldValue(bean: supplierInstance, field: "address")}</td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "country")}</td>
-			
-				<td><g:formatDate date="${supplierInstance.dateCreated}" /></td>
 			
 			</tr>
 		</g:each>

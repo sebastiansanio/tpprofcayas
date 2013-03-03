@@ -23,11 +23,11 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'agent.email.label', default: 'Email')}" />
 			
+				<th><g:message code="agent.defaultReport.label" default="Default Report" /></th>
+			
+				<th><g:message code="agent.defaultLocale.label" default="Default Locale" /></th>
+			
 				<th><g:message code="agent.country.label" default="Country" /></th>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'agent.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'agent.lastUpdated.label', default: 'Last Updated')}" />
 			
 			</tr>
 		</thead>
@@ -41,11 +41,11 @@
 			
 				<td>${fieldValue(bean: agentInstance, field: "email")}</td>
 			
+				<td>${fieldValue(bean: agentInstance, field: "defaultReport")}</td>
+			
+				<td>${fieldValue(bean: agentInstance, field: "defaultLocale")}</td>
+			
 				<td>${fieldValue(bean: agentInstance, field: "country")}</td>
-			
-				<td><g:formatDate date="${agentInstance.dateCreated}" /></td>
-			
-				<td><g:formatDate date="${agentInstance.lastUpdated}" /></td>
 			
 			</tr>
 		</g:each>

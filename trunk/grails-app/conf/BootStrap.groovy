@@ -1,3 +1,8 @@
+import report.Report
+import stakeholder.Customer;
+import stakeholder.CustomsBroker;
+import stakeholder.Supplier;
+
 import org.apache.shiro.crypto.hash.Sha256Hash
 import alert.AlertType
 import login.*
@@ -9,6 +14,31 @@ import product.*
 class BootStrap {
 
     def init = { servletContext ->
+		
+		List supplierReportFields = ["opNumber","customer","supplier","shipper","supplierOrder","currencyFob","currency","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
+			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","visaChargePayment","visaChargePaymentConcept","shippingMark","customerLogoPunch","hsCodeToBeWritten",
+			"amountOfMoneyInAdvanceTransferred","moneyBalance","dateOfBalancePayment","picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
+			"ship","docDraftApproved","cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber"
+		]
+		def supplierReport = new Report(name:'Proveedor',pendingOnly:true,fields:supplierReportFields)
+		supplierReport.save()
+		
+		List customsBrokerReportFields = ["opNumber","customer","shipper","supplierOrder","priceCondition","currencyFob","estimatedTimeOfDeparture",
+			"timeOfDeparture","estimatedTimeOfArrival","timeOfArrival","customsBroker","customsBrokerRefNumber","djaiNumber",
+			"djaiFormalizationDate","shippingMark","ship","freightQuote","forwarderRefNumber","loadSecuredPercent",
+			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber"
+		]
+		def customsBrokerReport = new Report(name:'Despachante',pendingOnly:true,fields:customsBrokerReportFields)
+		customsBrokerReport.save()
+				
+		
+		List customerReportFields = ["customerOpNumber","customer","shipper","supplierOrder","currencyFob","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
+			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","paymentStatus","customsBroker",
+			"customsBrokerRefNumber","visaChargePayment","visaChargePaymentConcept","djaiNumber","djaiFormalizationDate","amountOfMoneyInAdvanceTransferred","moneyBalance","dateOfBalancePayment",
+			"port",	"ship","forwarder","freightQuote","forwarderRefNumber","typeOfFreight","blNumber"
+		]
+		def customerReport = new Report(name:'Cliente',pendingOnly:true,fields:customerReportFields)
+		customerReport.save()
 		
 		def roleAdmin = new Role(name:"Admin")
 		roleAdmin.addToPermissions("user:*")
@@ -22,6 +52,8 @@ class BootStrap {
 		roleAdmin.addToPermissions("priceCondition:*")
 		roleAdmin.addToPermissions("visaChargePaymentConcept:*")
 		roleAdmin.addToPermissions("wishStatus:*")
+		roleAdmin.addToPermissions("availableLocale:*")
+		roleAdmin.addToPermissions("report:*")
 		roleAdmin.save()
 	
 		def roleOperator = new Role(name:"Operador")
@@ -50,6 +82,11 @@ class BootStrap {
 		roleManager.addToPermissions("currency:*")
 		roleManager.save()
 		
+		def localeEs = new AvailableLocale(language:'es',country:'ES')
+		localeEs.save()
+		def localeEn = new AvailableLocale(language:'en',country:'EN')
+		localeEn.save()
+		
 		def admin = new User(username:"admin", passwordHash: new Sha256Hash("admin").toHex())
 		admin.addToRoles(roleAdmin)
 		admin.save()
@@ -65,22 +102,22 @@ class BootStrap {
 		def country = new Country(name:"CHINA")
 		country.save()
 								
-		def customer = new Customer(name:"PLACASUR",country:country,address:".",cuit:"30-34948484-4")
+		def customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"PLACASUR",country:country,address:".",cuit:"30-34948484-4")
 		customer.save()
 		
-		def supplier = new Supplier(name:"HAI HUI",country:country,address:".",taxRegistryNumber:"2312232")
+		def supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"HAI HUI",country:country,address:".",taxRegistryNumber:"2312232")
 		supplier.save()
 		
-		def shipper = new Shipper(name:"GUANGZHOU ANIMAL",country:country)
+		def shipper = new Shipper(defaultReport:customerReport,defaultLocale:localeEs,name:"GUANGZHOU ANIMAL",country:country)
 		shipper.save(failOnError:true)
 		
-		def customsBroker = new CustomsBroker(name:"LEWKOWICK",country:country)
+		def customsBroker = new CustomsBroker(defaultReport:customsBrokerReport,defaultLocale:localeEs,name:"LEWKOWICK",country:country)
 		customsBroker.save()
 		
-		def forwarder = new Forwarder(name:"AirSeaLand",country:country)
+		def forwarder = new Forwarder(defaultReport:customerReport,defaultLocale:localeEs,name:"AirSeaLand",country:country)
 		forwarder.save(failOnError:true)
 		
-		def agent = new Agent(name:"SUNSHOW",country:country)
+		def agent = new Agent(defaultReport:customerReport,defaultLocale:localeEn,name:"SUNSHOW",country:country)
 		agent.save()
 		
 		def port = new Port(country:country,name:"GUANGZHOU")

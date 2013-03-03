@@ -23,11 +23,11 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'forwarder.email.label', default: 'Email')}" />
 			
+				<th><g:message code="forwarder.defaultReport.label" default="Default Report" /></th>
+			
+				<th><g:message code="forwarder.defaultLocale.label" default="Default Locale" /></th>
+			
 				<th><g:message code="forwarder.country.label" default="Country" /></th>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'forwarder.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'forwarder.lastUpdated.label', default: 'Last Updated')}" />
 			
 			</tr>
 		</thead>
@@ -41,11 +41,11 @@
 			
 				<td>${fieldValue(bean: forwarderInstance, field: "email")}</td>
 			
+				<td>${fieldValue(bean: forwarderInstance, field: "defaultReport")}</td>
+			
+				<td>${fieldValue(bean: forwarderInstance, field: "defaultLocale")}</td>
+			
 				<td>${fieldValue(bean: forwarderInstance, field: "country")}</td>
-			
-				<td><g:formatDate date="${forwarderInstance.dateCreated}" /></td>
-			
-				<td><g:formatDate date="${forwarderInstance.lastUpdated}" /></td>
 			
 			</tr>
 		</g:each>

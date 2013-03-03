@@ -23,11 +23,11 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'customsBroker.email.label', default: 'Email')}" />
 			
+				<th><g:message code="customsBroker.defaultReport.label" default="Default Report" /></th>
+			
+				<th><g:message code="customsBroker.defaultLocale.label" default="Default Locale" /></th>
+			
 				<th><g:message code="customsBroker.country.label" default="Country" /></th>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'customsBroker.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'customsBroker.lastUpdated.label', default: 'Last Updated')}" />
 			
 			</tr>
 		</thead>
@@ -41,11 +41,11 @@
 			
 				<td>${fieldValue(bean: customsBrokerInstance, field: "email")}</td>
 			
+				<td>${fieldValue(bean: customsBrokerInstance, field: "defaultReport")}</td>
+			
+				<td>${fieldValue(bean: customsBrokerInstance, field: "defaultLocale")}</td>
+			
 				<td>${fieldValue(bean: customsBrokerInstance, field: "country")}</td>
-			
-				<td><g:formatDate date="${customsBrokerInstance.dateCreated}" /></td>
-			
-				<td><g:formatDate date="${customsBrokerInstance.lastUpdated}" /></td>
 			
 			</tr>
 		</g:each>
