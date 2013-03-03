@@ -1,11 +1,14 @@
 package stakeholder
 
+import modal.AvailableLocale
+import wish.Wish
 import modal.Country
 import report.Report
 import login.User
 
 class Stakeholder {
 
+	
 	Date	dateCreated
 	Date	lastUpdated
 	
@@ -14,7 +17,7 @@ class Stakeholder {
 	String telephone
 	String email
 	Report defaultReport
-	String defaultLocale
+	AvailableLocale defaultLocale
 	
 
 	static constraints = {
@@ -22,8 +25,8 @@ class Stakeholder {
 		nullable:true
 		telephone blank:true, nullable:true
 		email email:true, blank:true, nullable:true
-		defaultReport nullable: true
-		defaultLocale nullable: true
+		defaultReport nullable: false
+		defaultLocale nullable: false
     }
 	
 	public String toString() {

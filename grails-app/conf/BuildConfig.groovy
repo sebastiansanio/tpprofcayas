@@ -36,16 +36,8 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 		
-		runtime 'org.jbpm:jbpm-bpmn2:5.2.0.Final'
-		runtime ('org.drools:drools-persistence-jpa:5.3.1.Final') {
-			transitive = false
-		}
-		runtime ('org.drools:drools-core:5.3.1.Final') {
-			transitive = false
-		}
-        // runtime 'mysql:mysql-connector-java:5.1.20'
-		runtime 'com.sun.xml.bind:jaxb-xjc:2.2.4'
-		runtime 'com.sun.xml.bind:jaxb-impl:2.2.4'
+        runtime 'mysql:mysql-connector-java:5.1.20'
+
     }
 
     plugins {

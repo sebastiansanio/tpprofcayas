@@ -26,11 +26,44 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')} ">
+				<label for="defaultReport" class="control-label"><g:message code="shipper.defaultReport.label" default="Default Report" /></label>
+				<div class="controls">
+					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" value="${shipperInstance?.defaultReport?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultLocale', 'error')} ">
+				<label for="defaultLocale" class="control-label"><g:message code="shipper.defaultLocale.label" default="Default Locale" /></label>
+				<div class="controls">
+					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" value="${shipperInstance?.defaultLocale?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'defaultLocale', 'error')}</span>
+				</div>
+			</div>
+
 			<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'country', 'error')} required">
 				<label for="country" class="control-label"><g:message code="shipper.country.label" default="Country" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 					<g:select id="country" name="country.id" from="${modal.Country.list()}" optionKey="id" required="" value="${shipperInstance?.country?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'country', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'wishes', 'error')} ">
+				<label for="wishes" class="control-label"><g:message code="shipper.wishes.label" default="Wishes" /></label>
+				<div class="controls">
+					
+<ul class="one-to-many">
+<g:each in="${shipperInstance?.wishes?}" var="w">
+    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="wish" action="create" params="['shipper.id': shipperInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+</li>
+</ul>
+
+					<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'wishes', 'error')}</span>
 				</div>
 			</div>
 

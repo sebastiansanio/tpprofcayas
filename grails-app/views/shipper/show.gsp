@@ -39,6 +39,20 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.defaultReport.label" default="Default Report" /></td>
+				
+				<td valign="top" class="value"><g:link controller="report" action="show" id="${shipperInstance?.defaultReport?.id}">${shipperInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.defaultLocale.label" default="Default Locale" /></td>
+				
+				<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${shipperInstance?.defaultLocale?.id}">${shipperInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="shipper.country.label" default="Country" /></td>
 				
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${shipperInstance?.country?.id}">${shipperInstance?.country?.encodeAsHTML()}</g:link></td>
@@ -56,6 +70,24 @@
 				<td valign="top" class="name"><g:message code="shipper.lastUpdated.label" default="Last Updated" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${shipperInstance?.lastUpdated}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.wishes.label" default="Wishes" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${shipperInstance.wishes}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+					
+					<export:formats controller="wish" action="exportByStakeholder" params='[id: shipperInstance.id]' formats="['csv','excel','ods','pdf']" />
+				
+				</td>
+				
+				
 				
 			</tr>
 		

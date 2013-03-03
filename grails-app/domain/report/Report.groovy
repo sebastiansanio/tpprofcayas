@@ -2,9 +2,9 @@ package report
 
 class Report {
 
-
 	Date	dateCreated
 	Date	lastUpdated
+	List fields
 	
 	static hasMany		= [fields: String]	
 	

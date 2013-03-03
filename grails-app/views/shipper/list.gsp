@@ -23,11 +23,11 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'shipper.email.label', default: 'Email')}" />
 			
+				<th><g:message code="shipper.defaultReport.label" default="Default Report" /></th>
+			
+				<th><g:message code="shipper.defaultLocale.label" default="Default Locale" /></th>
+			
 				<th><g:message code="shipper.country.label" default="Country" /></th>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'shipper.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'shipper.lastUpdated.label', default: 'Last Updated')}" />
 			
 			</tr>
 		</thead>
@@ -41,11 +41,11 @@
 			
 				<td>${fieldValue(bean: shipperInstance, field: "email")}</td>
 			
+				<td>${fieldValue(bean: shipperInstance, field: "defaultReport")}</td>
+			
+				<td>${fieldValue(bean: shipperInstance, field: "defaultLocale")}</td>
+			
 				<td>${fieldValue(bean: shipperInstance, field: "country")}</td>
-			
-				<td><g:formatDate date="${shipperInstance.dateCreated}" /></td>
-			
-				<td><g:formatDate date="${shipperInstance.lastUpdated}" /></td>
 			
 			</tr>
 		</g:each>

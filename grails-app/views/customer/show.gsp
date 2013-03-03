@@ -39,6 +39,20 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customer.defaultReport.label" default="Default Report" /></td>
+				
+				<td valign="top" class="value"><g:link controller="report" action="show" id="${customerInstance?.defaultReport?.id}">${customerInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customer.defaultLocale.label" default="Default Locale" /></td>
+				
+				<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${customerInstance?.defaultLocale?.id}">${customerInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customer.address.label" default="Address" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "address")}</td>
@@ -82,14 +96,17 @@
 						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
 					</g:each>
 					</ul>
-					<export:formats controller="wish" action="exportByStakeholder" params='[id:"${customerInstance.id}"]' formats="['csv','excel','ods','pdf']"/>
-	
+					
+
+					<export:formats controller="wish" action="exportByStakeholder" params='[id: customerInstance.id]' formats="['csv','excel','ods','pdf']" />
+					
 				</td>
 				
 			</tr>
 		
 		</tbody>
 	</table>
+
 </section>
 
 </body>

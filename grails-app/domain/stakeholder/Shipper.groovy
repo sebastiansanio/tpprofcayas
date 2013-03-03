@@ -1,11 +1,11 @@
 package stakeholder
+import wish.Wish
 
 class Shipper extends Stakeholder{
 
 	
-    static mapping = {
-    }
-    
+    static hasMany		= [wishes: Wish]
+	
 	static constraints = {
     }
 	
