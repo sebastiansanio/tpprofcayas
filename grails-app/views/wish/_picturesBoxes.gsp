@@ -5,7 +5,7 @@
 <div id="create-picture-box">
 	<!-- Button to trigger modal -->
 	<a href="#modalCreateBox" role="button" class="btn btn-primary" data-toggle="modal"> ${message(code: 'wish.loadFile.label', default: 'Add file')}</a>
-	 
+	
 	<!-- Modal -->
 	<div id="modalCreateBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalCreateBoxLabel" aria-hidden="true">
 
@@ -64,7 +64,7 @@
 		<div class="modal-header">
 	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
  			<!-- menu para editar o eliminar una foto -->
-            <ul id="MenuPictureBoxes" class="nav nav-pills">
+            <ul class="nav nav-pills">
             	<li>
                     <a href="#modalEditarBox" role="button" id="editPhotoBox"> <i class="icon-pencil"></i> ${message(code: 'default.button.edit.label', default: 'Edit')}</a>
                 </li>
@@ -144,7 +144,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'description', 'error')} required">
 				<label for="description" class="control-label"><g:message code="picture.description.label"  default="Description"/><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:textField name="description" required="" id="newDescription"/>
+					<g:textField name="description" required="" id="newDescriptionBox"/>
 					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'description', 'error')}</span>
 				</div>
 			</div>
@@ -154,21 +154,12 @@
 	<div class="modal-footer">
 		<div class="form-actions">
 	    	<g:submitButton name="editBoxes" class="btn btn-primary" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
-          		<button class="btn" type="reset" id="cancelEditPhotoDescription">Cancel</button>
+          		<button class="btn" type="reset" id="cancelEditPhotoBoxDescription">Cancel</button>
           	</div>
 	</div>
 	</g:form>
 </div>
 
-<!-- Para ver si llegó a esta página por modificar una foto o era para ver el pedido -->
-<g:if test="${idPictureUpdate != null}">
-	<script type="text/javascript">
-		$(document).ready(function() {
-        	$("#modalPictureBoxes").modal('show');
-		});	
-	</script>
-</g:if>
-	
 <script type="text/javascript">
 	<!-- para la edición de una descripción -->
     $("#editPhotoBox").click(function(){
@@ -179,13 +170,13 @@
     	var currentPhotoId = pathPhoto[pathPhoto.length-1];
     	var currentPhotoDescription = $("#itemsCarouselBoxes").find(".active").children(".carousel-caption").children("p").text();
     	    	
-    	$("#newDescription").attr("value", currentPhotoDescription);
+    	$("#newDescriptionBox").attr("value", currentPhotoDescription);
     	$("#idCurrentPhotoBox").attr("value", currentPhotoId);
         $("#modalPictureBoxes").modal('hide');
         $("#modalEditarBox").modal('show');
     });
 
-    $("#cancelEditPhotoDescription").click(function(){      
+    $("#cancelEditPhotoBoxDescription").click(function(){      
         $("#modalEditarBox").modal('hide');
     	$("#modalPictureBoxes").modal('show');
     });
