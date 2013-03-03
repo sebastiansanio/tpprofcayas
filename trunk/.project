@@ -26,7 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-			<location>/home/sebastian/.grails/2.2.0/projects/cayas/plugins</location>
+			<locationURI>GRAILS_ROOT/2.2.0/projects/cayas/plugins</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

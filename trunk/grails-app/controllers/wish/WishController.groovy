@@ -84,7 +84,7 @@ class WishController {
             return
         }
 
-        [wishInstance: wishInstance]
+        [wishInstance: wishInstance, idPictureUpdate: params.idPictureUpdate]
     }
 
     def edit() {
@@ -166,7 +166,7 @@ class WishController {
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
 		wishInstance.addToPicturesOfPrintingBoxes(picture)
-	        redirect(action: "show", id: wishInstance.id)	
+	    redirect(action: "show", id: wishInstance.id)	
 	}
 
 	def createContainerPicture(){
@@ -179,6 +179,50 @@ class WishController {
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
 		wishInstance.addToPicturesOfLoadingContainer(picture)
-	        redirect(action: "show", id: wishInstance.id)	
+        redirect(action: "show", id: wishInstance.id)	
+	}
+
+    def deleteBoxPicture(){
+		
+        def wishInstance = Wish.get(params.idWish)
+        def pictureInstance = wishInstance.picturesOfPrintingBoxes.find { id == params.id }
+
+        if (!pictureInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        try {
+            wishInstance.removeFromPicturesOfPrintingBoxes(pictureInstance)
+            pictureInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+            redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+			redirect(action: "list")
+			
+           // redirect(action: "show", id: params.id)
+        }
+    }
+	
+	def editPicture() {	
+		def pictureInstance = Picture.get(params.id)
+		if (!pictureInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+			redirect(action: "show", id: params.idWish)
+			return
+		}
+
+		pictureInstance.description = params.description
+
+		if (!pictureInstance.save(flush: true)) {
+			redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])		
+			return
+		}
+
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'picture.label', default: 'Picture'), pictureInstance.id])
+		redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
 	}
 }
