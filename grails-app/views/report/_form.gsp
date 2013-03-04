@@ -15,10 +15,18 @@
 				<label for="fields" class="control-label"><g:message code="report.fields.label" default="Fields" /></label>
 				<div class="controls">
 															
-					<g:select size="15" id="fields" name="fields" from="${new Wish().domainClass.properties}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" required="" value="${reportInstance?.fields}" multiple="multiple"/>
+					<g:select class="span4" size="15" id="avFields" name="avFields" from="${new Wish().domainClass.properties.findAll{!(it.name in reportInstance?.fields)}}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" multiple="multiple"/>
 					
-					<span class="help-inline">${hasErrors(bean: reportInstance, field: 'fields', 'error')}</span>
+				
+					<button type="button" onClick="addFields();">${message(code:'add.label')} </button>
+					<button type="button" onClick="removeFields();">${message(code:'remove.label')} </button>
+				
+					<g:select onSubmit="selectAll();" class="span4" size="15" id="fields" name="fields" from="${reportInstance?.fields}" optionValue="${{message(code:'wish.'+it+'.label')}}" multiple="multiple"/>
+																			
+				
 				</div>
+				
+				
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportInstance, field: 'pendingOnly', 'error')} ">
@@ -29,3 +37,18 @@
 				</div>
 			</div>
 
+<script>
+function addFields(){
+	$("#avFields :selected").appendTo("#fields");
+}
+
+function removeFields(){
+	$("#fields :selected").appendTo("#avFields");
+}
+
+$('form').submit(function(){
+		$("#fields option").attr('selected','selected');
+	}
+)
+
+</script>
