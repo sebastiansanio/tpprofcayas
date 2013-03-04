@@ -158,7 +158,6 @@
 	</g:form>
 </div>
 
-<div id="otra"></div>
 <!-- Para ver si llegó a esta página por modificar una foto o era para ver el pedido -->
 <!--  de una manera muy mala pero no sé como hacerlo de otra forma :P -->
 <g:if test="${idPictureUpdate != null}">			

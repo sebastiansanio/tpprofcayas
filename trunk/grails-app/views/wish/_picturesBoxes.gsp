@@ -118,12 +118,6 @@
 		</div>
 
 		<div class="modal-footer">
-<!-- 			<g:form action="deleteBoxPicture" params="[idWish: wishInstance.id]">
-				<div class="form-actions">
-		        	<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteBox" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
-            		<button class="btn" type="reset" data-dismiss="modal">Cancel</button>
-            	</div>
-			</g:form> -->
 			<g:form action="deleteBoxPicture" params="[idWish: wishInstance.id]">
 				<button class="btn" id="cancelDeletePhotoBox"><g:message code="default.button.cancel.label" default="Cancel"/></button>
 				<g:hiddenField name="id" id="idCurrentPhotoBoxDelete" />

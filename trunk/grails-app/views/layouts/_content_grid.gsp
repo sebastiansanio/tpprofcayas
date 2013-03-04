@@ -7,19 +7,23 @@
 		</div>
 	</div>
 	
-	<!-- Secondary menu in one line (e.g., actions for current controller) -->
 	<div class="row">
-		<div class="span12">
+		<!-- Secondary menu in one line (e.g., actions for current controller) -->
+		<div class="span2 bs-docs-sidebar">
 			<g:render template="/_menu/submenubar"/>														
+		</div>
+		
+		<div class="span10">
+			<!-- print system messages (infos, warnings, etc) - not validation errors -->
+			<g:if test="${flash.message}">
+				<div class="alert alert-info">${flash.message}</div>
+			</g:if>
+		
+			<!-- Show page's content -->
+			<g:layoutBody />
+			<g:pageProperty name="page.body" />
+			
 		</div>
 	</div>
 
-	<!-- print system messages (infos, warnings, etc) - not validation errors -->
-	<g:if test="${flash.message}">
-		<div class="alert alert-info">${flash.message}</div>
-	</g:if>
-
-	<!-- Show page's content -->
-	<g:layoutBody />
-	<g:pageProperty name="page.body" />
 </div>
