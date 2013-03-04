@@ -107,11 +107,11 @@
 </div>
 
 <!-- Modal para borrar una imagen -->
-	<div id="#modalDeleteContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="#modalDeleteContainerLabel" aria-hidden="true">
+	<div id="modalDeleteContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalDeleteContainerLabel" aria-hidden="true">
 
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="#modalDeleteContainerLabel">${message(code: 'wish.deletePicture.label', default: 'Delete file')}</h3>
+			<h3 id="modalDeleteContainerLabel">${message(code: 'wish.deletePicture.label', default: 'Delete file')}</h3>
 		</div>
 
 		<div class="modal-body">
@@ -179,7 +179,8 @@
 		</g:if>
 	</g:each>	
 </g:if>
-				
+				Srcitp:
+				<div id="otro"></div>
 <script type="text/javascript">
 	<!-- para la edición de una descripción -->
     $("#editPhotoContainer").click(function(){
@@ -199,11 +200,11 @@
     $("#deletePhotoContainer").click(function(){
 
     	$("#carouselContainers").carousel('pause');
-    	
     	var pathPhoto = $("#itemsCarouselContainer").find(".active").children("img").attr("src").split("/");
     	var currentPhotoId = pathPhoto[pathPhoto.length-1];
-    	    	    	
+
     	$("#idCurrentPhotoContainerDelete").attr("value", currentPhotoId);
+
         $("#modalPictureContainer").modal('hide');
         $("#modalDeleteContainer").modal('show');
     });
