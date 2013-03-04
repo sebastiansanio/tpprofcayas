@@ -66,10 +66,10 @@
  			<!-- menu para editar o eliminar una foto -->
             <ul class="nav nav-pills">
             	<li>
-                    <a href="#modalEditarBox" role="button" id="editPhotoBox"> <i class="icon-pencil"></i> ${message(code: 'default.button.edit.label', default: 'Edit')}</a>
+                    <a href="#modalEditBox" role="button" id="editPhotoBox"> <i class="icon-pencil"></i> ${message(code: 'default.button.edit.label', default: 'Edit')}</a>
                 </li>
                 <li>
-                     <a href="#modalBorrarBox" role="button" data-toggle="modal"> <i class="icon-trash"></i> ${message( code: 'default.button.delete.label', default: 'Delete')} </a>
+                     <a href="#modalDeleteBox" role="button" id="deletePhotoBox"> <i class="icon-trash"></i> ${message( code: 'default.button.delete.label', default: 'Delete')} </a>
                 </li>
             </ul>
 	  	</div>
@@ -106,8 +106,8 @@
 </div>
 
 
-	<!-- Modal para borrar una imagen -->
-	<div id="modalBorrarBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalBorrarBoxLabel" aria-hidden="true">
+<!-- Modal para borrar una imagen -->
+	<div id="modalDeleteBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalBorrarBoxLabel" aria-hidden="true">
 
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -119,22 +119,27 @@
 		</div>
 
 		<div class="modal-footer">
-			<g:form action="deleteBoxPicture" params="[idWish: wishInstance.id]">
+<!-- 			<g:form action="deleteBoxPicture" params="[idWish: wishInstance.id]">
 				<div class="form-actions">
 		        	<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteBox" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
             		<button class="btn" type="reset" data-dismiss="modal">Cancel</button>
             	</div>
-			</g:form>
+			</g:form> -->
+			<g:form action="deleteBoxPicture" params="[idWish: wishInstance.id]">
+				<button class="btn" id="cancelDeletePhotoBox"><g:message code="default.button.cancel.label" default="Cancel"/></button>
+				<g:hiddenField name="id" id="idCurrentPhotoBoxDelete" />
+				<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteBoxPicture" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+		</g:form>
 		</div>
 	</div>
 
 
 <!-- Modal para editar la descripcion -->
-<div id="modalEditarBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalEditarBoxLabel" aria-hidden="true">
+<div id="modalEditBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalEditBoxLabel" aria-hidden="true">
 
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="modalEditarBoxLabel">${message(code: 'wish.editPicture.label', default: 'Edit the image description')}</h3>
+		<h3 id="modalEditBoxLabel">${message(code: 'wish.editPicture.label', default: 'Edit the image description')}</h3>
 	</div>
 
 	<g:form method="post" action="editPicture" params="[idWish: wishInstance.id]" class="form-horizontal" enctype="multipart/form-data" >
@@ -173,11 +178,28 @@
     	$("#newDescriptionBox").attr("value", currentPhotoDescription);
     	$("#idCurrentPhotoBox").attr("value", currentPhotoId);
         $("#modalPictureBoxes").modal('hide');
-        $("#modalEditarBox").modal('show');
+        $("#modalEditBox").modal('show');
     });
 
+    $("#deletePhotoBox").click(function(){
+
+    	$("#carouselBoxes").carousel('pause');
+    	
+    	var pathPhoto = $("#itemsCarouselBoxes").find(".active").children("img").attr("src").split("/");
+    	var currentPhotoId = pathPhoto[pathPhoto.length-1];
+    	    	    	
+    	$("#idCurrentPhotoBoxDelete").attr("value", currentPhotoId);
+        $("#modalPictureBoxes").modal('hide');
+        $("#modalDeleteBox").modal('show');
+    });
+    
     $("#cancelEditPhotoBoxDescription").click(function(){      
-        $("#modalEditarBox").modal('hide');
+        $("#modalEditBox").modal('hide');
+    	$("#modalPictureBoxes").modal('show');
+    });
+
+    $("#cancelDeletePhotoBox").click(function(){      
+        $("#modalDeleteBox").modal('hide');
     	$("#modalPictureBoxes").modal('show');
     });
 

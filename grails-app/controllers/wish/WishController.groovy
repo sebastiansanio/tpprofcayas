@@ -183,29 +183,58 @@ class WishController {
 	}
 
     def deleteBoxPicture(){
-		
         def wishInstance = Wish.get(params.idWish)
-        def pictureInstance = wishInstance.picturesOfPrintingBoxes.find { id == params.id }
-
+        def pictureInstance = wishInstance.picturesOfPrintingBoxes.find { it.id == params.id.toInteger() }
+				
         if (!pictureInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
-            redirect(action: "list")
+			redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
             return
         }
-
+		
         try {
+			
             wishInstance.removeFromPicturesOfPrintingBoxes(pictureInstance)
             pictureInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
-            redirect(action: "list")
+			if (wishInstance.picturesOfPrintingBoxes.empty == true)
+				redirect(action: "show", id: params.idWish)
+			else
+				redirect(action: "show", id: params.idWish, params: [idPictureUpdate: wishInstance.picturesOfPrintingBoxes.first().id])
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
-			redirect(action: "list")
-			
-           // redirect(action: "show", id: params.id)
+			redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
         }
     }
+	
+	def deleteContainerPicture(){
+		
+		def wishInstance = Wish.get(params.idWish)
+		def pictureInstance = wishInstance.picturesOfLoadingContainer.find { it.id == params.id.toInteger() }
+		
+		if (!pictureInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+			redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
+			return
+		}
+
+		try {
+			
+			wishInstance.removeFromPicturesOfLoadingContainer(pictureInstance)
+			pictureInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+			
+			if (wishInstance.picturesOfLoadingContainer.empty == true)
+				redirect(action: "show", id: params.idWish)
+			else
+				redirect(action: "show", id: params.idWish, params: [idPictureUpdate: wishInstance.picturesOfLoadingContainer.first().id])
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+			redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
+		}
+	}
 	
 	def editPicture() {	
 		def pictureInstance = Picture.get(params.id)

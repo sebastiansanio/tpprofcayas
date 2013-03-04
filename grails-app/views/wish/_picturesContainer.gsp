@@ -57,10 +57,10 @@
 
 <div id="modal-view-picture-container">
 	<!-- Button to trigger modal -->
-	<a href="#modalPictureContainers" role="button" class="btn btn-primary" data-toggle="modal">${message( code: 'wish.viewPicture.label', default: 'View picture')}</a>
+	<a href="#modalPictureContainer" role="button" class="btn btn-primary" data-toggle="modal">${message( code: 'wish.viewPicture.label', default: 'View picture')}</a>
 	 
 	<!-- Modal -->
-	<div id="modalPictureContainers" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalPictureContainerLabel" aria-hidden="true">
+	<div id="modalPictureContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalPictureContainerLabel" aria-hidden="true">
 	 	<div class="modal-header">
 	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	    	
@@ -70,7 +70,7 @@
                     <a href="#modalEditContainer" role="button" id="editPhotoContainer"> <i class="icon-pencil"></i> ${message(code: 'default.button.edit.label', default: 'Edit')}</a>
                 </li>
                 <li>
-                     <a href="#modalDeleteContainer" role="button" data-toggle="modal"> <i class="icon-trash"></i> ${message( code: 'default.button.delete.label', default: 'Delete')} </a>
+                     <a href="#modalDeleteContainer" role="button" id="deletePhotoContainer"> <i class="icon-trash"></i> ${message( code: 'default.button.delete.label', default: 'Delete')} </a>
                 </li>
             </ul>
             
@@ -106,7 +106,27 @@
 	</div>
 </div>
 
+<!-- Modal para borrar una imagen -->
+	<div id="#modalDeleteContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="#modalDeleteContainerLabel" aria-hidden="true">
 
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="#modalDeleteContainerLabel">${message(code: 'wish.deletePicture.label', default: 'Delete file')}</h3>
+		</div>
+
+		<div class="modal-body">
+	         <p>${message(code: 'default.button.delete.confirm.message', default: "Are you sure?")}</p>
+		</div>
+
+		<div class="modal-footer">
+			<g:form action="deleteContainerPicture" params="[idWish: wishInstance.id]">
+				<button class="btn" id="cancelDeletePhotoContainer"><g:message code="default.button.cancel.label" default="Cancel"/></button>
+				<g:hiddenField name="id" id="idCurrentPhotoContainerDelete" />
+				<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteContainerPicture" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+		</g:form>
+		</div>
+	</div>
+	
 <!-- Modal para editar la descripcion -->
 <div id="modalEditContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalEditContainerLabel" aria-hidden="true">
 
@@ -144,7 +164,7 @@
 		<g:if test="${idPictureUpdate == photo.id.toString()}">
 			<script type="text/javascript">
 				$(document).ready(function() {
-					$("#modalPictureContainers").modal('show');
+					$("#modalPictureContainer").modal('show');
 				});	
 			</script>
 		</g:if>
@@ -176,8 +196,25 @@
         $("#modalEditContainer").modal('show');
     });
 
+    $("#deletePhotoContainer").click(function(){
+
+    	$("#carouselContainers").carousel('pause');
+    	
+    	var pathPhoto = $("#itemsCarouselContainer").find(".active").children("img").attr("src").split("/");
+    	var currentPhotoId = pathPhoto[pathPhoto.length-1];
+    	    	    	
+    	$("#idCurrentPhotoContainerDelete").attr("value", currentPhotoId);
+        $("#modalPictureContainer").modal('hide');
+        $("#modalDeleteContainer").modal('show');
+    });
+    
     $("#cancelEditPhotoContainerDescription").click(function(){      
         $("#modalEditContainer").modal('hide');
+    	$("#modalPictureContainer").modal('show');
+    });
+
+    $("#cancelDeletePhotoContainer").click(function(){      
+        $("#modalDeleteContainer").modal('hide');
     	$("#modalPictureContainer").modal('show');
     });
 
