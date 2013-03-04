@@ -1,4 +1,5 @@
 <%@ page import="report.Report" %>
+<%@ page import="wish.Wish" %>
 
 
 
@@ -13,6 +14,8 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: reportInstance, field: 'fields', 'error')} ">
 				<label for="fields" class="control-label"><g:message code="report.fields.label" default="Fields" /></label>
 				<div class="controls">
+															
+					<g:select size="15" id="fields" name="fields" from="${new Wish().domainClass.properties}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" required="" value="${reportInstance?.fields}" multiple="multiple"/>
 					
 					<span class="help-inline">${hasErrors(bean: reportInstance, field: 'fields', 'error')}</span>
 				</div>
