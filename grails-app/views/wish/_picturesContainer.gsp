@@ -158,12 +158,15 @@
 	</g:form>
 </div>
 
+<div id="otra"></div>
 <!-- Para ver si llegó a esta página por modificar una foto o era para ver el pedido -->
+<!--  de una manera muy mala pero no sé como hacerlo de otra forma :P -->
 <g:if test="${idPictureUpdate != null}">			
 	<g:each in="${wishInstance?.picturesOfLoadingContainer}" var="photo">
 		<g:if test="${idPictureUpdate == photo.id.toString()}">
 			<script type="text/javascript">
 				$(document).ready(function() {
+					$("#itemsCarouselBoxes").children(".item").first().attr("class", "active item");
 					$("#modalPictureContainer").modal('show');
 				});	
 			</script>
@@ -173,14 +176,14 @@
 		<g:if test="${idPictureUpdate == photo.id.toString()}">
 			<script type="text/javascript">
 				$(document).ready(function() {
+					$("#itemsCarouselContainer").children(".item").first().attr("class", "active item");
 					$("#modalPictureBoxes").modal('show');
 				});	
 			</script>
 		</g:if>
 	</g:each>	
 </g:if>
-				Srcitp:
-				<div id="otro"></div>
+
 <script type="text/javascript">
 	<!-- para la edición de una descripción -->
     $("#editPhotoContainer").click(function(){

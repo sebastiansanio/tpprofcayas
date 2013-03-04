@@ -81,7 +81,6 @@
 				<div id="itemsCarouselBoxes" class="carousel-inner"> 
 
 					<g:each in="${wishInstance.picturesOfPrintingBoxes}" var="picture" status="i">
-<!--  poner lo de in wishInstance.picturesOfPrintingBoxes  -->					
 						<div class="<%if((i==0 && idPictureUpdate==null) || (idPictureUpdate!=null && idPictureUpdate==picture.id.toString())) out.println("active ")%>item">
 							<img src="${createLink(action: 'viewPicture',id: picture.id)}"/>
 		                	<div class="carousel-caption">
