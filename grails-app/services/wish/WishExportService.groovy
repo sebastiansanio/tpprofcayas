@@ -11,6 +11,7 @@ import modal.Ship;
 import modal.ShippingMark;
 import modal.TypeOfFreight
 import org.springframework.context.MessageSource
+import report.Report
 import stakeholder.*
 import org.springframework.context.MessageSource
 import org.springframework.context.MessageSourceAware
@@ -24,48 +25,49 @@ class WishExportService implements MessageSourceAware {
 	
 	
 	def exportWishByStakeholder(String format,OutputStream outputStream,Locale locale,def stakeholder){
-		List fields = stakeholder.defaultReport.fields
+		Report report = stakeholder.defaultReport
+		
+		List fields = report.fields
 		List wishes = new ArrayList()
 		wishes.addAll(stakeholder.wishes)
 		
+		if(report.pendingOnly==true)
+			wishes = wishes.findAll{
+				it.isActive()
+			}
+				
 		doExport(format,outputStream,locale,fields,wishes)
 	}
 	
-	def exportWish(String format,OutputStream outputStream,Locale locale) {
-		List fields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder","priceCondition","currencyFob","currency","conversion",
-			"foreignCurrencyFob","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
-			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","paymentStatus","customsBroker",
-			"customsBrokerRefNumber","visaChargePayment","visaChargePaymentConcept","criterionValue","licenses",
-			"djaiNumber","djaiFormalizationDate","djaiExpirationDate","djaiExtendedRequested","djaiExtendedExpiration",
-			"shippingMark","customerLogoPunch","taxRegistryNumberAndCuitVerification","hsCodeToBeWritten",
-			"amountOfMoneyInAdvanceTransferred","swiftReceivedDate","swiftSentToSupplierDate","moneyBalance","dateOfBalancePayment",
-			"picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
-			"ship","docDraftApproved","forwarder","agent","freightQuote","forwarderRefNumber","loadSecuredPercent",
-			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber","bill",
-			"billDate","finnishDate"
-		]
+	def exportWish(String format,OutputStream outputStream,Locale locale,long reportId) {
+
+		Report report = Report.get(reportId)
+		
 		List wishes = Wish.list()
-		doExport(format,outputStream,locale,fields,wishes)
+		
+		if(report.pendingOnly==true)
+			wishes = wishes.findAll{
+				it.isActive()
+			}
+		
+		doExport(format,outputStream,locale,report.fields,wishes)
 	}
 	
-	def doExport(String format,OutputStream outputStream,Locale locale,List fields,List wishes){
-		
-		
+	
+	
+	def doExport(String format,OutputStream outputStream,Locale locale,List fields,List wishes){	
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
 		}
-
 		Map labels = new HashMap()
 		Map formatters = new HashMap()
-		
 		def wishDomainClass = new Wish().domainClass
-
+				
 		fields.each{
 			labels.put(it, messageSource.getMessage("wish."+it+".label",null,locale))
 			if(wishDomainClass.getPropertyByName(it).type == Date)
 				formatters.put(it, dateFormatter)
 		}
-		
 		Map parameters = [title: messageSource.getMessage("wish.label",null,locale)]
 		exportService.export(format,outputStream,wishes,fields,labels,formatters,parameters)
 	}

@@ -19,23 +19,21 @@ class WishController {
     }
 
     def list() {
-		
-		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
 
 	def export() {
+		params.reportId = Long.parseLong(params.reportId)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
-		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request))
+		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),params.reportId)
 	}
 	
 	
 	def exportByStakeholder() {
-		
 		def stakeholder = Stakeholder.get(params.id)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${stakeholder}.${params.extension}")

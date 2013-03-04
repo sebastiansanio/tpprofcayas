@@ -40,6 +40,21 @@ class BootStrap {
 		def customerReport = new Report(name:'Cliente',pendingOnly:true,fields:customerReportFields)
 		customerReport.save()
 		
+		List generalReportFields = ["opNumber","customerOpNumber","customer","supplier","shipper","supplierOrder","priceCondition","currencyFob","currency","conversion",
+			"foreignCurrencyFob","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
+			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","paymentStatus","customsBroker",
+			"customsBrokerRefNumber","visaChargePayment","visaChargePaymentConcept","criterionValue","licenses",
+			"djaiNumber","djaiFormalizationDate","djaiExpirationDate","djaiExtendedRequested","djaiExtendedExpiration",
+			"shippingMark","customerLogoPunch","taxRegistryNumberAndCuitVerification","hsCodeToBeWritten",
+			"amountOfMoneyInAdvanceTransferred","swiftReceivedDate","swiftSentToSupplierDate","moneyBalance","dateOfBalancePayment",
+			"picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
+			"ship","docDraftApproved","forwarder","agent","freightQuote","forwarderRefNumber","loadSecuredPercent",
+			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber","bill",
+			"billDate","finnishDate"
+		]
+		def generalReport = new Report(name:'General',pendingOnly:false,fields:generalReportFields)
+		generalReport.save()
+		
 		def roleAdmin = new Role(name:"Admin")
 		roleAdmin.addToPermissions("user:*")
 		roleAdmin.addToPermissions("main:*")
@@ -70,6 +85,7 @@ class BootStrap {
 		roleOperator.addToPermissions("shipper:*")
 		roleOperator.addToPermissions("port:*")
 		roleOperator.addToPermissions("ship:*")
+		roleOperator.addToPermissions("report:*")
 		roleOperator.save()
 		
 		def roleManager = new Role(name:"Manager")
