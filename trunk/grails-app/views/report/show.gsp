@@ -34,9 +34,18 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="report.fields.label" default="Fields" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: reportInstance, field: "fields")}</td>
+				<td valign="top" class="value">
+				
+				<g:each in="${reportInstance.fields}" var="s">
+						<li>${message(code:"wish."+s+".label")}</li>
+				</g:each>
+		
+				
+				</td>
 				
 			</tr>
+		
+		
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="report.lastUpdated.label" default="Last Updated" /></td>
