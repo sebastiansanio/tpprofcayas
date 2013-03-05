@@ -22,18 +22,10 @@
 	<r:require modules="${session.skin ? session.skin + '_utils' : 'bootstrap_utils'}"/>
 	<r:require module="export"/>
 	
-	<g:javascript src="bootstrap-lightbox.min.js" />
-	<link type="text/css" href="${createLinkTo(dir:'css',file:'bootstrap-lightbox.min.css')}" />
 
 	<r:layoutResources />
 	<g:layoutHead />
 
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-
-	<%-- For Javascript see end of body --%>
 </head>
 
 <body>

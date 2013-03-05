@@ -35,6 +35,9 @@
 		</g:each>
 		</tbody>
 	</table>
+	
+		${DocumentType.list().findAll{it.isPhase2()}}
+	
 	<div class="pagination">
 		<bs:paginate total="${documentTypeInstanceTotal}" />
 	</div>
