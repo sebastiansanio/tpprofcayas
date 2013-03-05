@@ -159,28 +159,27 @@
 </div>
 
 <!-- Para ver si llegó a esta página por modificar una foto o era para ver el pedido -->
-<!--  de una manera muy mala pero no sé como hacerlo de otra forma :P -->
-<g:if test="${idPictureUpdate != null}">			
-	<g:each in="${wishInstance?.picturesOfLoadingContainer}" var="photo">
-		<g:if test="${idPictureUpdate == photo.id.toString()}">
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$("#itemsCarouselBoxes").children(".item").first().attr("class", "active item");
-					$("#modalPictureContainer").modal('show');
-				});	
-			</script>
-		</g:if>
-	</g:each>	
-	<g:each in="${wishInstance?.picturesOfPrintingBoxes}" var="photo">
-		<g:if test="${idPictureUpdate == photo.id.toString()}">
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$("#itemsCarouselContainer").children(".item").first().attr("class", "active item");
-					$("#modalPictureBoxes").modal('show');
-				});	
-			</script>
-		</g:if>
-	</g:each>	
+<g:if test="${wishInstance?.picturesOfLoadingContainer.find{it.id.toString() == idPictureUpdate } }">
+	
+ </g:if>
+ 
+<g:if test="${idPictureUpdate != null}">
+	<g:if test="${wishInstance?.picturesOfLoadingContainer.find{it.id.toString() == idPictureUpdate } }">
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#itemsCarouselBoxes").children(".item").first().attr("class", "active item");
+				$("#modalPictureContainer").modal('show');
+			});	
+		</script>
+	</g:if>			
+	<g:elseif test="${wishInstance?.picturesOfPrintingBoxes.find{it.id.toString() == idPictureUpdate } }">
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#itemsCarouselContainer").children(".item").first().attr("class", "active item");
+				$("#modalPictureBoxes").modal('show');
+			});	
+		</script>
+	</g:elseif> 	
 </g:if>
 
 <script type="text/javascript">
