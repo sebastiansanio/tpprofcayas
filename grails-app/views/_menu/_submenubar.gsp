@@ -5,7 +5,7 @@
 			&&	params.controller != ''
 
 }">
-	<ul id="Menu" class="nav nav-list bs-docs-sidenav" data-spy="affix">
+	<ul id="Menu" class="nav nav-list bs-docs-sidenav" data-spy="affix" style="width: 10%">
 
 		<g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />
 		
