@@ -11,21 +11,31 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: reportInstance, field: 'fields', 'error')} ">
-				<label for="fields" class="control-label"><g:message code="report.fields.label" default="Fields" /></label>
-				<div class="controls">
-															
-					<g:select class="span4" size="15" id="avFields" name="avFields" from="${new Wish().domainClass.properties.findAll{!(it.name in reportInstance?.fields)}}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" multiple="multiple"/>
+				
+				<div class="row-fluid">
+					<div class="control-group fieldcontain ${hasErrors(bean: reportInstance, field: 'fields', 'error')} ">
+						
+					<label class="span1" for="fields" class="control-label"><g:message code="report.fields.label" default="Fields" /></label>
+						
+					<div class="span3">									
+					<g:select size="15" id="avFields" name="avFields" from="${new Wish().domainClass.properties.findAll{!(it.name in reportInstance?.fields)}}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" multiple="multiple"/>
+					</div>
 					
-				
-					<button type="button" onClick="addFields();">${message(code:'add.label')} </button>
-					<button type="button" onClick="removeFields();">${message(code:'remove.label')} </button>
-				
-					<g:select onSubmit="selectAll();" class="span4" size="15" id="fields" name="fields" from="${reportInstance?.fields}" optionValue="${{message(code:'wish.'+it+'.label')}}" multiple="multiple"/>
-																			
+					<div class="span2">	
+					<p><button class="span12" type="button" onClick="addFields();">${message(code:'add.label')} </button></p>
+					<p><button class="span12" type="button" onClick="removeFields();"> ${message(code:'remove.label')} </button></p>
+					<p><button class="span12" type ="button" onClick="up();"> ${message(code:'up.label')}</button>		</p>
+					<p><button class="span12" type ="button" onClick="down();"> ${message(code:'down.label')}</button></p>
+					</div>
+					
+					<div class="span3">			
+					<g:select onSubmit="selectAll();"size="15" id="fields" name="fields" from="${reportInstance?.fields}" optionValue="${{message(code:'wish.'+it+'.label')}}" multiple="multiple"/>
+					</div>
+													
 				
 				</div>
 				
+					
 				
 			</div>
 
@@ -44,6 +54,22 @@ function addFields(){
 
 function removeFields(){
 	$("#fields :selected").appendTo("#avFields");
+}
+
+function up(){
+	var op = $("#fields :selected");
+	if(op.length){
+		op.first().prev().before(op)
+
+	}
+}
+
+function down(){
+	var op = $("#fields :selected");
+	if(op.length){
+		op.first().next().after(op)
+
+	}
 }
 
 $('form').submit(function(){
