@@ -19,6 +19,8 @@
 			
 				<g:sortableColumn property="name" title="${message(code: 'documentType.name.label', default: 'Name')}" />
 			
+				<g:sortableColumn property="type" title="${message(code: 'documentType.type.label', default: 'Type')}" />
+			
 			</tr>
 		</thead>
 		<tbody>
@@ -26,6 +28,8 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
 				<td><g:link action="show" id="${documentTypeInstance.id}">${fieldValue(bean: documentTypeInstance, field: "name")}</g:link></td>
+			
+				<td>${message(code:documentTypeInstance.type)}</td>
 			
 			</tr>
 		</g:each>
