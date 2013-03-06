@@ -19,7 +19,7 @@
 		templateHtml += "${message(code:'loadUnit.cartonPrintingInfoSentDate.label')}";
 		templateHtml += "</label>";
 		templateHtml += "<div class='controls'>";
-		templateHtml += "<input id='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' class='date' size='16' type='text' value='' data-date-format='dd/mm/yyyy' />";
+		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker' data-date-format='dd/mm/yyyy' />";
 		templateHtml += "</div>";
 		templateHtml += "</div>";
 
@@ -80,7 +80,12 @@
 		
 		
 		templateHtml += "</div>";
-		$("#loadUnitsChildList").append(templateHtml);			
+		$("#loadUnitsChildList").append(templateHtml);		
+		
+		$("#"+loadUnitCount+"cartonPrintingInfoSentDate").datepicker({
+			format: 'dd/mm/yyyy',
+			
+		});
 		loadUnitCount++;
 				
 	}
