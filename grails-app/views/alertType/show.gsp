@@ -46,6 +46,30 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="alertType.frequency.label" default="Frequency" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "frequency")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="alertType.stakeholders.label" default="Stakeholders" />
+				
+				<td>
+					<ul>
+					<g:each in="${alertTypeInstance.stakeholders}" var="a">
+						<li>${message(code:'wish.'+a+'.label')}</li>
+					</g:each>
+					</ul>
+				
+				
+				</td>
+				
+				
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="alertType.alerts.label" default="Alerts" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -55,13 +79,6 @@
 					</g:each>
 					</ul>
 				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="alertType.frequency.label" default="Frequency" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "frequency")}</td>
 				
 			</tr>
 		

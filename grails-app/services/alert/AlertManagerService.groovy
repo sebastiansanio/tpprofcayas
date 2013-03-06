@@ -1,17 +1,5 @@
 package alert
 
-import org.drools.builder.KnowledgeBuilder
-import org.drools.definition.KnowledgePackage
-import org.drools.io.Resource
-import org.drools.runtime.Environment
-import org.drools.runtime.StatefulKnowledgeSession
-import org.drools.builder.ResourceType
-import org.drools.KnowledgeBase
-import org.drools.KnowledgeBaseFactory
-import org.drools.SessionConfiguration
-import org.drools.builder.KnowledgeBuilderFactory
-import org.drools.io.ResourceFactory
-import org.jbpm.process.instance.ProcessInstance
 import wish.Wish
 
 class AlertManagerService {
@@ -29,9 +17,8 @@ class AlertManagerService {
 	def generateAlerts(Wish wish){
 		def alertTypes = AlertType.findAll()
 		alertTypes.each{alertType ->
-			alertType.checkWish(wish)
+			wish.addAlert(alertType)
 		}
-		
 	}
 	
     def generateAllAlerts() {
@@ -43,12 +30,6 @@ class AlertManagerService {
 			generateAlerts(wish)
 		}
     }
-	
-	def checkAlerts(Wish wish){
-		wish.alerts.each{
-			it.check()
-		}
-	}
 	
 	def checkAllAlerts() {
 		def activeAlerts = Alert.findAll().findAll{

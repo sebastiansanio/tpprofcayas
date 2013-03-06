@@ -160,10 +160,19 @@ class Wish {
 	}
 	
 	def getActiveAlerts(){
-		return alerts.findAll().findAll{
+		return alerts.findAll{
 			it.isActive()
 		}
 	}
+	
+	def checkAlerts(){
+		def activeAlerts = getActiveAlerts()
+		activeAlerts.each{
+			it.check()
+		}
+		
+	}
+	
 	
 	boolean isActive(){
 		return finnishDate == null
@@ -178,10 +187,21 @@ class Wish {
 		return djaiFormalizationDate+180
 	}
 	
-	void generateAlert(AlertType alertType,Date deadline){
+	
+	void addAlert(AlertType alertType){
+		Date completionField = this[alertType.nameOfCompletionField]
+		if (completionField != null)
+			return
+		Date estimatedDate = this[alertType.nameOfEstimatedDateField]
+		if (estimatedDate == null)
+			return
+		Date attentionDate = estimatedDate.minus(alertType.alertTerm)
+				
+		checkAlerts()
 		def activeAlerts = getActiveAlerts()
+				
 		if(!(alertType.id in activeAlerts.alertType.id))
-			addToAlerts(new Alert(alertType:alertType,deadline:deadline))
+			addToAlerts(new Alert(alertType:alertType,deadline:estimatedDate,attentionDate:attentionDate))
 	}
 	
 	public String toString() {
