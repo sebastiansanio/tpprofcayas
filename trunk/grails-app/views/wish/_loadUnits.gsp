@@ -96,18 +96,18 @@
 	
 	<g:each var="loadUnitInstance" in="${wishInstance?.loadUnits}" status="i">
 	
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')} required">
-				<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="loadUnit.cartonPrintingInfoSentDate.label" default="Carton Printing Info Sent Date" /><span class="required-indicator">*</span></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}">
+				<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="loadUnit.cartonPrintingInfoSentDate.label" default="Carton Printing Info Sent Date" /></label>
 				<div class="controls">
-					<bs:datePicker name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}"  />
+					<bs:datePicker default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}"  />
 					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentUser', 'error')} required">
-				<label for="cartonPrintingInfoSentUser" class="control-label"><g:message code="loadUnit.cartonPrintingInfoSentUser.label" default="Carton Printing Info Sent User" /><span class="required-indicator">*</span></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentUser', 'error')}">
+				<label for="cartonPrintingInfoSentUser" class="control-label"><g:message code="loadUnit.cartonPrintingInfoSentUser.label" default="Carton Printing Info Sent User" /></label>
 				<div class="controls">
-					<g:select id="cartonPrintingInfoSentUser" name="loadUnits[${i}].cartonPrintingInfoSentUser.id" from="${login.User.list()}" optionKey="id" required="" value="${loadUnitInstance?.cartonPrintingInfoSentUser?.id}" class="many-to-one"/>
+					<g:select id="cartonPrintingInfoSentUser" name="loadUnits[${i}].cartonPrintingInfoSentUser.id" from="${login.User.list()}" optionKey="id" value="${loadUnitInstance?.cartonPrintingInfoSentUser?.id}" noSelection="${[null:'']}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentUser', 'error')}</span>
 				</div>
 			</div>
@@ -128,10 +128,10 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')} required">
-				<label for="unitPrice" class="control-label"><g:message code="loadUnit.unitPrice.label" default="Unit Price" /><span class="required-indicator">*</span></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}">
+				<label for="unitPrice" class="control-label"><g:message code="loadUnit.unitPrice.label" default="Unit Price" /></label>
 				<div class="controls">
-					<g:field type="number" name="loadUnits[${i}].unitPrice" step="any" required="" value="${loadUnitInstance.unitPrice}"/>
+					<g:field type="number" name="loadUnits[${i}].unitPrice" step="any" value="${loadUnitInstance.unitPrice}"/>
 					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}</span>
 				</div>
 			</div>

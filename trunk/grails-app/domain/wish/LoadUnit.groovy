@@ -17,6 +17,11 @@ class LoadUnit {
     }
     
 	static constraints = {
+		product nullable:false
+		quantity nullable:false
+		unitPrice nullable:true
+		cartonPrintingInfoSentDate nullable:true
+		cartonPrintingInfoSentUser nullable:true
     }
 	
 	String toString(){

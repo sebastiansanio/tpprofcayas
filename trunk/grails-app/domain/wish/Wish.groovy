@@ -204,8 +204,30 @@ class Wish {
 			addToAlerts(new Alert(alertType:alertType,deadline:estimatedDate,attentionDate:attentionDate))
 	}
 	
+	//Alert 1
 	Date getCartonsPrintingInfoSentDate(){
-
+		
+		boolean dateNull = false
+		Date lastCartonPrintingInfoSendDate = null
+		loadUnits.each{
+			if(it.cartonPrintingInfoSentDate == null)
+				dateNull = true			
+			else if(lastCartonPrintingInfoSendDate == null || it.cartonPrintingInfoSentDate > lastCartonPrintingInfoSendDate)
+				lastCartonPrintingInfoSendDate = it.cartonPrintingInfoSentDate
+			
+		}
+		if(!dateNull)
+			return lastCartonPrintingInfoSendDate
+		else
+			return null
+	}
+	
+	//Alert 2
+	Date getDateToConfirmDeliveryDate(){
+		Date cartonsPrintingInfoSentDate = getCartonsPrintingInfoSentDate()
+		if (cartonsPrintingInfoSentDate == null)
+			return null
+		return cartonsPrintingInfoSentDate.plus(1)
 	}
 		
 	public String toString() {
