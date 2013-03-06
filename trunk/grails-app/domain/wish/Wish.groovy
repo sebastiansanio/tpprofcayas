@@ -204,6 +204,10 @@ class Wish {
 			addToAlerts(new Alert(alertType:alertType,deadline:estimatedDate,attentionDate:attentionDate))
 	}
 	
+	Date getCartonsPrintingInfoSentDate(){
+
+	}
+		
 	public String toString() {
 		return opNumber
 	}
