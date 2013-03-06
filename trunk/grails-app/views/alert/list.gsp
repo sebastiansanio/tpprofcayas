@@ -19,15 +19,18 @@
 			
 				<th><g:message code="alert.alertType.label" default="Alert Type" /></th>
 			
-				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
-			
 				<th><g:message code="alert.wish.label" default="Wish" /></th>
 			
+				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
 			
-				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /></th>
-	
-				<th><g:message code="alert.doInspect.label" default="Inspected" /></th>
+				<g:sortableColumn property="attentionDate" title="${message(code: 'alert.attentionDate.label', default: 'Attention Date')}" />
 			
+				<g:sortableColumn property="lastInspected" title="${message(code: 'alert.lastInspected.label', default: 'Last Inspected')}" />
+			
+				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /> </th>
+				
+				<th><g:message code="alert.doInspect.label" default="Inspected" /> </th>
+				
 			
 			</tr>
 		</thead>
@@ -37,15 +40,19 @@
 			
 				<td>${fieldValue(bean: alertInstance, field: "alertType")}</td>
 			
-				<td><g:formatDate format="dd/MM/yyyy" date="${alertInstance.deadline}" /></td>
+				<td><g:link action="show" controller="wish" id="${alertInstance.wish.id}">${fieldValue(bean: alertInstance, field: "wish")}</g:link></td>
 			
-				<td><g:link controller="wish" action="show" id="${alertInstance.wish.id}">${fieldValue(bean: alertInstance, field: "wish")}</g:link></td>			
+				<td><g:formatDate date="${alertInstance.deadline}" /></td>
+			
+				<td><g:formatDate date="${alertInstance.attentionDate}" /></td>
+			
+				<td><g:formatDate date="${alertInstance.lastInspected}" /></td>
 			
 				<td> <a href="#" class="popoverAlerts" rel="popover" data-content="<div><% alertInstance.wish.getActiveAlerts().each{out.println(it.deadline.format("dd/MM/yyyy")+": "+it.toString())} %>" data-original-title="Alertas activas" >${alertInstance.wish.getActiveAlerts().size()}</a></td>
-			 
-			 	<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link> </td>
-			 
-			 
+			 	
+				<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link></td>
+				
+			
 			</tr>
 		</g:each>
 		</tbody>
@@ -60,8 +67,7 @@ $(function()
 		{ $(".popoverAlerts").popover({template: '<div class="popover span3"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'});
 });
 </script>
+
 </body>
-
-
 
 </html>

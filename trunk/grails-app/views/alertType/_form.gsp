@@ -34,28 +34,22 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'alerts', 'error')} ">
-				<label for="alerts" class="control-label"><g:message code="alertType.alerts.label" default="Alerts" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'frequency', 'error')} ">
+				<label for="frequency" class="control-label"><g:message code="alertType.frequency.label" default="Frequency" /></label>
 				<div class="controls">
-					
-<ul class="one-to-many">
-<g:each in="${alertTypeInstance?.alerts?}" var="a">
-    <li><g:link controller="alert" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="alert" action="create" params="['alertType.id': alertTypeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'alert.label', default: 'Alert')])}</g:link>
-</li>
-</ul>
-
-					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'alerts', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'frequency', 'error')} required">
-				<label for="frequency" class="control-label"><g:message code="alertType.frequency.label" default="Frequency" /><span class="required-indicator">*</span></label>
-				<div class="controls">
-					<g:field type="number" name="frequency" required="" value="${alertTypeInstance.frequency}"/>
+					<g:field type="number" name="frequency" value="${alertTypeInstance.frequency}"/>
 					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'frequency', 'error')}</span>
 				</div>
 			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'stakeholders', 'error')} ">
+				<label for="stakeholders" class="control-label"><g:message code="alertType.stakeholders.label" default="Stakeholders" /></label>
+				<div class="controls">
+					
+					<g:select name="stakeholders" from="${['agent','customer','customsBroker','forwarder','shipper','supplier']}" optionValue="${{message(code:'wish.'+it+'.label')}}" value="${alertTypeInstance.stakeholders}" multiple="multiple" size="6"  />
+					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'stakeholders', 'error')}</span>
+				</div>
+			</div>
+
+					
 

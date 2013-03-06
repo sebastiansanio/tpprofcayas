@@ -6,6 +6,7 @@ class Alert {
 	AlertType alertType		
 	Date dateCreated
 	Date deadline
+	Date attentionDate
 	Date dateFinalized
 	String finalizedReason
 	
@@ -20,8 +21,9 @@ class Alert {
 		alertType nullable:false
 		wish nullable:false
 		deadline nullable:false
+		attentionDate nullable:false
 		dateFinalized nullable:true
-		finalizedReason nullable:true,inList: ["Actividad realizada","Cambio de fecha"]
+		finalizedReason nullable:true,inList: ["activityFinished","deadlineChanged"]
 		lastInspected nullable:true
     }
 	
@@ -34,9 +36,9 @@ class Alert {
 	void check(){
 				
 		if(wish[alertType.nameOfCompletionField]!=null){
-			finalize("Actividad realizada")
+			finalize("activityFinished")
 		}else if(wish[alertType.nameOfEstimatedDateField] != deadline){
-			finalize("Cambio de fecha")
+			finalize("deadlineChanged")
 		}else if(isInspected() && alertType.frequency!=null && new Date() >= lastInspected + alertType.frequency){
 			lastInspected = null
 		}

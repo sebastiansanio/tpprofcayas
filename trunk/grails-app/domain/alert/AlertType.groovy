@@ -10,7 +10,7 @@ class AlertType {
 	String nameOfEstimatedDateField
 	String nameOfCompletionField
 	
-	static hasMany		= [alerts:Alert]	
+	static hasMany		= [alerts:Alert,stakeholders:String]
 	
     static mapping = {
     }
@@ -22,21 +22,7 @@ class AlertType {
 		alertTerm nullable:false
 		frequency nullable:true
     }
-	
-	public void checkWish(Wish wish){
-		Date completionField = wish[nameOfCompletionField]
-		if (completionField != null)
-			return
-		Date estimatedDate = wish[nameOfEstimatedDateField]		
-		if (estimatedDate == null)
-			return
-		Date today = new Date()
-		today = today.clearTime()
-			
-		if(estimatedDate  <= today + alertTerm)
-			wish.generateAlert(this,estimatedDate)
-	}
-	
+		
 	public String toString() {
 		return description
 	}
