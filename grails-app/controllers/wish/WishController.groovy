@@ -65,14 +65,41 @@ class WishController {
     }
 
     def save() {
-		
         def wishInstance = new Wish(params)
+
+        if (wishInstance?.firstStageRequiredDocuments != null)
+        {
+            def cantElement = wishInstance.firstStageRequiredDocuments.size()
+
+            for (int i = 0; i < cantElement; i++)
+            {
+                def element = wishInstance.firstStageRequiredDocuments[i].file
+
+                if (element == null || element.size() == 0)
+                    wishInstance.firstStageRequiredDocuments[i].file = new byte[1]   //para q no salte la exception si no carga archivo
+            }
+        }
+
+        if (wishInstance?.secondStageRequiredDocuments != null)
+        {
+            def cantElement = wishInstance.secondStageRequiredDocuments.size()
+
+            for (int i = 0; i < cantElement; i++)
+            {
+                def element = wishInstance.secondStageRequiredDocuments[i].file
+
+                if (element == null || element.size() == 0)
+                    wishInstance.secondStageRequiredDocuments[i].file = new byte[1]  //para q no salte la exception si no carga archivo
+            }
+        }
+
 		alertManagerService.generateAlerts(wishInstance)
-		
+
         if (!wishInstance.save(flush: true)) {
             render(view: "create", model: [wishInstance: wishInstance])
             return
         }
+
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'wish.label', default: 'Wish'), wishInstance.id])
         redirect(action: "show", id: wishInstance.id)

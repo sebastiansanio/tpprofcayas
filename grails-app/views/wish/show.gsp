@@ -515,37 +515,7 @@
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
 					<p><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents" /></p>	
-					
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th></th>
-			                  	<th>${message(code: 'document.trackingNumber.label', default: 'Tracking number')}</th>
-			                  	<th>${message(code: 'document.received.label', default: 'Date received')}</th>
-			                </tr>
-			            </thead>
-						<tbody>
-							<tr>
-			                  	<td>
-			                  		<label class="checkbox">
-							      		Nombre del tipo de documento
-							    	</label>
-								</td>
-			                  	<td>
-			                  		<g:textField name="bill" value="${wishInstance?.bill}"/>
-			                  	</td>
-			                  	<td>
-			                  		<bs:datePicker name="documentDay" precision="day"  value="${wishInstance?.billDate}" default="none" noSelection="['': '']" />
-								</td>
-							</tr>
-			             </tbody>
-					</table>
-				
-					<ul>
-					<g:each in="${wishInstance.firstStageRequiredDocuments}" var="f">
-						<li><g:link controller="document" action="show" id="${f.id}">${f?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
+					<g:render template="documentShow" model="['wishInstance':wishInstance]"/>
 				</td>
 				
 			</tr>
