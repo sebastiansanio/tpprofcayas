@@ -100,6 +100,22 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'deliveryDateConfirmed', 'error')} ">
+				<label for="deliveryDateConfirmed" class="control-label"><g:message code="wish.deliveryDateConfirmed.label" default="Delivery Date Confirmed?" /></label>
+				<div class="controls">
+					<bs:checkBox name="deliveryDateConfirmed" value="${wishInstance?.deliveryDateConfirmed}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDateConfirmed', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')} ">
+				<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Send Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="cartonPrintingInfoSentDate" precision="day"  value="${wishInstance?.cartonPrintingInfoSentDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
+				</div>
+			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')} ">
 				<label for="estimatedTimeOfDeparture" class="control-label"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></label>
@@ -197,7 +213,7 @@
 				</div>
 			</div>
 
-						<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'visaChargePaymentConcept', 'error')} ">
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'visaChargePaymentConcept', 'error')} ">
 				<label for="visaChargePaymentConcept" class="control-label"><g:message code="wish.visaChargePaymentConcept.label" default="Visa Charge Payment Concept" /></label>
 				<div class="controls">
 					<g:select id="visaChargePaymentConcept" name="visaChargePaymentConcept.id" from="${modal.VisaChargePaymentConcept.list()}" optionKey="id" value="${wishInstance?.visaChargePaymentConcept?.id}" class="many-to-one" noSelection="['null': '']"/>
@@ -229,6 +245,11 @@
 				</div>
 			</div>
 
+</div>
+
+<div class="span6">
+
+
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')} required">
 				<label for="djaiFormalizationDate" class="control-label"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -236,6 +257,8 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')}</span>
 				</div>
 			</div>
+
+
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiExtendedRequested', 'error')} ">
 				<label for="djaiExtendedRequested" class="control-label"><g:message code="wish.djaiExtendedRequested.label" default="Djai Extended Requested" /></label>
@@ -252,10 +275,8 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'djaiExtendedExpiration', 'error')}</span>
 				</div>
 			</div>
-</div>
 
 
-<div class="span6">
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'shippingMark', 'error')} ">
 				<label for="shippingMark" class="control-label"><g:message code="wish.shippingMark.label" default="Shipping Mark" /></label>
