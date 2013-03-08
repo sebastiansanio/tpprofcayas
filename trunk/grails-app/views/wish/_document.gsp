@@ -69,14 +69,6 @@
 
               </tbody>
  		</table>
-
-
-    <!-- <label for="secondStageRequiredDocuments" class="control-label"><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents" /></label>
-    <div class="controls">
-        <g:select name="secondStageRequiredDocuments" from="${wish.Document.list()}" multiple="multiple" optionKey="id" size="5" value="${wishInstance?.secondStageRequiredDocuments*.id}" class="many-to-many"/>
-        <span class="help-inline">${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')}</span>
-    </div>
-    -->
 </div>
 
 <script type="text/javascript">

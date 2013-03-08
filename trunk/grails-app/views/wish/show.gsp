@@ -487,16 +487,14 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.alerts.label" default="Alerts" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${wishInstance.activeAlerts}" var="a">
-						<li class="alert <% if(!a?.isInspected()) out.println("alert-error") %>">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
-					</g:each>
-					</ul>
+				<td colspan="2" valign="top" class="name">
+				    <p><g:message code="wish.alerts.label" default="Alerts" /> <p>
+                    <ul>
+                        <g:each in="${wishInstance.activeAlerts}" var="a">
+                         <li class="alert <% if(!a?.isInspected()) out.println("alert-error") %>">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
+                        </g:each>
+                    </ul>
 				</td>
-				
 			</tr>
 		
 			<tr class="prop">
@@ -514,12 +512,19 @@
 		
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
-					<p><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents" /></p>	
-					<g:render template="documentShow" model="['wishInstance':wishInstance]"/>
+					<p><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></p>
+					<g:render template="documentShow" model="['documents':wishInstance?.firstStageRequiredDocuments]"/>
 				</td>
 				
 			</tr>
-		
+
+            <tr class="prop">
+                <td colspan="2" valign="top" class="name">
+                    <p><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents"/></p>
+                    <g:render template="documentShow" model="['documents':wishInstance?.secondStageRequiredDocuments]"/>
+                </td>
+            </tr>
+
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.notes.label" default="Notes" /></td>
 				
@@ -527,19 +532,6 @@
 					<ul>
 					<g:each in="${wishInstance.notes}" var="n">
 						<li>${n?.encodeAsHTML()}</li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${wishInstance.secondStageRequiredDocuments}" var="s">
-						<li><g:link controller="document" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
 					</g:each>
 					</ul>
 				</td>
@@ -566,8 +558,6 @@
 				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy" date="${wishInstance?.lastUpdated}" /></td>
 				
 			</tr>
-
-
 		
 		</tbody>
 	</table>
