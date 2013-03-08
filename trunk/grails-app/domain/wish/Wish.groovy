@@ -213,11 +213,6 @@ class Wish {
 		if(!(alertType.id in activeAlerts.alertType.id))
 			addToAlerts(new Alert(alertType:alertType,deadline:estimatedDate,attentionDate:attentionDate))
 	}
-
-	Date getConfirmedDeliveryDate(){
-		if(deliveryDateConfirmed)
-			return deliveryDate
-	}
 		
 	//Alert 1
 	Date getLastCartonPrintingInfoSentDate(){	
@@ -248,6 +243,27 @@ class Wish {
 			return null
 		return cartonsPrintingInfoSentDate.plus(1)
 	}
+	
+	//Alert 3
+	Date getDateToDemandSwiftToClient(){
+		if(paymentTerm?.percentPaymentAfterDelivery==100)
+			return null
+		Date date = wishDate
+		int i = 0
+		while (i<4){
+			date = date.plus(1)
+			if(!(date[Calendar.DAY_OF_WEEK]==Calendar.SATURDAY || date[Calendar.DAY_OF_WEEK]==Calendar.SUNDAY))
+			i++
+		}
+		return date	
+	}
+	
+	//Alert 5
+	Date getConfirmedDeliveryDate(){
+		if(deliveryDateConfirmed)
+			return deliveryDate
+	}
+	
 
 	public String toString() {
 		return opNumber
