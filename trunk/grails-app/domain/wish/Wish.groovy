@@ -2,8 +2,7 @@ package wish
 
 import stakeholder.*
 import modal.*
-import alert.Alert
-import alert.AlertType
+import alert.*
 
 class Wish {
 
@@ -31,6 +30,8 @@ class Wish {
 	BigDecimal conversion
 	BigDecimal currencyFob
 	Date deliveryDate
+	boolean deliveryDateConfirmed
+	Date cartonPrintingInfoSentDate	
 	Date estimatedTimeOfDeparture 
 	boolean departed
 	Date estimatedTimeOfArrival
@@ -93,9 +94,10 @@ class Wish {
 		supplierOrder nullable:true,blank:true
 		priceCondition nullable:true
 		currency nullable:true
-		conversion nullable:false,min:0.0001,scale:4
-		currencyFob nullable:false,scale:4
+		conversion nullable:true,min:0.0001,scale:4
+		currencyFob nullable:true,scale:4
 		deliveryDate nullable:true
+		cartonPrintingInfoSentDate nullable:true
 		estimatedTimeOfDeparture nullable:true
 		estimatedTimeOfArrival nullable:true
 		wishDate nullable:false
@@ -144,7 +146,7 @@ class Wish {
 		billDate nullable:true
 		finnishDate nullable:true
 	}
-	
+		
 	Date getTimeOfDeparture(){
 		if(departed)
 			return estimatedTimeOfDeparture
@@ -165,30 +167,40 @@ class Wish {
 		}
 	}
 	
-	def checkAlerts(){
-		def activeAlerts = getActiveAlerts()
-		activeAlerts.each{
-			it.check()
-		}
-		
-	}
-	
-	
+
 	boolean isActive(){
 		return finnishDate == null
 	}
 		
 	BigDecimal getForeignCurrencyFob(){
+		
+		if(currencyFob==null || conversion == null)
+			return null
+		
 		return currencyFob.divide(conversion,4)
 	}
 	
 		
 	Date getDjaiExpirationDate(){
+		if (djaiFormalizationDate==null)
+			return null
+		
 		return djaiFormalizationDate+180
 	}
 	
-	
+
+	def checkAlerts(){
+		def activeAlerts = getActiveAlerts()
+		activeAlerts.each{
+			it.check()
+		}	
+	}
+		
 	void addAlert(AlertType alertType){
+		checkAlerts()
+		
+		if(!isActive())
+			return
 		Date completionField = this[alertType.nameOfCompletionField]
 		if (completionField != null)
 			return
@@ -196,25 +208,30 @@ class Wish {
 		if (estimatedDate == null)
 			return
 		Date attentionDate = estimatedDate.minus(alertType.alertTerm)
-				
-		checkAlerts()
 		def activeAlerts = getActiveAlerts()
 				
 		if(!(alertType.id in activeAlerts.alertType.id))
 			addToAlerts(new Alert(alertType:alertType,deadline:estimatedDate,attentionDate:attentionDate))
 	}
-	
-	//Alert 1
-	Date getCartonsPrintingInfoSentDate(){
+
+	Date getConfirmedDeliveryDate(){
+		if(deliveryDateConfirmed)
+			return deliveryDate
+	}
 		
+	//Alert 1
+	Date getLastCartonPrintingInfoSentDate(){	
+		
+		if(cartonPrintingInfoSentDate!=null)
+			return cartonPrintingInfoSentDate
+			
 		boolean dateNull = false
 		Date lastCartonPrintingInfoSendDate = null
 		loadUnits.each{
 			if(it.cartonPrintingInfoSentDate == null)
-				dateNull = true			
+				dateNull = true		
 			else if(lastCartonPrintingInfoSendDate == null || it.cartonPrintingInfoSentDate > lastCartonPrintingInfoSendDate)
 				lastCartonPrintingInfoSendDate = it.cartonPrintingInfoSentDate
-			
 		}
 		if(!dateNull)
 			return lastCartonPrintingInfoSendDate
@@ -222,14 +239,16 @@ class Wish {
 			return null
 	}
 	
+
+	
 	//Alert 2
 	Date getDateToConfirmDeliveryDate(){
-		Date cartonsPrintingInfoSentDate = getCartonsPrintingInfoSentDate()
+		Date cartonsPrintingInfoSentDate = getLastCartonPrintingInfoSentDate()
 		if (cartonsPrintingInfoSentDate == null)
 			return null
 		return cartonsPrintingInfoSentDate.plus(1)
 	}
-		
+
 	public String toString() {
 		return opNumber
 	}

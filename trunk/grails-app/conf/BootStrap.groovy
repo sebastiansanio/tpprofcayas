@@ -169,7 +169,7 @@ class BootStrap {
 		
 		def alertType = new AlertType(description:"Vencimiento de la Djai",nameOfEstimatedDateField:"djaiExpirationDate",nameOfCompletionField:"timeOfArrival",alertTerm:10)
     	alertType.save()
-		alertType = new AlertType(description:"Enviar diseño de caja",nameOfEstimatedDateField:"wishDate",nameOfCompletionField:"cartonsPrintingInfoSentDate",alertTerm:0,frequency:3)
+		alertType = new AlertType(description:"Enviar diseños de cajas",nameOfEstimatedDateField:"wishDate",nameOfCompletionField:"lastCartonPrintingInfoSentDate",alertTerm:0,frequency:3)
 		alertType.save()
 		alertType = new AlertType(description:"Confirmar fecha de delivery",nameOfEstimatedDateField:"dateToConfirmDeliveryDate",nameOfCompletionField:"deliveryDate",alertTerm:0)
 		alertType.save()

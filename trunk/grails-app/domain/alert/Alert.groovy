@@ -23,7 +23,7 @@ class Alert {
 		deadline nullable:false
 		attentionDate nullable:false
 		dateFinalized nullable:true
-		finalizedReason nullable:true,inList: ["activityFinished","deadlineChanged"]
+		finalizedReason nullable:true,inList: ["activityFinished","deadlineChanged","wishFinalized"]
 		lastInspected nullable:true
     }
 	
@@ -37,6 +37,8 @@ class Alert {
 				
 		if(wish[alertType.nameOfCompletionField]!=null){
 			finalize("activityFinished")
+		}else if(!wish.isActive()){
+			finalize("wishFinalized")
 		}else if(wish[alertType.nameOfEstimatedDateField] != deadline){
 			finalize("deadlineChanged")
 		}else if(isInspected() && alertType.frequency!=null && new Date() >= lastInspected + alertType.frequency){
