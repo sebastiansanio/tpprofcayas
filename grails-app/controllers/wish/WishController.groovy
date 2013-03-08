@@ -80,7 +80,8 @@ class WishController {
 
     def show() {
         def wishInstance = Wish.get(params.id)
-		
+
+				
         if (!wishInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
             redirect(action: "list")
