@@ -53,7 +53,6 @@
 
 </div>
 </p>
-<div id="als"> </div>
 
 <div id="modal-view-picture-container">
 	<!-- Button to trigger modal -->
