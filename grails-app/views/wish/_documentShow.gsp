@@ -11,7 +11,7 @@
         </tr>
     </thead>
 	<tbody>
-		<g:each var="document" in="${wishInstance?.firstStageRequiredDocuments}">
+		<g:each var="document" in="${documents}">
 			<tr>
                 <td valign="top" class="value">${fieldValue(bean: document, field: "documentType.name")}</td>
 
