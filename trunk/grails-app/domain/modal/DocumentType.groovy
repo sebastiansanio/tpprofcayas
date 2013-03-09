@@ -10,15 +10,15 @@ class DocumentType {
     
 	static constraints = {
 		name unique:true
-		type nullable:false,inList: ["documentType.phase1.label","documentType.phase2.label", "documentType.bothPhases.label"]
+		type nullable:false,inList: ["phase1","phase2", "bothPhases"]
     }
 	
 	public isPhase1(){
-		return type == "documentType.phase1.label" || type == "documentType.bothPhases.label"
+		return type == "phase1" || type == "bothPhases"
 	}
 	
 	public isPhase2(){
-		return type == "documentType.phase2.label" || type == "documentType.bothPhases.label"
+		return type == "phase2" || type == "bothPhases"
 	}
 
 	public String toString() {

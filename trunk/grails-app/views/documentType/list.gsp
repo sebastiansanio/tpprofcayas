@@ -29,7 +29,7 @@
 			
 				<td><g:link action="show" id="${documentTypeInstance.id}">${fieldValue(bean: documentTypeInstance, field: "name")}</g:link></td>
 			
-				<td>${message(code:documentTypeInstance.type)}</td>
+				<td>${message(code:'documentType.'+documentTypeInstance.type+'.label')}</td>
 			
 			</tr>
 		</g:each>

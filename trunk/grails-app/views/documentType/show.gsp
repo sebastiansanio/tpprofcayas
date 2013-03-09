@@ -27,7 +27,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="documentType.type.label" default="Type" /></td>
 				
-				<td valign="top" class="value">${message(code:documentTypeInstance.type)}</td>
+				<td valign="top" class="value">${message(code:'documentType.'+documentTypeInstance.type+'.label')}</td>
 				
 			</tr>
 		

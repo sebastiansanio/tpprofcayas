@@ -115,6 +115,20 @@ class BootStrap {
 		manager.addToRoles(roleManager)
 		manager.save()
 		
+		def documentType = new DocumentType(name:'Cl with Visa at consulate',type:'phase1')
+		documentType.save()
+		documentType = new DocumentType(name:'PL',type:'phase1')
+		documentType.save()
+		documentType = new DocumentType(name:'BL - CO',type:'phase1')
+		documentType.save()
+		documentType = new DocumentType(name:'Cl',type:'phase1')
+		documentType.save()
+		documentType = new DocumentType(name:'Export Certificate with Visa',type:'phase2')
+		documentType.save()
+		documentType = new DocumentType(name:'Price List with Visa',type:'phase2')
+		documentType.save()
+		
+		
 		def country = new Country(name:"CHINA")
 		country.save()
 								
