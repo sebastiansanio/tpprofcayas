@@ -13,7 +13,7 @@ class Document {
     }
     
 	static constraints = {
-		file size: 1..9999999,nullable:true
+		file maxSize: 9999999,nullable:true
 		received nullable:true
 		trackingNumber nullable:true,blank:true
 		
