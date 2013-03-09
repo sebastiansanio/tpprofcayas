@@ -17,7 +17,7 @@
 					<tr>
 	                  	<td>
 	                  	    <label class="checkbox">
-	                  	        <input type="checkbox" id="check1-${i}" onclick="clickDocPhase1('${i}')" value="${document?.id}">${document?.name}
+	                  	        <input type="checkbox" class="checkDoc-1" id="check1-${i}" onclick="clickDocPhase1('${i}')" value="${document?.id}">${document?.name}
 	                  	    </label>
 	                  	</td>
 
@@ -31,7 +31,7 @@
 	                  	 </td>
 					</tr>
 				</g:each>
-             </tbody>
+            </tbody>
 		</table>
 	</div>
 
@@ -46,7 +46,7 @@
                    	<th>${message(code: 'document.received.label', default: 'Date received')}</th>
                    	<th> </th>
                  </tr>
-             </thead>
+            </thead>
  			<tbody>
 				<g:each var="document" in="${DocumentType?.list().findAll{it.isPhase2()}}" status="i">
 					<tr>
@@ -58,7 +58,7 @@
 
 	                  	<td> <g:textField name="documentTrackingNumber" id="txt2-${i}"/> </td>
 
-	                  	<td> <bs:datePicker name="documentDay" precision="day"default="none" noSelection="['': '']" id="date2-${i}"/> </td>
+	                  	<td> <bs:datePicker name="documentDay" precision="day" default="none" noSelection="['': '']" id="date2-${i}"/> </td>
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd2-${i}" name="document"></p>
@@ -66,13 +66,11 @@
 	                  	 </td>
 					</tr>
 				</g:each>
-
-              </tbody>
+            </tbody>
  		</table>
-</div>
+    </div>
 
 <script type="text/javascript">
-
     $(document).ready(function() {
 
         var init = function(countElement, nroDoc)
@@ -97,15 +95,16 @@
 
         };
 
-        init(${DocumentType?.list().findAll{it.isPhase1()}?.size()}, 1);
-        init(${DocumentType?.list().findAll{it.isPhase2()}?.size()}, 2);
+        init("${DocumentType?.list().findAll{it.isPhase1()}?.size()}", 1);
+        init("${DocumentType?.list().findAll{it.isPhase2()}?.size()}", 2);
+
     });
 
     function clickDocPhase1(nroId)
     {
         enableDisable(nroId, 1);
 
-        var elementCount = ${DocumentType?.list().findAll{it.isPhase1()}?.size()};
+        var elementCount = "${DocumentType?.list().findAll{it.isPhase1()}?.size()}";
         setName(elementCount, 1,"firstStageRequiredDocuments");
     }
 
@@ -113,7 +112,7 @@
     {
         enableDisable(nroId, 2);
 
-        var elementCount = ${DocumentType?.list().findAll{it.isPhase2()}?.size()};
+        var elementCount = "${DocumentType?.list().findAll{it.isPhase2()}?.size()}";
         setName(elementCount, 2,"secondStageRequiredDocuments");
     }
 
@@ -178,3 +177,27 @@
         }
     }
 </script>
+
+<g:each var="doc1" in="${wishInstance?.firstStageRequiredDocuments}">
+    <script>
+        $(document).ready(function() {
+
+            var idTypeDoc = ".checkDoc-1[value = " + ${doc1?.documentType?.id} + "]";
+            $(idTypeDoc).prop("checked", true); //marco el check si el doc esta en el pedido
+
+            var nroId = $(idTypeDoc).attr("id").split("-")[1];
+
+            clickDocPhase1(nroId); //habilito los demás componentes
+
+            var numDoc = 1;
+
+            var	text   = "#txt"   + numDoc + "-" + nroId;
+            var	date   = "#date"  + numDoc + "-" + nroId;
+                //    var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
+                //    var	btnDel = "#btnDel"+ numDoc + "-" + nroId;
+
+            $(text).attr("value", "${doc1?.trackingNumber}");
+            $(date).attr("value", '${doc1?.received?.format("dd/MM/yyyy")}');
+         });
+    </script>
+</g:each>
