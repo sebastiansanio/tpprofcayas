@@ -14,6 +14,7 @@
 		</div>
 		
 		<div class="span8">
+			<g:render template="/_common/modals/deleteDialog" model="[item: item]"/>
 			<!-- print system messages (infos, warnings, etc) - not validation errors -->
 			<g:if test="${flash.message}">
 				<div class="alert alert-info">${flash.message}</div>
