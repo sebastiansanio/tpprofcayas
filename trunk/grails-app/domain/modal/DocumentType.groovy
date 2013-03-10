@@ -4,7 +4,9 @@ class DocumentType {
 
 	String name
 	String type
-		
+	boolean requiresVisa	
+	boolean isBl
+	
     static mapping = {
     }
     
@@ -20,7 +22,7 @@ class DocumentType {
 	public isPhase2(){
 		return type == "phase2" || type == "bothPhases"
 	}
-
+	
 	public String toString() {
 		return name
 	}

@@ -45,6 +45,16 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'paymentTerm', 'error')} ">
+				<label for="paymentTerm" class="control-label"><g:message code="wish.paymentTerm.label" default="Payment Term" /></label>
+				<div class="controls">
+					<g:select id="paymentTerm" name="paymentTerm.id" from="${modal.PaymentTerm.list()}" optionKey="id" value="${wishInstance?.paymentTerm?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'paymentTerm', 'error')}</span>
+				</div>
+			</div>
+
+
+
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'productDescription', 'error')} ">
 				<label for="productDescription" class="control-label"><g:message code="wish.productDescription.label" default="Product Description" /></label>
 				<div class="controls">
@@ -93,61 +103,7 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')} ">
-				<label for="deliveryDate" class="control-label"><g:message code="wish.deliveryDate.label" default="Delivery Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="deliveryDate" precision="day"  value="${wishInstance?.deliveryDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')}</span>
-				</div>
-			</div>
 			
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'deliveryDateConfirmed', 'error')} ">
-				<label for="deliveryDateConfirmed" class="control-label"><g:message code="wish.deliveryDateConfirmed.label" default="Delivery Date Confirmed?" /></label>
-				<div class="controls">
-					<bs:checkBox name="deliveryDateConfirmed" value="${wishInstance?.deliveryDateConfirmed}" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDateConfirmed', 'error')}</span>
-				</div>
-			</div>
-			
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')} ">
-				<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Send Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="cartonPrintingInfoSentDate" precision="day"  value="${wishInstance?.cartonPrintingInfoSentDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')} ">
-				<label for="estimatedTimeOfDeparture" class="control-label"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></label>
-				<div class="controls">
-					<bs:datePicker name="estimatedTimeOfDeparture" precision="day"  value="${wishInstance?.estimatedTimeOfDeparture}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'departed', 'error')} ">
-				<label for="departed" class="control-label"><g:message code="wish.departed.label" default="Departed" /></label>
-				<div class="controls">
-					<bs:checkBox name="departed" value="${wishInstance?.departed}" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'departed', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')} ">
-				<label for="estimatedTimeOfArrival" class="control-label"><g:message code="wish.estimatedTimeOfArrival.label" default="Estimated Time Of Arrival" /></label>
-				<div class="controls">
-					<bs:datePicker name="estimatedTimeOfArrival" precision="day"  value="${wishInstance?.estimatedTimeOfArrival}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'arrived', 'error')} ">
-				<label for="arrived" class="control-label"><g:message code="wish.arrived.label" default="Arrived" /></label>
-				<div class="controls">
-					<bs:checkBox name="arrived" value="${wishInstance?.arrived}" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'arrived', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'wishDate', 'error')} required">
 				<label for="wishDate" class="control-label"><g:message code="wish.wishDate.label" default="Wish Date" /><span class="required-indicator">*</span></label>
@@ -165,13 +121,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'paymentTerm', 'error')} ">
-				<label for="paymentTerm" class="control-label"><g:message code="wish.paymentTerm.label" default="Payment Term" /></label>
-				<div class="controls">
-					<g:select id="paymentTerm" name="paymentTerm.id" from="${modal.PaymentTerm.list()}" optionKey="id" value="${wishInstance?.paymentTerm?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'paymentTerm', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'wishStatus', 'error')} ">
 				<label for="wishStatus" class="control-label"><g:message code="wish.wishStatus.label" default="Wish Status" /></label>
@@ -249,6 +198,107 @@
 
 <div class="span6">
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')} ">
+				<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Send Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="cartonPrintingInfoSentDate" precision="day"  value="${wishInstance?.cartonPrintingInfoSentDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
+				</div>
+			</div>
+
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')} ">
+				<label for="deliveryDate" class="control-label"><g:message code="wish.deliveryDate.label" default="Delivery Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="deliveryDate" precision="day"  value="${wishInstance?.deliveryDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDate', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'deliveryDateConfirmed', 'error')} ">
+				<label for="deliveryDateConfirmed" class="control-label"><g:message code="wish.deliveryDateConfirmed.label" default="Delivery Date Confirmed?" /></label>
+				<div class="controls">
+					<bs:checkBox name="deliveryDateConfirmed" value="${wishInstance?.deliveryDateConfirmed}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'deliveryDateConfirmed', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftReceivedDate', 'error')} ">
+				<label for="swiftReceivedDate" class="control-label"><g:message code="wish.swiftReceivedDate.label" default="Swift Received Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="swiftReceivedDate" precision="day"  value="${wishInstance?.swiftReceivedDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'swiftReceivedDate', 'error')}</span>
+				</div>
+			</div>
+
+
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')} ">
+				<label for="swiftSentToSupplierDate" class="control-label"><g:message code="wish.swiftSentToSupplierDate.label" default="Swift Sent To Supplier Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="swiftSentToSupplierDate" precision="day"  value="${wishInstance?.swiftSentToSupplierDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')}</span>
+				</div>
+			</div>
+
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'docDraftApproved', 'error')} ">
+				<label for="docDraftApproved" class="control-label"><g:message code="wish.docDraftApproved.label" default="Doc Draft Approved" /></label>
+				<div class="controls">
+					<bs:datePicker name="docDraftApproved" precision="day"  value="${wishInstance?.docDraftApproved}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'docDraftApproved', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')} ">
+				<label for="picturesOfPrintingBoxesAndLoadReceived" class="control-label"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></label>
+				<div class="controls">
+					<bs:datePicker name="picturesOfPrintingBoxesAndLoadReceived" precision="day"  value="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')} ">
+				<label for="picturesOfLoadingContainerReceived" class="control-label"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></label>
+				<div class="controls">
+					<bs:datePicker name="picturesOfLoadingContainerReceived" precision="day"  value="${wishInstance?.picturesOfLoadingContainerReceived}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')}</span>
+				</div>
+			</div>
+
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')} ">
+				<label for="estimatedTimeOfDeparture" class="control-label"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></label>
+				<div class="controls">
+					<bs:datePicker name="estimatedTimeOfDeparture" precision="day"  value="${wishInstance?.estimatedTimeOfDeparture}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'departed', 'error')} ">
+				<label for="departed" class="control-label"><g:message code="wish.departed.label" default="Departed" /></label>
+				<div class="controls">
+					<bs:checkBox name="departed" value="${wishInstance?.departed}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'departed', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')} ">
+				<label for="estimatedTimeOfArrival" class="control-label"><g:message code="wish.estimatedTimeOfArrival.label" default="Estimated Time Of Arrival" /></label>
+				<div class="controls">
+					<bs:datePicker name="estimatedTimeOfArrival" precision="day"  value="${wishInstance?.estimatedTimeOfArrival}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'arrived', 'error')} ">
+				<label for="arrived" class="control-label"><g:message code="wish.arrived.label" default="Arrived" /></label>
+				<div class="controls">
+					<bs:checkBox name="arrived" value="${wishInstance?.arrived}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'arrived', 'error')}</span>
+				</div>
+			</div>
+
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')} required">
 				<label for="djaiFormalizationDate" class="control-label"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /><span class="required-indicator">*</span></label>
@@ -322,23 +372,6 @@
 
 
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftReceivedDate', 'error')} ">
-				<label for="swiftReceivedDate" class="control-label"><g:message code="wish.swiftReceivedDate.label" default="Swift Received Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="swiftReceivedDate" precision="day"  value="${wishInstance?.swiftReceivedDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'swiftReceivedDate', 'error')}</span>
-				</div>
-			</div>
-
-
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')} ">
-				<label for="swiftSentToSupplierDate" class="control-label"><g:message code="wish.swiftSentToSupplierDate.label" default="Swift Sent To Supplier Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="swiftSentToSupplierDate" precision="day"  value="${wishInstance?.swiftSentToSupplierDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'moneyBalance', 'error')} ">
 				<label for="moneyBalance" class="control-label"><g:message code="wish.moneyBalance.label" default="Money Balance" /></label>
@@ -356,21 +389,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')} ">
-				<label for="picturesOfPrintingBoxesAndLoadReceived" class="control-label"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></label>
-				<div class="controls">
-					<bs:datePicker name="picturesOfPrintingBoxesAndLoadReceived" precision="day"  value="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')} ">
-				<label for="picturesOfLoadingContainerReceived" class="control-label"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></label>
-				<div class="controls">
-					<bs:datePicker name="picturesOfLoadingContainerReceived" precision="day"  value="${wishInstance?.picturesOfLoadingContainerReceived}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')} ">
 				<label for="sourceCountry" class="control-label"><g:message code="wish.sourceCountry.label" default="Source Country" /></label>
@@ -396,13 +414,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'docDraftApproved', 'error')} ">
-				<label for="docDraftApproved" class="control-label"><g:message code="wish.docDraftApproved.label" default="Doc Draft Approved" /></label>
-				<div class="controls">
-					<bs:datePicker name="docDraftApproved" precision="day"  value="${wishInstance?.docDraftApproved}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'docDraftApproved', 'error')}</span>
-				</div>
-			</div>
 
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'docDraftToBeApprovedBeforeDelivery', 'error')} ">

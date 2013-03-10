@@ -21,6 +21,11 @@
 			
 				<g:sortableColumn property="type" title="${message(code: 'documentType.type.label', default: 'Type')}" />
 			
+				<g:sortableColumn property="requiresVisa" title="${message(code: 'documentType.requiresVisa.label', default: 'Requires Visa?')}" />
+			
+				<g:sortableColumn property="isBl" title="${message(code: 'documentType.isBl.label', default: 'Is Bl?')}" />
+			
+			
 			</tr>
 		</thead>
 		<tbody>
@@ -30,6 +35,11 @@
 				<td><g:link action="show" id="${documentTypeInstance.id}">${fieldValue(bean: documentTypeInstance, field: "name")}</g:link></td>
 			
 				<td>${message(code:'documentType.'+documentTypeInstance.type+'.label')}</td>
+			
+				<td><g:formatBoolean boolean="${documentTypeInstance?.requiresVisa}" /></td>
+			
+				<td><g:formatBoolean boolean="${documentTypeInstance?.isBl}" /></td>
+			
 			
 			</tr>
 		</g:each>

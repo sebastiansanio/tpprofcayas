@@ -18,7 +18,7 @@ class AlertController {
 		alertManagerService.generateAllAlerts()
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		if(params.sort==null) 
-			params.sort = "deadline"
+			params.sort = "attentionDate"
 		if(params.order==null)
 			params.order = "asc"
 		
@@ -30,13 +30,17 @@ class AlertController {
 		alertManagerService.generateAllAlerts()
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		if(params.sort==null)
-			params.sort = "deadline"
+			params.sort = "attentionDate"
 		if(params.order==null)
 			params.order = "asc"
 		
-		render(view: "list", model: [alertInstanceList: alertManagerService.getInspectedAlerts(params), alertInstanceTotal: alertManagerService.getInspectedAlerts().size()])
+		render(view: "list", model: [alertInstanceList: alertManagerService.getInspectedAlerts(params), alertInstanceTotal: alertManagerService.getInspectedAlerts().size()])	
+	}
+	
+	def query() {
 		
 	}
+		
 	
 	def inspected(){
 		def alertInstance = Alert.get(params.id)

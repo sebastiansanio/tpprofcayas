@@ -19,7 +19,14 @@ class Document {
 		
     }
 	
-
+	boolean requiresVisa(){
+		return documentType.requiresVisa
+	}
+	
+	boolean isBl(){
+		return documentType.isBl
+	}
+	
 	public String toString() {
 		return documentType.toString()
 	}

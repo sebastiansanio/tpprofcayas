@@ -30,7 +30,23 @@
 				<td valign="top" class="value">${message(code:'documentType.'+documentTypeInstance.type+'.label')}</td>
 				
 			</tr>
-		
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="documentType.requiresVisa.label" default="Requires Visa?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${documentTypeInstance?.requiresVisa}" /></td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="documentType.isBl.label" default="Is Bl?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${documentTypeInstance?.isBl}" /></td>
+				
+			</tr>
+
+
+
 		</tbody>
 	</table>
 </section>
