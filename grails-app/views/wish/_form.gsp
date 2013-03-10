@@ -194,6 +194,103 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'billDate', 'error')} ">
+				<label for="billDate" class="control-label"><g:message code="wish.billDate.label" default="Bill Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="billDate" precision="day"  value="${wishInstance?.billDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'billDate', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')} ">
+				<label for="finnishDate" class="control-label"><g:message code="wish.finnishDate.label" default="Finnish Date" /></label>
+				<div class="controls">
+					<bs:datePicker name="finnishDate" precision="day"  value="${wishInstance?.finnishDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'hasFeeder', 'error')} ">
+				<label for="hasFeeder" class="control-label"><g:message code="wish.hasFeeder.label" default="Has feeder" /></label>
+				<div class="controls">
+					<bs:checkBox name="hasFeeder" value="${wishInstance?.hasFeeder}" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'hasFeeder', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'forwarder', 'error')} ">
+				<label for="forwarder" class="control-label"><g:message code="wish.forwarder.label" default="Forwarder" /></label>
+				<div class="controls">
+					<g:select id="forwarder" name="forwarder.id" from="${stakeholder.Forwarder.list()}" optionKey="id" value="${wishInstance?.forwarder?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'forwarder', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'agent', 'error')} ">
+				<label for="agent" class="control-label"><g:message code="wish.agent.label" default="Agent" /></label>
+				<div class="controls">
+					<g:select id="agent" name="agent.id" from="${stakeholder.Agent.list()}" optionKey="id" value="${wishInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'agent', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')} ">
+				<label for="sourceCountry" class="control-label"><g:message code="wish.sourceCountry.label" default="Source Country" /></label>
+				<div class="controls">
+					<g:select id="sourceCountry" name="sourceCountry.id" from="${modal.Country.list()}" optionKey="id" value="${wishInstance?.sourceCountry?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'port', 'error')} ">
+				<label for="port" class="control-label"><g:message code="wish.port.label" default="Port" /></label>
+				<div class="controls">
+					<g:select id="port" name="port.id" from="${modal.Port.list()}" optionKey="id" value="${wishInstance?.port?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'port', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'ship', 'error')} ">
+				<label for="ship" class="control-label"><g:message code="wish.ship.label" default="Ship" /></label>
+				<div class="controls">
+					<g:select id="ship" name="ship.id" from="${modal.Ship.list()}" optionKey="id" value="${wishInstance?.ship?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'ship', 'error')}</span>
+				</div>
+			</div>
+
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'typeOfFreight', 'error')} ">
+				<label for="typeOfFreight" class="control-label"><g:message code="wish.typeOfFreight.label" default="Type Of Freight" /></label>
+				<div class="controls">
+					<g:select id="typeOfFreight" name="typeOfFreight.id" from="${modal.TypeOfFreight.list()}" optionKey="id" value="${wishInstance?.typeOfFreight?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'typeOfFreight', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'blNumber', 'error')} ">
+				<label for="blNumber" class="control-label"><g:message code="wish.blNumber.label" default="Bl Number" /></label>
+				<div class="controls">
+					<g:textField name="blNumber" value="${wishInstance?.blNumber}"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'blNumber', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'dispatchNumber', 'error')} ">
+				<label for="dispatchNumber" class="control-label"><g:message code="wish.dispatchNumber.label" default="Dispatch Number" /></label>
+				<div class="controls">
+					<g:textField name="dispatchNumber" value="${wishInstance?.dispatchNumber}"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'dispatchNumber', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'bill', 'error')} ">
+				<label for="bill" class="control-label"><g:message code="wish.bill.label" default="Bill" /></label>
+				<div class="controls">
+					<g:textField name="bill" value="${wishInstance?.bill}"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'bill', 'error')}</span>
+				</div>
+			</div>
+
 </div>
 
 <div class="span6">
@@ -390,29 +487,6 @@
 			</div>
 
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')} ">
-				<label for="sourceCountry" class="control-label"><g:message code="wish.sourceCountry.label" default="Source Country" /></label>
-				<div class="controls">
-					<g:select id="sourceCountry" name="sourceCountry.id" from="${modal.Country.list()}" optionKey="id" value="${wishInstance?.sourceCountry?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'sourceCountry', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'port', 'error')} ">
-				<label for="port" class="control-label"><g:message code="wish.port.label" default="Port" /></label>
-				<div class="controls">
-					<g:select id="port" name="port.id" from="${modal.Port.list()}" optionKey="id" value="${wishInstance?.port?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'port', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'ship', 'error')} ">
-				<label for="ship" class="control-label"><g:message code="wish.ship.label" default="Ship" /></label>
-				<div class="controls">
-					<g:select id="ship" name="ship.id" from="${modal.Ship.list()}" optionKey="id" value="${wishInstance?.ship?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'ship', 'error')}</span>
-				</div>
-			</div>
 
 
 
@@ -432,21 +506,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'forwarder', 'error')} ">
-				<label for="forwarder" class="control-label"><g:message code="wish.forwarder.label" default="Forwarder" /></label>
-				<div class="controls">
-					<g:select id="forwarder" name="forwarder.id" from="${stakeholder.Forwarder.list()}" optionKey="id" value="${wishInstance?.forwarder?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'forwarder', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'agent', 'error')} ">
-				<label for="agent" class="control-label"><g:message code="wish.agent.label" default="Agent" /></label>
-				<div class="controls">
-					<g:select id="agent" name="agent.id" from="${stakeholder.Agent.list()}" optionKey="id" value="${wishInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'agent', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'freightQuote', 'error')} ">
 				<label for="freightQuote" class="control-label"><g:message code="wish.freightQuote.label" default="Freight Quote" /></label>
@@ -504,61 +563,8 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'typeOfFreight', 'error')} ">
-				<label for="typeOfFreight" class="control-label"><g:message code="wish.typeOfFreight.label" default="Type Of Freight" /></label>
-				<div class="controls">
-					<g:select id="typeOfFreight" name="typeOfFreight.id" from="${modal.TypeOfFreight.list()}" optionKey="id" value="${wishInstance?.typeOfFreight?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'typeOfFreight', 'error')}</span>
-				</div>
-			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'blNumber', 'error')} ">
-				<label for="blNumber" class="control-label"><g:message code="wish.blNumber.label" default="Bl Number" /></label>
-				<div class="controls">
-					<g:textField name="blNumber" value="${wishInstance?.blNumber}"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'blNumber', 'error')}</span>
-				</div>
-			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'dispatchNumber', 'error')} ">
-				<label for="dispatchNumber" class="control-label"><g:message code="wish.dispatchNumber.label" default="Dispatch Number" /></label>
-				<div class="controls">
-					<g:textField name="dispatchNumber" value="${wishInstance?.dispatchNumber}"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'dispatchNumber', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'bill', 'error')} ">
-				<label for="bill" class="control-label"><g:message code="wish.bill.label" default="Bill" /></label>
-				<div class="controls">
-					<g:textField name="bill" value="${wishInstance?.bill}"/>
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'bill', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'billDate', 'error')} ">
-				<label for="billDate" class="control-label"><g:message code="wish.billDate.label" default="Bill Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="billDate" precision="day"  value="${wishInstance?.billDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'billDate', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')} ">
-				<label for="finnishDate" class="control-label"><g:message code="wish.finnishDate.label" default="Finnish Date" /></label>
-				<div class="controls">
-					<bs:datePicker name="finnishDate" precision="day"  value="${wishInstance?.finnishDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')}</span>
-				</div>
-			</div>
-			
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'hasFeeder', 'error')} ">
-				<label for="hasFeeder" class="control-label"><g:message code="wish.hasFeeder.label" default="Has feeder" /></label>
-				<div class="controls">
-					<bs:checkBox name="hasFeeder" value="${wishInstance?.hasFeeder}" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'hasFeeder', 'error')}</span>
-				</div>
-			</div>
 
 </div>
 	
