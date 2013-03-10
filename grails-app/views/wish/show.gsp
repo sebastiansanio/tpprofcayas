@@ -169,7 +169,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.paymentTerm.label" default="Payment Term" /></td>
 				
-				<td valign="top" class="value"><g:link controller="paymentTerm" action="show" id="${wishInstance?.paymentTerm?.id}">${wishInstance?.paymentTerm?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value">${wishInstance?.paymentTerm?.encodeAsHTML()}</td>
 				
 			</tr>
 		

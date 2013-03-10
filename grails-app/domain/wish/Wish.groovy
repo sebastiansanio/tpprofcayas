@@ -246,7 +246,7 @@ class Wish {
 	
 	//Alert 3
 	Date getDateToDemandSwiftToClient(){
-		if(paymentTerm?.percentPaymentAfterDelivery==100)
+		if(paymentTerm == null || paymentTerm?.percentPaymentAfterDelivery==100)
 			return null
 		Date date = wishDate
 		int i = 0
@@ -264,7 +264,110 @@ class Wish {
 			return deliveryDate
 	}
 	
-
+	//Alert 6
+	Date getRequireVisaDate(){
+		boolean requiresVisa = false
+		firstStageRequiredDocuments.each{
+			if (it.requiresVisa())
+				requiresVisa = true
+		}
+		
+		secondStageRequiredDocuments.each{
+			if (it.requiresVisa())
+				requiresVisa = true
+		}
+		if(requiresVisa)
+			return deliveryDate
+		return null
+	}
+	
+	Date getVisaReceivedDate(){
+		boolean requiresVisa = false
+		Date visaReceivedDateAux = null
+		
+		firstStageRequiredDocuments.each{
+			if (it.requiresVisa())
+				visaReceivedDateAux = it.received
+		}
+		
+		secondStageRequiredDocuments.each{
+			if (it.requiresVisa())
+				visaReceivedDateAux = it.received
+		}
+		return visaReceivedDateAux
+	}
+	
+	//Alert 8 - Alert 11
+	Date getEstimatedBalancePaymentDate(){
+		if(paymentTerm?.percentPaymentAfterDelivery==0)
+			return deliveryDate
+		if(paymentTerm?.hasCad() || paymentTerm?.percentPaymentAfterDelivery==70)
+			return getBlReceivedDate()
+		return null
+		
+	}
+	
+	//Alert 9
+	Date getEstimatedPicturesOfLoadingContainerReceivedDate(){
+		if(forwarder==null)
+			return null
+		
+		Date estimatedDate = null
+		boolean allDocumentsReceived = true
+		
+		firstStageRequiredDocuments.each{
+			if(it.received == null)
+				allDocumentsReceived = false
+			else
+				if(estimatedDate == null || it.received > estimatedDate)
+					estimatedDate = it.received
+		}
+		
+		if(allDocumentsReceived)
+			return estimatedDate
+		return null
+		
+	}
+	
+	//Alert 10
+	Date getRequireBlDate(){
+		boolean requiresBl = false
+		firstStageRequiredDocuments.each{
+			if(it.isBl())
+				requiresBl = true
+		}
+		
+		secondStageRequiredDocuments.each{
+			if(it.isBl())
+				requiresBl = true
+		}
+		
+		if(!requiresBl)
+			return null
+				
+		Date timeOfDepartureAux = getTimeOfDeparture()
+		if(timeOfDepartureAux == null)
+			return null
+		else
+			return timeOfDepartureAux.plus(5)
+		
+	}
+	
+	Date getBlReceivedDate(){
+		
+		Date blReceivedAux = null
+		firstStageRequiredDocuments.each{
+			if(it.isBl())
+				blReceivedAux = it.received
+		}
+		
+		secondStageRequiredDocuments.each{
+			if(it.isBl())
+				blReceivedAux = it.received
+		}
+		return blReceivedAux
+	}
+	
 	public String toString() {
 		return opNumber
 	}

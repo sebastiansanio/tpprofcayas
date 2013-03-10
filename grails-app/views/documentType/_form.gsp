@@ -18,3 +18,20 @@
 				</div>
 			</div>
 
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: documentTypeInstance, field: 'requiresVisa', 'error')} ">
+				<label for="requiresVisa" class="control-label"><g:message code="documentType.requiresVisa.label" default="Requires Visa?" /></label>
+				<div class="controls">
+					<bs:checkBox name="requiresVisa" value="${documentTypeInstance?.requiresVisa}" />
+					<span class="help-inline">${hasErrors(bean: documentTypeInstance, field: 'requiresVisa', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: documentTypeInstance, field: 'isBl', 'error')} ">
+				<label for="isBl" class="control-label"><g:message code="documentType.isBl.label" default="Is Bl?" /></label>
+				<div class="controls">
+					<bs:checkBox name="requiresVisa" value="${documentTypeInstance?.isBl}" />
+					<span class="help-inline">${hasErrors(bean: documentTypeInstance, field: 'isBl', 'error')}</span>
+				</div>
+			</div>
+			
