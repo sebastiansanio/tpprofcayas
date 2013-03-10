@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'alert.label', default: 'Alert')}" />
-	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<title><g:message code="default.query.label" args="[entityName]" /></title>
 </head>
 
 <body>
@@ -47,15 +47,13 @@
 </div>
 
 <div class="row-fluid">
-
-<div class="span5">
-
-<p><button type="button" onClick="setToday();">${message(code:'default.today.label')}</button></p>
-<p><button type="button" onClick="setTomorrow();">${message(code:'default.tomorrow.label')}</button></p>
-<p><button type="button" onClick="setThisWeek();">${message(code:'default.thisWeek.label')}</button></p>
-<p><button type="button" onClick="setNextWeek();">${message(code:'default.nextWeek.label')}</button></p>
-<p><button type="button" onClick="setThisMonth();">${message(code:'default.thisMonth.label')}</button></p>
-<p><button type="button" onClick="setNextMonth();">${message(code:'default.nextMonth.label')}</button></p>
+<div class="span2 btn-toolbar">
+<button class="btn span12" type="button" onClick="setToday();">${message(code:'default.today.label')}</button>
+<button class="btn span12" type="button" onClick="setTomorrow();">${message(code:'default.tomorrow.label')}</button>
+<button class="btn span12" type="button" onClick="setThisWeek();">${message(code:'default.thisWeek.label')}</button>
+<button class="btn span12" type="button" onClick="setNextWeek();">${message(code:'default.nextWeek.label')}</button>
+<button class="btn span12" type="button" onClick="setThisMonth();">${message(code:'default.thisMonth.label')}</button>
+<button class="btn span12" type="button" onClick="setNextMonth();">${message(code:'default.nextMonth.label')}</button>
 
 </div>
 </div>
@@ -104,9 +102,60 @@ function changeDatepicker(fromDate,toDate){
 }
 
 function setToday(){
-	changeDatepicker(new Date(),new Date())
+	changeDatepicker(new Date(),new Date());
 }
 
+function setTomorrow(){
+	changeDatepicker(new Date(new Date().getTime()+24*60*60*1000),new Date(new Date().getTime()+24*60*60*1000))
+}
+
+function setThisWeek(){
+	var today = new Date();
+	var day = today.getDay();
+	var diff = today.getDate() - day + (day == 0 ? -6:1);
+	var monday = new Date(today.setDate(diff));
+	var sunday = new Date(monday.getTime()+24*60*60*1000*6);
+	
+	changeDatepicker(monday,sunday);	
+}
+
+function setNextWeek(){
+	var today = new Date();
+	var day = today.getDay();
+	var diff = today.getDate() - day + (day == 0 ? -6:1);
+	var monday = new Date(today.setDate(diff)+24*60*60*1000*7);
+	var sunday = new Date(monday.getTime()+24*60*60*1000*6);
+	
+	changeDatepicker(monday,sunday);	
+}
+
+function setThisMonth(){
+	var today = new Date();
+	var firstDay = new Date(today.getFullYear(),today.getMonth(), 1);
+
+	if(today.getMonth() == 1){
+		var lastDay = new Date(today.getFullYear()+1,0,1);
+	} else{
+		var lastDay = new Date(new Date(today.getFullYear(),today.getMonth()+1,1).getTime()-24*60*60*1000);
+	}
+	changeDatepicker(firstDay,lastDay);
+}
+
+function setNextMonth(){
+	var today = new Date();
+	if(today.getMonth() == 1){
+		var firstDay = new Date(today.getFullYear()+1,0,1);
+	} else{
+		var firstDay = new Date(new Date(today.getFullYear(),today.getMonth()+1,1).getTime());
+	}
+	if(firstDay.getMonth() == 1){
+		var lastDay = new Date(firstDay.getFullYear()+1,0,1);
+	} else{
+		var lastDay = new Date(new Date(firstDay.getFullYear(),firstDay.getMonth()+1,1).getTime()-24*60*60*1000);
+	}
+	
+	changeDatepicker(firstDay,lastDay);
+}
 
 </script>
 
