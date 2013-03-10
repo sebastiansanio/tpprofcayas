@@ -25,8 +25,6 @@
 			
 				<g:sortableColumn property="attentionDate" title="${message(code: 'alert.attentionDate.label', default: 'Attention Date')}" />
 			
-				<g:sortableColumn property="lastInspected" title="${message(code: 'alert.lastInspected.label', default: 'Last Inspected')}" />
-			
 				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /> </th>
 				
 				<th><g:message code="alert.doInspect.label" default="Inspected" /> </th>
@@ -45,9 +43,7 @@
 				<td><g:formatDate date="${alertInstance.deadline}" /></td>
 			
 				<td><g:formatDate date="${alertInstance.attentionDate}" /></td>
-			
-				<td><g:formatDate date="${alertInstance.lastInspected}" /></td>
-			
+						
 				<td> <a href="#" class="popoverAlerts" rel="popover" data-content="<div><% alertInstance.wish.getActiveAlerts().each{out.println(it.deadline.format("dd/MM/yyyy")+": "+it.toString())} %>" data-original-title="Alertas activas" >${alertInstance.wish.getActiveAlerts().size()}</a></td>
 			 	
 				<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link></td>
