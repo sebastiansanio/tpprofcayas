@@ -20,8 +20,10 @@ class OpNumberGeneratorService {
 	}
 	
 	Long getNextOpNumber(){
+		
 		def array = Wish.executeQuery("select max(a.opNumber) from Wish a")
-		if(array.size()==0)
+		
+		if(array[0]==null)
 			return 1
 		return array[0]+1
 		
