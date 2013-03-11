@@ -80,7 +80,7 @@ class Wish {
 	String dispatchNumber
 	String bill
 	Date billDate
-	Date finnishDate
+	Date finishDate
 	boolean hasFeeder
 	
 	static constraints = {
@@ -143,7 +143,7 @@ class Wish {
 		dispatchNumber nullable:true
 		bill nullable:true		
 		billDate nullable:true
-		finnishDate nullable:true
+		finishDate nullable:true
 	}
 		
 	Date getTimeOfDeparture(){
@@ -168,7 +168,7 @@ class Wish {
 	
 
 	boolean isActive(){
-		return finnishDate == null
+		return finishDate == null
 	}
 		
 	BigDecimal getForeignCurrencyFob(){

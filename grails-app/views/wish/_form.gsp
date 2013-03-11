@@ -203,11 +203,11 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')} ">
-				<label for="finnishDate" class="control-label"><g:message code="wish.finnishDate.label" default="Finnish Date" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'finishDate', 'error')} ">
+				<label for="finishDate" class="control-label"><g:message code="wish.finishDate.label" default="Finish Date" /></label>
 				<div class="controls">
-					<bs:datePicker name="finnishDate" precision="day"  value="${wishInstance?.finnishDate}" default="none" noSelection="['': '']" />
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'finnishDate', 'error')}</span>
+					<bs:datePicker name="finishDate" precision="day"  value="${wishInstance?.finishDate}" default="none" noSelection="['': '']" />
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'finishDate', 'error')}</span>
 				</div>
 			</div>
 			

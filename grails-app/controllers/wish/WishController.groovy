@@ -1,6 +1,9 @@
 package wish
 
+import importer.GenericExcelImporter
 import java.io.OutputStream;
+import java.util.Map;
+
 import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
 import login.User
@@ -24,11 +27,58 @@ class WishController {
 		
 	}
 
+	def importWishes(){
+		Map configuration = [
+			sheet:'Pedido',
+			startRow:1,
+			columnMap: [
+				'A': 'opNumber',
+				'B': 'customerOpNumber',
+				'C': 'customer.id',
+				'D': 'supplier.id',
+				'E': 'shipper.id',
+				'F': 'productDescription',
+				'G': 'supplierOrder',
+				'H': 'currencyFob',
+				'I': 'currency.id',
+				'J': 'conversion',
+				'K': 'estimatedTimeOfDeparture',
+				'L': 'estimatedTimeOfArrival',
+				'M': 'wishDate',
+				'N': 'customsBroker.id',
+				'O': 'ship.id',
+				'P': 'forwarder.id',
+				'Q': 'agent.id',
+				'R': 'dispatchNumber',
+				'S': 'djaiNumber',
+				'T': 'djaiFormalizationDate',
+				'U': 'finishDate'
+			]
+		]
+		def path ="/home/sebastian/Descargas/prueba.xls"
+		GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
+		List objects = genericExcelImporter.getObjects(configuration)
+				
+		objects.each{
+			def customer = Customer.get(it['customer.id']) 
+			it.estimatedTimeOfDeparture = it.estimatedTimeOfDeparture.toDateTimeAtStartOfDay().toDate()
+			it.estimatedTimeOfArrival = it.estimatedTimeOfArrival.toDateTimeAtStartOfDay().toDate()			
+			it.wishDate = it.wishDate.toDateTimeAtStartOfDay().toDate()
+			it.djaiFormalizationDate = it.djaiFormalizationDate.toDateTimeAtStartOfDay().toDate()
+			it.finishDate = it.finishDate.toDateTimeAtStartOfDay().toDate()
+			Wish wishInstance = new Wish(it)
+			if(wishInstance.customerOpNumber == null)
+				wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(customer)
+			if(wishInstance.opNumber == null)
+				wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()	
+			customer.addToWishes(wishInstance)
+			customer.save()
+		}
+		redirect(action: "list", params: params)
+	}
+		
     def list() {
-		
-		
-		
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
@@ -74,10 +124,6 @@ class WishController {
 
     def save() {
         def wishInstance = new Wish(params)
-		
-		System.out.println(opNumberGeneratorService.getNextOpNumber())
-		System.out.println(opNumberGeneratorService.getNextCustomerOpNumber(wishInstance.customer))
-		
 		
 		alertManagerService.generateAlerts(wishInstance)
 		if(wishInstance.customerOpNumber == null)

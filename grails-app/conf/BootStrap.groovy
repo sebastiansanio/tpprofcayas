@@ -15,6 +15,7 @@ class BootStrap {
 
     def init = { servletContext ->
 		
+		
 		List supplierReportFields = ["opNumber","customer","supplier","shipper","supplierOrder","currencyFob","currency","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","visaChargePayment","visaChargePaymentConcept","shippingMark","customerLogoPunch","hsCodeToBeWritten",
 			"amountOfMoneyInAdvanceTransferred","moneyBalance","dateOfBalancePayment","picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
@@ -129,14 +130,28 @@ class BootStrap {
 		documentType.save()
 		
 		
+		def ship = new Ship (name:'Ship')
+		ship.save()
+		
 		def country = new Country(name:"CHINA")
 		country.save()
 								
 		def customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"PLACASUR",country:country,address:".",cuit:"30-34948484-4")
 		customer.save()
+		customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"DELTA",country:country,address:".",cuit:"30-34948484-4")
+		customer.save()
+		customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"RICCHEZZE",country:country,address:".",cuit:"30-34948484-4")
+		customer.save()
+		
+		
 		
 		def supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"HAI HUI",country:country,address:".",taxRegistryNumber:"2312232")
 		supplier.save()
+		supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"Triumph",country:country,address:".",taxRegistryNumber:"2312232")
+		supplier.save()
+		supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"TECBRIL",country:country,address:".",taxRegistryNumber:"2312232")
+		supplier.save()
+		
 		
 		def shipper = new Shipper(defaultReport:customerReport,defaultLocale:localeEs,name:"GUANGZHOU ANIMAL",country:country)
 		shipper.save(failOnError:true)
@@ -183,8 +198,13 @@ class BootStrap {
 		def wishStatus = new WishStatus(name:"At production")
 		wishStatus.save()
 		
-		def currency = new Currency(name:"DOLAR")
+		def currency = new Currency(name:"PESO")
 		currency.save()
+		currency = new Currency(name:"DOLAR")
+		currency.save()
+		currency = new Currency(name:"YUAN")
+		currency.save()
+		
 		
 		def alertType = new AlertType(description:"Vencimiento de la Djai",nameOfEstimatedDateField:"djaiExpirationDate",nameOfCompletionField:"timeOfArrival",alertTerm:10)
     	alertType.save()

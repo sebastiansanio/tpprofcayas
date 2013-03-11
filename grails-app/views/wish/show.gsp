@@ -480,9 +480,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.finnishDate.label" default="Finnish Date" /></td>
+				<td valign="top" class="name"><g:message code="wish.finishDate.label" default="Finish Date" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${wishInstance?.finnishDate}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.finishDate}" /></td>
 				
 			</tr>
 		
