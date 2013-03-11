@@ -56,5 +56,6 @@ grails.project.dependency.resolution = {
 		compile ':export:1.5'
 		compile ':excel-import:1.0.0'
 		compile ':mail:1.0.1'
+		
     }
 }

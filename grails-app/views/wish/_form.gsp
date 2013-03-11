@@ -5,18 +5,19 @@
 
 <div class="span6">
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'opNumber', 'error')} required">
-				<label for="opNumber" class="control-label"><g:message code="wish.opNumber.label" default="Op Number" /><span class="required-indicator">*</span></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'opNumber', 'error')}">
+				<label for="opNumber" class="control-label"><g:message code="wish.opNumber.label" default="Op Number" /></label>
 				<div class="controls">
-					<g:field type="number" name="opNumber" min="0" required="" value="${wishInstance.opNumber}"/>
+					<g:field type="number" name="opNumber" min="0" value="${wishInstance.opNumber}"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'opNumber', 'error')}</span>
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'customerOpNumber', 'error')} required">
-				<label for="customerOpNumber" class="control-label"><g:message code="wish.customerOpNumber.label" default="Customer Op Number" /><span class="required-indicator">*</span></label>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'customerOpNumber', 'error')}">
+				<label for="customerOpNumber" class="control-label"><g:message code="wish.customerOpNumber.label" default="Customer Op Number" /></label>
 				<div class="controls">
-					<g:field type="number" name="customerOpNumber" min="0" required="" value="${wishInstance.customerOpNumber}"/>
+					<g:field type="number" name="customerOpNumber" min="0" value="${wishInstance.customerOpNumber}"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'customerOpNumber', 'error')}</span>
 				</div>
 			</div>
@@ -562,8 +563,6 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'palletsQuantity', 'error')}</span>
 				</div>
 			</div>
-
-
 
 
 </div>
