@@ -15,4 +15,5 @@ class Customer extends Stakeholder{
 	static constraints = {
     }
 	
+	
 }

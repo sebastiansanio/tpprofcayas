@@ -12,6 +12,7 @@ class WishController {
 
 	def wishExportService
 	def alertManagerService
+	def opNumberGeneratorService
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -24,6 +25,9 @@ class WishController {
 	}
 
     def list() {
+		
+		
+		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
@@ -70,8 +74,18 @@ class WishController {
 
     def save() {
         def wishInstance = new Wish(params)
+		
+		System.out.println(opNumberGeneratorService.getNextOpNumber())
+		System.out.println(opNumberGeneratorService.getNextCustomerOpNumber(wishInstance.customer))
+		
+		
 		alertManagerService.generateAlerts(wishInstance)
-
+		if(wishInstance.customerOpNumber == null)
+			wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(wishInstance.customer)
+		if(wishInstance.opNumber == null)
+			wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()
+		
+		
         if (!wishInstance.save(flush: true)) {
             render(view: "create", model: [wishInstance: wishInstance])
             return

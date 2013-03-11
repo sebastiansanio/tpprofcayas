@@ -83,7 +83,6 @@ class Wish {
 	Date finnishDate
 	boolean hasFeeder
 	
-    
 	static constraints = {
 		opNumber unique:true,min:0L
 		customerOpNumber unique: 'customer',min:0L
