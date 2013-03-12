@@ -70,6 +70,7 @@ class BootStrap {
 		roleAdmin.addToPermissions("wishStatus:*")
 		roleAdmin.addToPermissions("availableLocale:*")
 		roleAdmin.addToPermissions("report:*")
+		roleAdmin.addToPermissions("*:show")
 		roleAdmin.save()
 	
 		def roleOperator = new Role(name:"Operador")
@@ -87,6 +88,7 @@ class BootStrap {
 		roleOperator.addToPermissions("port:*")
 		roleOperator.addToPermissions("ship:*")
 		roleOperator.addToPermissions("report:*")
+		roleOperator.addToPermissions("*:show")
 		roleOperator.save()
 		
 		def roleManager = new Role(name:"Manager")
@@ -97,6 +99,7 @@ class BootStrap {
 		roleManager.addToPermissions("alertType:*")
 		roleManager.addToPermissions("country:*")
 		roleManager.addToPermissions("currency:*")
+		roleManager.addToPermissions("*:show")
 		roleManager.save()
 		
 		def localeEs = new AvailableLocale(language:'es',country:'ES')
