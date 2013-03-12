@@ -32,6 +32,8 @@
 		</div>
 	</g:form>
 
+	<!-- lo agrego acá porq según documentación no se puede tener un form dentro de otro -->
+	<g:render template="documentDeleteModal"></g:render>
 </section>
 			
 </body>
