@@ -54,6 +54,7 @@
 <button class="btn span12" type="button" onClick="setNextWeek();">${message(code:'default.nextWeek.label')}</button>
 <button class="btn span12" type="button" onClick="setThisMonth();">${message(code:'default.thisMonth.label')}</button>
 <button class="btn span12" type="button" onClick="setNextMonth();">${message(code:'default.nextMonth.label')}</button>
+<button class="btn span12" type="button" onClick="setAll();">${message(code:'default.all.label')}</button>
 
 </div>
 </div>
@@ -154,6 +155,14 @@ function setNextMonth(){
 		var lastDay = new Date(new Date(firstDay.getFullYear(),firstDay.getMonth()+1,1).getTime()-24*60*60*1000);
 	}
 	
+	changeDatepicker(firstDay,lastDay);
+}
+
+function setAll(){
+
+	var today = new Date();
+	var firstDay = new Date(2010,0,1);
+	var lastDay = new Date(today.getFullYear()+2,11,31);
 	changeDatepicker(firstDay,lastDay);
 }
 

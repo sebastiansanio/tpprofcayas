@@ -23,8 +23,6 @@ class AlertExportService {
 				it.isActive() && !it.isInspected()
 			}
 		
-		System.out.println(alerts.toString())
-			
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
 			
