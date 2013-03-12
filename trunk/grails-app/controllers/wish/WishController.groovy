@@ -340,4 +340,56 @@ class WishController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'picture.label', default: 'Picture'), pictureInstance.id])
 		redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
 	}
+
+    def deleteDocumentFirstPhase(){		
+		def wishInstance = Wish.get(params.idWish)
+		def documentInstance = wishInstance.firstStageRequiredDocuments[params.nroDocumentDelete.toInteger()]
+		
+		if (!documentInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
+			redirect(action: "edit", id: params.idWish)
+			return
+		}
+
+		try {
+			
+			wishInstance.removeFromFirstStageRequiredDocuments(documentInstance)
+			documentInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			redirect(action: "edit", id: params.idWish)
+		}		
+    }
+
+    def deleteDocumentSecondPhase(){
+		def wishInstance = Wish.get(params.idWish)
+		def documentInstance = wishInstance.secondStageRequiredDocuments[params.nroDocumentDelete.toInteger()]
+		
+		if (!documentInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
+			redirect(action: "edit", id: params.idWish)
+			return
+		}
+
+		try {
+			
+			wishInstance.removeFromSecondStageRequiredDocuments(documentInstance)
+			documentInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
+    }
+	
+	def deleteDocument(){
+		
+		// sacar luego
+		System.out.println("__________________________________________________deleteDocument");
+	}
 }

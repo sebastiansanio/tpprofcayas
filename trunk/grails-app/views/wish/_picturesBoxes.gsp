@@ -42,7 +42,7 @@
 
 		    <div class="form-actions">
 			    <g:submitButton name="createBoxes" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-            	<button class="btn" type="reset" data-dismiss="modal">Cancel</button>
+            	<button class="btn" type="reset" data-dismiss="modal"><g:message code="default.button.cancel.label" default="Cancel"/></button>
 			</div>
 
 		</div>
@@ -122,7 +122,7 @@
 				<button class="btn" id="cancelDeletePhotoBox"><g:message code="default.button.cancel.label" default="Cancel"/></button>
 				<g:hiddenField name="id" id="idCurrentPhotoBoxDelete" />
 				<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteBoxPicture" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
-		</g:form>
+			</g:form>
 		</div>
 	</div>
 

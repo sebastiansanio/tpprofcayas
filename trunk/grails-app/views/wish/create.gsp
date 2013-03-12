@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'wish.label', default: 'Wish')}" />
+	<script src="${resource(dir:'js', file:'deleteDocument.js')}"></script>
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 

@@ -27,7 +27,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd1-${i}" name="document"></p>
-	                  		<p><a role="button" class="btn btn-small btn-primary" id="btnDel1-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
+	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel1" id="btnDel1-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
 				</g:each>
@@ -52,7 +52,7 @@
 					<tr>
 	                  	<td>
 	                  	    <label class="checkbox">
-	                  	        <input type="checkbox" id="check2-${i}" onclick="clickDocPhase2('${i}')" value="${document?.id}">${document?.name}
+	                  	        <input type="checkbox" class="checkDoc-2" id="check2-${i}" onclick="clickDocPhase2('${i}')" value="${document?.id}">${document?.name}
 	                  	    </label>
 	                  	</td>
 
@@ -62,7 +62,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd2-${i}" name="document"></p>
-	                  		<p><a role="button" class="btn btn-small btn-primary" id="btnDel2-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
+	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel2" id="btnDel2-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
 				</g:each>
@@ -71,133 +71,197 @@
     </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
 
-        var init = function(countElement, nroDoc)
-        {
-            var text, date, btnAdd, btnDel;
+function checkName(nroDoc, nroId) {
+	return "#check" + nroDoc + "-" + nroId;
+};
 
-            for(var i = 0; i < countElement; i++)
-            {
-                text   = "#txt"    + nroDoc + "-" + i;
-                date   = "#date"   + nroDoc + "-" + i;
-                btnAdd = "#btnAdd" + nroDoc + "-" + i;
-                btnDel = "#btnDel" + nroDoc + "-" + i;
+function textName(nroDoc, nroId) {
+	return "#txt" + nroDoc + "-" + nroId;
+};
 
-                $(text).prop("disabled", true);
-                $(date).prop("disabled", true);
-                $(btnAdd).attr("disabled", "disabled");
-                $(btnDel).attr("disabled", "disabled");
+function dateName(nroDoc, nroId) {
+	return "#date" + nroDoc + "-" + nroId;
+};
 
-                if ('${params.action}' == "create")
-                    $(btnDel).hide();
-            }
+function btnAddName(nroDoc, nroId) {
+	return "#btnAdd" + nroDoc + "-" + nroId;
+};
 
-        };
+function btnDelName(nroDoc, nroId) {
+	return "#btnDel" + nroDoc + "-" + nroId;
+};
 
-        init("${DocumentType?.list().findAll{it.isPhase1()}?.size()}", 1);
-        init("${DocumentType?.list().findAll{it.isPhase2()}?.size()}", 2);
-
-    });
-
-    function clickDocPhase1(nroId)
+$(document).ready(function() {
+    var init = function(countElement, nroDoc)
     {
-        enableDisable(nroId, 1);
+        var text, date, btnAdd, btnDel;
 
-        var elementCount = "${DocumentType?.list().findAll{it.isPhase1()}?.size()}";
-        setName(elementCount, 1,"firstStageRequiredDocuments");
-    }
-
-    function clickDocPhase2(nroId)
-    {
-        enableDisable(nroId, 2);
-
-        var elementCount = "${DocumentType?.list().findAll{it.isPhase2()}?.size()}";
-        setName(elementCount, 2,"secondStageRequiredDocuments");
-    }
-
-    function enableDisable(nroId, nroDoc)
-    {
-        /* habilita los demás inputs si el check está marcado  */
-
-        var	check  = "#check" + nroDoc + "-" + nroId;
-        var	text   = "#txt"   + nroDoc + "-" + nroId;
-        var	date   = "#date"  + nroDoc + "-" + nroId;
-        var	btnAdd = "#btnAdd"+ nroDoc + "-" + nroId;
-        var	btnDel = "#btnDel"+ nroDoc + "-" + nroId;
-
-        if ($(check).prop("checked") == true)
+        for(var i = 0; i < countElement; i++)
         {
-            $(text).prop("disabled", false);
-            $(date).prop("disabled", false);
-            $(btnAdd).removeAttr("disabled");
-            $(btnDel).removeAttr("disabled");
-        }
-        else
-        {
+            text   = textName(nroDoc, i);
+            date   = dateName(nroDoc, i);
+            btnAdd = btnAddName(nroDoc, i);
+            btnDel = btnDelName(nroDoc, i);
+
             $(text).prop("disabled", true);
             $(date).prop("disabled", true);
             $(btnAdd).attr("disabled", "disabled");
             $(btnDel).attr("disabled", "disabled");
-        }
-    }
 
-    function setName(elementCount, nroDoc, list)
+           	$(btnDel).hide();
+        }
+
+    };
+
+    init("${DocumentType?.list().findAll{it.isPhase1()}?.size()}", 1);
+    init("${DocumentType?.list().findAll{it.isPhase2()}?.size()}", 2);
+
+
+    $(".btnDel1").click(function()
     {
-        /* cambia los names para pasarle al controlador solo los que están marcados */
-        for (var i = 0, id = 0; i < elementCount; i++)
-        {
-            var check  = "#check"  + nroDoc + "-" + i;
-            var	text   = "#txt"    + nroDoc + "-" + i;
-            var	date   = "#date"   + nroDoc + "-" + i;
-            var	btnAdd = "#btnAdd" + nroDoc + "-" + i;
-            var	btnDel = "#btnDel" + nroDoc + "-" + i;
+        modalDelete(1, this.id.split("-")[1], "deleteDocumentFirstPhase");
+    }); 
 
-             if ($(check).prop("checked") == true)
-             {
-                var checkName  = list + "[" + id + "].documentType.id";
-                var	textName   = list + "[" + id + "].trackingNumber";
-                var	dateName   = list + "[" + id + "].received";
-                var	btnAddName = list + "[" + id + "].file";
+    $(".btnDel2").click(function()
+    {
+        modalDelete(2, this.id.split("-")[1], "deleteDocumentSecondPhase");
+    });
+});
 
-                $(check).attr("name", checkName);
-                $(text).attr("name", textName);
-                $(date).attr("name", dateName);
-                $(btnAdd).attr("name", btnAddName);
+function clickDocPhase1(nroId)
+{
+    enableDisable(nroId, 1);
 
-                id++;
-             }
-             else
-             {
-                $(check).removeAttr("name");
-                $(text).removeAttr("name");
-                $(date).removeAttr("name");
-                $(btnAdd).removeAttr("name");
-             }
-        }
+    var elementCount = "${DocumentType?.list().findAll{it.isPhase1()}?.size()}";
+    setName(elementCount, 1,"firstStageRequiredDocuments");
+};
+
+function clickDocPhase2(nroId)
+{
+    enableDisable(nroId, 2);
+
+    var elementCount = "${DocumentType?.list().findAll{it.isPhase2()}?.size()}";
+    setName(elementCount, 2,"secondStageRequiredDocuments");
+};
+
+function enableDisable(nroId, nroDoc)
+{
+    /* habilita los demás inputs si el check está marcado  */
+    var	check  = checkName(nroDoc, nroId);
+    var	text   = textName(nroDoc, nroId);
+    var	date   = dateName(nroDoc, nroId);
+    var	btnAdd = btnAddName(nroDoc, nroId);
+    var	btnDel = btnDelName(nroDoc, nroId);
+
+    if ($(check).prop("checked") == true)
+    {
+        $(text).prop("disabled", false);
+        $(date).prop("disabled", false);
+        $(btnAdd).removeAttr("disabled");
+        $(btnDel).removeAttr("disabled");
     }
+    else
+    {
+        $(text).prop("disabled", true);
+        $(date).prop("disabled", true);
+        $(btnAdd).attr("disabled", "disabled");
+        $(btnDel).attr("disabled", "disabled");
+    }
+};
+
+function setName(elementCount, nroDoc, list)
+{
+    /* cambia los names para pasarle al controlador solo los que están marcados */
+    for (var i = 0, id = 0; i < elementCount; i++)
+    {
+        var	check  = "#check"  + nroDoc + "-" + i;
+        var	text   = "#txt"    + nroDoc + "-" + i;
+        var	date   = "#date"   + nroDoc + "-" + i;
+        var	btnAdd = "#btnAdd" + nroDoc + "-" + i;
+        var	btnDel = "#btnDel" + nroDoc + "-" + i;
+
+         if ($(check).prop("checked") == true)
+         {
+            var checkName  = list + "[" + id + "].documentType.id";
+            var	textName   = list + "[" + id + "].trackingNumber";
+            var	dateName   = list + "[" + id + "].received";
+            var	btnAddName = list + "[" + id + "].file";
+
+            $(check).attr("name", checkName);
+            $(text).attr("name", textName);
+            $(date).attr("name", dateName);
+            $(btnAdd).attr("name", btnAddName);
+
+            id++;
+         }
+         else
+         {
+            $(check).removeAttr("name");
+            $(text).removeAttr("name");
+            $(date).removeAttr("name");
+            $(btnAdd).removeAttr("name");
+         }
+    }
+};
+
+function modalDelete(nroDoc, nroId, nameMethod)
+{
+    var nameCheck = checkName(nroDoc, nroId);
+
+    var nameAtribute = $(nameCheck).attr("name");
+    var nroIdDocInWish = nameAtribute.split("[")[1].split("]")[0];
+    
+	$("#nroCurrentDocumentDelete").attr("value", nroIdDocInWish);
+
+	var nameAcction = $("#nroCurrentDocumentDelete").parent().attr("action");
+	var regExp = nameMethod + "?";
+	var nameNewAcction = nameAcction.replace(/deleteDocument*\?/, "deleteDocumentFirstPhase?");
+
+    $("#nroCurrentDocumentDelete").parent().attr("action", nameNewAcction);
+    
+    $("#modalDeleteDocument").modal('show'); 	
+};
+
+function enableComponentCheck(numDoc, datos, clickFunc)
+{
+	var idTypeDoc = ".checkDoc-" + numDoc + "[value = " + datos[0] + "]";
+    $(idTypeDoc).prop("checked", true); //marco el check si el doc esta en el pedido
+
+    var nroId = $(idTypeDoc).attr("id").split("-")[1];
+
+	clickFunc(nroId); //habilito los demás componentes
+	
+    var	text   = "#txt"   + numDoc + "-" + nroId;
+    var	date   = "#date"  + numDoc + "-" + nroId;
+        //    var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
+    var	btnDel = "#btnDel"+ numDoc + "-" + nroId;
+    
+    $(text).attr("value", datos[1]);
+    $(date).attr("value", datos[2]);
+
+    $(btnDel).show();		
+};
 </script>
 
 <g:each var="doc1" in="${wishInstance?.firstStageRequiredDocuments}">
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
 
-            var idTypeDoc = ".checkDoc-1[value = " + ${doc1?.documentType?.id} + "]";
-            $(idTypeDoc).prop("checked", true); //marco el check si el doc esta en el pedido
+            var datos = ["${doc1?.documentType?.id}", "${doc1?.trackingNumber}", '${doc1?.received?.format("dd/MM/yyyy")}'];
+            
+            enableComponentCheck(1, datos, clickDocPhase1);            
+         });
+    </script>
+</g:each>
 
-            var nroId = $(idTypeDoc).attr("id").split("-")[1];
-
-            clickDocPhase1(nroId); //habilito los demás componentes
-
-            var numDoc = 1;
-
-            var	text   = "#txt"   + numDoc + "-" + nroId;
-            var	date   = "#date"  + numDoc + "-" + nroId;
-                //    var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
-                //    var	btnDel = "#btnDel"+ numDoc + "-" + nroId;
-
-            $(text).attr("value", "${doc1?.trackingNumber}");
-            $(date).attr("value", '${doc1?.received?.format("dd/MM/yyyy")}');
+<g:each var="doc2" in="${wishInstance?.secondStageRequiredDocuments}">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+        	var datos = ["${doc2?.documentType?.id}", "${doc2?.trackingNumber}", '${doc2?.received?.format("dd/MM/yyyy")}'];
+        	
+            enableComponentCheck(2, datos, clickDocPhase2);			
          });
     </script>
 </g:each>
