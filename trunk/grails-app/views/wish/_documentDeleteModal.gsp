@@ -27,7 +27,6 @@
 $("#delDoc").click(function()
 {
 	//porq de la otra manera llamaba al DeleteDocument y no al que le ponía en forma dinámica.
-    $("#modalDeleteDocument").modal('show'); 
-    
+    $("#modalDeleteDocument").modal('show');    
 });	
 </script>
