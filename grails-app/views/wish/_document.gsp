@@ -16,7 +16,7 @@
 				<g:each var="document" in="${DocumentType?.list().findAll{it.isPhase1()}}" status="i">
 					<tr>
 	                  	<td>
-	                  	    <label class="checkbox">
+	                  	    <label class="checkbox"> 
 	                  	        <input type="checkbox" class="checkDoc-1" id="check1-${i}" onclick="clickDocPhase1('${i}')" value="${document?.id}">${document?.name}
 	                  	    </label>
 	                  	</td>
@@ -236,7 +236,8 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     var	date   = "#date"  + numDoc + "-" + nroId;
         //    var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
     var	btnDel = "#btnDel"+ numDoc + "-" + nroId;
-    
+
+    $(idTypeDoc).prop("disabled", true);
     $(text).attr("value", datos[1]);
     $(date).attr("value", datos[2]);
 

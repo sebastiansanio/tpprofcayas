@@ -386,10 +386,4 @@ class WishController {
 			redirect(action: "edit", id: params.idWish)
 		}
     }
-	
-	def deleteDocument(){
-		
-		// sacar luego
-		System.out.println("__________________________________________________deleteDocument");
-	}
 }
