@@ -5,12 +5,13 @@ class Alert {
 
 	AlertType alertType		
 	Date dateCreated
+	Date lastUpdated
 	Date deadline
 	Date attentionDate
 	Date dateFinalized
 	String finalizedReason
-	
 	Date lastInspected
+	int timesRegenerated
 	
 	static belongsTo	= [wish:Wish]	
 	
@@ -41,7 +42,8 @@ class Alert {
 			finalize("wishFinalized")
 		}else if(wish[alertType.nameOfEstimatedDateField] != deadline){
 			finalize("deadlineChanged")
-		}else if(isInspected() && alertType.frequency!=null && new Date() >= lastInspected + alertType.frequency){
+		}else if(isInspected() && alertType.frequency!=null && new Date().clearTime() >= attentionDate + alertType.frequency * (timesRegenerated+1)){
+			timesRegenerated ++
 			lastInspected = null
 		}
 	}
