@@ -1,9 +1,9 @@
-dataSource {
-    pooled = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
-}
+//dataSource {
+//    pooled = true
+//    driverClassName = "org.h2.Driver"
+//    username = "sa"
+//    password = ""
+//}
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
@@ -13,21 +13,37 @@ hibernate {
 environments {
     development {
         dataSource {
+			pooled = true
+			driverClassName = "org.h2.Driver"
+			username = "sa"
+			password = ""
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-			
         }
     }
     test {
         dataSource {
+			pooled = true
+			driverClassName = "org.h2.Driver"
+			username = "sa"
+			password = ""
             dbCreate = "create-drop"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }
+	
+	//create user 'usrcayas'@'localhost' identified by 'gUrrUch4g4';
+	//create schema cayas;
+	//grant all priviliges on cayas.* to 'usrcayas'@'localhost' with grant option;
     production {
         dataSource {
+			pooled = true
+			driverClassName = "com.mysql.jdbc.Driver"
+			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+			username = "usrcayas"
+			password = "gUrrUch4g4"
             dbCreate = "create-drop"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://localhost/cayas?useUnicode=yes&characterEncoding=UTF-8"
             pooled = true
             properties {
                maxActive = -1
