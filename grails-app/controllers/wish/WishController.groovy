@@ -27,7 +27,16 @@ class WishController {
 		
 	}
 
+	def importForm(){
+		
+	}
+	
 	def importWishes(){
+		
+		String filename = new Date().toString()+".tmp"
+		File file = new File(filename)
+		params.importFile.transferTo(file)
+		
 		Map configuration = [
 			sheet:'Pedido',
 			startRow:1,
@@ -55,25 +64,31 @@ class WishController {
 				'U': 'finishDate'
 			]
 		]
-		def path ="/home/sebastian/Descargas/prueba.xls"
-		GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
-		List objects = genericExcelImporter.getObjects(configuration)
-				
-		objects.each{
-			def customer = Customer.get(it['customer.id']) 
-			it.estimatedTimeOfDeparture = it.estimatedTimeOfDeparture.toDateTimeAtStartOfDay().toDate()
-			it.estimatedTimeOfArrival = it.estimatedTimeOfArrival.toDateTimeAtStartOfDay().toDate()			
-			it.wishDate = it.wishDate.toDateTimeAtStartOfDay().toDate()
-			it.djaiFormalizationDate = it.djaiFormalizationDate.toDateTimeAtStartOfDay().toDate()
-			it.finishDate = it.finishDate.toDateTimeAtStartOfDay().toDate()
-			Wish wishInstance = new Wish(it)
-			if(wishInstance.customerOpNumber == null)
-				wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(customer)
-			if(wishInstance.opNumber == null)
-				wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()	
-			customer.addToWishes(wishInstance)
-			customer.save()
+		def path = file.getAbsolutePath()
+		
+		try{
+			GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
+			List objects = genericExcelImporter.getObjects(configuration)	
+			objects.each{
+				def customer = Customer.get(it['customer.id']) 
+				it.estimatedTimeOfDeparture = it.estimatedTimeOfDeparture.toDateTimeAtStartOfDay().toDate()
+				it.estimatedTimeOfArrival = it.estimatedTimeOfArrival.toDateTimeAtStartOfDay().toDate()			
+				it.wishDate = it.wishDate.toDateTimeAtStartOfDay().toDate()
+				it.djaiFormalizationDate = it.djaiFormalizationDate.toDateTimeAtStartOfDay().toDate()
+				it.finishDate = it.finishDate.toDateTimeAtStartOfDay().toDate()
+				Wish wishInstance = new Wish(it)
+				if(wishInstance.customerOpNumber == null)
+					wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(customer)
+				if(wishInstance.opNumber == null)
+					wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()	
+				customer.addToWishes(wishInstance)
+				customer.save()
+			}
+			flash.message =  message(code: 'default.importOk.message')
+		}catch(Exception e){
+			flash.message =  message(code: 'default.importError.message')
 		}
+		file.delete()
 		redirect(action: "list", params: params)
 	}
 		

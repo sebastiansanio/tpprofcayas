@@ -47,6 +47,12 @@
 				<g:link action="query"><i class="icon-th-list"></i> <g:message code="default.query.label" args="[entityName]"/></g:link>
 			</li>
 		</g:if>
+
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":importForm") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/importForm')}">									
+			<li class="${ params.action == "importForm" ? 'active' : '' }">
+				<g:link action="importForm"><i class="icon-plus"></i> <g:message code="default.import.label" args="[entityName]"/></g:link>
+			</li>
+		</g:if>
 		
 		
 		
