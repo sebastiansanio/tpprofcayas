@@ -19,8 +19,14 @@
 
                 <td valign="top" class="value"><g:formatDate date="${document?.received}"/> </td>
                 
-                <td valign="top" class="value"><a href="${createLink(action: 'downloadDocument',id: document?.id)}" target="_blank"><i class="icon-download-alt"></i></a></td>
-                
+                <td valign="top" class="value">
+	                <g:if test="${document?.file.length == 0}">
+	                	<em>${message(code: 'document.nofile.label', default: 'No File')}</em>
+	                </g:if>
+	                <g:else> 
+	                	<a href="${createLink(action: 'downloadDocument',id: document?.id)}" target="_blank"><i class="icon-download-alt"></i></a>
+               		</g:else>
+               	</td>
 			</tr>
 		</g:each>
     </tbody>
