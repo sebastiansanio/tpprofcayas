@@ -27,14 +27,14 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="alertType.nameOfEstimatedDateField.label" default="Name Of Estimated Date Field" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "nameOfEstimatedDateField")}</td>
+				<td valign="top" class="value">${ message(code:'wish.'+alertTypeInstance.nameOfEstimatedDateField+'.label')}</td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="alertType.nameOfCompletionField.label" default="Name Of Completion Field" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "nameOfCompletionField")}</td>
+				<td valign="top" class="value">${ message(code:'wish.'+alertTypeInstance.nameOfCompletionField+'.label')}</td>
 				
 			</tr>
 		
