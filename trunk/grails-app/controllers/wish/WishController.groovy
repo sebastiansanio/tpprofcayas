@@ -386,4 +386,15 @@ class WishController {
 			redirect(action: "edit", id: params.idWish)
 		}
     }
+	
+	def downloadDocument(){
+		def document = Document.get(params.id)
+		
+		response.setContentType("application/x-download")
+		response.setHeader("Content-disposition", "attachment; filename=${params.id}")
+		response.outputStream << document.file
+		response.outputStream.flush()
+		
+		   return	
+	}
 }
