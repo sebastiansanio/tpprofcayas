@@ -35,9 +35,9 @@
 			
 				<td><g:link action="show" id="${alertTypeInstance.id}">${fieldValue(bean: alertTypeInstance, field: "description")}</g:link></td>
 			
-				<td>${fieldValue(bean: alertTypeInstance, field: "nameOfEstimatedDateField")}</td>
+				<td>${ message(code:'wish.'+alertTypeInstance.nameOfEstimatedDateField+'.label')}</td>
 			
-				<td>${fieldValue(bean: alertTypeInstance, field: "nameOfCompletionField")}</td>
+				<td>${ message(code:'wish.'+alertTypeInstance.nameOfCompletionField+'.label')}</td>
 			
 				<td>${fieldValue(bean: alertTypeInstance, field: "alertTerm")}</td>
 			
