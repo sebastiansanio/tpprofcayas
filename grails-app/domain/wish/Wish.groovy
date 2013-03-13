@@ -82,6 +82,7 @@ class Wish {
 	Date billDate
 	Date finishDate
 	boolean hasFeeder
+	Date forwarderSelectedDate
 	
 	static constraints = {
 		opNumber unique:true,min:0L
@@ -144,8 +145,14 @@ class Wish {
 		bill nullable:true		
 		billDate nullable:true
 		finishDate nullable:true
+		forwarderSelectedDate nullable:true
 	}
 		
+	def beforeValidate(){
+		if(forwarder!= null &&forwarderSelectedDate == null)
+			forwarderSelectedDate = new Date().clearTime()
+	}
+	
 	Date getTimeOfDeparture(){
 		if(departed)
 			return estimatedTimeOfDeparture
@@ -245,16 +252,21 @@ class Wish {
 	
 	//Alert 3
 	Date getDateToDemandSwiftToClient(){
-		if(paymentTerm == null || paymentTerm?.percentPaymentAfterDelivery==100)
-			return null
-		Date date = wishDate
-		int i = 0
-		while (i<4){
-			date = date.plus(1)
-			if(!(date[Calendar.DAY_OF_WEEK]==Calendar.SATURDAY || date[Calendar.DAY_OF_WEEK]==Calendar.SUNDAY))
-			i++
+		if(paymentTerm?.percentPaymentBeforeDelivery==30){
+			Date date = wishDate
+			int i = 0
+			while (i<4){
+				date = date.plus(1)
+				if(!(date[Calendar.DAY_OF_WEEK]==Calendar.SATURDAY || date[Calendar.DAY_OF_WEEK]==Calendar.SUNDAY))
+				i++
+			}
+			return date
 		}
-		return date	
+		Date date = getBlReceivedDate()
+		if(date!= null)
+			date.plus(5)
+		
+		return date
 	}
 	
 	//Alert 5
@@ -300,32 +312,9 @@ class Wish {
 	Date getEstimatedBalancePaymentDate(){
 		if(paymentTerm?.percentPaymentAfterDelivery==0)
 			return deliveryDate
-		if(paymentTerm?.hasCad() || paymentTerm?.percentPaymentAfterDelivery==70)
+		if(paymentTerm?.hasCad() && paymentTerm?.percentPaymentAfterDelivery==70)
 			return getBlReceivedDate()
 		return null
-		
-	}
-	
-	//Alert 9
-	Date getEstimatedPicturesOfLoadingContainerReceivedDate(){
-		if(forwarder==null)
-			return null
-		
-		Date estimatedDate = null
-		boolean allDocumentsReceived = true
-		
-		firstStageRequiredDocuments.each{
-			if(it.received == null)
-				allDocumentsReceived = false
-			else
-				if(estimatedDate == null || it.received > estimatedDate)
-					estimatedDate = it.received
-		}
-		
-		if(allDocumentsReceived)
-			return estimatedDate
-		return null
-		
 	}
 	
 	//Alert 10
@@ -366,6 +355,7 @@ class Wish {
 		}
 		return blReceivedAux
 	}
+	
 	
 	public String toString() {
 		return opNumber

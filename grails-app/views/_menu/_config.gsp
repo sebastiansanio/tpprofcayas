@@ -23,23 +23,7 @@
 					</a></li>
 				</ul>
 			</li>
-			<li class="dropdown-submenu">
-				<a href="#" class="dropdown-toggle">
-					<span class="js-current-language">${message(code: 'default.skin.label', default: 'Skin')}</span>
-				</a>
-				<ul class="dropdown-menu dropdown-menu-dark">
-					<li>
-						<a title="Original" href="${request.forwardURI+'?skin=bootstrap'}">
-							<g:message code="default.skin.original.label" default="Bright (Original)"/>
-						</a>
-					</li>
-					<li>
-						<a title="Skin A"    href="${request.forwardURI+'?skin=bootstrap_skinA'}">
-							<g:message code="default.skin.skinA.label"    default="Dark (Cyborg)"/>
-						</a>
-					</li>
-				</ul>
-			</li>
+
 		</ul>
 	</li>
 </ul>
