@@ -27,6 +27,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd1-${i}" name="document"></p>
+	                  		<p><a role="button" class="btn btn-small btn-primary btnRep" id="btnRep1-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
 	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel1" id="btnDel1-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
@@ -62,6 +63,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd2-${i}" name="document"></p>
+	                  		<p><a role="button" class="btn btn-small btn-primary btnRep" id="btnRep2-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
 	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel2" id="btnDel2-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
@@ -92,6 +94,10 @@ function btnDelName(nroDoc, nroId) {
 	return "#btnDel" + nroDoc + "-" + nroId;
 };
 
+function btnRepName(nroDoc, nroId) {
+	return "#btnRep" + nroDoc + "-" + nroId;
+};
+
 $(document).ready(function() {
     var init = function(countElement, nroDoc)
     {
@@ -103,13 +109,15 @@ $(document).ready(function() {
             date   = dateName(nroDoc, i);
             btnAdd = btnAddName(nroDoc, i);
             btnDel = btnDelName(nroDoc, i);
-
+			btnRep = btnRepName(nroDoc, i);
+			
             $(text).prop("disabled", true);
             $(date).prop("disabled", true);
             $(btnAdd).attr("disabled", "disabled");
             $(btnDel).attr("disabled", "disabled");
 
            	$(btnDel).hide();
+           	$(btnRep).hide();
         }
 
     };
@@ -129,6 +137,19 @@ $(document).ready(function() {
     });
 });
 
+$(".btnRep").click(function()
+{	
+	var nroId = this.id.split("-")[1];
+	var aux = this.id.split("-")[0]; //primer parte del id
+	var nroDoc = aux.slice(6,aux.length); //6 = btnRep
+	
+	var nameAdd = btnAddName(nroDoc, nroId);	
+	$(nameAdd).show();
+	
+	var idButton = "#" + this.id;	
+	$(idButton).hide();
+});
+	    
 function clickDocPhase1(nroId)
 {
     enableDisable(nroId, 1);
@@ -216,7 +237,7 @@ function modalDelete(nroDoc, nroId, nameMethod)
 
 	var nameAcction = $("#nroCurrentDocumentDelete").parent().attr("action");
 	var regExp = nameMethod + "?";
-	var nameNewAcction = nameAcction.replace(/deleteDocument*\?/, "deleteDocumentFirstPhase?");
+	var nameNewAcction = nameAcction.replace(/deleteDocument*\?/, regExp);
 
     $("#nroCurrentDocumentDelete").parent().attr("action", nameNewAcction);
     
@@ -234,14 +255,26 @@ function enableComponentCheck(numDoc, datos, clickFunc)
 	
     var	text   = "#txt"   + numDoc + "-" + nroId;
     var	date   = "#date"  + numDoc + "-" + nroId;
-        //    var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
+    var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
     var	btnDel = "#btnDel"+ numDoc + "-" + nroId;
+    var	btnRep = "#btnRep"+ numDoc + "-" + nroId;
+    
 
     $(idTypeDoc).prop("disabled", true);
     $(text).attr("value", datos[1]);
     $(date).attr("value", datos[2]);
 
-    $(btnDel).show();		
+    $(btnDel).show();	
+
+    if (datos[3] == true) // no hay archivo
+    {
+        $(btnAdd).show(); 
+    }
+    else // si hay archivo
+    {
+        $(btnAdd).hide();
+        $(btnRep).show();
+    }	
 };
 </script>
 
@@ -249,7 +282,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     <script type="text/javascript">
         $(document).ready(function() {
 
-            var datos = ["${doc1?.documentType?.id}", "${doc1?.trackingNumber}", '${doc1?.received?.format("dd/MM/yyyy")}'];
+            var datos = ["${doc1?.documentType?.id}", "${doc1?.trackingNumber}", '${doc1?.received?.format("dd/MM/yyyy")}', "${doc1?.file?.length}" == "0"];
             
             enableComponentCheck(1, datos, clickDocPhase1);            
          });
@@ -259,8 +292,8 @@ function enableComponentCheck(numDoc, datos, clickFunc)
 <g:each var="doc2" in="${wishInstance?.secondStageRequiredDocuments}">
     <script type="text/javascript">
         $(document).ready(function() {
-            
-        	var datos = ["${doc2?.documentType?.id}", "${doc2?.trackingNumber}", '${doc2?.received?.format("dd/MM/yyyy")}'];
+
+        	var datos = ["${doc2?.documentType?.id}", "${doc2?.trackingNumber}", '${doc2?.received?.format("dd/MM/yyyy")}', "${doc2?.file?.length}" == "0"];
         	
             enableComponentCheck(2, datos, clickDocPhase2);			
          });
