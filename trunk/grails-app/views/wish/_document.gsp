@@ -27,7 +27,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd1-${i}" name="document"></p>
-	                  		<p><a role="button" class="btn btn-small btn-primary btnRep" id="btnRep1-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
+	                  		<p><a href="#modalReplaceDocument" role="button" class="btn btn-small btn-primary btnRep" id="btnRep1-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
 	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel1" id="btnDel1-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
@@ -72,6 +72,9 @@
  		</table>
     </div>
 
+<!--  modal para reemplazar archivos de un documento -->
+	<g:render template="documentReplaceModal"></g:render>
+	
 <script type="text/javascript">
 
 function checkName(nroDoc, nroId) {
@@ -99,6 +102,9 @@ function btnRepName(nroDoc, nroId) {
 };
 
 $(document).ready(function() {
+
+	var replaceNroDoc, replaceNroId, replaceIdButton;
+	 
     var init = function(countElement, nroDoc)
     {
         var text, date, btnAdd, btnDel;
@@ -135,21 +141,32 @@ $(document).ready(function() {
     {
         modalDelete(2, this.id.split("-")[1], "deleteDocumentSecondPhase");
     });
-});
 
-$(".btnRep").click(function()
-{	
-	var nroId = this.id.split("-")[1];
-	var aux = this.id.split("-")[0]; //primer parte del id
-	var nroDoc = aux.slice(6,aux.length); //6 = btnRep
-	
-	var nameAdd = btnAddName(nroDoc, nroId);	
-	$(nameAdd).show();
-	
-	var idButton = "#" + this.id;	
-	$(idButton).hide();
+    $(".btnRep").click(function()
+    {	
+    	replaceNroId = this.id.split("-")[1];
+    	var aux = this.id.split("-")[0]; //primer parte del id
+    	replaceNroDoc = aux.slice(6,aux.length); //6 = btnRep
+    	
+    	replaceIdButton = "#" + this.id;	
+
+    	 $("#modalReplaceDocument").modal('show');
+    });    
+
+    $("#repDoc").click(function()
+   	{
+    	var idAdd = btnAddName(replaceNroDoc, replaceNroId);
+    	var list = (replaceNroDoc == 1)? "firstStageRequiredDocuments": "secondStageRequiredDocuments";
+    	var nameAdd = list + "[" + replaceNroId + "].file";
+    
+		var elementAdd = "<p><input type='file' id='"+ idAdd +"' name='"+nameAdd+"'></p>";
+
+		$(replaceIdButton).parent().prepend(elementAdd);
+    	    	
+    	$(replaceIdButton).hide(); 
+    });	
 });
-	    
+    
 function clickDocPhase1(nroId)
 {
     enableDisable(nroId, 1);
@@ -272,7 +289,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     }
     else // si hay archivo
     {
-        $(btnAdd).hide();
+        $(btnAdd).remove();
         $(btnRep).show();
     }	
 };

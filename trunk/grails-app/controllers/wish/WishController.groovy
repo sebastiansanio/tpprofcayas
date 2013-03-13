@@ -390,10 +390,6 @@ class WishController {
 	def downloadDocument(){
 		def document = Document.get(params.id)
 		
-		System.out.println(document.file);
-		System.out.println(document.file== null);
-		System.out.println(document.file.length == 0);
-		
 		//response.setContentType("application/x-download")
 		response.setHeader("Content-disposition", "attachment; filename=${params.id}")
 		response.outputStream << document.file
