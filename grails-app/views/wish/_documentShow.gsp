@@ -19,7 +19,8 @@
 
                 <td valign="top" class="value"><g:formatDate date="${document?.received}"/> </td>
                 
-                <td valign="top" class="value"></td>
+                <td valign="top" class="value"><a href="${createLink(action: 'downloadDocument',id: document?.id)}" target="_blank"><i class="icon-download-alt"></i> lalallalal</a></td>
+                
 			</tr>
 		</g:each>
     </tbody>
