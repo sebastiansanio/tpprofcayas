@@ -9,8 +9,9 @@
 
 <div class="span5">
 
-
-
+<h4>
+${message(code:'default.news.label')} 
+</h4>
 </div>
 
 </body>
