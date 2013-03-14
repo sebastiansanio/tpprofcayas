@@ -329,8 +329,6 @@
 				</div>
 			</div>
 
-
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')} ">
 				<label for="swiftSentToSupplierDate" class="control-label"><g:message code="wish.swiftSentToSupplierDate.label" default="Swift Sent To Supplier Date" /></label>
 				<div class="controls">
@@ -406,8 +404,6 @@
 				</div>
 			</div>
 
-
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiExtendedRequested', 'error')} ">
 				<label for="djaiExtendedRequested" class="control-label"><g:message code="wish.djaiExtendedRequested.label" default="Djai Extended Requested" /></label>
 				<div class="controls">
@@ -424,8 +420,6 @@
 				</div>
 			</div>
 
-
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'shippingMark', 'error')} ">
 				<label for="shippingMark" class="control-label"><g:message code="wish.shippingMark.label" default="Shipping Mark" /></label>
 				<div class="controls">
@@ -441,8 +435,6 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'customerLogoPunch', 'error')}</span>
 				</div>
 			</div>
-
-
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'taxRegistryNumberAndCuitVerification', 'error')} ">
 				<label for="taxRegistryNumberAndCuitVerification" class="control-label"><g:message code="wish.taxRegistryNumberAndCuitVerification.label" default="Tax Registry Number And Cuit Verification" /></label>
@@ -467,8 +459,6 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'amountOfMoneyInAdvanceTransferred', 'error')}</span>
 				</div>
 			</div>
-
-
 
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'moneyBalance', 'error')} ">

@@ -498,24 +498,17 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${wishInstance.docDraftToBeApprovedBeforeDelivery}" var="d">
-						<li><g:link controller="draft" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
+				<td colspan="2" valign="top" class="name">
+					<p><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery"/></p>
+					<g:render template="draftShow" model="['drafts':wishInstance?.docDraftToBeApprovedBeforeDelivery]"/>
+				</td>				
 			</tr>
-		
+					
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
 					<p><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></p>
 					<g:render template="documentShow" model="['documents':wishInstance?.firstStageRequiredDocuments]"/>
-				</td>
-				
+				</td>				
 			</tr>
 
             <tr class="prop">
