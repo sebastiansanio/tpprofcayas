@@ -7,7 +7,9 @@ class Document {
 	DocumentType documentType
 	Date received
 	String trackingNumber
+	String fileName
 	byte[] file
+
 	
     static mapping = {
     }
@@ -16,7 +18,7 @@ class Document {
 		file maxSize: 9999999,nullable:true
 		received nullable:true
 		trackingNumber nullable:true,blank:true
-		
+		fileName nullable:true,blank:true		
     }
 	
 	boolean requiresVisa(){
