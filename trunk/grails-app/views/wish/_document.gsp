@@ -77,6 +77,8 @@
 	
 <script type="text/javascript">
 
+var nextUseDoc1 = 0, nextUseDoc2 = 0;
+
 function checkName(nroDoc, nroId) {
 	return "#check" + nroDoc + "-" + nroId;
 };
@@ -211,7 +213,7 @@ function enableDisable(nroId, nroDoc)
 function setName(elementCount, nroDoc, list)
 {
     /* cambia los names para pasarle al controlador solo los que están marcados */
-    for (var i = 0, id = 0; i < elementCount; i++)
+    for (var i = 0, id = (nroDoc==1)?nextUseDoc1:nextUseDoc2; i < elementCount; i++)
     {
         var	check  = "#check"  + nroDoc + "-" + i;
         var	text   = "#txt"    + nroDoc + "-" + i;
@@ -219,27 +221,30 @@ function setName(elementCount, nroDoc, list)
         var	btnAdd = "#btnAdd" + nroDoc + "-" + i;
         var	btnDel = "#btnDel" + nroDoc + "-" + i;
 
-         if ($(check).prop("checked") == true)
-         {
-            var checkName  = list + "[" + id + "].documentType.id";
-            var	textName   = list + "[" + id + "].trackingNumber";
-            var	dateName   = list + "[" + id + "].received";
-            var	btnAddName = list + "[" + id + "].file";
-
-            $(check).attr("name", checkName);
-            $(text).attr("name", textName);
-            $(date).attr("name", dateName);
-            $(btnAdd).attr("name", btnAddName);
-
-            id++;
-         }
-         else
-         {
-            $(check).removeAttr("name");
-            $(text).removeAttr("name");
-            $(date).removeAttr("name");
-            $(btnAdd).removeAttr("name");
-         }
+        if ($(check).prop("disabled") == false)
+        {
+	         if ($(check).prop("checked") == true)
+	         {
+	            var checkName  = list + "[" + id + "].documentType.id";
+	            var	textName   = list + "[" + id + "].trackingNumber";
+	            var	dateName   = list + "[" + id + "].received";
+	            var	btnAddName = list + "[" + id + "].file";
+	
+	            $(check).attr("name", checkName);
+	            $(text).attr("name", textName);
+	            $(date).attr("name", dateName);
+	            $(btnAdd).attr("name", btnAddName);
+	
+	            id++;
+	         }
+	         else
+	         {
+	            $(check).removeAttr("name");
+	            $(text).removeAttr("name");
+	            $(date).removeAttr("name");
+	            $(btnAdd).removeAttr("name");
+	         }
+        }
     }
 };
 
@@ -263,7 +268,7 @@ function modalDelete(nroDoc, nroId, nameMethod)
 
 function enableComponentCheck(numDoc, datos, clickFunc)
 {
-	var idTypeDoc = ".checkDoc-" + numDoc + "[value = " + datos[0] + "]";
+	var idTypeDoc = ".checkDoc-" + numDoc + "[value = " + datos[0] + "]"; //busco el tipo de doc del pedido
     $(idTypeDoc).prop("checked", true); //marco el check si el doc esta en el pedido
 
     var nroId = $(idTypeDoc).attr("id").split("-")[1];
@@ -301,7 +306,9 @@ function enableComponentCheck(numDoc, datos, clickFunc)
 
             var datos = ["${doc1?.documentType?.id}", "${doc1?.trackingNumber}", '${doc1?.received?.format("dd/MM/yyyy")}', "${doc1?.file?.length}" == "0"];
             
-            enableComponentCheck(1, datos, clickDocPhase1);            
+            enableComponentCheck(1, datos, clickDocPhase1);      
+
+            nextUseDoc1 ++;      
          });
     </script>
 </g:each>
@@ -313,6 +320,8 @@ function enableComponentCheck(numDoc, datos, clickFunc)
         	var datos = ["${doc2?.documentType?.id}", "${doc2?.trackingNumber}", '${doc2?.received?.format("dd/MM/yyyy")}', "${doc2?.file?.length}" == "0"];
         	
             enableComponentCheck(2, datos, clickDocPhase2);			
+
+            nextUseDoc2 ++;
          });
     </script>
 </g:each>
