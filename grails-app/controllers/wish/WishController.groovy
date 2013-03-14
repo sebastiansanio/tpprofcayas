@@ -92,7 +92,7 @@ class WishController {
 		redirect(action: "list", params: params)
 	}
 		
-    def list() {
+    def list() {		
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
@@ -138,8 +138,15 @@ class WishController {
     }
 
     def save() {
+		def keys = params.keySet().toArray()
+		keys.each{
+			if(it.matches("firstStageRequiredDocuments\\[[0-9]*\\]\\.file"))
+				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+			if(it.matches("secondStageRequiredDocuments\\[[0-9]*\\]\\.file"))
+				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+		}
+
         def wishInstance = new Wish(params)
-		
 		alertManagerService.generateAlerts(wishInstance)
 		if(wishInstance.customerOpNumber == null)
 			wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(wishInstance.customer)
@@ -183,8 +190,15 @@ class WishController {
     }
 
     def update() {
-        
 		def wishInstance = Wish.get(params.id)
+		def keys = params.keySet().toArray()
+		keys.each{
+			if(it.matches("firstStageRequiredDocuments\\[[0-9]*\\]\\.file"))
+				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+			if(it.matches("secondStageRequiredDocuments\\[[0-9]*\\]\\.file"))
+				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+		}
+		
         if (!wishInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
             redirect(action: "list")
@@ -390,8 +404,7 @@ class WishController {
 	def downloadDocument(){
 		def document = Document.get(params.id)
 		
-		//response.setContentType("application/x-download")
-		response.setHeader("Content-disposition", "attachment; filename=${params.id}")
+		response.setHeader("Content-disposition", "attachment; filename=${document.fileName}")
 		response.outputStream << document.file
 		response.outputStream.flush()
 		
