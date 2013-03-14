@@ -18,7 +18,16 @@
 		<g:form action="deleteDocument" params="[idWish: wishInstance.id]">		
 			<button class="btn" type="reset" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.cancel.label" default="Cancel"/></button>
 			<g:hiddenField name="nroDocumentDelete" id="nroCurrentDocumentDelete"/>
-			<button class="btn btn-danger" id="delDoc" data-dismiss="modal" aria-hidden="true"> <g:message code="default.button.delete.label" default="Delete"/></button>
+			<button class="btn btn-danger" id="delDoc"> <g:message code="default.button.delete.label" default="Delete"/></button>
 		</g:form>
 	</div>
 </div>
+
+<script type="text/javascript">		
+	$("#delDoc").click(function()		
+	{		
+		//porq de la otra manera llamaba al DeleteDocument y no al que le ponía en forma dinámica.		
+	    $("#modalDeleteDocument").submit();
+	    $("#modalDeleteDocument").modal('hide');		
+	});		
+</script>
