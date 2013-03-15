@@ -477,27 +477,6 @@
 				</div>
 			</div>
 
-
-
-
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'docDraftToBeApprovedBeforeDelivery', 'error')} ">
-				<label for="docDraftToBeApprovedBeforeDelivery" class="control-label"><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-					<g:each in="${wishInstance?.docDraftToBeApprovedBeforeDelivery?}" var="d">
-					    <li><g:link controller="draft" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-					
-					<g:link class="btn btn-inverse" controller="draft" action="create" params="['wish.id': wishInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'draft.label', default: 'Draft')])}</g:link>
-
-					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'docDraftToBeApprovedBeforeDelivery', 'error')}</span>
-				</div>
-			</div>
-
-
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'freightQuote', 'error')} ">
 				<label for="freightQuote" class="control-label"><g:message code="wish.freightQuote.label" default="Freight Quote" /></label>
 				<div class="controls">
@@ -563,7 +542,10 @@
 	 
 	 <h5><g:message code="wish.loadUnits.label" default="Products"/></h5>
 	 <g:render template="loadUnits" model="['wishInstance':wishInstance]"/>
-		
+	
+	 <hr>
+	 <g:render template="draft" model="['wishInstance':wishInstance]"/>
+
 	 <hr>
 	 <g:render template="document" model="['wishInstance':wishInstance]"/>
 	 	

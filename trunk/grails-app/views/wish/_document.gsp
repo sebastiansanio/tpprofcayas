@@ -158,13 +158,16 @@ $(document).ready(function() {
     $("#repDoc").click(function()
    	{
     	var idAdd = btnAddName(replaceNroDoc, replaceNroId);
+    	var idCheck = checkName(replaceNroDoc, replaceNroId);
     	var list = (replaceNroDoc == 1)? "firstStageRequiredDocuments": "secondStageRequiredDocuments";
-    	var nameAdd = list + "[" + replaceNroId + "].file";
+    	var replacePosition = $(idCheck).attr("name").split("[")[1].split("]")[0];
+    	
+    	var nameAdd = list + "[" + replacePosition + "].file";
     
 		var elementAdd = "<p><input type='file' id='"+ idAdd +"' name='"+nameAdd+"'></p>";
 
 		$(replaceIdButton).parent().prepend(elementAdd);
-    	    	
+    	
     	$(replaceIdButton).hide(); 
     });	
 });
@@ -294,7 +297,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     }
     else // si hay archivo
     {
-        $(btnAdd).remove();
+        $(btnAdd).parent().remove();
         $(btnRep).show();
     }	
 };
