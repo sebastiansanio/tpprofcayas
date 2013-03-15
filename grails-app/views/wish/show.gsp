@@ -485,7 +485,14 @@
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.finishDate}" /></td>
 				
 			</tr>
-		
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.hasFeeder.label" default="Has feeder?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.hasFeeder}" /></td>
+				
+			</tr>
+					
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
 				    <p><g:message code="wish.alerts.label" default="Alerts" /> <p>
@@ -531,13 +538,6 @@
 				
 			</tr>
 			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.hasFeeder.label" default="Has feeder?" /></td>
-				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.hasFeeder}" /></td>
-				
-			</tr>
-
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.dateCreated.label" default="Date Created" /></td>
 				
