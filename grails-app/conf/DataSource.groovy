@@ -42,7 +42,7 @@ environments {
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "usrcayas"
 			password = "gUrrUch4g4"
-            dbCreate = "create-drop"
+            dbCreate = "update"
             url = "jdbc:mysql://localhost/cayas?useUnicode=yes&characterEncoding=UTF-8"
             pooled = true
             properties {
