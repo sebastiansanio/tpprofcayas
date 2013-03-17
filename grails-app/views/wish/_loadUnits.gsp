@@ -12,23 +12,13 @@
 	function addLoadUnit(){
 		var htmlId = "loadUnit" + loadUnitCount;
 		
-		var templateHtml = "<div class='row' id='" + htmlId + "' name='" + htmlId +"'>";	
+		var templateHtml = "<tr>";	
 
-		templateHtml += "<div class='control-group'>";
-		templateHtml += "<label for='cartonPrintingInfoSentDate' class='control-label'>";
-		templateHtml += "${message(code:'loadUnit.cartonPrintingInfoSentDate.label')}";
-		templateHtml += "</label>";
-		templateHtml += "<div class='controls'>";
+		templateHtml += "<td>";
 		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker' data-date-format='dd/mm/yyyy' />";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
+		templateHtml += "</td>";
 
-
-		templateHtml += "<div class='control-group fieldcontain'>";
-		templateHtml += "<label for='cartonPrintingInfoSentUser' class='control-label'>";
-		templateHtml += "${message(code:'loadUnit.cartonPrintingInfoSentUser.label')}";
-		templateHtml += "</label>";
-		templateHtml += "<div class='controls'>";
+		templateHtml += "<td>";
 		templateHtml += "<select id='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentUser' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentUser.id'>";
 		<%
 		User.findAll().each{
@@ -37,16 +27,9 @@
 		}		
 		%>
 		templateHtml += "</select>";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
+		templateHtml += "</td>";
 
-
-
-		templateHtml += "<div class='control-group fieldcontain'>";
-		templateHtml += "<label for='product' class='control-label'>";
-		templateHtml += "${message(code:'loadUnit.product.label')}";
-		templateHtml += "</label>";
-		templateHtml += "<div class='controls'>";
+		templateHtml += "<td>";
 		templateHtml += "<select id='loadUnits["+loadUnitCount+"].product' name='loadUnits["+loadUnitCount+"].product.id'>";
 		<%
 		Product.findAll().each{
@@ -56,31 +39,19 @@
 		
 		%>
 		templateHtml += "</select>";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
-		
+		templateHtml += "</td>";		
 
-		templateHtml += "<div class='control-group'>";
-		templateHtml += "<label for='quantity' class='control-label'>";
-		templateHtml += "${message(code:'loadUnit.quantity.label')}";
-		templateHtml += "</label>";
-		templateHtml += "<div class='controls'>";
+		templateHtml += "<td>";
 		templateHtml += "<input type='number' step='any' id='loadUnits["+loadUnitCount+"].quantity' name='loadUnits["+loadUnitCount+"].quantity' />";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
+		templateHtml += "</td>";
 
-		templateHtml += "<div class='control-group'>";
-		templateHtml += "<label for='unitPrice' class='control-label'>";
-		templateHtml += "${message(code:'loadUnit.unitPrice.label')}";
-		templateHtml += "</label>";
-		templateHtml += "<div class='controls'>";
+		templateHtml += "<td>";
 		templateHtml += "<input type='number' step='any' id='loadUnits["+loadUnitCount+"].unitPrice' name='loadUnits["+loadUnitCount+"].unitPrice' />";
-		templateHtml += "</div>";
-		templateHtml += "</div>";
+		templateHtml += "</td>";
 		
 		
-		templateHtml += "</div>";
-		$("#loadUnitsChildList").append(templateHtml);		
+		templateHtml += "</tr>";
+		$("#loadUnit-table").append(templateHtml);		
 		
 		$("#"+loadUnitCount+"cartonPrintingInfoSentDate").datepicker({
 			format: 'dd/mm/yyyy',
@@ -92,56 +63,51 @@
 
 </script>
 
-<div id="loadUnitsChildList">
-	
+<div class="row-fluid">
+
+<table class="table table-hover table-condensed">
+	<thead>
+ 		<tr>
+        	<th>${message(code:'loadUnit.cartonPrintingInfoSentDate.label')}</th>
+        	<th>${message(code:'loadUnit.cartonPrintingInfoSentUser.label')}</th>
+        	<th>${message(code:'loadUnit.product.label')}</th>
+        	<th>${message(code:'loadUnit.quantity.label')}</th>
+        	<th>${message(code:'loadUnit.unitPrice.label')}</th>
+        </tr>
+    </thead>
+	<tbody id="loadUnit-table">
 	<g:each var="loadUnitInstance" in="${wishInstance?.loadUnits}" status="i">
-	
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}">
-				<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="loadUnit.cartonPrintingInfoSentDate.label" default="Carton Printing Info Sent Date" /></label>
-				<div class="controls">
-					<bs:datePicker default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}"  />
-					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
-				</div>
-			</div>
+		<tr>
+			<td>	
+				<bs:datePicker default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}"  />
+				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
+			</td>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentUser', 'error')}">
-				<label for="cartonPrintingInfoSentUser" class="control-label"><g:message code="loadUnit.cartonPrintingInfoSentUser.label" default="Carton Printing Info Sent User" /></label>
-				<div class="controls">
-					<g:select id="cartonPrintingInfoSentUser" name="loadUnits[${i}].cartonPrintingInfoSentUser.id" from="${login.User.list()}" optionKey="id" value="${loadUnitInstance?.cartonPrintingInfoSentUser?.id}" noSelection="${[null:'']}" class="many-to-one"/>
-					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentUser', 'error')}</span>
-				</div>
-			</div>
+			<td>
+				<g:select id="cartonPrintingInfoSentUser" name="loadUnits[${i}].cartonPrintingInfoSentUser.id" from="${login.User.list()}" optionKey="id" value="${loadUnitInstance?.cartonPrintingInfoSentUser?.id}" noSelection="${[null:'']}" class="many-to-one"/>
+				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentUser', 'error')}</span>
+			</td>
+			
+			<td>
+				<g:select id="loadUnits[${i}].product" name="loadUnits[${i}].product.id" from="${product.Product.list()}" optionKey="id" required="" value="${loadUnitInstance?.product?.id}" class="many-to-one"/>
+				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'product', 'error')}</span>
+			</td>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'product', 'error')} required">
-				<label for="product" class="control-label"><g:message code="loadUnit.product.label" default="Product" /><span class="required-indicator">*</span></label>
-				<div class="controls">
-					<g:select id="loadUnits[${i}].product" name="loadUnits[${i}].product.id" from="${product.Product.list()}" optionKey="id" required="" value="${loadUnitInstance?.product?.id}" class="many-to-one"/>
-					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'product', 'error')}</span>
-				</div>
-			</div>
+			<td>
+				<g:field type="number" name="loadUnits[${i}].quantity" step="any" required="" value="${loadUnitInstance.quantity}"/>
+				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'quantity', 'error')}</span>
+			</td>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'quantity', 'error')} required">
-				<label for="quantity" class="control-label"><g:message code="loadUnit.quantity.label" default="Quantity" /><span class="required-indicator">*</span></label>
-				<div class="controls">
-					<g:field type="number" name="loadUnits[${i}].quantity" step="any" required="" value="${loadUnitInstance.quantity}"/>
-					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'quantity', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}">
-				<label for="unitPrice" class="control-label"><g:message code="loadUnit.unitPrice.label" default="Unit Price" /></label>
-				<div class="controls">
-					<g:field type="number" name="loadUnits[${i}].unitPrice" step="any" value="${loadUnitInstance.unitPrice}"/>
-					<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}</span>
-				</div>
-			</div>
-
-	
-	
+			<td>
+				<g:field type="number" name="loadUnits[${i}].unitPrice" step="any" value="${loadUnitInstance.unitPrice}"/>
+				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}</span>
+			</td>
+		</tr>
 	</g:each>
+
+</tbody>
+</table>
+
 </div>
-
-
-
 
 <input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add')}" onClick="addLoadUnit();" />
