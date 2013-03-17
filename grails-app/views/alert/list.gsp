@@ -27,8 +27,9 @@
 			
 				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /> </th>
 				
-				<th><g:message code="alert.doInspect.label" default="Inspected" /> </th>
-				
+				<g:if test="${params.action =='list'}">				
+					<th><g:message code="alert.doInspect.label" default="Inspected" /> </th>
+				</g:if>
 			
 			</tr>
 		</thead>
@@ -46,8 +47,9 @@
 						
 				<td> <a href="#" class="popoverAlerts" rel="popover" data-content="<div><% alertInstance.wish.getActiveAlerts().each{out.println(it.deadline.format("dd/MM/yyyy")+": "+it.toString())} %>" data-original-title="Alertas activas" >${alertInstance.wish.getActiveAlerts().size()}</a></td>
 			 	
-				<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link></td>
-				
+			 	<g:if test="${params.action =='list'}">		
+					<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link></td>
+				</g:if>
 			
 			</tr>
 		</g:each>

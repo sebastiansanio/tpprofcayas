@@ -24,8 +24,7 @@ class AlertExportService {
 			}
 		
 		def dateFormatter = {domain, value->
-			return value?.format("dd/MM/yyyy")
-			
+			return value?.format("dd/MM/yyyy")	
 		}
 
 		Date dateFinalized
