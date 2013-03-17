@@ -4,6 +4,9 @@ import stakeholder.CustomsBroker;
 import stakeholder.Supplier;
 
 import org.apache.shiro.crypto.hash.Sha256Hash
+import org.quartz.Scheduler
+import org.quartz.SchedulerFactory
+import org.quartz.impl.StdSchedulerFactory
 import alert.AlertType
 import login.*
 import modal.*
@@ -14,8 +17,7 @@ import product.*
 class BootStrap {
 
     def init = { servletContext ->
-		
-		
+				
 		List supplierReportFields = ["opNumber","customer","supplier","shipper","supplierOrder","currencyFob","currency","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","visaChargePayment","visaChargePaymentConcept","shippingMark","customerLogoPunch","hsCodeToBeWritten",
 			"amountOfMoneyInAdvanceTransferred","moneyBalance","dateOfBalancePayment","picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
@@ -51,7 +53,7 @@ class BootStrap {
 			"picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
 			"ship","docDraftApproved","forwarder","agent","freightQuote","forwarderRefNumber","loadSecuredPercent",
 			"cbm","grossWeight","netWeight","palletsQuantity","typeOfFreight","blNumber","dispatchNumber","bill",
-			"billDate","finnishDate"
+			"billDate","finishDate"
 		]
 		def generalReport = new Report(name:'General',pendingOnly:false,fields:generalReportFields)
 		generalReport.save()

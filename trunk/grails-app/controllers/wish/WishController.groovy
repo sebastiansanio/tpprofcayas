@@ -16,6 +16,7 @@ class WishController {
 	def wishExportService
 	def alertManagerService
 	def opNumberGeneratorService
+	def wishImportService
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -33,62 +34,14 @@ class WishController {
 	
 	def importWishes(){
 		
-		String filename = new Date().toString()+".tmp"
-		File file = new File(filename)
-		params.importFile.transferTo(file)
-		
-		Map configuration = [
-			sheet:'Pedido',
-			startRow:1,
-			columnMap: [
-				'A': 'opNumber',
-				'B': 'customerOpNumber',
-				'C': 'customer.id',
-				'D': 'supplier.id',
-				'E': 'shipper.id',
-				'F': 'productDescription',
-				'G': 'supplierOrder',
-				'H': 'currencyFob',
-				'I': 'currency.id',
-				'J': 'conversion',
-				'K': 'estimatedTimeOfDeparture',
-				'L': 'estimatedTimeOfArrival',
-				'M': 'wishDate',
-				'N': 'customsBroker.id',
-				'O': 'ship.id',
-				'P': 'forwarder.id',
-				'Q': 'agent.id',
-				'R': 'dispatchNumber',
-				'S': 'djaiNumber',
-				'T': 'djaiFormalizationDate',
-				'U': 'finishDate'
-			]
-		]
-		def path = file.getAbsolutePath()
-		
 		try{
-			GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
-			List objects = genericExcelImporter.getObjects(configuration)	
-			objects.each{
-				def customer = Customer.get(it['customer.id']) 
-				it.estimatedTimeOfDeparture = it.estimatedTimeOfDeparture.toDateTimeAtStartOfDay().toDate()
-				it.estimatedTimeOfArrival = it.estimatedTimeOfArrival.toDateTimeAtStartOfDay().toDate()			
-				it.wishDate = it.wishDate.toDateTimeAtStartOfDay().toDate()
-				it.djaiFormalizationDate = it.djaiFormalizationDate.toDateTimeAtStartOfDay().toDate()
-				it.finishDate = it.finishDate.toDateTimeAtStartOfDay().toDate()
-				Wish wishInstance = new Wish(it)
-				if(wishInstance.customerOpNumber == null)
-					wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(customer)
-				if(wishInstance.opNumber == null)
-					wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()	
-				customer.addToWishes(wishInstance)
-				customer.save()
-			}
-			flash.message =  message(code: 'default.importOk.message')
-		}catch(Exception e){
-			flash.message =  message(code: 'default.importError.message')
+			wishImportService.importWishes(params.importFile.getBytes())
+			alertManagerService.generateAllAlerts()
+			flash.message = message(code:'default.importOk.message')
+		}catch(RuntimeException e){
+			flash.message = message(code:'default.importError.message')
 		}
-		file.delete()
+		
 		redirect(action: "list", params: params)
 	}
 		
