@@ -39,10 +39,12 @@ class WishImportService {
 	]
 
     def importWishes(byte[] fileContent) {
-		String filename = "import"+new Date().toString()+".tmp"
+		String filename = "import"+new Date().getTime().toString()+".tmp"
 		File file = new File(filename)
+		file.createNewFile()
 		FileOutputStream fos = new FileOutputStream(file)
 		fos.write(fileContent)
+		fos.close()
 		def path = file.getAbsolutePath()
 		try{
 			GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
