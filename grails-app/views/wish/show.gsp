@@ -8,6 +8,7 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'wish.label', default: 'Wish')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'noteStyle.css')}" />
 </head>
 
 <body>
@@ -507,35 +508,35 @@
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
 					<p><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery"/></p>
-					<g:render template="draftShow" model="['drafts':wishInstance?.docDraftToBeApprovedBeforeDelivery]"/>
+					<g:if test="${wishInstance?.docDraftToBeApprovedBeforeDelivery?.size() != 0}">
+						<g:render template="draftShow" model="['drafts':wishInstance?.docDraftToBeApprovedBeforeDelivery]"/>
+					</g:if>
 				</td>				
 			</tr>
 					
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
 					<p><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></p>
-					<g:render template="documentShow" model="['documents':wishInstance?.firstStageRequiredDocuments]"/>
+					<g:if test="${wishInstance?.firstStageRequiredDocuments?.size() != 0}">
+						<g:render template="documentShow" model="['documents':wishInstance?.firstStageRequiredDocuments]"/>
+					</g:if>						
 				</td>				
 			</tr>
 
             <tr class="prop">
                 <td colspan="2" valign="top" class="name">
                     <p><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents"/></p>
-                    <g:render template="documentShow" model="['documents':wishInstance?.secondStageRequiredDocuments]"/>
+                    <g:if test="${wishInstance?.secondStageRequiredDocuments?.size() != 0}">
+                    	<g:render template="documentShow" model="['documents':wishInstance?.secondStageRequiredDocuments]"/>
+                    </g:if>
                 </td>
             </tr>
 
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.notes.label" default="Notes" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${wishInstance.notes}" var="n">
-						<li>${n?.encodeAsHTML()}</li>
-					</g:each>
-					</ul>
+				<td colspan="2" "valign="top" class="name">
+					<p><g:message code="wish.notes.label" default="Notes"/></p>
+					<g:render template="notesShow" model="['notes':wishInstance.notes]"/>
 				</td>
-				
 			</tr>
 			
 			<tr class="prop">
