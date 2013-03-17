@@ -1,5 +1,4 @@
 <%@ page import="wish.Wish" %>
-<%@ page import="modal.DocumentType" %>
 
 <!-- Modal para reemplazar un arhivo de un documento de un pedido-->
 

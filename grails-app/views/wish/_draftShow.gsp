@@ -12,14 +12,7 @@
 			<tr>
                 <td valign="top" class="value">${fieldValue(bean: draft, field: "description")}</td>
 
-                <td valign="top" class="value">
-	                <g:if test="${draft?.file.length == 0}">
-	                	<em>${message(code: 'default.nofile.label', default: 'No File')}</em>
-	                </g:if>
-	                <g:else> 
-	                	<a href="${createLink(action: 'downloadDraft',id: draft?.id)}" target="_blank"><i class="icon-download-alt"></i></a>
-               		</g:else>
-               	</td>
+                <td valign="top" class="value"> <a href="${createLink(action: 'downloadDraft',id: draft?.id)}" target="_blank"><i class="icon-download-alt"></i></a> </td>
 			</tr>
 		</g:each>
     </tbody>

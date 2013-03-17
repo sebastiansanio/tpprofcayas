@@ -7,6 +7,13 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'wish.label', default: 'Wish')}" />
 	<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	
+	<script type="text/javascript">
+		var messageDeleteDraft = "${message(code: 'draft.delete.label', default: 'Delete draft')}";
+		var cantDraft = ${wishInstance?.docDraftToBeApprovedBeforeDelivery?.size()} + 0;
+	</script>
+	<script type="text/javascript" src="${resource(dir:'js', file:'draftFunc.js')}"> </script>	
+	
 </head>
 
 <body>
@@ -34,6 +41,8 @@
 
 	<!-- lo agrego acá porq según documentación no se puede tener un form dentro de otro -->
 	<g:render template="documentDeleteModal"></g:render>
+	<g:render template="draftDeleteModal"></g:render>
+	
 </section>
 			
 </body>

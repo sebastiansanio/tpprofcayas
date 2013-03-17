@@ -27,7 +27,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd1-${i}" name="document"></p>
-	                  		<p><a href="#modalReplaceDocument" role="button" class="btn btn-small btn-primary btnRep" id="btnRep1-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
+	                  		<p><a href="#modalReplaceDocument" role="button" class="btn btn-small btn-primary btnRep" id="btnRep1-${i}"> ${message(code: 'default.button.replace.label', default: 'Replace file')}</a></p>
 	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel1" id="btnDel1-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
@@ -63,7 +63,7 @@
 
 	                  	<td>
 	                  		<p><input type="file" id="btnAdd2-${i}" name="document"></p>
-	                  		<p><a role="button" class="btn btn-small btn-primary btnRep" id="btnRep2-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
+	                  		<p><a href="#modalReplaceDocument" role="button" class="btn btn-small btn-primary btnRep" id="btnRep2-${i}"> ${message(code: 'document.replacefile.label', default: 'Replace file')}</a></p>
 	                  		<p><a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel2" id="btnDel2-${i}"> ${message(code: 'wish.deleteDocument.label', default: 'Delete document')}</a></p>
 	                  	 </td>
 					</tr>
@@ -73,8 +73,8 @@
     </div>
 
 <!--  modal para reemplazar archivos de un documento -->
-	<g:render template="documentReplaceModal"></g:render>
-	
+<g:render template="documentReplaceModal"></g:render>
+
 <script type="text/javascript">
 
 var nextUseDoc1 = 0, nextUseDoc2 = 0;
@@ -152,7 +152,7 @@ $(document).ready(function() {
     	
     	replaceIdButton = "#" + this.id;	
 
-    	 $("#modalReplaceDocument").modal('show');
+      	$("#modalReplaceDocument").modal('show');
     });    
 
     $("#repDoc").click(function()
@@ -164,7 +164,7 @@ $(document).ready(function() {
     	
     	var nameAdd = list + "[" + replacePosition + "].file";
     
-		var elementAdd = "<p><input type='file' id='"+ idAdd +"' name='"+nameAdd+"'></p>";
+		var elementAdd = $("<p><input type='file' id='"+ idAdd +"' name='"+nameAdd+"'></p>");				
 
 		$(replaceIdButton).parent().prepend(elementAdd);
     	

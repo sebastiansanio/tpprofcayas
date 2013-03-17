@@ -144,21 +144,23 @@ class WishController {
 				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
 			if(it.matches("secondStageRequiredDocuments\\[[0-9]*\\]\\.file"))
 				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+			if(it.matches("docDraftToBeApprovedBeforeDelivery\\[[0-9]*\\]\\.draft"))
+				params[it.replace(".draft",".fileName")]=params[it].getOriginalFilename()
 		}
 
         def wishInstance = new Wish(params)
+			
 		alertManagerService.generateAlerts(wishInstance)
+
 		if(wishInstance.customerOpNumber == null)
 			wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(wishInstance.customer)
 		if(wishInstance.opNumber == null)
 			wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()
 		
-		
         if (!wishInstance.save(flush: true)) {
             render(view: "create", model: [wishInstance: wishInstance])
             return
         }
-
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'wish.label', default: 'Wish'), wishInstance.id])
         redirect(action: "show", id: wishInstance.id)
@@ -196,6 +198,8 @@ class WishController {
 			if(it.matches("firstStageRequiredDocuments\\[[0-9]*\\]\\.file"))
 				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
 			if(it.matches("secondStageRequiredDocuments\\[[0-9]*\\]\\.file"))
+				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+			if(it.matches("docDraftToBeApprovedBeforeDelivery\\[[0-9]*\\]\\.file"))
 				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
 		}
 		
@@ -369,11 +373,11 @@ class WishController {
 			
 			wishInstance.removeFromFirstStageRequiredDocuments(documentInstance)
 			documentInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
 			redirect(action: "edit", id: params.idWish)
 		}
 		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
 			redirect(action: "edit", id: params.idWish)
 		}		
     }
@@ -392,11 +396,11 @@ class WishController {
 			
 			wishInstance.removeFromSecondStageRequiredDocuments(documentInstance)
 			documentInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
 			redirect(action: "edit", id: params.idWish)
 		}
 		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Picture'), params.nroDocumentDelete])
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
 			redirect(action: "edit", id: params.idWish)
 		}
     }
@@ -409,5 +413,38 @@ class WishController {
 		response.outputStream.flush()
 		
 		return	
+	}
+	
+	def downloadDraft(){
+		def draft = Draft.get(params.id)
+		
+		response.setHeader("Content-disposition", "attachment; filename=${draft.fileName}")
+		response.outputStream << draft.draft
+		response.outputStream.flush()
+		
+		return
+	}
+	
+	def deleteDraft(){
+		def wishInstance = Wish.get(params.idWish)
+		def drafttInstance = wishInstance.docDraftToBeApprovedBeforeDelivery[params.nroDraftDelete.toInteger()]
+		
+		if (!drafttInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'draft.label', default: 'Draft'), params.nroDraftDelete])
+			redirect(action: "edit", id: params.idWish)
+			return
+		}
+
+		try {
+			
+			wishInstance.removeFromDocDraftToBeApprovedBeforeDelivery(drafttInstance)
+			drafttInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'draft.label', default: 'Draft'), params.nroDraftDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'draft.label', default: 'Draft'), params.nroDraftDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
 	}
 }

@@ -532,8 +532,6 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'palletsQuantity', 'error')}</span>
 				</div>
 			</div>
-
-
 </div>
 	
 </div>
@@ -551,7 +549,5 @@
 	 	
 	 <hr>
 	 <h5><g:message code="wish.notes.label" default="Notes" /></h5>
-	 <g:render template="notes" model="['wishInstance':wishInstance]"/>
-	 
-	 
+	 <g:render template="notes" model="['wishInstance':wishInstance]"/>	 
 </div>
