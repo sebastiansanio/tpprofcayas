@@ -6,12 +6,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'wish.label', default: 'Wish')}" />
-	<script src="${resource(dir:'js', file:'deleteDocument.js')}"></script>
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
+	<script type="text/javascript">
+		var messageDeleteDraft = "${message(code: 'draft.delete.label', default: 'Delete draft')}";
+		var cantDraft = ${wishInstance?.docDraftToBeApprovedBeforeDelivery?.size()} + 0;
+	</script>
+	<script type="text/javascript" src="${resource(dir:'js', file:'draftFunc.js')}"> </script>	
+	
 </head>
 
 <body>
-
+	
 <section id="create-wish" class="first">
 
 	<g:hasErrors bean="${wishInstance}">
@@ -30,6 +35,10 @@
             <button class="btn" type="reset">Cancel</button>
 		</div>
 	</g:form>
+	
+	<!-- lo agrego acá porq según documentación no se puede tener un form dentro de otro -->
+	<g:render template="documentDeleteModal"></g:render>
+	<g:render template="draftDeleteModal"></g:render>
 	
 </section>
 		
