@@ -144,4 +144,4 @@
 
 
 
-<input type="button" class="btn btn-inverse" value="${message(code:'wish.loadUnit.add')}" onClick="addLoadUnit();" />
+<input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add')}" onClick="addLoadUnit();" />

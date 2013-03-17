@@ -68,4 +68,4 @@
 			
 
 
-<input type="button" class="btn btn-inverse" value="${message(code:'wish.notes.add')}" onClick="addNote();" />
+<input type="button" class="btn btn-primary" value="${message(code:'wish.notes.add')}" onClick="addNote();" />
