@@ -199,8 +199,8 @@ class WishController {
 				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
 			if(it.matches("secondStageRequiredDocuments\\[[0-9]*\\]\\.file"))
 				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
-			if(it.matches("docDraftToBeApprovedBeforeDelivery\\[[0-9]*\\]\\.file"))
-				params[it.replace(".file",".fileName")]=params[it].getOriginalFilename()
+			if(it.matches("docDraftToBeApprovedBeforeDelivery\\[[0-9]*\\]\\.draft"))
+				params[it.replace(".draft",".fileName")]=params[it].getOriginalFilename()
 		}
 		
         if (!wishInstance) {
