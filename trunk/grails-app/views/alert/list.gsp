@@ -16,6 +16,8 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<g:sortableColumn property="attentionDate" title="${message(code: 'alert.attentionDate.label', default: 'Attention Date')}" />
+
 			
 				<th><g:message code="alert.alertType.label" default="Alert Type" /></th>
 			
@@ -23,7 +25,6 @@
 			
 				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
 			
-				<g:sortableColumn property="attentionDate" title="${message(code: 'alert.attentionDate.label', default: 'Attention Date')}" />
 			
 				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /> </th>
 				
@@ -35,7 +36,10 @@
 		</thead>
 		<tbody>
 		<g:each in="${alertInstanceList}" status="i" var="alertInstance">
-			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+		
+			<tr class="${alertInstance.isActive() && !alertInstance.isInspected() && alertInstance.attentionDate.compareTo(new Date().clearTime())<=0 ? 'error' :((i % 2) == 0 ? 'odd' : 'even')}">
+
+				<td><g:formatDate date="${alertInstance.attentionDate}" /></td>
 			
 				<td>${fieldValue(bean: alertInstance, field: "alertType")}</td>
 			
@@ -43,7 +47,6 @@
 			
 				<td><g:formatDate date="${alertInstance.deadline}" /></td>
 			
-				<td><g:formatDate date="${alertInstance.attentionDate}" /></td>
 						
 				<td> <a href="#" class="popoverAlerts" rel="popover" data-content="<div><% alertInstance.wish.getActiveAlerts().each{out.println(it.deadline.format("dd/MM/yyyy")+": "+it.toString())} %>" data-original-title="Alertas activas" >${alertInstance.wish.getActiveAlerts().size()}</a></td>
 			 	
