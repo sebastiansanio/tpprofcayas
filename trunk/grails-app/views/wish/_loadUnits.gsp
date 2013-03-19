@@ -15,7 +15,7 @@
 		var templateHtml = "<tr>";	
 
 		templateHtml += "<td>";
-		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker' data-date-format='dd/mm/yyyy' />";
+		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker span2' data-date-format='dd/mm/yyyy' />";
 		templateHtml += "</td>";
 
 		templateHtml += "<td>";
@@ -42,11 +42,11 @@
 		templateHtml += "</td>";		
 
 		templateHtml += "<td>";
-		templateHtml += "<input type='number' step='any' id='loadUnits["+loadUnitCount+"].quantity' name='loadUnits["+loadUnitCount+"].quantity' />";
+		templateHtml += "<input type='number' class='span2' step='any' id='loadUnits["+loadUnitCount+"].quantity' name='loadUnits["+loadUnitCount+"].quantity' />";
 		templateHtml += "</td>";
 
 		templateHtml += "<td>";
-		templateHtml += "<input type='number' step='any' id='loadUnits["+loadUnitCount+"].unitPrice' name='loadUnits["+loadUnitCount+"].unitPrice' />";
+		templateHtml += "<input type='number' class='span2' step='any' id='loadUnits["+loadUnitCount+"].unitPrice' name='loadUnits["+loadUnitCount+"].unitPrice' />";
 		templateHtml += "</td>";
 		
 		
@@ -63,8 +63,6 @@
 
 </script>
 
-<div class="row-fluid">
-
 <table class="table table-hover table-condensed">
 	<thead>
  		<tr>
@@ -79,7 +77,7 @@
 	<g:each var="loadUnitInstance" in="${wishInstance?.loadUnits}" status="i">
 		<tr>
 			<td>	
-				<bs:datePicker default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}"  />
+				<input type="text" class="datepicker span2" id="loadUnits[${i}].cartonPrintingInfoSentDate" default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day" data-date-format="dd/mm/yyyy" value="${loadUnitInstance?.cartonPrintingInfoSentDate?.format("dd/MM/yyyy")}"  />
 				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
 			</td>
 
@@ -94,12 +92,12 @@
 			</td>
 
 			<td>
-				<g:field type="number" name="loadUnits[${i}].quantity" step="any" required="" value="${loadUnitInstance.quantity}"/>
+				<g:field type="number" class="span2" name="loadUnits[${i}].quantity" step="any" required="" value="${loadUnitInstance.quantity}"/>
 				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'quantity', 'error')}</span>
 			</td>
 
 			<td>
-				<g:field type="number" name="loadUnits[${i}].unitPrice" step="any" value="${loadUnitInstance.unitPrice}"/>
+				<g:field type="number" class="span2" name="loadUnits[${i}].unitPrice" step="any" value="${loadUnitInstance.unitPrice}"/>
 				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}</span>
 			</td>
 		</tr>
@@ -107,7 +105,5 @@
 
 </tbody>
 </table>
-
-</div>
 
 <input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add')}" onClick="addLoadUnit();" />
