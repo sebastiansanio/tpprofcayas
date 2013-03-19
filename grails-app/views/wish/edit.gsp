@@ -13,6 +13,8 @@
 		var cantDraft = ${wishInstance?.docDraftToBeApprovedBeforeDelivery?.size()} + 0;
 	</script>
 	<script type="text/javascript" src="${resource(dir:'js', file:'draftFunc.js')}"> </script>	
+		
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'tableArticle.css')}" />
 	
 </head>
 
