@@ -8,6 +8,7 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'wish.label', default: 'Wish')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'noteStyle.css')}" />
 </head>
 
 <body>
