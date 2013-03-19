@@ -8,60 +8,35 @@
 <script type="text/javascript">
 
 	var loadUnitCount = ${wishInstance?.loadUnits?.size()} + 0;
+	var usuarios = new Array(),
+		productos = new Array(),
+		usuario,
+		producto;
 
-	function addLoadUnit(){
-		var htmlId = "loadUnit" + loadUnitCount;
+	<%
+	User.findAll().each
+	{
+		out.println(""" usuario = new Object(); """)
+		out.println(""" usuario.id = '${it.id}'; """)
+		out.println(""" usuario.nombre = '${it}'; """)
+		out.println(""" usuarios.push(usuario); """)
 		
-		var templateHtml = "<tr>";	
+	}	
+	%>
 
-		templateHtml += "<td>";
-		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker' data-date-format='dd/mm/yyyy' />";
-		templateHtml += "</td>";
-
-		templateHtml += "<td>";
-		templateHtml += "<select id='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentUser' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentUser.id'>";
-		<%
-		User.findAll().each{
-			out.println(""" templateHtml += "<option value='${it.id}'>${it}</option>" """)
-			
-		}		
-		%>
-		templateHtml += "</select>";
-		templateHtml += "</td>";
-
-		templateHtml += "<td>";
-		templateHtml += "<select id='loadUnits["+loadUnitCount+"].product' name='loadUnits["+loadUnitCount+"].product.id'>";
-		<%
-		Product.findAll().each{
-			out.println(""" templateHtml += "<option value='${it.id}'>${it}</option>" """)
-			
-		}
+	<%
+	Product.findAll().each
+	{
+		out.println(""" producto = new Object(); """)
+		out.println(""" producto.id = '${it.id}'; """)
+		out.println(""" producto.nombre = '${it}'; """)
+		out.println(""" productos.push(producto); """)
 		
-		%>
-		templateHtml += "</select>";
-		templateHtml += "</td>";		
-
-		templateHtml += "<td>";
-		templateHtml += "<input type='number' class='span2' step='any' id='loadUnits["+loadUnitCount+"].quantity' name='loadUnits["+loadUnitCount+"].quantity' />";
-		templateHtml += "</td>";
-
-		templateHtml += "<td>";
-		templateHtml += "<input type='number' class='span2' step='any' id='loadUnits["+loadUnitCount+"].unitPrice' name='loadUnits["+loadUnitCount+"].unitPrice' />";
-		templateHtml += "</td>";
-		
-		
-		templateHtml += "</tr>";
-		$("#loadUnit-table").append(templateHtml);		
-		
-		$("#"+loadUnitCount+"cartonPrintingInfoSentDate").datepicker({
-			format: 'dd/mm/yyyy',
-			
-		});
-		loadUnitCount++;
-				
-	}
-
+	}	
+	%>
 </script>
+<script type="text/javascript" src="${resource(dir:'js', file:'loadUnitFunc.js')}"> </script>	
+
 
 <table class="table table-hover table-condensed">
 	<thead>
@@ -71,13 +46,14 @@
         	<th>${message(code:'loadUnit.product.label')}</th>
         	<th>${message(code:'loadUnit.quantity.label')}</th>
         	<th>${message(code:'loadUnit.unitPrice.label')}</th>
+        	<th></th>
         </tr>
     </thead>
 	<tbody id="loadUnit-table">
 	<g:each var="loadUnitInstance" in="${wishInstance?.loadUnits}" status="i">
 		<tr>
 			<td>	
-				<bs:datePicker default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}" class="span2" />
+				<bs:datePicker name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}" class="span2" />
 				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
 			</td>
 
@@ -100,10 +76,14 @@
 				<g:field type="number" class="span2" name="loadUnits[${i}].unitPrice" step="any" value="${loadUnitInstance.unitPrice}"/>
 				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'unitPrice', 'error')}</span>
 			</td>
+			
+			<td>
+				<a role="button" class="btn btn-primary" id="btnDel-unit-${i}"><i class="icon-trash"></i></a>
+			</td>
 		</tr>
 	</g:each>
 
 </tbody>
 </table>
 
-<input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add')}" onClick="addLoadUnit();" />
+<input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add')}"  id="btnLoadUnit" />
