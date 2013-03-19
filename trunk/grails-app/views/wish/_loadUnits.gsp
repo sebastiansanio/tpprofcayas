@@ -15,7 +15,7 @@
 		var templateHtml = "<tr>";	
 
 		templateHtml += "<td>";
-		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker span2' data-date-format='dd/mm/yyyy' />";
+		templateHtml += "<input id='"+loadUnitCount+"cartonPrintingInfoSentDate' name='loadUnits["+loadUnitCount+"].cartonPrintingInfoSentDate' type='text' class='datepicker' data-date-format='dd/mm/yyyy' />";
 		templateHtml += "</td>";
 
 		templateHtml += "<td>";
@@ -77,7 +77,7 @@
 	<g:each var="loadUnitInstance" in="${wishInstance?.loadUnits}" status="i">
 		<tr>
 			<td>	
-				<input type="text" class="datepicker span2" id="loadUnits[${i}].cartonPrintingInfoSentDate" default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day" data-date-format="dd/mm/yyyy" value="${loadUnitInstance?.cartonPrintingInfoSentDate?.format("dd/MM/yyyy")}"  />
+				<bs:datePicker default="none" name="loadUnits[${i}].cartonPrintingInfoSentDate" precision="day"  value="${loadUnitInstance?.cartonPrintingInfoSentDate}" class="span2" />
 				<span class="help-inline">${hasErrors(bean: loadUnitInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
 			</td>
 
