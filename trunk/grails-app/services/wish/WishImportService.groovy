@@ -34,7 +34,8 @@ class WishImportService {
 			'S': 'dispatchNumber',
 			'T': 'djaiNumber',
 			'U': 'djaiFormalizationDate',
-			'V': 'finishDate'
+			'V': 'finishDate',
+			'W': 'customsBrokerRefNumber'
 		]
 	]
 
