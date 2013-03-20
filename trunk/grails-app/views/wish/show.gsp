@@ -57,14 +57,6 @@
 				<td valign="top" class="name"><g:message code="wish.productDescription.label" default="Product description" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "productDescription")}</td>
-				
-			</tr>
-			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.supplierOrder.label" default="Supplier Order" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "supplierOrder")}</td>
-				
 			</tr>
 			
 			<tr class="prop">
@@ -77,9 +69,15 @@
 					</g:each>
 					</ul>
 				</td>
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.supplierOrder.label" default="Supplier Order" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "supplierOrder")}</td>
 				
 			</tr>
-		
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.priceCondition.label" default="Price Condition" /></td>
 				

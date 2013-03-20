@@ -1,5 +1,3 @@
-<%@ page import="wish.Wish" %>
-
 <div id="modalReplaceDraft" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalReplaceDraftLabel" aria-hidden="true">
 
 	<div class="modal-header">
