@@ -17,7 +17,7 @@
 		templateHtml += "${message(code:'note.label')}:";
 		templateHtml += "</label>";
 		templateHtml += "<div class='controls'>";
-		templateHtml += "<textarea row='3' type='text' name='notes["+notesCount+"].text' />";
+		templateHtml += "<textarea row='3' type='text' class='input-xxlarge' name='notes["+notesCount+"].text' />";
 		templateHtml += "</div>";
 		templateHtml += "</div>";
 

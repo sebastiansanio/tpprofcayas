@@ -35,6 +35,42 @@ $(document).ready(function() {
 		return "loadUnit-unitPrice-"+ nro;
 	};
 
+	var delUnit = function(elemento)
+	{
+		var nroId = parseInt(elemento.id.split('-')[2]);
+		
+		$("#"+elemento.id).parent().parent().remove();
+		loadUnitCount--;
+
+		/*renombrar el resto*/
+		var date, user, product, quantity, price, btnDel;
+		for (var i = nroId; i < loadUnitCount; i++)
+		{
+			date = idDate(i+1);
+			user = idUser(i+1);
+			product = idProduct(i+1);
+			quantity = idQuantity(i+1);
+			price = idUnitPrice(i+1);
+			btnDel = nameBtnDel(i+1);
+							 
+			$("#"+date).attr("name", nameDate(i));
+			$("#"+date).attr("id", nameDate(i));  
+			
+			$("#"+user).attr("name", nameUser(i)+".id");
+			$("#"+user).attr("id", nameUser(i));
+			
+			$("#"+product).attr("name", nameProduct(i)+".id");
+			$("#"+product).attr("id", nameProduct(i));
+			
+			$("#"+quantity).attr("name", nameQuantity(i));
+			$("#"+quantity).attr("id", nameQuantity(i));
+
+			$("#"+price).attr("name", nameUnitPrice(i));
+			$("#"+price).attr("id", nameUnitPrice(i));
+			
+			$("#"+btnDel).attr("id", nameBtnDel(i));
+		}		
+	};
 	
 	$("#btnLoadUnit").click(function() 
 	{		 
@@ -87,39 +123,7 @@ $(document).ready(function() {
 		
 		$("#"+nameBtnDel(loadUnitCount)).click(function()  
 		{
-			var nroId = parseInt(this.id.split('-')[2]);
-		
-			$("#"+this.id).parent().parent().remove();
-			loadUnitCount--;
-	
-			/*renombrar el resto*/
-			var date, user, product, quantity, price, btnDel;
-			for (var i = nroId; i < loadUnitCount; i++)
-			{
-				date = idDate(i+1);
-				user = idUser(i+1);
-				product = idProduct(i+1);
-				quantity = idQuantity(i+1);
-				price = idUnitPrice(i+1);
-				btnDel = nameBtnDel(i+1);
-								 
-				$("#"+date).attr("name", nameDate(i));
-				$("#"+date).attr("id", nameDate(i));  
-				
-				$("#"+user).attr("name", nameUser(i)+".id");
-				$("#"+user).attr("id", nameUser(i));
-				
-				$("#"+product).attr("name", nameProduct(i)+".id");
-				$("#"+product).attr("id", nameProduct(i));
-				
-				$("#"+quantity).attr("name", nameQuantity(i));
-				$("#"+quantity).attr("id", nameQuantity(i));
-	
-				$("#"+price).attr("name", nameUnitPrice(i));
-				$("#"+price).attr("id", nameUnitPrice(i));
-				
-				$("#"+btnDel).attr("id", nameBtnDel(i));
-			}			
+			delUnit(this);
 		});
 		
 		loadUnitCount++;
@@ -128,8 +132,15 @@ $(document).ready(function() {
 	
 	$(".btnDel-unit").click(function() 
 	{
-	
+		var nroId = this.id.split("-")[2];
+
+		$("#nroCurrentUnitDelete").attr("value", nroId);
+	    $("#modalDeleteUnit").modal('show'); 
 	});
 	
+	$(".btnDel-unit-temp").click(function() 
+	{
+		delUnit(this);
+	});
 });
 	

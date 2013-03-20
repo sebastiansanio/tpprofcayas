@@ -44,7 +44,7 @@
  		</table>
     </div>
 
-<a role="button" class="btn btn-primary add-draft">${message(code: 'default.add.label', args: [message(code: 'draft.label', default: 'Draft')])}</a>
+<a role="button" class="btn btn-primary add-draft">${message(code: 'draft.add.label', default: 'Add draft')}</a>
 
 <!--  modal para reemplazar archivos -->
 <g:render template="draftReplaceModal"></g:render>

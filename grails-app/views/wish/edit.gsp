@@ -35,6 +35,7 @@
 	<!-- lo agrego acá porq según documentación no se puede tener un form dentro de otro -->
 	<g:render template="documentDeleteModal"></g:render>
 	<g:render template="draftDeleteModal"></g:render>
+	<g:render template="loadUnitsDeleteModal"></g:render>
 	
 </section>
 			

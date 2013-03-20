@@ -78,7 +78,12 @@
 			</td>
 			
 			<td>
-				<a role="button" class="btn btn-primary" id="btnDel-unit-${i}"><i class="icon-trash"></i></a>
+				<g:if test="${!(loadUnitInstance.quantity) }">
+					<a role="button" class="btn btn-primary btnDel-unit-temp" id="btnDel-unit-${i}"><i class="icon-trash"></i></a>
+				</g:if>
+				<g:else>
+					<a href="#modalDeleteUnit" role="button" class="btn btn-primary btnDel-unit" id="btnDel-unit-${i}"><i class="icon-trash"></i></a>
+				</g:else>
 			</td>
 		</tr>
 	</g:each>

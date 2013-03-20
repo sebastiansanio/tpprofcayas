@@ -1,7 +1,4 @@
 <%@ page import="wish.Wish" %>
-<%@ page import="modal.DocumentType" %>
-
-<!-- Modal para borrar un documento de un pedido-->
 
 <div id="modalDeleteDraft" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalDeleteDraftLabel" aria-hidden="true">
 
@@ -22,5 +19,3 @@
 		</g:form>
 	</div>
 </div>
-
-</script>

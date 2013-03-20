@@ -400,4 +400,27 @@ class WishController {
 			redirect(action: "edit", id: params.idWish)
 		}
 	}
+	
+	def deleteUnit(){
+		def wishInstance = Wish.get(params.idWish)
+		def unitInstance = wishInstance.loadUnits[params.nroUnitDelete.toInteger()]
+		
+		if (!unitInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'loadUnit.label', default: 'Load unit'), params.nroUnitDelete])
+			redirect(action: "edit", id: params.idWish)
+			return
+		}
+
+		try {
+			
+			wishInstance.removeFromLoadUnits(unitInstance)
+			unitInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'loadUnit.label', default: 'Load unit'), params.nroUnitDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'loadUnit.label', default: 'Load unit'), params.nroUnitDelete])
+			redirect(action: "edit", id: params.idWish)
+		}
+	}
 }
