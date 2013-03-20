@@ -1,19 +1,19 @@
 $(document).ready(function() {
 
 	var nameDate = function(nro){
-		return "loadUnit[" + nro + "].cartonPrintingInfoSentDate";
+		return "loadUnits[" + nro + "].cartonPrintingInfoSentDate";
 	};	
 	var nameUser = function(nro){
-		return "loadUnit[" + nro + "].cartonPrintingInfoSentUser.id";
+		return "loadUnits[" + nro + "].cartonPrintingInfoSentUser.id";
 	};
 	var nameProduct = function(nro){
-		return "loadUnit[" + nro + "].product.id";
+		return "loadUnits[" + nro + "].product.id";
 	};
 	var nameQuantity = function(nro){
-		return "loadUnit[" + nro + "].quantity";
+		return "loadUnits[" + nro + "].quantity";
 	};
 	var nameUnitPrice = function(nro){
-		return "loadUnit[" + nro + "].unitPrice";
+		return "loadUnits[" + nro + "].unitPrice";
 	};
 	var nameBtnDel = function(nro){
 		return "btnDel-unit-" + nro;
@@ -38,7 +38,7 @@ $(document).ready(function() {
 	
 	$("#btnLoadUnit").click(function() 
 	{		 
-		var htmlId = "loadUnit[" + loadUnitCount + "].";
+		var htmlId = "loadUnits[" + loadUnitCount + "].";
 		
 		var templateHtml = "<tr>";	
 		
