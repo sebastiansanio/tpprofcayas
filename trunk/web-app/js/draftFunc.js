@@ -3,6 +3,29 @@ var nroIdDraft = -1;
 
 $(document).ready(function() {
 	
+	var delDraft = function(objeto)
+	{
+		var nroRef = parseInt(objeto.id.split("-")[2]); 
+		$(objeto).parent().parent().remove();
+		cantDraft--;
+
+		var nameText, nameFile, btnDel;
+		for (var i = nroRef; i < cantDraft; i++)
+		{
+			nameText = idText((i+1)); 
+			nameFile = idFile(i+1);
+			btnDel = "#btnDel-draft-" + (i+1);
+			
+			$(nameText).attr("name", "docDraftToBeApprovedBeforeDelivery[" + i + "].description");
+			$(nameText).attr("id", "text-draft-" + i);		
+			
+			$(nameFile).attr("name", "docDraftToBeApprovedBeforeDelivery[" + i + "].draft");
+			$(nameFile).attr("id", "file-draft-" + i);
+			
+			$(btnDel).attr("id", "btnDel-draft-" + i);
+		}
+	};
+	
 	$(".add-draft").click(function()
 	{		
 		var idBtn = "btnDel-draft-"+cantDraft;
@@ -10,37 +33,24 @@ $(document).ready(function() {
 		var element = $("<tr> \
 						 <td> <input type='text' id='text-draft-"+cantDraft+"' name='docDraftToBeApprovedBeforeDelivery[" + cantDraft + "].description'/></td> \
 						 <td> <input type='file' id='file-draft-"+cantDraft+"' name='docDraftToBeApprovedBeforeDelivery[" + cantDraft + "].draft'></td> \
-						 <td> <a role='button' class='btn btn-small btn-primary' id='"+ idBtn +"'>" + messageDeleteDraft +"</a></td> \
+						 <td> <a role='button' class='btn btn-small btn-primary' id='"+ idBtn +"'> <i class='icon-trash'></i> </a></td> \
 						</tr>");
 
 		$("#draft-table").append(element);
 		
 		$("#"+idBtn).click(function()
 		{
-			var nroRef = parseInt(this.id.split("-")[2]); 
-			$(this).parent().parent().remove();
-			cantDraft--;
-
-			var nameText, nameFile, btnDel;
-			for (var i = nroRef; i < cantDraft; i++)
-			{
-				nameText = idText((i+1)); 
-				nameFile = idFile(i+1);
-				btnDel = "#btnDel-draft-" + (i+1);
-				
-				$(nameText).attr("name", "docDraftToBeApprovedBeforeDelivery[" + i + "].description");
-				$(nameText).attr("id", "text-draft-" + i);		
-				
-				$(nameFile).attr("name", "docDraftToBeApprovedBeforeDelivery[" + i + "].draft");
-				$(nameFile).attr("id", "file-draft-" + i);
-				
-				$(btnDel).attr("id", "btnDel-draft-" + i);
-			}
+			delDraft(this);
 		});
 
 		cantDraft++;
 	});
 	
+	$(".btnDel-draft-temp").click(function() 
+	{
+		delDraft(this);
+	});
+
 	$(".btnRep-draft").click(function()
 	{	
 		nroIdDraft = this.id.split("-")[2];

@@ -1,7 +1,6 @@
 <%@ page import="wish.Wish" %>
 			
 <script type="text/javascript">
-	var messageDeleteDraft = "${message(code: 'draft.delete.label', default: 'Delete draft')}";
 	var cantDraft = ${wishInstance?.docDraftToBeApprovedBeforeDelivery?.size()} + 0;
 </script>
 <script type="text/javascript" src="${resource(dir:'js', file:'draftFunc.js')}"> </script>	
@@ -30,13 +29,13 @@
 								<p> <span class="help-inline alert alert-error"> <strong>x</strong> ${message(code: 'draft.noFileSelected.label', default: 'No file selected')}</span> </p>
 							</td>	
 														
-							<td> <a role="button" class="btn btn-small btn-primary" id="btnDel-draft-${i}" onclick="delElement(${i})">${message(code: 'wish.deleteDraft.label', default: 'Delete draft')}</a></td>
+							<td> <a role="button" class="btn btn-small btn-primary btnDel-draft-temp" id="btnDel-draft-${i}"><i class="icon-trash"></i></a></td>
 
                   		</g:if>
                   		<g:else>
 							<td> <a href="#modalReplaceFile" role="button" class="btn btn-small btn-primary btnRep-draft" id="btnRep-draft-${i}"> ${message(code: 'default.button.replace.label', default: 'Replace file')}</a> </td>
 						
-							<td> <a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel-draft" id="btnDel-draft-${i}"> ${message(code: 'draft.delete.label', default: 'Delete draft')}</a></td>
+							<td> <a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel-draft" id="btnDel-draft-${i}"> <i class="icon-trash"></i> </a></td>
 
                   		</g:else>
 					</tr>

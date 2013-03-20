@@ -38,8 +38,6 @@ $(document).ready(function() {
 	
 	$("#btnLoadUnit").click(function() 
 	{		 
-		var htmlId = "loadUnits[" + loadUnitCount + "].";
-		
 		var templateHtml = "<tr>";	
 		
 		templateHtml += "<td>";
@@ -83,9 +81,8 @@ $(document).ready(function() {
 		templateHtml += "</tr>";
 		$("#loadUnit-table").append(templateHtml);		
 		
-		$("#"+loadUnitCount+"cartonPrintingInfoSentDate").datepicker({
+		$("#"+idDate(loadUnitCount)).datepicker({
 			format: 'dd/mm/yyyy',
-			
 		});
 		
 		$("#"+nameBtnDel(loadUnitCount)).click(function()  
