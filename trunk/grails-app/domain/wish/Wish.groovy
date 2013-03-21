@@ -47,7 +47,7 @@ class Wish {
 	VisaChargePaymentConcept visaChargePaymentConcept
 	CriterionValue criterionValue
 	boolean licenses
-	long djaiNumber
+	String djaiNumber
 	Date djaiFormalizationDate
 	Date djaiExtendedRequested
 	Date djaiExtendedExpiration
@@ -111,8 +111,8 @@ class Wish {
 		visaChargePaymentConcept nullable:true,blank:true
 		criterionValue nullable:true
 		licenses nullable:false
-		djaiNumber nullable:false,blank:false
-		djaiFormalizationDate nullable:false
+		djaiNumber nullable:true,blank:true
+		djaiFormalizationDate nullable:true
 		djaiExtendedRequested nullable:true
 		djaiExtendedExpiration nullable:true
 		shippingMark nullable:true
