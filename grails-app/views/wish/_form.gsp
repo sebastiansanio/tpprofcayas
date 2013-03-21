@@ -186,14 +186,16 @@
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'licenses', 'error')}</span>
 				</div>
 			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiNumber', 'error')} required">
-				<label for="djaiNumber" class="control-label"><g:message code="wish.djaiNumber.label" default="Djai Number" /><span class="required-indicator">*</span></label>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiNumber', 'error')} ">
+				<label for="dispatchNumber" class="control-label"><g:message code="wish.djaiNumber.label" default="Djai Number" /></label>
 				<div class="controls">
-					<g:field type="number" name="djaiNumber" required="" value="${wishInstance.djaiNumber}"/>
+					<g:textField name="djaiNumber" value="${wishInstance?.djaiNumber}"/>
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'djaiNumber', 'error')}</span>
 				</div>
 			</div>
+			
+			
 
 			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'billDate', 'error')} ">
 				<label for="billDate" class="control-label"><g:message code="wish.billDate.label" default="Bill Date" /></label>
@@ -396,8 +398,8 @@
 			</div>
 
 
-			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')} required">
-				<label for="djaiFormalizationDate" class="control-label"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /><span class="required-indicator">*</span></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')}">
+				<label for="djaiFormalizationDate" class="control-label"><g:message code="wish.djaiFormalizationDate.label" default="Djai Formalization Date" /></label>
 				<div class="controls">
 					<bs:datePicker dateFormat="dd/MM/yyyy" name="djaiFormalizationDate" precision="day"  value="${wishInstance?.djaiFormalizationDate}"  />
 					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'djaiFormalizationDate', 'error')}</span>
