@@ -22,8 +22,7 @@
 
 						<td> <g:textField name="docDraftToBeApprovedBeforeDelivery[${i}].description" value="${draft?.description}" id="text-draft-${i}"/></td>
 
-						<g:if test="${draft?.fileName == ""}">
-
+						<g:if test="${!draft?.id}">
 							<td>
 								<p> <input type="file" id="btnAdd-draft-${i}" name="docDraftToBeApprovedBeforeDelivery[${i}].draft"> </p>
 								<p> <span class="help-inline alert alert-error"> <strong>x</strong> ${message(code: 'draft.noFileSelected.label', default: 'No file selected')}</span> </p>
@@ -34,7 +33,7 @@
                   		</g:if>
                   		<g:else>
 							<td> <a href="#modalReplaceFile" role="button" class="btn btn-small btn-primary btnRep-draft" id="btnRep-draft-${i}"> ${message(code: 'default.button.replace.label', default: 'Replace file')}</a> </td>
-						
+							
 							<td> <a href="#modalDeleteDocument" role="button" class="btn btn-small btn-primary btnDel-draft" id="btnDel-draft-${i}"> <i class="icon-trash"></i> </a></td>
 
                   		</g:else>
@@ -43,6 +42,7 @@
             </tbody>
  		</table>
     </div>
+    
 
 <a role="button" class="btn btn-primary add-draft">${message(code: 'draft.add.label', default: 'Add draft')}</a>
 
