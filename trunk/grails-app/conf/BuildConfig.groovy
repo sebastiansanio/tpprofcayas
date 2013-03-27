@@ -37,6 +37,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 		
         runtime 'mysql:mysql-connector-java:5.1.20'
+		compile ('org.quartz-scheduler:quartz:2.1.5'){
+			excludes "slf4j-api","c3p0","jta"
+		}
 
     }
 
@@ -56,6 +59,5 @@ grails.project.dependency.resolution = {
 		compile ':export:1.5'
 		compile ':excel-import:1.0.0'
 		compile ':mail:1.0.1'
-		
     }
 }

@@ -2,6 +2,7 @@ import report.Report
 import stakeholder.Customer;
 import stakeholder.CustomsBroker;
 import stakeholder.Supplier;
+import grails.util.Environment;
 
 import org.apache.shiro.crypto.hash.Sha256Hash
 import org.quartz.Scheduler
@@ -17,6 +18,8 @@ import product.*
 class BootStrap {
 
     def init = { servletContext ->
+		
+		if(Environment.current != Environment.PRODUCTION) {
 				
 		List supplierReportFields = ["opNumber","customer","supplier","shipper","supplierOrder","currencyFob","currency","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 			"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","visaChargePayment","visaChargePaymentConcept","shippingMark","customerLogoPunch","hsCodeToBeWritten",
@@ -235,7 +238,7 @@ class BootStrap {
 		alertType = new AlertType(description:"Pedir Bl",nameOfEstimatedDateField:"requireBlDate",nameOfCompletionField:"blReceivedDate",alertTerm:0)
 		alertType.save()
 		
-		
+		}
 	}
     def destroy = {
     }
