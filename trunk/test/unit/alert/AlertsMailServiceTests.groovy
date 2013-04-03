@@ -1,4 +1,4 @@
-package wish
+package alert
 
 
 
@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(WishImportService)
-class WishImportServiceTests {
+@TestFor(AlertsMailService)
+class AlertsMailServiceTests {
 
     void testSomething() {
         fail "Implement me"

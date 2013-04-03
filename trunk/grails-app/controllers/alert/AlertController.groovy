@@ -44,6 +44,8 @@ class AlertController {
 	}
 	
 	def export() {
+		alertManagerService.checkAllAlerts()
+		alertManagerService.generateAllAlerts()
 		Date fromDate = Date.parse('dd/MM/yyyy',params.fromDate)
 		Date toDate = Date.parse('dd/MM/yyyy',params.toDate)
 		boolean pendingOnly = params.pendingOnly
@@ -53,6 +55,8 @@ class AlertController {
 	}
 	
 	def inspected(){
+		alertManagerService.checkAllAlerts()
+		alertManagerService.generateAllAlerts()
 		def alertInstance = Alert.get(params.id)
 		if (!alertInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'alert.label', default: 'Alert'), params.id])
