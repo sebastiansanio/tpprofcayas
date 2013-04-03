@@ -66,25 +66,6 @@ class WishController {
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${stakeholder}.${params.extension}")
 		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder)
 	}
-
-	def sendMail(){
-		
-		File file = new File("${message(code:'wish.label')}"+new Date()+".${params.extension}")
-		OutputStream outputStream = new FileOutputStream(file)
-		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
-		wishExportService.exportWish(params.format,outputStream,RequestContextUtils.getLocale(request))
-		
-		sendMail {
-			multipart true
-			to "sebastiansanio@outlook.com"
-			subject "${message(code:'wish.label')}"
-			body "${message(code:'wish.label')}"
-			attachBytes "${message(code:'wish.label')}.${params.extension}",'application/vnd.ms-excel',file.readBytes()
-				
-		}
-		file.delete()
-		redirect(action: "list")
-	}
 	
     def create() {
         [wishInstance: new Wish(params)]

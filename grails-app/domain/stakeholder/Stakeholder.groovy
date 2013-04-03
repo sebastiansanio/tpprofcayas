@@ -8,6 +8,7 @@ import login.User
 
 class Stakeholder {
 
+	static hasMany		= [contacts: Contact]
 	
 	Date	dateCreated
 	Date	lastUpdated
@@ -21,8 +22,7 @@ class Stakeholder {
 	
 
 	static constraints = {
-		name blank:false
-		nullable:true
+		name blank:false, nullable:true
 		telephone blank:true, nullable:true
 		email email:true, blank:true, nullable:true
 		defaultReport nullable: false

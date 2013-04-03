@@ -1,17 +1,15 @@
-package modal
+package stakeholder
 
 
 
 import grails.test.mixin.*
-import modal.PaymentStatus;
-
 import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(PaymentStatus)
-class PaymentStatusTests {
+@TestFor(Contact)
+class ContactTests {
 
     void testSomething() {
        fail "Implement me"
