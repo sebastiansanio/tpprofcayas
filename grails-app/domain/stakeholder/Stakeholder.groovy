@@ -9,6 +9,8 @@ import login.User
 class Stakeholder {
 
 	static hasMany		= [contacts: Contact]
+   
+  List contacts
 	
 	Date	dateCreated
 	Date	lastUpdated
