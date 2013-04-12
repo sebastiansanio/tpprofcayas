@@ -1,7 +1,8 @@
 <%@ page import="stakeholder.Customer" %>
 
-
-
+<div class="row-fluid">
+	<div class="span6">
+		<h5><g:message code="stakeholder.companyInformation.label" default="Company information"/></h5>
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'name', 'error')} required">
 				<label for="name" class="control-label"><g:message code="customer.name.label" default="Name" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -11,7 +12,7 @@
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'telephone', 'error')} ">
-				<label for="telephone" class="control-label"><g:message code="customer.telephone.label" default="Telephone" /></label>
+				<label for="telephone" class="control-label"><g:message code="customer.telephone.label" default="Telephone"/></label>
 				<div class="controls">
 					<g:textField name="telephone" value="${customerInstance?.telephone}"/>
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'telephone', 'error')}</span>
@@ -26,18 +27,18 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')} ">
-				<label for="defaultReport" class="control-label"><g:message code="customer.defaultReport.label" default="Default Report" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')} required">
+				<label for="defaultReport" class="control-label"><g:message code="customer.defaultReport.label" default="Default Report"/><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" value="${customerInstance?.defaultReport?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" required="" value="${customerInstance?.defaultReport?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')}</span>
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')} ">
-				<label for="defaultLocale" class="control-label"><g:message code="customer.defaultLocale.label" default="Default Locale" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')} required">
+				<label for="defaultLocale" class="control-label"><g:message code="customer.defaultLocale.label" default="Default Locale"/><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" value="${customerInstance?.defaultLocale?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" required="" value="${customerInstance?.defaultLocale?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')}</span>
 				</div>
 			</div>
@@ -70,16 +71,20 @@
 				<label for="wishes" class="control-label"><g:message code="customer.wishes.label" default="Wishes" /></label>
 				<div class="controls">
 					
-<ul class="one-to-many">
-<g:each in="${customerInstance?.wishes?}" var="w">
-    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="wish" action="create" params="['customer.id': customerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
-</li>
-</ul>
+					<ul class="one-to-many">
+						<g:each in="${customerInstance?.wishes?}" var="w">
+						    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						<li class="add">
+							<g:link controller="wish" action="create" params="['customer.id': customerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+						</li>
+					</ul>
 
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'wishes', 'error')}</span>
 				</div>
 			</div>
-
+	</div>
+	<div class="span6">
+		<g:render template="/_stakeholder/form" model="['stakeholderInstance':customerInstance]"/>
+	</div>
+</div>
