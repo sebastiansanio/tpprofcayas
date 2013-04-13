@@ -28,7 +28,8 @@
             <button class="btn" type="reset">Cancel</button>
 		</div>
 	</g:form>
-	
+
+	<g:render template="/_stakeholder/contactDeleteModal" model="['stakeholderInstance':supplierInstance]"></g:render>	
 </section>
 		
 </body>

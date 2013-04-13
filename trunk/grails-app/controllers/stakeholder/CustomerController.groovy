@@ -25,26 +25,7 @@ class CustomerController {
 
     def save() {
         def customerInstance = new Customer(params)
-		
-		if (customerInstance.contacts == null) {
-			System.out.println("Contactos es nulo")
-		} else {
-			System.out.println("Contactos no es nulo")
-		}
-		
-	//	customerInstance.addToContacts(new Contact(name:"Raul"))
-		
-//		if (customerInstance.contacts == null)
-//			{
-//				System.out.println("Contactos es nulo")
-//			}
-		
-		System.out.println("Contacto nombre:  " + params.contacts)
-//		System.out.println("Contacto nombre:  " + params.contacts[0].name)
-		
-		System.out.println("Contacto custoemr:  " + customerInstance.contacts)
-		System.out.println("Contacto custoemr:  " + customerInstance.contacts[0].name)
-		
+				
         if (!customerInstance.save(flush: true)) {
             render(view: "create", model: [customerInstance: customerInstance])
             return
@@ -131,7 +112,7 @@ class CustomerController {
 		
 		if (!contactInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.nroContactDelete])
-			redirect(action: "edit", id: params.idWish)
+			redirect(action: "edit", id: params.idStakeholder)
 			return
 		}
 

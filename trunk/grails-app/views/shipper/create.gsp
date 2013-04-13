@@ -29,6 +29,7 @@
 		</div>
 	</g:form>
 	
+	<g:render template="/_stakeholder/contactDeleteModal" model="['stakeholderInstance':shipperInstance]"></g:render>
 </section>
 		
 </body>

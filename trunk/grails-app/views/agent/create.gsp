@@ -29,6 +29,8 @@
 		</div>
 	</g:form>
 	
+	<g:render template="/_stakeholder/contactDeleteModal" model="['stakeholderInstance':agentInstance]"></g:render>
+	
 </section>
 		
 </body>
