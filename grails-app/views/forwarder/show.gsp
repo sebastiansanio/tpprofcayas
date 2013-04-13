@@ -60,20 +60,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="forwarder.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${forwarderInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="forwarder.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${forwarderInstance?.lastUpdated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="forwarder.wishes.label" default="Wishes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
@@ -88,7 +74,23 @@
 				</td>
 				
 			</tr>
+
+			<g:render template="/_stakeholder/show" model="['stakeholderInstance':forwarderInstance]"/>
 		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="forwarder.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${forwarderInstance?.dateCreated}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="forwarder.lastUpdated.label" default="Last Updated" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${forwarderInstance?.lastUpdated}" /></td>
+				
+			</tr>
+			
 		</tbody>
 	</table>
 </section>

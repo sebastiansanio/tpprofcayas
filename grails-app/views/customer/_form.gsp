@@ -30,7 +30,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')} required">
 				<label for="defaultReport" class="control-label"><g:message code="customer.defaultReport.label" default="Default Report"/><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" required="" value="${customerInstance?.defaultReport?.id}" class="many-to-one"/>
+					<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" required="" value="${customerInstance?.defaultReport?.id}" class="many-to-one" noSelection="['null': '']"/>
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')}</span>
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')} required">
 				<label for="defaultLocale" class="control-label"><g:message code="customer.defaultLocale.label" default="Default Locale"/><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" required="" value="${customerInstance?.defaultLocale?.id}" class="many-to-one"/>
+					<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" required="" value="${customerInstance?.defaultLocale?.id}" class="many-to-one" noSelection="['null': '']"/>
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')}</span>
 				</div>
 			</div>

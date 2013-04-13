@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="modal-footer">
-		<g:form action="deleteContact" params="[idStakeholder: stakeholderInstance.id]">		
+		<g:form controller="stakeholder" action="deleteContact" params="[idStakeholder: stakeholderInstance.id]">		
 			<button class="btn" type="reset" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.cancel.label" default="Cancel"/></button>
 			<g:hiddenField name="nroContactDelete" id="nroContactDelete"/>
 			<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteContact" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>

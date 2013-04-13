@@ -67,20 +67,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${supplierInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${supplierInstance?.lastUpdated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.taxRegistryNumber.label" default="Tax Registry Number" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "taxRegistryNumber")}</td>
@@ -98,11 +84,27 @@
 					</ul>
 					
 					<export:formats controller="wish" action="exportByStakeholder" params='[id: supplierInstance.id]' formats="['csv','excel','ods','pdf']" />
-				
 				</td>
 				
 			</tr>
 		
+			<g:render template="/_stakeholder/show" model="['stakeholderInstance':supplierInstance]"/>
+
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${supplierInstance?.dateCreated}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.lastUpdated.label" default="Last Updated" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${supplierInstance?.lastUpdated}" /></td>
+				
+			</tr>
+					
 		</tbody>
 	</table>
 </section>

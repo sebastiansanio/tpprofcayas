@@ -60,6 +60,23 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.wishes.label" default="Wishes" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${shipperInstance.wishes}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+					
+					<export:formats controller="wish" action="exportByStakeholder" params='[id: shipperInstance.id]' formats="['csv','excel','ods','pdf']" />
+				</td>
+				
+			</tr>
+
+			<g:render template="/_stakeholder/show" model="['stakeholderInstance':shipperInstance]"/>
+
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="shipper.dateCreated.label" default="Date Created" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${shipperInstance?.dateCreated}" /></td>
@@ -72,25 +89,7 @@
 				<td valign="top" class="value"><g:formatDate date="${shipperInstance?.lastUpdated}" /></td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="shipper.wishes.label" default="Wishes" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${shipperInstance.wishes}" var="w">
-						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
 					
-					<export:formats controller="wish" action="exportByStakeholder" params='[id: shipperInstance.id]' formats="['csv','excel','ods','pdf']" />
-				
-				</td>
-				
-				
-				
-			</tr>
-		
 		</tbody>
 	</table>
 </section>
