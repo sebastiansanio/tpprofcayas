@@ -104,4 +104,27 @@ class AgentController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def deleteContact(){
+		def stakeholderInstance = Stakeholder.get(params.idStakeholder)
+		def contactInstance = stakeholderInstance.contacts[params.nroContactDelete.toInteger()]
+		
+		if (!contactInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.nroContactDelete])
+			redirect(action: "edit", id: params.idStakeholder)
+			return
+		}
+
+		try {
+			
+			stakeholderInstance.removeFromContacts(contactInstance)
+			contactInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'contact.label', default: 'Contact'), params.nroContactDelete])
+			redirect(action: "edit", id: params.idStakeholder)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'contact.label', default: 'Contact'), params.nroContactDelete])
+			redirect(action: "edit", id: params.idStakeholder)
+		}
+	}
 }
