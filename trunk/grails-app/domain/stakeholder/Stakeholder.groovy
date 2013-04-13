@@ -7,19 +7,19 @@ import report.Report
 import login.User
 
 class Stakeholder {
-
+	
 	static hasMany		= [contacts: Contact]
    
-  List contacts
+	List 	contacts
 	
 	Date	dateCreated
 	Date	lastUpdated
 	
-	String name
+	String 	name
 	Country country
-	String telephone
-	String email
-	Report defaultReport
+	String 	telephone
+	String 	email
+	Report 	defaultReport
 	AvailableLocale defaultLocale
 	
 

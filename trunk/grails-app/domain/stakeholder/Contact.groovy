@@ -3,9 +3,9 @@ package stakeholder
 class Contact {
 	
 	Date	dateCreated
-	String name
-	String email
-	String position
+	String 	name
+	String 	email
+	String 	position
 	
 	static belongsTo	= [stakeholder:Stakeholder]
 		    
