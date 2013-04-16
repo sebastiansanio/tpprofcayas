@@ -6,6 +6,9 @@ class Contact {
 	String 	name
 	String 	email
 	String 	position
+	boolean sendAlerts
+	boolean sendReports
+	
 	
 	static belongsTo	= [stakeholder:Stakeholder]
 		    

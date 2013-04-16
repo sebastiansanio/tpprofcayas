@@ -21,7 +21,6 @@ class Stakeholder {
 	String 	email
 	Report 	defaultReport
 	AvailableLocale defaultLocale
-	
 
 	static constraints = {
 		name blank:false, nullable:true
