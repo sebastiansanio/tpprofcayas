@@ -52,6 +52,23 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'country', 'error')}</span>
 			</div>
 		</div>
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'province', 'error')}">
+			<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
+			<div class="controls">
+				<g:textField name="province" value="${shipperInstance?.province}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'province', 'error')}</span>
+			</div>
+		</div>
+			
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'locality', 'error')}">
+			<label for="locality" class="control-label"><g:message code="customer.locality.label" default="Locality" /></label>
+			<div class="controls">
+				<g:textField name="locality" value="${shipperInstance?.locality}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'locality', 'error')}</span>
+			</div>
+		</div>
+		
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'wishes', 'error')} ">
 			<label for="wishes" class="control-label"><g:message code="shipper.wishes.label" default="Wishes" /></label>

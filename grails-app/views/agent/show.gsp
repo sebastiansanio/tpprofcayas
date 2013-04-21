@@ -56,8 +56,21 @@
 				<td valign="top" class="name"><g:message code="agent.country.label" default="Country" /></td>
 				
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${agentInstance?.country?.id}">${agentInstance?.country?.encodeAsHTML()}</g:link></td>
-				
 			</tr>
+
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="agent.province.label" default="Province" /></td>
+				
+				<td valign="top" class="value">${agentInstance?.province?.encodeAsHTML()}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="agent.locality.label" default="Locality" /></td>
+				
+				<td valign="top" class="value">${agentInstance?.locality?.encodeAsHTML()}</td>
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="agent.wishes.label" default="Wishes" /></td>

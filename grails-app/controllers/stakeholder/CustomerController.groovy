@@ -75,6 +75,8 @@ class CustomerController {
                 return
             }
         }
+		
+		System.out.println(params)
 
         customerInstance.properties = params
 

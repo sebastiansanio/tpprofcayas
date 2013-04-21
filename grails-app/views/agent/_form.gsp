@@ -53,6 +53,23 @@
 			</div>
 		</div>
 
+		<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'province', 'error')}">
+			<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
+			<div class="controls">
+				<g:textField name="province" value="${agentInstance?.province}"/>
+				<span class="help-inline">${hasErrors(bean: agentInstance, field: 'province', 'error')}</span>
+			</div>
+		</div>
+			
+		<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'locality', 'error')}">
+			<label for="locality" class="control-label"><g:message code="customer.locality.label" default="Locality" /></label>
+			<div class="controls">
+				<g:textField name="locality" value="${agentInstance?.locality}"/>
+				<span class="help-inline">${hasErrors(bean: agentInstance, field: 'locality', 'error')}</span>
+			</div>
+		</div>
+
+
 		<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'wishes', 'error')} ">
 			<label for="wishes" class="control-label"><g:message code="agent.wishes.label" default="Wishes" /></label>
 			<div class="controls">

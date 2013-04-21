@@ -58,6 +58,19 @@
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${customsBrokerInstance?.country?.id}">${customsBrokerInstance?.country?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customsBroker.province.label" default="Province" /></td>
+				
+				<td valign="top" class="value">${customsBrokerInstance?.province?.encodeAsHTML()}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customsBroker.locality.label" default="Locality" /></td>
+				
+				<td valign="top" class="value">${customsBrokerInstance?.locality?.encodeAsHTML()}</td>
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customsBroker.wishes.label" default="Wishes" /></td>

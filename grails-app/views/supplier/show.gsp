@@ -65,6 +65,19 @@
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${supplierInstance?.country?.id}">${supplierInstance?.country?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.province.label" default="Province" /></td>
+				
+				<td valign="top" class="value">${supplierInstance?.province?.encodeAsHTML()}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.locality.label" default="Locality" /></td>
+				
+				<td valign="top" class="value">${supplierInstance?.locality?.encodeAsHTML()}</td>
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.taxRegistryNumber.label" default="Tax Registry Number" /></td>
