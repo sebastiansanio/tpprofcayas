@@ -61,6 +61,23 @@
 			</div>
 		</div>
 
+		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'province', 'error')}">
+			<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
+			<div class="controls">
+				<g:textField name="province" value="${supplierInstance?.province}"/>
+				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'province', 'error')}</span>
+			</div>
+		</div>
+			
+		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'locality', 'error')}">
+			<label for="locality" class="control-label"><g:message code="customer.locality.label" default="Locality" /></label>
+			<div class="controls">
+				<g:textField name="locality" value="${supplierInstance?.locality}"/>
+				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'locality', 'error')}</span>
+			</div>
+		</div>
+
+
 		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'taxRegistryNumber', 'error')} ">
 			<label for="taxRegistryNumber" class="control-label"><g:message code="supplier.taxRegistryNumber.label" default="Tax Registry Number" /></label>
 			<div class="controls">

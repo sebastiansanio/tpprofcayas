@@ -60,6 +60,20 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="forwarder.province.label" default="Province" /></td>
+				
+				<td valign="top" class="value">${forwarderInstance?.province?.encodeAsHTML()}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="forwarder.locality.label" default="Locality" /></td>
+				
+				<td valign="top" class="value">${forwarderInstance?.locality?.encodeAsHTML()}</td>
+			</tr>
+		
+		
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="forwarder.wishes.label" default="Wishes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">

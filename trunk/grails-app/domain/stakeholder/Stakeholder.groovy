@@ -17,6 +17,9 @@ class Stakeholder {
 	
 	String 	name
 	Country country
+	String province
+	String locality
+	
 	String 	telephone
 	String 	email
 	Report 	defaultReport
@@ -28,6 +31,8 @@ class Stakeholder {
 		email email:true, blank:true, nullable:true
 		defaultReport nullable: false
 		defaultLocale nullable: false
+		province nullable:true,blank:true
+		locality nullable:true,blank:true
     }
 	
 	public String toString() {

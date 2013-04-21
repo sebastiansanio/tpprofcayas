@@ -58,6 +58,19 @@
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${shipperInstance?.country?.id}">${shipperInstance?.country?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.province.label" default="Province" /></td>
+				
+				<td valign="top" class="value">${shipperInstance?.province?.encodeAsHTML()}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.locality.label" default="Locality" /></td>
+				
+				<td valign="top" class="value">${shipperInstance?.locality?.encodeAsHTML()}</td>
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="shipper.wishes.label" default="Wishes" /></td>

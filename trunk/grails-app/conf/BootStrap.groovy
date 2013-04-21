@@ -93,6 +93,7 @@ class BootStrap {
 		roleOperator.addToPermissions("port:*")
 		roleOperator.addToPermissions("ship:*")
 		roleOperator.addToPermissions("report:*")
+		roleOperator.addToPermissions("contact:*")
 		roleOperator.addToPermissions("*:show")
 		roleOperator.save()
 		

@@ -65,6 +65,19 @@
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${customerInstance?.country?.id}">${customerInstance?.country?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customer.province.label" default="Province" /></td>
+				
+				<td valign="top" class="value">${customerInstance?.province?.encodeAsHTML()}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customer.locality.label" default="Locality" /></td>
+				
+				<td valign="top" class="value">${customerInstance?.locality?.encodeAsHTML()}</td>
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customer.cuit.label" default="Cuit" /></td>

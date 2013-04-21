@@ -4,6 +4,8 @@ import wish.*
 
 class Customer extends Stakeholder{
 
+	static final String type = "customer"
+	
 	String address
 	String cuit
 

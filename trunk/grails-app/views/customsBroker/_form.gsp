@@ -52,6 +52,23 @@
 				<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'country', 'error')}</span>
 			</div>
 		</div>
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'province', 'error')}">
+			<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
+			<div class="controls">
+				<g:textField name="province" value="${customsBrokerInstance?.province}"/>
+				<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'province', 'error')}</span>
+			</div>
+		</div>
+			
+		<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'locality', 'error')}">
+			<label for="locality" class="control-label"><g:message code="customer.locality.label" default="Locality" /></label>
+			<div class="controls">
+				<g:textField name="locality" value="${customsBrokerInstance?.locality}"/>
+				<span class="help-inline">${hasErrors(bean: customsBrokerInstance, field: 'locality', 'error')}</span>
+			</div>
+		</div>
+		
 
 		<div class="control-group fieldcontain ${hasErrors(bean: customsBrokerInstance, field: 'wishes', 'error')} ">
 			<label for="wishes" class="control-label"><g:message code="customsBroker.wishes.label" default="Wishes" /></label>

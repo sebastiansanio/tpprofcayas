@@ -58,6 +58,22 @@
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'country', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'province', 'error')}">
+				<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
+				<div class="controls">
+					<g:textField name="province" value="${customerInstance?.province}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'province', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'locality', 'error')}">
+				<label for="locality" class="control-label"><g:message code="customer.locality.label" default="Locality" /></label>
+				<div class="controls">
+					<g:textField name="locality" value="${customerInstance?.locality}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'locality', 'error')}</span>
+				</div>
+			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'cuit', 'error')} ">
 				<label for="cuit" class="control-label"><g:message code="customer.cuit.label" default="Cuit" /></label>
