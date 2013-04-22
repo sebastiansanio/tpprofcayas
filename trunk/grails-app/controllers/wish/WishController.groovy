@@ -17,6 +17,7 @@ class WishController {
 	def alertManagerService
 	def opNumberGeneratorService
 	def wishImportService
+	def documentImportService
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -32,13 +33,24 @@ class WishController {
 		
 	}
 	
+	def importDocuments(){		
+		try{
+			documentImportService.importDocuments(params.importFile.getBytes())
+			alertManagerService.generateAllAlerts()
+			flash.message = message(code:'default.importOk.message')
+		}catch(Exception e){
+			flash.message = message(code:'default.importError.message')
+		}
+		redirect(action: "list", params: params)
+	}
+	
 	def importWishes(){
 		
 		try{
 			wishImportService.importWishes(params.importFile.getBytes())
 			alertManagerService.generateAllAlerts()
 			flash.message = message(code:'default.importOk.message')
-		}catch(RuntimeException e){
+		}catch(Exception e){
 			flash.message = message(code:'default.importError.message')
 		}
 		
