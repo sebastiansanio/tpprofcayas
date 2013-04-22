@@ -467,8 +467,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.bill.label" default="Bill" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "bill")}</td>
-				
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "bill")}</td>		
 			</tr>
 		
 			<tr class="prop">

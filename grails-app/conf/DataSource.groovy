@@ -34,7 +34,7 @@ environments {
 	
 	//create user 'usrcayas'@'localhost' identified by 'gUrrUch4g4';
 	//create schema cayas;
-	//grant all priviliges on cayas.* to 'usrcayas'@'localhost' with grant option;
+	//grant all privileges on cayas.* to 'usrcayas'@'localhost' with grant option;
     production {
         dataSource {
 			pooled = true

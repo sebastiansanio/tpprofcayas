@@ -5,7 +5,7 @@ import java.util.Locale;
 
 import stakeholder.Stakeholder
 
-class WishesMailService {
+class WishMailService {
 
     static transactional = true
 	
