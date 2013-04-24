@@ -86,8 +86,9 @@ class WishImportService {
 		try{
 			GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
 			List objects = genericExcelImporter.getObjects(configuration)
-
+			
 			objects.each{
+				
 				def customer = Customer.get(it['customer.id'])								
 				['shipper.id','priceCondition.id','currency.id','customsBroker.id','ship.id','forwarder.id','agent.id',
 					'paymentTerm.id','wishStatus.id','paymentStatus.id','visaChargePayment','visaChargePaymentConcept.id','criterionValue.id','licenses',
@@ -97,12 +98,17 @@ class WishImportService {
 					if(it[attribute] == null)
 						it.remove(attribute)
 				}
-				['estimatedTimeOfDeparture','estimatedTimeOfArrival','wishDate','djaiFormalizationDate','finishDate',
+				
+					
+					
+				['wishDate','estimatedTimeOfDeparture','estimatedTimeOfArrival','djaiFormalizationDate','finishDate',
 					'dateOfMoneyInAdvanceTransfer','djaiExtendedRequested','djaiExtendedExpiration','taxRegistryNumberAndCuitVerification',
 					'swiftReceivedDate','swiftSentToSupplierDate','dateOfBalancePayment','picturesOfPrintingBoxesAndLoadReceived',
 					'picturesOfLoadingContainerReceived','docDraftApproved','billDate'].each{attribute ->
 					if(it[attribute] == null)
 						it.remove(attribute)
+					else if(it[attribute] == 'OK')
+						it[attribute] = it['wishDate'].plus(20)
 					else
 						it[attribute] = it[attribute].toDateTimeAtStartOfDay().toDate()
 				}
@@ -117,6 +123,7 @@ class WishImportService {
 				customer.save()
 			}
 		}catch(Exception e){
+			System.out.println(e.getMessage())
 			throw new RuntimeException("Importing failed",e)
 		}finally{
 			file.delete()

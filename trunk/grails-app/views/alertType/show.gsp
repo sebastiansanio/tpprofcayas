@@ -70,12 +70,12 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="alertType.alerts.label" default="Alerts" /></td>
+				<td valign="top" class="name"><g:message code="alertType.messages.label" default="Messages" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
-					<g:each in="${alertTypeInstance.alerts}" var="a">
-						<li><g:link controller="alert" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+					<g:each in="${alertTypeInstance.messages}" var="a">
+						<li><g:link controller="alertMessage" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 					</g:each>
 					</ul>
 				</td>

@@ -51,6 +51,7 @@ class WishController {
 			alertManagerService.generateAllAlerts()
 			flash.message = message(code:'default.importOk.message')
 		}catch(Exception e){
+			
 			flash.message = message(code:'default.importError.message')
 		}
 		

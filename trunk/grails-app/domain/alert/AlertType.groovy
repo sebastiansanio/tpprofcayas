@@ -10,7 +10,7 @@ class AlertType {
 	String nameOfEstimatedDateField
 	String nameOfCompletionField
 	
-	static hasMany		= [alerts:Alert,stakeholders:String]
+	static hasMany		= [alerts:Alert,stakeholders:String,messages:AlertMessage]
 	
     static mapping = {
     }
