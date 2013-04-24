@@ -103,6 +103,7 @@ class BootStrap {
 		roleManager.addToPermissions("subFamily:*")
 		roleManager.addToPermissions("family:*")
 		roleManager.addToPermissions("alertType:*")
+		roleManager.addToPermissions("alertMessage:*")
 		roleManager.addToPermissions("country:*")
 		roleManager.addToPermissions("currency:*")
 		roleManager.addToPermissions("*:show")
