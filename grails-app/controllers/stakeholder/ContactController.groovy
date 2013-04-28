@@ -86,15 +86,18 @@ class ContactController {
         redirect(action: "show", id: contactInstance.id)
     }
 
+
     def delete() {
         def contactInstance = Contact.get(params.id)
-        if (!contactInstance) {
+
+		if (!contactInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")
             return
         }
 
         try {
+			contactInstance.stakeholder.removeFromContacts(contactInstance)	
             contactInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")

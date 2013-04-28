@@ -8,8 +8,7 @@ class Note {
 	String text
 	User user
 	
-    static mapping = {
-    }
+	
     
 	static constraints = {
 		text nullable:true
