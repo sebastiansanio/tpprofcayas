@@ -52,7 +52,12 @@
 				<div class="controls">
 					<g:textArea rows='3' name="notes[${i}].text" >${noteInstance?.text}</g:textArea>
 					<span class="help-inline">${hasErrors(bean: noteInstance, field: 'text', 'error')}</span>
+					
+					<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" class="btn btn-primary" action="deleteNote" id="${noteInstance.id}" params="[noteWishId: wishInstance.id]"><i class="icon-trash"></i></g:link>
+				
 				</div>
+				
+				
 			</div>
 
 			<g:hiddenField id="notes[${i}].user" name="notes[${i}].user.id" value="${noteInstance?.user?.id}"/>

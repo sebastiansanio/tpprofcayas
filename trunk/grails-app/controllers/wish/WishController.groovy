@@ -417,4 +417,27 @@ class WishController {
 			redirect(action: "edit", id: params.idWish)
 		}
 	}
+	
+	def deleteNote(){
+		def wishInstance = Wish.get(params.noteWishId)
+		def noteInstance = Note.get(params.id)
+		
+		if (!noteInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.noteWishId)
+			return
+		}
+
+		try {
+			
+			wishInstance.removeFromNotes(noteInstance)
+			noteInstance.delete()
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.noteWishId)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.noteWishId)
+		}
+	}
 }
