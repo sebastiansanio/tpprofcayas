@@ -9,7 +9,13 @@
 </head>
 
 <body>
-	
+
+<g:if test="${flash.error != null}">
+	<div class="alert alert-error">
+		${flash.error}
+	</div>
+</g:if>
+
 
 <h4> <g:message code="wish.import.label" default="Import"/> </h4>
 
