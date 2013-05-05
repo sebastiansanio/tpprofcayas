@@ -86,21 +86,19 @@ class WishImportService {
 		try{
 			GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
 			List objects = genericExcelImporter.getObjects(configuration)
-			
+						
 			objects.each{
-				
-				def customer = Customer.get(it['customer.id'])								
+
 				['shipper.id','priceCondition.id','currency.id','customsBroker.id','ship.id','forwarder.id','agent.id',
 					'paymentTerm.id','wishStatus.id','paymentStatus.id','visaChargePayment','visaChargePaymentConcept.id','criterionValue.id','licenses',
 					'shippingMark.id','customerLogoPunch','hsCodeToBeWritten','amountOfMoneyInAdvanceTransferred',
 					'moneyBalance','sourceCountry.id','port.id','freightQuote','forwarderRefNumber','loadSecuredPercent',
-					'cbm','grossWeight','netWeight','palletsQuantity','typeOfFreight.id','blNumber','bill','hasFeeder'].each{attribute ->
-					if(it[attribute] == null)
-						it.remove(attribute)
-				}
-				
-					
-					
+					'cbm','grossWeight','netWeight','palletsQuantity','typeOfFreight.id','blNumber','bill'
+					,'hasFeeder'].each{attribute ->
+						if(it[attribute] == null)
+							it.remove(attribute)
+					}
+						
 				['wishDate','estimatedTimeOfDeparture','estimatedTimeOfArrival','djaiFormalizationDate','finishDate',
 					'dateOfMoneyInAdvanceTransfer','djaiExtendedRequested','djaiExtendedExpiration','taxRegistryNumberAndCuitVerification',
 					'swiftReceivedDate','swiftSentToSupplierDate','dateOfBalancePayment','picturesOfPrintingBoxesAndLoadReceived',
@@ -111,20 +109,30 @@ class WishImportService {
 						it[attribute] = it['wishDate'].plus(20)
 					else
 						it[attribute] = it[attribute].toDateTimeAtStartOfDay().toDate()
+				}	
+				Wish wishInstance = null
+				
+				if(it['opNumber'] != null){
+					wishInstance = Wish.findByOpNumber(it['opNumber'])
+				}				
+				if(wishInstance == null){
+					wishInstance = new Wish()
 				}
-									
-				Wish wishInstance = new Wish(it)
-				if(wishInstance.customerOpNumber == null)
-					wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(customer)
+				wishInstance.properties = it	
+				
+				def customer = Customer.get(it['customer.id'])	
 				if(wishInstance.opNumber == null)
 					wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()
-				
+				if(wishInstance.customerOpNumber == null)
+					wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(customer)
+
 				customer.addToWishes(wishInstance)
-				customer.save()
+				customer.save(failOnError:true)
+				
 			}
+
 		}catch(Exception e){
-			System.out.println(e.getMessage())
-			throw new RuntimeException("Importing failed",e)
+			throw new RuntimeException(e.getMessage(),e)
 		}finally{
 			file.delete()
 		}

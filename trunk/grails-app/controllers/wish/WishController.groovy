@@ -39,7 +39,7 @@ class WishController {
 			alertManagerService.generateAllAlerts()
 			flash.message = message(code:'default.importOk.message')
 		}catch(Exception e){
-			flash.message = message(code:'default.importError.message')
+			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
 		}
 		redirect(action: "list", params: params)
 	}
@@ -50,12 +50,11 @@ class WishController {
 			wishImportService.importWishes(params.importFile.getBytes())
 			alertManagerService.generateAllAlerts()
 			flash.message = message(code:'default.importOk.message')
-		}catch(Exception e){
-			
-			flash.message = message(code:'default.importError.message')
+		}catch(Exception e){			
+			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
 		}
 		
-		redirect(action: "list", params: params)
+		redirect(action: "importForm", params: params)
 	}
 		
     def list() {		
