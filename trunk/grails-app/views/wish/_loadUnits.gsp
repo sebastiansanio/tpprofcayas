@@ -41,11 +41,11 @@
 <table class="table table-hover table-condensed">
 	<thead>
  		<tr>
-        	<th>${message(code:'loadUnit.cartonPrintingInfoSentDate.label')}</th>
-        	<th>${message(code:'loadUnit.cartonPrintingInfoSentUser.label')}</th>
-        	<th>${message(code:'loadUnit.product.label')}</th>
-        	<th>${message(code:'loadUnit.quantity.label')}</th>
-        	<th>${message(code:'loadUnit.unitPrice.label')}</th>
+        	<th>${message(code:'loadUnit.cartonPrintingInfoSentDate.label', default:'Date of dispatch of design')}</th>
+        	<th>${message(code:'loadUnit.cartonPrintingInfoSentUser.label', default:'User who sent the design')}</th>
+        	<th>${message(code:'loadUnit.product.label', default:'Product')}</th>
+        	<th>${message(code:'loadUnit.quantity.label', default:'Quantity')}</th>
+        	<th>${message(code:'loadUnit.unitPrice.label', default:'Unit price')}</th>
         	<th></th>
         </tr>
     </thead>
@@ -91,4 +91,4 @@
 </tbody>
 </table>
 
-<input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add')}"  id="btnLoadUnit" />
+<input type="button" class="btn btn-primary" value="${message(code:'wish.loadUnit.add', default:'Add load')}"  id="btnLoadUnit" />
