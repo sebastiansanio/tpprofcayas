@@ -5,7 +5,6 @@
 </script>
 <script type="text/javascript" src="${resource(dir:'js', file:'draftFunc.js')}"> </script>	
 				
- <h5><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery"/></h5>
 	<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'docDraftToBeApprovedBeforeDelivery', 'error')} ">
  		<table class="table table-hover">
  			<thead>
