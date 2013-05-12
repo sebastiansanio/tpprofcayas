@@ -321,6 +321,16 @@
 				
 			</tr>
 		
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Sent Date" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${wishInstance?.cartonPrintingInfoSentDate}" /></td>
+				
+			</tr>
+		
+			
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></td>
 				
