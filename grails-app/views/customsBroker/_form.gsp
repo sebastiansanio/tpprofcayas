@@ -75,9 +75,7 @@
 			<div class="controls">
 				
 				<ul class="one-to-many">
-					<g:each in="${customsBrokerInstance?.wishes?}" var="w">
-					    <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
-					</g:each>
+
 					<li class="add">
 						<g:link controller="wish" action="create" params="['customsBroker.id': customsBrokerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
 					</li>
