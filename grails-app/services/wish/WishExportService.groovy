@@ -56,6 +56,16 @@ class WishExportService implements MessageSourceAware {
 	
 	
 	
+	def getMaxWidth(List wishes,String label,int initialMaxWidth){
+		int maxWidth = initialMaxWidth
+		wishes.each{
+			if(it[label].toString().length()>maxWidth){
+				maxWidth = it[label].toString().length()
+			}
+		}
+		return maxWidth * 1.2
+	}
+	
 	def doExport(String format,OutputStream outputStream,Locale locale,List fields,List wishes){	
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
@@ -63,13 +73,17 @@ class WishExportService implements MessageSourceAware {
 		Map labels = new HashMap()
 		Map formatters = new HashMap()
 		def wishDomainClass = new Wish().domainClass
+		
+		List widths = new ArrayList()
 				
 		fields.each{
-			labels.put(it, messageSource.getMessage("wish."+it+".label",null,locale))
+			String label = messageSource.getMessage("wish."+it+".label",null,locale)
+			labels.put(it, label)
 			if(wishDomainClass.getPropertyByName(it).type == Date)
 				formatters.put(it, dateFormatter)
+			widths.add(getMaxWidth(wishes,it,label.length()))
 		}
-		Map parameters = [title: messageSource.getMessage("wish.label",null,locale)]
+		Map parameters = [title: messageSource.getMessage("wish.label",null,locale),'column.widths':widths,'font.family':'STSong-Light']
 		exportService.export(format,outputStream,wishes,fields,labels,formatters,parameters)
 	}
 
