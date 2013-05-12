@@ -15,7 +15,7 @@ class AgentController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [agentInstanceList: Agent.list(params), agentInstanceTotal: Agent.count()]
     }
 
