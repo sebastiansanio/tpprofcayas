@@ -18,7 +18,7 @@
 					<label class="span1" for="fields" class="control-label"><g:message code="report.fields.label" default="Fields" /></label>
 						
 					<div class="span3">									
-					<g:select size="15" id="avFields" name="avFields" from="${new Wish().domainClass.properties.findAll{!(it.name in reportInstance?.fields)}}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" multiple="multiple"/>
+					<g:select size="15" id="avFields" name="avFields" from="${new Wish().domainClass.properties.findAll{!(it.name in reportInstance?.fields)}.sort{message(code:'wish.'+it.name+'.label')}}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" multiple="multiple"/>
 					</div>
 					
 					<div class="span2">	
