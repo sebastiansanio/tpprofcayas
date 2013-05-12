@@ -80,6 +80,12 @@ class WishController {
 		List wishes = Wish.findAllByFinishDateIsNotNull(params)
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
 	}
+	
+	def listBilledByStakeholder(){
+		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		Set wishes = Stakeholder.get(params.id).wishes.findAll{it.finishDate != null || it.billDate !=null}
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+	}
 
 	def export() {
 		params.reportId = Long.parseLong(params.reportId)

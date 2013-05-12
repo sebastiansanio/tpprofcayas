@@ -74,19 +74,26 @@
 		
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="forwarder.wishes.label" default="Wishes" /></td>
+				<td valign="top" class="name"><g:message code="stakeholder.pendingWishes.label" default="Pending Orders" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
-					<g:each in="${forwarderInstance.wishes}" var="w">
-						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+					<g:each in="${forwarderInstance.wishes.findAll{it.billDate==null && it.finishDate==null}.sort{it.opNumber}}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
 					</g:each>
 					</ul>
-					
+
 					<export:formats controller="wish" action="exportByStakeholder" params='[id: forwarderInstance.id]' formats="['csv','excel','ods','pdf']" />
-				
+					
+					
 				</td>
-				
+			</tr>
+			
+			<tr><td></td>
+				<td class="btn">
+					<g:link action='listBilledByStakeholder' controller='wish' id='${forwarderInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
+				</td>
+			
 			</tr>
 
 			<g:render template="/_stakeholder/show" model="['stakeholderInstance':forwarderInstance]"/>
