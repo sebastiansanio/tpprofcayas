@@ -71,7 +71,8 @@ class WishImportService {
 			'BD': 'blNumber',
 			'BE': 'bill',
 			'BF': 'billDate',
-			'BG': 'hasFeeder'
+			'BG': 'hasFeeder',
+			'BH': 'cartonPrintingInfoSentDate'
 		]
 	]
 
@@ -102,7 +103,7 @@ class WishImportService {
 				['wishDate','estimatedTimeOfDeparture','estimatedTimeOfArrival','djaiFormalizationDate','finishDate',
 					'dateOfMoneyInAdvanceTransfer','djaiExtendedRequested','djaiExtendedExpiration','taxRegistryNumberAndCuitVerification',
 					'swiftReceivedDate','swiftSentToSupplierDate','dateOfBalancePayment','picturesOfPrintingBoxesAndLoadReceived',
-					'picturesOfLoadingContainerReceived','docDraftApproved','billDate'].each{attribute ->
+					'picturesOfLoadingContainerReceived','docDraftApproved','billDate','cartonPrintingInfoSentDate'].each{attribute ->
 					if(it[attribute] == null)
 						it.remove(attribute)
 					else if(it[attribute] == 'OK')
