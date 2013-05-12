@@ -81,8 +81,19 @@ class WishController {
 	}
 	
     def create() {
-        [wishInstance: new Wish(params)]
+		
+		Wish wishInstance = new Wish(params)
+		
+		wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()
+			
+        [wishInstance: wishInstance]
     }
+	
+	def getNextCustomerOpNumber(){
+		render opNumberGeneratorService.getNextCustomerOpNumber(Customer.get(params.id))
+		
+	}
+
 
     def save() {
 		def keys = params.keySet().toArray()
@@ -98,11 +109,6 @@ class WishController {
         def wishInstance = new Wish(params)
 			
 		alertManagerService.generateAlerts(wishInstance)
-
-		if(wishInstance.customerOpNumber == null)
-			wishInstance.customerOpNumber = opNumberGeneratorService.getNextCustomerOpNumber(wishInstance.customer)
-		if(wishInstance.opNumber == null)
-			wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()
 		
         if (!wishInstance.save(flush: true)) {
             render(view: "create", model: [wishInstance: wishInstance])
