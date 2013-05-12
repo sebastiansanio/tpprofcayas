@@ -15,7 +15,7 @@ class ForwarderController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [forwarderInstanceList: Forwarder.list(params), forwarderInstanceTotal: Forwarder.count()]
     }
 

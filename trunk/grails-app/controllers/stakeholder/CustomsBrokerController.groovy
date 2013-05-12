@@ -15,7 +15,7 @@ class CustomsBrokerController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [customsBrokerInstanceList: CustomsBroker.list(params), customsBrokerInstanceTotal: CustomsBroker.count()]
     }
 

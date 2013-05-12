@@ -15,7 +15,7 @@ class ShipperController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [shipperInstanceList: Shipper.list(params), shipperInstanceTotal: Shipper.count()]
     }
 

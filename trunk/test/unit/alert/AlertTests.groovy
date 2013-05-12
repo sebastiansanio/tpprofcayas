@@ -1,13 +1,9 @@
 package alert
-
-
-
 import wish.Wish
+import org.junit.Test
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@TestFor(Alert)
+
+
 class AlertTests {
 	
 	@Test

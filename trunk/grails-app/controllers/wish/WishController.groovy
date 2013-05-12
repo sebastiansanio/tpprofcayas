@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import login.User
 import org.apache.shiro.SecurityUtils
 import stakeholder.*
+import org.springframework.transaction.annotation.Transactional
 
 
 class WishController {
@@ -58,7 +59,7 @@ class WishController {
 	}
 		
     def list() {		
-		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
@@ -167,13 +168,13 @@ class WishController {
         }
 
         wishInstance.properties = params
-
+		
         if (!wishInstance.save(flush: true)) {
-            render(view: "edit", model: [wishInstance: wishInstance])
+			render(view: "edit", model: [wishInstance: wishInstance])
             return
         }
 		alertManagerService.generateAlerts(wishInstance)
-		
+				
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'wish.label', default: 'Wish'), wishInstance.id])
         redirect(action: "show", id: wishInstance.id)
     }
@@ -430,7 +431,7 @@ class WishController {
 		try {
 			
 			wishInstance.removeFromNotes(noteInstance)
-			noteInstance.delete()
+			noteInstance.delete(flush:true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
 			redirect(action: "edit", id: params.noteWishId)
 		}

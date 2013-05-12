@@ -15,7 +15,7 @@ class SupplierController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
     }
 
