@@ -4,9 +4,11 @@
 
 <div id="generalDataInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseData">
-			<h4><g:message code="wish.title.generalData.label" default="General Data"/></h4>
+			<g:message code="wish.title.generalData.label" default="General Data"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseData" class="accordion-body collapse in">
     	<div class="accordion-inner">
@@ -16,7 +18,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'customer', 'error')} required">
 						<label for="customer" class="control-label"><g:message code="wish.customer.label" default="Customer" /><span class="required-indicator">*</span></label>
 						<div class="controls">
-							<g:select id="customer" name="customer.id" from="${stakeholder.Customer.list()}" optionKey="id" required="" value="${wishInstance?.customer?.id}" class="many-to-one"/>
+							<g:select onChange="getCustomerOpNumber(this);" noSelection="['null': '']" id="customer" name="customer.id" from="${stakeholder.Customer.list()}" optionKey="id" required="" value="${wishInstance?.customer?.id}" class="many-to-one"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'customer', 'error')}</span>
 						</div>
 					</div>
@@ -24,7 +26,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'supplier', 'error')} required">
 						<label for="supplier" class="control-label"><g:message code="wish.supplier.label" default="Supplier" /><span class="required-indicator">*</span></label>
 						<div class="controls">
-							<g:select id="supplier" name="supplier.id" from="${stakeholder.Supplier.list()}" optionKey="id" required="" value="${wishInstance?.supplier?.id}" class="many-to-one"/>
+							<g:select noSelection="['null': '']" id="supplier" name="supplier.id" from="${stakeholder.Supplier.list()}" optionKey="id" required="" value="${wishInstance?.supplier?.id}" class="many-to-one"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'supplier', 'error')}</span>
 						</div>
 					</div>
@@ -32,7 +34,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'shipper', 'error')} ">
 						<label for="shipper" class="control-label"><g:message code="wish.shipper.label" default="Shipper" /></label>
 						<div class="controls">
-							<g:select id="shipper" name="shipper.id" from="${stakeholder.Shipper.list()}" optionKey="id" required="" value="${wishInstance?.shipper?.id}" class="many-to-one"/>
+							<g:select noSelection="['null': '']" id="shipper" name="shipper.id" from="${stakeholder.Shipper.list()}" optionKey="id" required="" value="${wishInstance?.shipper?.id}" class="many-to-one"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'shipper', 'error')}</span>
 						</div>
 					</div>
@@ -74,9 +76,11 @@
 
 <div id="wishStatus" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseWishStatus">
-			<h4><g:message code="wish.title.wishStatus.label" default="Wish status"/></h4>
+			<g:message code="wish.title.wishStatus.label" default="Wish status"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseWishStatus" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -98,15 +102,17 @@
 
 <div id="referenceInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseReference">
-			<h4><g:message code="wish.title.reference.label" default="Reference"/></h4>
+			<g:message code="wish.title.reference.label" default="Reference"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseReference" class="accordion-body collapse in">
 		<div class="accordion-inner">
 			<div class="row-fluid">
 				<div class="span6">
-					
+										
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'opNumber', 'error')}">
 						<label for="opNumber" class="control-label"><g:message code="wish.opNumber.label" default="Op Number" /></label>
 						<div class="controls">
@@ -118,7 +124,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'customerOpNumber', 'error')}">
 						<label for="customerOpNumber" class="control-label"><g:message code="wish.customerOpNumber.label" default="Customer Op Number" /></label>
 						<div class="controls">
-							<g:field type="number" name="customerOpNumber" min="0" value="${wishInstance.customerOpNumber}"/>
+							<g:field type="number" id="customerOpNumber" name="customerOpNumber" min="0" value="${wishInstance.customerOpNumber}"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'customerOpNumber', 'error')}</span>
 						</div>
 					</div>
@@ -159,9 +165,11 @@
 
 <div id="datesInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseDates">
-			<h4><g:message code="wish.title.dates.label" default="Dates"/></h4>
+			<g:message code="wish.title.dates.label" default="Dates"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseDates" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -211,9 +219,11 @@
 
 <div id="paymentInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsePayment">
-			<h4><g:message code="wish.title.payment.label" default="Payment"/></h4>
+			<g:message code="wish.title.payment.label" default="Payment"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapsePayment" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -303,9 +313,11 @@
 
 <div id="loadInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseLoad">
-			<h4><g:message code="wish.title.load.label" default="Products"/></h4>
+			<g:message code="wish.title.load.label" default="Products"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseLoad" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -390,9 +402,11 @@
 
 <div id="djaiInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseDjai">
-			<h4><g:message code="wish.title.djai.label" default="DJAI"/></h4>
+			<g:message code="wish.title.djai.label" default="DJAI"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseDjai" class="accordion-body collapse in">
 		<div class="accordion-inner">	
@@ -450,9 +464,11 @@
 
 <div id="positioTariffnInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsePositionTariff">
-			<h4><g:message code="wish.title.positionTariff.label" default="Position tariff"/></h4>
+			<g:message code="wish.title.positionTariff.label" default="Position tariff"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapsePositionTariff" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -493,9 +509,11 @@
 
 <div id="swiftsInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSwifts">
-			<h4><g:message code="wish.title.swifts.label" default="Swifts"/></h4>
+			<g:message code="wish.title.swifts.label" default="Swifts"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseSwifts" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -528,9 +546,11 @@
 
 <div id="documentInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseDocument">
-		 	<h4><g:message code="wish.title.document.label" default="Documents"/></h4>
+		 	<g:message code="wish.title.document.label" default="Documents"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseDocument" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -541,9 +561,11 @@
 
 <div id="draftInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseDraft">
-			<h4><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery"/></h4>
+			<g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseDraft" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -582,9 +604,11 @@
 
 <div id="freightInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFreight">
-			<h4><g:message code="wish.title.freight.label" default="Freight"/></h4>
+			<g:message code="wish.title.freight.label" default="Freight"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseFreight" class="accordion-body collapse in">
 		<div class="accordion-inner">			
@@ -666,9 +690,11 @@
 
 <div id="finalInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFinal">
-			<h4><g:message code="wish.title.final.label" default="Final data"/></h4>
+			<g:message code="wish.title.final.label" default="Final data"/>
 		</a>
+		</h4>
 	</div>
 	<div id="collapseFinal" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -777,9 +803,11 @@
 
 <div id="notesInfo" class="accordion-group">
 	<div class="accordion-heading">
+		<h4>
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseNotes">
-			<h4><g:message code="wish.notes.label" default="Notes" /></h4>
+			<g:message code="wish.notes.label" default="Notes" />
 		</a>
+		</h4>
 	</div>
 	<div id="collapseNotes" class="accordion-body collapse in">
 		<div class="accordion-inner">
@@ -787,3 +815,14 @@
 	    </div>
 	</div>
 </div>
+
+<script>
+function getCustomerOpNumber(inputSelect){
+	var call = '${createLink(controller:'wish', action:'getNextCustomerOpNumber')}/'+inputSelect.value;
+	$.get(call,function(result){
+		
+		$('#customerOpNumber').val(result);
+	});
+}
+
+</script>
