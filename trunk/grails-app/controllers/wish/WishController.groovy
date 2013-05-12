@@ -63,6 +63,23 @@ class WishController {
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
+	def listPending(){
+		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNull(params)
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+	}
+	
+	def listBilled(){
+		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNotNull(params)
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+	}
+	
+	def listFinished(){
+		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		List wishes = Wish.findAllByFinishDateIsNotNull(params)
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+	}
 
 	def export() {
 		params.reportId = Long.parseLong(params.reportId)

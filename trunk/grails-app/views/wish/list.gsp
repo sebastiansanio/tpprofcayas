@@ -21,11 +21,11 @@
 			
 				<g:sortableColumn property="customerOpNumber" title="${message(code: 'wish.customerOpNumber.label', default: 'Customer Op Number')}" />
 			
-				<th><g:message code="wish.customer.label" default="Customer" /></th>
+				<g:sortableColumn property="customer.name" title="${message(code: 'wish.customer.label', default: 'Customer')}" />
+
+				<g:sortableColumn property="supplier.name" title="${message(code: 'wish.supplier.label', default: 'Supplier')}" />
 			
-				<th><g:message code="wish.supplier.label" default="Supplier" /></th>
-			
-				<th><g:message code="wish.shipper.label" default="Shipper" /></th>
+				<g:sortableColumn property="shipper.name" title="${message(code: 'wish.shipper.label', default: 'Shipper')}" />
 			
 				<g:sortableColumn property="supplierOrder" title="${message(code: 'wish.supplierOrder.label', default: 'Supplier Order')}" />
 			

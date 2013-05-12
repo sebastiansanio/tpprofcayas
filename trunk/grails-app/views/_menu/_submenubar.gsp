@@ -21,7 +21,12 @@
 			</li>
 		</g:if>
 		
-		
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":listPending") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/listPending')}">									
+			<li class="${ params.action == "listPending" ? 'active' : '' }">
+				<g:link action="listPending"><i class="icon-th-list"></i> <g:message code="default.listPending.label" args="[entityName]"/></g:link>
+			</li>
+		</g:if>
+				
 		
 		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":create") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/create')}">			
 			<li class="${ params.action == "create" ? 'active' : '' }">
@@ -54,6 +59,17 @@
 			</li>
 		</g:if>
 		
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":listBilled") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/listBilled')}">									
+			<li class="${ params.action == "listBilled" ? 'active' : '' }">
+				<g:link action="listBilled"><i class="icon-th-list"></i> <g:message code="default.listBilled.label" args="[entityName]"/></g:link>
+			</li>
+		</g:if>
+		
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":listFinished") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/listFinished')}">									
+			<li class="${ params.action == "listFinished" ? 'active' : '' }">
+				<g:link action="listFinished"><i class="icon-th-list"></i> <g:message code="default.listFinished.label" args="[entityName]"/></g:link>
+			</li>
+		</g:if>
 		
 		
 	</ul>
