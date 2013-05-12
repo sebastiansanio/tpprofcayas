@@ -30,6 +30,7 @@ class WishExportService implements MessageSourceAware {
 		List fields = report.fields
 		List wishes = new ArrayList()
 		wishes.addAll(stakeholder.wishes)
+		wishes.sort{it.opNumber}
 		
 		if(report.pendingOnly==true)
 			wishes = wishes.findAll{
@@ -43,7 +44,7 @@ class WishExportService implements MessageSourceAware {
 
 		Report report = Report.get(reportId)
 		
-		List wishes = Wish.list()
+		List wishes = Wish.list(sort:'opNumber')
 		
 		if(report.pendingOnly==true)
 			wishes = wishes.findAll{
