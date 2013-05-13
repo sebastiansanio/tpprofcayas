@@ -244,14 +244,18 @@ class WishController {
 	def createBoxPicture(){
 		def picture = new Picture(params)
 		def wishInstance = Wish.get(params.idWish)
-	        if (!picture.save(flush: true)) {
-	        	redirect(action: "show", id: wishInstance.id)	
-        	   return
-        	}
+
+		if (!picture.save(flush: true)) {
+        	redirect(action: "show", id: wishInstance.id)	
+    	   return
+    	}
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
 		wishInstance.addToPicturesOfPrintingBoxes(picture)
-	    redirect(action: "show", id: wishInstance.id)	
+		
+
+		def text = "/wish/show/" + wishInstance.id + "#picturesOfPrintingBoxesAndLoadReceived"
+		redirect(uri: text)
 	}
 
 	def createContainerPicture(){
@@ -264,7 +268,9 @@ class WishController {
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
 		wishInstance.addToPicturesOfLoadingContainer(picture)
-        redirect(action: "show", id: wishInstance.id)	
+       
+		def text = "/wish/show/" + wishInstance.id + "#picturesOfLoadingContainerReceived"
+		redirect(uri: text)
 	}
 
     def deleteBoxPicture(){
@@ -337,7 +343,10 @@ class WishController {
 		}
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'picture.label', default: 'Picture'), pictureInstance.id])
-		redirect(action: "show", id: params.idWish, params: [idPictureUpdate: params.id])
+		
+		def text = "/wish/show/" + params.idWish + "#picturesOfLoadingContainerReceived"
+		
+		redirect(uri: text, params: [idPictureUpdate: params.id])
 	}
 
     def deleteDocumentFirstPhase(){		
