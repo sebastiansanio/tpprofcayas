@@ -34,10 +34,9 @@
 	<g:render template="documentDeleteModal"></g:render>
 	<g:render template="draftDeleteModal"></g:render>
 	<g:render template="loadUnitsDeleteModal"></g:render>
-
 	
 </section>
-		
+
 </body>
 
 </html>
