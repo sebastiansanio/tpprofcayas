@@ -2,7 +2,7 @@
 <%@ page import="wish.Wish" %>
 
 <p>
-<div id="create-picture-container">
+	<div id="create-picture-container">
 
 	<!-- Button to trigger modal -->
 	<a href="#modalCreateContainer" role="button" class="btn btn-primary" data-toggle="modal"> ${message(code: 'wish.loadFile.label', default: 'Add file')}</a>
@@ -42,8 +42,8 @@
 		<div class="modal-footer">
 
 		    <div class="form-actions">
-			<g:submitButton name="createContainer" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-            		<button class="btn" type="reset" data-dismiss="modal"><g:message code="default.button.cancel.label" default="Cancel"/></button>
+				<g:submitButton name="createContainer" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+            	<a href="#picturesOfLoadingContainerReceived" class="btn" type="reset" data-dismiss="modal"><g:message code="default.button.cancel.label" default="Cancel"/></a>
 			</div>
 
 		</div>
@@ -100,7 +100,7 @@
 		</div>
 		
 		<div class="modal-footer">
-		    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		    <a href="#picturesOfLoadingContainerReceived" class="btn" data-dismiss="modal"> ${message(code: 'default.close.label', default: 'Close')}</a>
 		</div>
 	</div>
 </div>
@@ -119,7 +119,7 @@
 
 		<div class="modal-footer">
 			<g:form action="deleteContainerPicture" params="[idWish: wishInstance.id]">
-				<button class="btn" id="cancelDeletePhotoContainer"><g:message code="default.button.cancel.label" default="Cancel"/></button>
+				<<a href="#picturesOfLoadingContainerReceived" class="btn" id="cancelDeletePhotoContainer"><g:message code="default.button.cancel.label" default="Cancel"/></a>
 				<g:hiddenField name="id" id="idCurrentPhotoContainerDelete" />
 				<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteContainerPicture" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
 		</g:form>
@@ -151,7 +151,7 @@
 	<div class="modal-footer">
 		<div class="form-actions">
 	    	<g:submitButton name="editContainer" class="btn btn-primary" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
-          		<button class="btn" type="reset" id="cancelEditPhotoContainerDescription">Cancel</button>
+          		<a href="#picturesOfLoadingContainerReceived" class="btn" type="reset" id="cancelEditPhotoContainerDescription"><g:message code="default.button.cancel.label" default="Cancel"/></a>
           	</div>
 	</div>
 	</g:form>

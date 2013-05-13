@@ -2,7 +2,7 @@
 <%@ page import="wish.Wish" %>
 
 <p>
-<div id="create-picture-box">
+	<div id="create-picture-box">
 	<!-- Button to trigger modal -->
 	<a href="#modalCreateBox" role="button" class="btn btn-primary" data-toggle="modal"> ${message(code: 'wish.loadFile.label', default: 'Add file')}</a>
 	
@@ -42,7 +42,7 @@
 
 		    <div class="form-actions">
 			    <g:submitButton name="createBoxes" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-            	<button class="btn" type="reset" data-dismiss="modal"><g:message code="default.button.cancel.label" default="Cancel"/></button>
+            	<a href="#picturesOfPrintingBoxesAndLoadReceived" class="btn" type="reset" data-dismiss="modal"><g:message code="default.button.cancel.label" default="Cancel"/></a>
 			</div>
 
 		</div>
@@ -98,7 +98,7 @@
 		</div>
 		
 		<div class="modal-footer">
-		    <button class="btn" data-dismiss="modal" aria-hidden="true"> ${message(code: 'default.close.label', default: 'Close')} </button>
+		    <a href="#picturesOfPrintingBoxesAndLoadReceived" class="btn" data-dismiss="modal"> ${message(code: 'default.close.label', default: 'Close')} </a>
 		</div>
 		
 	</div>
@@ -106,6 +106,7 @@
 
 
 <!-- Modal para borrar una imagen -->
+
 	<div id="modalDeleteBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalBorrarBoxLabel" aria-hidden="true">
 
 		<div class="modal-header">
@@ -119,7 +120,7 @@
 
 		<div class="modal-footer">
 			<g:form action="deleteBoxPicture" params="[idWish: wishInstance.id]">
-				<button class="btn" id="cancelDeletePhotoBox"><g:message code="default.button.cancel.label" default="Cancel"/></button>
+				<a href="#picturesOfPrintingBoxesAndLoadReceived" class="btn" id="cancelDeletePhotoBox"><g:message code="default.button.cancel.label" default="Cancel"/></a>
 				<g:hiddenField name="id" id="idCurrentPhotoBoxDelete" />
 				<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteBoxPicture" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
 			</g:form>
@@ -152,8 +153,8 @@
 	<div class="modal-footer">
 		<div class="form-actions">
 	    	<g:submitButton name="editBoxes" class="btn btn-primary" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
-          		<button class="btn" type="reset" id="cancelEditPhotoBoxDescription">Cancel</button>
-          	</div>
+         	<a href="#picturesOfPrintingBoxesAndLoadReceived" class="btn" type="reset" id="cancelEditPhotoBoxDescription"><g:message code="default.button.cancel.label" default="Cancel"/></a>
+        </div>
 	</div>
 	</g:form>
 </div>

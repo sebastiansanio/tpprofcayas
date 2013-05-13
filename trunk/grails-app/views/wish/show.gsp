@@ -321,8 +321,8 @@
 				
 			</tr>
 		
-		
 			<tr class="prop">
+
 				<td valign="top" class="name"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Sent Date" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.cartonPrintingInfoSentDate}" /></td>
@@ -331,14 +331,14 @@
 		
 			
 		
-			<tr class="prop">
+			<tr class="prop" id="picturesOfPrintingBoxesAndLoadReceived">
 				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
 				
 			</tr>
 		
-			<tr class="prop">
+			<tr class="prop" id="picturesOfLoadingContainerReceived">
 				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfLoadingContainerReceived}" /></td>
