@@ -66,25 +66,30 @@ class WishController {
 	def listPending(){
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNull(params)
-		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+		int wishesSize = Wish.countByFinishDateIsNullAndBillDateIsNull()
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
 	}
 	
 	def listBilled(){
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNotNull(params)
-		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+		int wishesSize = Wish.countByFinishDateIsNullAndBillDateIsNotNull()
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
 	}
 	
 	def listFinished(){
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNotNull(params)
-		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+		int wishesSize = Wish.countByFinishDateIsNotNull()
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
 	}
 	
 	def listBilledByStakeholder(){
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
-		Set wishes = Stakeholder.get(params.id).wishes.findAll{it.finishDate != null || it.billDate !=null}
-		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishes.size()])
+		Stakeholder stakeholder = Stakeholder.get(params.id)
+		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and (finish_date is not null or bill_date is not null) "+ (params.sort ? " order by ${params.sort} ${params.order}" : ''),[stakeholder:stakeholder.id],params)
+		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and (finish_date is not null or bill_date is not null) "+ (params.sort ? " order by ${params.sort} ${params.order}" : ''),[stakeholder:stakeholder.id])
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesToCount.size()])
 	}
 
 	def export() {
