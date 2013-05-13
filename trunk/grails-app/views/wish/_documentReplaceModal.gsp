@@ -14,7 +14,20 @@
 	</div>
 
 	<div class="modal-footer">
-		<a href="#docPhases1" class="btn" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.cancel.label" default="Cancel"/></a>
-		<a href="#docPhases1" class="btn btn-danger" data-dismiss="modal" aria-hidden="true" id="repDoc"> <g:message code="default.button.replace.label" default="Replace"/></a>
+		<a href="#docPhases1" class="btn" id="canDoc"><g:message code="default.button.cancel.label" default="Cancel"/></a>
+		<a href="#docPhases1" class="btn btn-danger" id="repDoc"> <g:message code="default.button.replace.label" default="Replace"/></a>
 	</div>
 </div>
+
+<script>
+	$("#canDoc").click(function() 
+	{
+        $("#modalReplaceDocument").modal('hide');
+	});
+
+	$("#repDoc").click(function() 
+	{
+        $("#modalReplaceDocument").modal('hide');
+	});
+	
+</script>
