@@ -38,7 +38,7 @@
 <script type="text/javascript" src="${resource(dir:'js', file:'loadUnitFunc.js')}"> </script>	
 
 
-<table class="table table-hover table-condensed">
+<table id="loadUnitDoc" class="table table-hover table-condensed">
 	<thead>
  		<tr>
         	<th>${message(code:'loadUnit.cartonPrintingInfoSentDate.label', default:'Date of dispatch of design')}</th>

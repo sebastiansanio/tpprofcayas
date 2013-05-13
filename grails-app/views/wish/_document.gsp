@@ -2,7 +2,7 @@
 <%@ page import="modal.DocumentType" %>
 
 <h5><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></h5>
-	<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'firstStageRequiredDocuments', 'error')} ">
+	<div id="docPhases1" class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'firstStageRequiredDocuments', 'error')} ">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -38,7 +38,7 @@
 
 <hr>
  <h5><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents"/></h5>
-    <div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')} ">
+    <div id="docPhases2" class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')} ">
  		<table class="table table-hover">
  			<thead>
  				<tr>
