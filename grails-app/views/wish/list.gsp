@@ -52,7 +52,7 @@
 		</tbody>
 	</table>
 	<div class="pagination">
-		<bs:paginate total="${wishInstanceTotal}" />
+		<bs:paginate id="${params.id }" total="${wishInstanceTotal}" />
 	</div>
 
 	
