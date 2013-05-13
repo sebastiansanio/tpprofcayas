@@ -99,8 +99,7 @@ class WishController {
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
 		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),params.reportId)
 	}
-	
-	
+		
 	def exportByStakeholder() {
 		def stakeholder = Stakeholder.get(params.id)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
@@ -121,7 +120,6 @@ class WishController {
 		render opNumberGeneratorService.getNextCustomerOpNumber(Customer.get(params.id))
 		
 	}
-
 
     def save() {
 		def keys = params.keySet().toArray()
@@ -288,10 +286,13 @@ class WishController {
             wishInstance.removeFromPicturesOfPrintingBoxes(pictureInstance)
             pictureInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
+			
+			def text = "/wish/show/" + params.idWish + "#picturesOfPrintingBoxesAndLoadReceived"
+			
 			if (wishInstance.picturesOfPrintingBoxes.empty == true)
-				redirect(action: "show", id: params.idWish)
+				redirect(uri: text)
 			else
-				redirect(action: "show", id: params.idWish, params: [idPictureUpdate: wishInstance.picturesOfPrintingBoxes.first().id])
+				redirect(uri: text, params: [idPictureUpdate: wishInstance.picturesOfPrintingBoxes.first().id])
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
@@ -316,10 +317,12 @@ class WishController {
 			pictureInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
 			
+			def text = "/wish/show/" + params.idWish + "#picturesOfLoadingContainerReceived"
+			
 			if (wishInstance.picturesOfLoadingContainer.empty == true)
-				redirect(action: "show", id: params.idWish)
+				redirect(uri: text)
 			else
-				redirect(action: "show", id: params.idWish, params: [idPictureUpdate: wishInstance.picturesOfLoadingContainer.first().id])
+				redirect(uri: text, params: [idPictureUpdate: wishInstance.picturesOfLoadingContainer.first().id])
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'picture.label', default: 'Picture'), params.id])
@@ -345,7 +348,6 @@ class WishController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'picture.label', default: 'Picture'), pictureInstance.id])
 		
 		def text = "/wish/show/" + params.idWish + "#picturesOfLoadingContainerReceived"
-		
 		redirect(uri: text, params: [idPictureUpdate: params.id])
 	}
 
@@ -355,6 +357,7 @@ class WishController {
 		
 		if (!documentInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
+			
 			redirect(action: "edit", id: params.idWish)
 			return
 		}
@@ -364,7 +367,9 @@ class WishController {
 			wishInstance.removeFromFirstStageRequiredDocuments(documentInstance)
 			documentInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
-			redirect(action: "edit", id: params.idWish)
+			
+			def text = "/wish/edit/" + params.idWish + "#docPhases1"
+			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
@@ -387,7 +392,9 @@ class WishController {
 			wishInstance.removeFromSecondStageRequiredDocuments(documentInstance)
 			documentInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
-			redirect(action: "edit", id: params.idWish)
+
+			def text = "/wish/edit/" + params.idWish + "#docPhases2"
+			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'document.label', default: 'Document'), params.nroDocumentDelete])
@@ -430,7 +437,9 @@ class WishController {
 			wishInstance.removeFromDocDraftToBeApprovedBeforeDelivery(drafttInstance)
 			drafttInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'draft.label', default: 'Draft'), params.nroDraftDelete])
-			redirect(action: "edit", id: params.idWish)
+			
+			def text = "/wish/edit/" + params.idWish + "#draftDoc"
+			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'draft.label', default: 'Draft'), params.nroDraftDelete])
@@ -453,7 +462,9 @@ class WishController {
 			wishInstance.removeFromLoadUnits(unitInstance)
 			unitInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'loadUnit.label', default: 'Load unit'), params.nroUnitDelete])
-			redirect(action: "edit", id: params.idWish)
+			
+			def text = "/wish/edit/" + params.idWish + "#loadUnitDoc"
+			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'loadUnit.label', default: 'Load unit'), params.nroUnitDelete])
@@ -476,7 +487,9 @@ class WishController {
 			wishInstance.removeFromNotes(noteInstance)
 			noteInstance.delete(flush:true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
-			redirect(action: "edit", id: params.noteWishId)
+			
+			def text = "/wish/edit/" + params.idWish + "#notesChildList"
+			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
