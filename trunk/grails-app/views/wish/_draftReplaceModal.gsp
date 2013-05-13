@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.cancel.label" default="Cancel"/></button>
-		<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" id="repDraft"> <g:message code="default.button.replace.label" default="Replace"/></button>
+		<a href="#draftDoc" class="btn" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.cancel.label" default="Cancel"/></a>
+		<a href="#draftDoc" class="btn btn-danger" data-dismiss="modal" aria-hidden="true" id="repDraft"> <g:message code="default.button.replace.label" default="Replace"/></a>
 	</div>
 </div>

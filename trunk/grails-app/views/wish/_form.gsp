@@ -211,6 +211,22 @@
 						</div>
 					</div>
 
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')} ">
+						<label for="estimatedTimeOfDeparture" class="control-label"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></label>
+						<div class="controls">
+							<bs:datePicker name="estimatedTimeOfDeparture" precision="day"  value="${wishInstance?.estimatedTimeOfDeparture}" default="none" noSelection="['': '']" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')}</span>
+						</div>
+					</div>
+
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')} ">
+						<label for="estimatedTimeOfArrival" class="control-label"><g:message code="wish.estimatedTimeOfArrival.label" default="Estimated Time Of Arrival" /></label>
+						<div class="controls">
+							<bs:datePicker name="estimatedTimeOfArrival" precision="day"  value="${wishInstance?.estimatedTimeOfArrival}" default="none" noSelection="['': '']" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')}</span>
+						</div>
+					</div>
+					
 				</div>
 			</div>		
 	    </div>
@@ -537,7 +553,16 @@
 							<bs:datePicker name="swiftSentToSupplierDate" precision="day"  value="${wishInstance?.swiftSentToSupplierDate}" default="none" noSelection="['': '']" />
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'swiftSentToSupplierDate', 'error')}</span>
 						</div>
-					</div>		
+					</div>
+					
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')} ">
+						<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Send Date" /></label>
+						<div class="controls">
+							<bs:datePicker name="cartonPrintingInfoSentDate" precision="day"  value="${wishInstance?.cartonPrintingInfoSentDate}" default="none" noSelection="['': '']" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
+						</div>
+					</div>
+						
 				</div>
 			</div>		
 	    </div>
@@ -650,22 +675,6 @@
 				</div>
 				<div class="span6">
 
-					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')} ">
-						<label for="estimatedTimeOfDeparture" class="control-label"><g:message code="wish.estimatedTimeOfDeparture.label" default="Estimated Time Of Departure" /></label>
-						<div class="controls">
-							<bs:datePicker name="estimatedTimeOfDeparture" precision="day"  value="${wishInstance?.estimatedTimeOfDeparture}" default="none" noSelection="['': '']" />
-							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfDeparture', 'error')}</span>
-						</div>
-					</div>
-
-					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')} ">
-						<label for="estimatedTimeOfArrival" class="control-label"><g:message code="wish.estimatedTimeOfArrival.label" default="Estimated Time Of Arrival" /></label>
-						<div class="controls">
-							<bs:datePicker name="estimatedTimeOfArrival" precision="day"  value="${wishInstance?.estimatedTimeOfArrival}" default="none" noSelection="['': '']" />
-							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'estimatedTimeOfArrival', 'error')}</span>
-						</div>
-					</div>
-
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'arrived', 'error')} ">
 						<label for="arrived" class="control-label"><g:message code="wish.arrived.label" default="Arrived" /></label>
 						<div class="controls">
@@ -727,6 +736,15 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'dispatchNumber', 'error')}</span>
 						</div>
 					</div>
+					
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'billDate', 'error')} ">
+						<label for="billDate" class="control-label"><g:message code="wish.billDate.label" default="Bill Date" /></label>
+						<div class="controls">
+							<bs:datePicker name="billDate" precision="day"  value="${wishInstance?.billDate}" default="none" noSelection="['': '']" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'billDate', 'error')}</span>
+						</div>
+					</div>
+				
 				</div>
 			</div>		
 	    </div>
@@ -745,13 +763,6 @@
 					</div>
 				</div>
 
-				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'billDate', 'error')} ">
-					<label for="billDate" class="control-label"><g:message code="wish.billDate.label" default="Bill Date" /></label>
-					<div class="controls">
-						<bs:datePicker name="billDate" precision="day"  value="${wishInstance?.billDate}" default="none" noSelection="['': '']" />
-						<span class="help-inline">${hasErrors(bean: wishInstance, field: 'billDate', 'error')}</span>
-					</div>
-				</div>
 
 				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'blNumber', 'error')} ">
 					<label for="blNumber" class="control-label"><g:message code="wish.blNumber.label" default="Bl Number" /></label>
@@ -761,17 +772,6 @@
 					</div>
 				</div>
 
-				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')} ">
-					<label for="cartonPrintingInfoSentDate" class="control-label"><g:message code="wish.cartonPrintingInfoSentDate.label" default="Carton Printing Info Send Date" /></label>
-					<div class="controls">
-						<bs:datePicker name="cartonPrintingInfoSentDate" precision="day"  value="${wishInstance?.cartonPrintingInfoSentDate}" default="none" noSelection="['': '']" />
-						<span class="help-inline">${hasErrors(bean: wishInstance, field: 'cartonPrintingInfoSentDate', 'error')}</span>
-					</div>
-				</div>
-	</div>
-
-	<div class="span6">
-
 				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'taxRegistryNumberAndCuitVerification', 'error')} ">
 					<label for="taxRegistryNumberAndCuitVerification" class="control-label"><g:message code="wish.taxRegistryNumberAndCuitVerification.label" default="Tax Registry Number And Cuit Verification" /></label>
 					<div class="controls">
@@ -779,7 +779,9 @@
 						<span class="help-inline">${hasErrors(bean: wishInstance, field: 'taxRegistryNumberAndCuitVerification', 'error')}</span>
 					</div>
 				</div>
+	</div>
 
+	<div class="span6">
 				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'hsCodeToBeWritten', 'error')} ">
 					<label for="hsCodeToBeWritten" class="control-label"><g:message code="wish.hsCodeToBeWritten.label" default="Hs Code To Be Written" /></label>
 					<div class="controls">
