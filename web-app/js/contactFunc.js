@@ -9,7 +9,13 @@ $(document).ready(function()
 	var namePosition = function(nro){
 		return "contacts[" + nro + "].position";
 	};
-
+	var nameAlert = function(nro){
+		return "contacts[" + nro + "].sendAlerts";
+	};
+	var nameReport = function(nro){
+		return "contacts[" + nro + "].sendReports";
+	};
+	
 	var idParent = function(nro){
 		return "contact-" + nro;
 	};
@@ -22,6 +28,12 @@ $(document).ready(function()
 	var idPosition = function(nro){
 		return "contacts-position-" + nro;
 	};
+	var idAlert = function(nro){
+		return "contacts-sendAlerts-" + nro;
+	};
+	var idReport = function(nro){
+		return "contacts-sendReports-" + nro;
+	};
 	var idBtnDelContact = function(nro){
 		return "btnDel-contact-" + nro;
 	};
@@ -29,17 +41,20 @@ $(document).ready(function()
 	var deleteContact = function(objeto)
 	{
 		var nroRef = parseInt(objeto.id.split("-")[2]); 
-		$(objeto).parent().remove();
+		$(objeto).parent().parent().remove();
 		cantContact--;
 
-		var idParentNuevo, idNameNuevo, idEmailNuevo, idPositionNuevo, idBtnDelNuevo;
+		var idParentNuevo, idNameNuevo, idEmailNuevo, idPositionNuevo,
+		idAlertNuevo, idReportNuevo, idBtnDelNuevo;
 		
 		for (var i = nroRef; i < cantContact; i++)
 		{
 			idParentNuevo	= "#" + idParent((i+1));
-			idNameNuevo	= "#" + idName((i+1)); 
+			idNameNuevo		= "#" + idName((i+1)); 
 			idEmailNuevo 	= "#" + idEmail((i+1));
 			idPositionNuevo	= "#" + idPosition((i+1));
+			idAlertNuevo	= "#" + idAlert((i+1));
+			idReportNuevo	= "#" + idReport((i+1));
 			idBtnDelNuevo 	= "#" + idBtnDelContact((i+1));
 			
 			$(idParentNuevo).attr( "id"	, idParent(i) );
@@ -53,40 +68,50 @@ $(document).ready(function()
 			$(idPositionNuevo).attr( "name"	, namePosition(i) );
 			$(idPositionNuevo).attr( "id"	, idPosition(i) );
 
+			$(idAlertNuevo).attr( "name", nameAlert(i) );
+			$(idAlertNuevo).attr( "id"	, idAlert(i) );
+
+			$(idReportNuevo).attr( "name", nameReport(i) );
+			$(idReportNuevo).attr( "id"	 , idReport(i) );
+
 			$(idBtnDelNuevo).attr("id"	, idBtnDelContact(i) );
 		}
 	};
 	
 	$("#btnAdd-contact").click(function()
 	{
-		var elementName, elementEmail, elementPosition, elementBtnDel, elementParent,
+		var elementName, elementEmail, elementPosition, elementAlert, 
+			elementReport, elementBtnDel, elementParent, 
 			idElementParent = idParent(cantContact);
 		
 		
-		elementName = $("<div class='control-group fieldcontain required'> \
-							<label class='control-label'>" + nameLabel + "<span class='required-indicator'>*</span></label> \
-							<div class='controls'> \
-								<input type='text' id='" + idName(cantContact)+ "' name='" + nameName(cantContact) + "' required=''/> \
-							</div> \
-						</div>");
+		elementName = $("<td> <input type='text' id='" + idName(cantContact)+ "' name='" + nameName(cantContact) + "' required=''/> </td>");
 		
-		elementEmail = $("<div class='control-group fieldcontain'> \
-							<label class='control-label'>" + emailLabel + "</label> \
-							<div class='controls'> \
-								<input type='text' id='" + idEmail(cantContact) + "' name='" + nameEmail(cantContact) + "'/> \
-							</div> \
-						</div>");
+		elementEmail = $("<td> <input type='text' id='" + idEmail(cantContact) + "' name='" + nameEmail(cantContact) + "'/> </td>");
 
-		elementPosition = $("<div class='control-group fieldcontain'> \
-								<label class='control-label'>" + positionLabel + "</label> \
-								<div class='controls'> \
-									<input type='text' id='" + idPosition(cantContact) + "' name='" + namePosition(cantContact) + "'/> \
-								</div> \
-							</div>");
+		elementPosition = $("<td> <input type='text' id='" + idPosition(cantContact) + "' name='" + namePosition(cantContact) + "'/> </td>");
 		
-		elementBtnDel = $("<a role='button' class='btn btn-small btn-primary' id='"+ idBtnDelContact(cantContact) +"'> <i class='icon-trash'></i> </a>");
+		elementAlert = $("<td> \
+							<input type='hidden' name='_"+ nameAlert(cantContact) +"'> \
+							<input class='hide pull-right span1' type='checkbox' name='"+ nameAlert(cantContact) +"' id='"+ idAlert(cantContact) +"'> \
+							<div id='btngroup' class='btn-group radiocheckbox span1' data-toggle='buttons-radio'> \
+								<div class='btn btn-small on '>" + seleccLabel + "</div> \
+								<div class='btn btn-small off active btn-primary'>"+ noSeleccLabel +"</div> \
+							</div> \
+						</td>");
+		
+		elementReport = $("<td> \
+				<input type='hidden' name='_"+ nameReport(cantContact) +"'> \
+				<input class='hide pull-right span1' type='checkbox' name='"+ nameReport(cantContact) +"' id='"+ idReport(cantContact) +"'> \
+				<div id='btngroup' class='btn-group radiocheckbox span1' data-toggle='buttons-radio'> \
+					<div class='btn btn-small on '>" + seleccLabel + "</div> \
+					<div class='btn btn-small off active btn-primary'>"+ noSeleccLabel +"</div> \
+				</div> \
+			</td>");
+		
+		elementBtnDel = $("<td> <a role='button' class='btn btn-small btn-primary' id='"+ idBtnDelContact(cantContact) +"'> <i class='icon-trash'></i> </a> </td>");
 	
-		elementParent = $("<div id='" + idElementParent + "'> </div>");
+		elementParent = $("<tr id='" + idElementParent + "'> </tr>");
 		
 		idElementParent = "#" + idElementParent;
 		
@@ -95,8 +120,9 @@ $(document).ready(function()
 		$(idElementParent).append(elementName);
 		$(idElementParent).append(elementEmail);
 		$(idElementParent).append(elementPosition);
+		$(idElementParent).append(elementAlert);
+		$(idElementParent).append(elementReport);
 		$(idElementParent).append(elementBtnDel);
-		$(idElementParent).append("<hr>");
 		
 		$("#" + idBtnDelContact(cantContact)).click(function() {
 			deleteContact(this);
@@ -115,5 +141,21 @@ $(document).ready(function()
 
 		$("#nroContactDelete").attr("value", nroId);
 	    $("#modalDeleteContact").modal('show'); 
+	});
+	
+	$(".contact-check").click(function()
+	{
+		var id = "#" + this.id;
+ 
+	    if ($(id).prop("checked") == true)
+	    {
+	    	$(id).attr("value", true);
+	    }
+	    else
+	    {
+	    	$(id).attr("value", false);
+	    }	
+	    
+	    alert($(id).attr("value"));
 	});
 });
