@@ -10,7 +10,20 @@
 	</div>
 
 	<div class="modal-footer">
-		<a href="#draftDoc" class="btn" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.cancel.label" default="Cancel"/></a>
-		<a href="#draftDoc" class="btn btn-danger" data-dismiss="modal" aria-hidden="true" id="repDraft"> <g:message code="default.button.replace.label" default="Replace"/></a>
+		<a href="#draftDoc" class="btn" id="canDraft" ><g:message code="default.button.cancel.label" default="Cancel"/></a>
+		<a href="#draftDoc" class="btn btn-danger" id="repDraft"> <g:message code="default.button.replace.label" default="Replace"/></a>
 	</div>
 </div>
+
+<script>
+	$("#canDraft").click(function() 
+	{
+        $("#modalReplaceDraft").modal('hide');
+	});
+
+	$("#repDraft").click(function() 
+	{
+        $("#modalReplaceDraft").modal('hide');
+	});
+	
+</script>
