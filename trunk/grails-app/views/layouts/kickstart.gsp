@@ -16,6 +16,8 @@
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-72x72.png"	sizes="72x72">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-114x114.png"	sizes="114x114">
 	
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'docs.css')}" />
+		
 	<%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
 	<r:require modules="jquery"/>
 	<r:require modules="${session.skin ? session.skin            : 'bootstrap'}"/>
@@ -28,7 +30,7 @@
 
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
 	<g:render template="/_menu/navbar"/>														
 
 	<!-- Enable to overwrite Header by individual page -->
@@ -66,6 +68,9 @@
 	
 	<!-- Included Javascript files and other resources -->
 	<r:layoutResources />
+	
+	<script type="text/javascript" src="${resource(dir:'js', file:'applicationFixes.js')}"> </script>
+	
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 
 	<!-- Main menu in one line (e.g., controller entry points -->
 	<div class="row">
-		<div class="span12">
+		<div class="span12 bs-docs-sidebar">
 			<g:render template="/_menu/menubar"/>
 		</div>
 	</div>
