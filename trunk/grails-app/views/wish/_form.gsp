@@ -294,7 +294,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'currencyFob', 'error')} ">
 						<label for="currencyFob" class="control-label"><g:message code="wish.currencyFob.label" default="Currency Fob" /></label>
 						<div class="controls">
-							<g:field type="number" name="currencyFob" step="any" value="${wishInstance.currencyFob}"/>
+							<g:field id="currencyFob" onChange="calculateBalance();" type="number" name="currencyFob" step="any" value="${wishInstance.currencyFob}"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'currencyFob', 'error')}</span>
 						</div>
 					</div>
@@ -330,7 +330,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'amountOfMoneyInAdvanceTransferred', 'error')} ">
 						<label for="amountOfMoneyInAdvanceTransferred" class="control-label"><g:message code="wish.amountOfMoneyInAdvanceTransferred.label" default="Amount Of Money In Advance Transferred" /></label>
 						<div class="controls">
-							<g:field type="number" name="amountOfMoneyInAdvanceTransferred" step="any" value="${wishInstance.amountOfMoneyInAdvanceTransferred}"/>
+							<g:field id="amountOfMoneyInAdvanceTransferred" onChange="calculateBalance();" type="number" name="amountOfMoneyInAdvanceTransferred" step="any" value="${wishInstance.amountOfMoneyInAdvanceTransferred}"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'amountOfMoneyInAdvanceTransferred', 'error')}</span>
 						</div>
 					</div>
@@ -338,7 +338,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'moneyBalance', 'error')} ">
 						<label for="moneyBalance" class="control-label"><g:message code="wish.moneyBalance.label" default="Money Balance" /></label>
 						<div class="controls">
-							<g:field type="number" name="moneyBalance" step="any" value="${wishInstance.moneyBalance}"/>
+							<g:field id="moneyBalance" type="number" name="moneyBalance" step="any" value="${wishInstance.moneyBalance}"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'moneyBalance', 'error')}</span>
 						</div>
 					</div>
@@ -821,5 +821,13 @@ function getCustomerOpNumber(inputSelect){
 		
 		$('#customerOpNumber').val(result);
 	});
+}
+
+function calculateBalance(){
+
+	var currencyFob = $('#currencyFob').val();
+	var amountOfMoneyInAdvanceTransferred = $('#amountOfMoneyInAdvanceTransferred').val();
+	
+	$('#moneyBalance').val(currencyFob-amountOfMoneyInAdvanceTransferred);
 }
 </script>
