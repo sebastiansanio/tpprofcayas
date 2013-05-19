@@ -119,7 +119,7 @@
 
 		<div class="modal-footer">
 			<g:form action="deleteContainerPicture" params="[idWish: wishInstance.id]">
-				<<a href="#picturesOfLoadingContainerReceived" class="btn" id="cancelDeletePhotoContainer"><g:message code="default.button.cancel.label" default="Cancel"/></a>
+				<a href="#picturesOfLoadingContainerReceived" class="btn" id="cancelDeletePhotoContainer"><g:message code="default.button.cancel.label" default="Cancel"/></a>
 				<g:hiddenField name="id" id="idCurrentPhotoContainerDelete" />
 				<span class="button"><g:actionSubmit class="btn btn-danger" action="deleteContainerPicture" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
 		</g:form>
