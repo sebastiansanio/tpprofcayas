@@ -160,7 +160,10 @@ class WishController {
     }
 
     def edit() {
-        def wishInstance = Wish.get(params.id)
+        
+		def wishInstance = Wish.get(params.id)
+		
+		
         if (!wishInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
             redirect(action: "list")
@@ -488,7 +491,7 @@ class WishController {
 			noteInstance.delete(flush:true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
 			
-			def text = "/wish/edit/" + params.idWish + "#notesChildList"
+			def text = "/wish/edit/" + params.noteWishId + "#notesChildList"
 			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
