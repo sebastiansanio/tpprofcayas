@@ -828,6 +828,6 @@ function calculateBalance(){
 	var currencyFob = $('#currencyFob').val();
 	var amountOfMoneyInAdvanceTransferred = $('#amountOfMoneyInAdvanceTransferred').val();
 	
-	$('#moneyBalance').val(currencyFob-amountOfMoneyInAdvanceTransferred);
+	$('#moneyBalance').val((currencyFob-amountOfMoneyInAdvanceTransferred).toFixed(4));
 }
 </script>
