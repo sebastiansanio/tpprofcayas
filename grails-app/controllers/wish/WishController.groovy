@@ -4,6 +4,7 @@ import importer.GenericExcelImporter
 import java.io.OutputStream;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
 import login.User
@@ -268,33 +269,59 @@ class WishController {
 	}
 
 	def createBoxPicture(){
-		def picture = new Picture(params)
-		def wishInstance = Wish.get(params.idWish)
-
-		if (!picture.save(flush: true)) {
-        	redirect(action: "show", id: wishInstance.id)	
-    	   return
-    	}
-
-		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
-		wishInstance.addToPicturesOfPrintingBoxes(picture)
 		
+		// para obtener los archivos seleccionados
+		List<MultipartFile> files = request.multiFileMap.collect { it.value }.flatten()
+		def wishInstance = Wish.get(params.idWish)
+		def argPict = [:]
+		def archivos = files.findAll { !it.empty  }
+	
+		argPict.put("description", params.description)
+		
+		archivos.asList().each {
+			
+			argPict.put("image", it.getBytes() );
+			
+			def picture = new Picture(argPict)
+			
+			if (!picture.save(flush: true)) {
+				redirect(action: "show", id: wishInstance.id)
+				return
+			}
+
+			flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
+			wishInstance.addToPicturesOfPrintingBoxes(picture)
+		  }
 
 		def text = "/wish/show/" + wishInstance.id + "#picturesOfPrintingBoxesAndLoadReceived"
 		redirect(uri: text)
 	}
 
 	def createContainerPicture(){
-		def picture = new Picture(params)
-		def wishInstance = Wish.get(params.idWish)
-	        if (!picture.save(flush: true)) {
-        	    	  redirect(action: "show", id: wishInstance.id)
-        	   return
-        	}
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
-		wishInstance.addToPicturesOfLoadingContainer(picture)
-       
+		// para obtener los archivos seleccionados
+		List<MultipartFile> files = request.multiFileMap.collect { it.value }.flatten()
+		def wishInstance = Wish.get(params.idWish)
+		def argPict = [:]	
+		def archivos = files.findAll { !it.empty  }
+	
+		argPict.put("description", params.description)
+		
+		archivos.asList().each {	
+			
+			argPict.put("image", it.getBytes() );
+			
+			def picture = new Picture(argPict)
+			
+			if (!picture.save(flush: true)) {
+				redirect(action: "show", id: wishInstance.id)
+				return
+			}
+
+			flash.message = message(code: 'default.created.message', args: [message(code: 'picture.label', default: 'Picture'), picture.id])
+			wishInstance.addToPicturesOfLoadingContainer(picture)			
+		  }
+
 		def text = "/wish/show/" + wishInstance.id + "#picturesOfLoadingContainerReceived"
 		redirect(uri: text)
 	}
