@@ -1,6 +1,9 @@
 <%@ page import="wish.Picture" %>
 <%@ page import="wish.Wish" %>
 
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'inputFile.css')}" />
+<script type="text/javascript" src="${resource(dir:'js', file:'multipleInput.js')}"> </script>	
+
 <p>
 	<div id="create-picture-container">
 
@@ -20,15 +23,20 @@
 		<div class="modal-body">
 		
 			<fieldset class="form">			
-				
+
 			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'image', 'error')} required">
 				<label for="image" class="control-label"><g:message code="picture.image.label" default="Image" /><span class="required-indicator">*</span></label>
-				<div class="controls">
-					<input type="file" id="image" name="image" />
-					<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'image', 'error')}</span>
+				<div class="multiple-input-file controls">
+					<div class="custom-input-file">
+						<input type="file" class="input-file" multiple id="image" name="image[]">
+					    	<div class="btn btn-primary">${message(code: 'wish.uploadFile.label', default: 'Upload file')}</div>
+					    	<span class="help-inline">${hasErrors(bean: pictureInstance, field: 'image', 'error')}</span>
+					</div>
+					<p> </p>
+					<ul class="input-file-ul"></ul>
 				</div>
 			</div>
-
+				
 			<div class="control-group fieldcontain ${hasErrors(bean: pictureInstance, field: 'description', 'error')} required">
 				<label for="description" class="control-label"><g:message code="picture.description.label"  default="Description"/><span class="required-indicator">*</span></label>
 				<div class="controls">
