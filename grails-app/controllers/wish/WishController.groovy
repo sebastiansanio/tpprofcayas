@@ -59,11 +59,21 @@ class WishController {
 	}
 		
     def list() {		
+		if(params.sort == null)
+			params.sort = 'opNumber'
+		if(params.order == null)
+			params.order = 'desc'
+			
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
 	def listPending(){
+		if(params.sort == null)
+			params.sort = 'opNumber'
+		if(params.order == null)
+			params.order = 'desc'
+			
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNull(params)
 		int wishesSize = Wish.countByFinishDateIsNullAndBillDateIsNull()
@@ -71,6 +81,11 @@ class WishController {
 	}
 	
 	def listBilled(){
+		if(params.sort == null)
+			params.sort = 'opNumber'
+		if(params.order == null)
+			params.order = 'desc'
+		
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNotNull(params)
 		int wishesSize = Wish.countByFinishDateIsNullAndBillDateIsNotNull()
@@ -78,6 +93,11 @@ class WishController {
 	}
 	
 	def listFinished(){
+		if(params.sort == null)
+			params.sort = 'opNumber'
+		if(params.order == null)
+			params.order = 'desc'
+		
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNotNull(params)
 		int wishesSize = Wish.countByFinishDateIsNotNull()
@@ -85,10 +105,15 @@ class WishController {
 	}
 	
 	def listBilledByStakeholder(){
+		if(params.sort == null)
+			params.sort = 'opNumber'
+		if(params.order == null)
+			params.order = 'desc'
+		
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		Stakeholder stakeholder = Stakeholder.get(params.id)
-		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and (finish_date is not null or bill_date is not null) "+ (params.sort ? " order by ${params.sort} ${params.order}" : ''),[stakeholder:stakeholder.id],params)
-		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and (finish_date is not null or bill_date is not null) "+ (params.sort ? " order by ${params.sort} ${params.order}" : ''),[stakeholder:stakeholder.id])
+		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and (finish_date is not null or bill_date is not null) order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id],params)
+		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and (finish_date is not null or bill_date is not null) order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id])
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesToCount.size()])
 	}
 
