@@ -89,8 +89,8 @@
 			</tr>
 			
 			<tr><td></td>
-				<td class="btn">
-					<g:link action='listBilledByStakeholder' controller='wish' id='${customsBrokerInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
+				<td>
+					<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${customsBrokerInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
 				</td>
 			
 			</tr>
