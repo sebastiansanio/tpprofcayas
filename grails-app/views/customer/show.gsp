@@ -37,7 +37,14 @@
 				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "email")}</td>
 				
 			</tr>
-		
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="customer.cuit.label" default="Cuit" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "cuit")}</td>
+				
+			</tr>
+					
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customer.defaultReport.label" default="Default Report" /></td>
 				
@@ -77,14 +84,6 @@
 				
 				<td valign="top" class="value">${customerInstance?.locality?.encodeAsHTML()}</td>
 			</tr>
-
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="customer.cuit.label" default="Cuit" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "cuit")}</td>
-				
-			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="stakeholder.pendingWishes.label" default="Pending Orders" /></td>
@@ -98,13 +97,13 @@
 
 					<export:formats controller="wish" action="exportByStakeholder" params='[id: customerInstance.id]' formats="['csv','excel','ods','pdf']" />
 					
-					
 				</td>
 			</tr>
 			
-			<tr><td></td>
-				<td class="btn">
-					<g:link action='listBilledByStakeholder' controller='wish' id='${customerInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
+			<tr>
+				<td></td>
+				<td>
+					<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${customerInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
 				</td>
 			
 			</tr>

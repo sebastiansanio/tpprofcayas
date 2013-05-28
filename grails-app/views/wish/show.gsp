@@ -124,6 +124,17 @@
 		<tbody>
 
 			<tr class="prop">
+				<td colspan="2" valign="top" class="name">
+				    <p><g:message code="wish.alerts.label" default="Alerts" /> <p>
+                    <ul>
+                        <g:each in="${wishInstance.activeAlerts}" var="a">
+                         <li class="alert <% if(!a?.isInspected()) out.println("alert-error") %>">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
+                        </g:each>
+                    </ul>
+				</td>
+			</tr>
+			
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.wishDate.label" default="Wish Date" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.wishDate}" /></td>
@@ -599,29 +610,26 @@
 			</tr>
 		</tbody>
 	</table>
-									
+			
+	<h4> <g:message code="wish.notes.label" default="Notes"/> </h4>
+
 	<table class="table">
 		<tbody>
-
-
-			<tr class="prop">
-				<td colspan="2" valign="top" class="name">
-				    <p><g:message code="wish.alerts.label" default="Alerts" /> <p>
-                    <ul>
-                        <g:each in="${wishInstance.activeAlerts}" var="a">
-                         <li class="alert <% if(!a?.isInspected()) out.println("alert-error") %>">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
-                        </g:each>
-                    </ul>
-				</td>
-			</tr>
-
+			
 			<tr class="prop">
 				<td colspan="2" "valign="top" class="name">
 					<p><g:message code="wish.notes.label" default="Notes"/></p>
 					<g:render template="notesShow" model="['notes':wishInstance.notes]"/>
 				</td>
 			</tr>
-			
+		</tbody>
+	</table>
+	
+	<h4> <g:message code=" " default=" "/> </h4>
+											
+	<table class="table">
+		<tbody>
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.dateCreated.label" default="Date Created" /></td>
 				
