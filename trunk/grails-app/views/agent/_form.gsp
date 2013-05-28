@@ -1,10 +1,9 @@
 <%@ page import="stakeholder.Agent" %>
 
+<h5><g:message code="stakeholder.agentInformation.label" default="Agent information"/></h5>
+
 <div class="row-fluid">
 	<div class="span6">
-		
-		<h5><g:message code="stakeholder.agentInformation.label" default="Agent information"/></h5>
-		
 		<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'name', 'error')} required">
 			<label for="name" class="control-label"><g:message code="agent.name.label" default="Name" /><span class="required-indicator">*</span></label>
 			<div class="controls">
@@ -28,6 +27,8 @@
 				<span class="help-inline">${hasErrors(bean: agentInstance, field: 'email', 'error')}</span>
 			</div>
 		</div>
+	</div>
+	<div class="span6">
 
 		<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'defaultReport', 'error')} required">
 			<label for="defaultReport" class="control-label"><g:message code="agent.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
@@ -68,24 +69,23 @@
 				<span class="help-inline">${hasErrors(bean: agentInstance, field: 'locality', 'error')}</span>
 			</div>
 		</div>
-
-
-		<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'wishes', 'error')} ">
-			<label for="wishes" class="control-label"><g:message code="agent.wishes.label" default="Wishes" /></label>
-			<div class="controls">
-				
-				<ul class="one-to-many">
-
-					<li class="add">
-						<g:link controller="wish" action="create" params="['agent.id': agentInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
-					</li>
-				</ul>
-
-				<span class="help-inline">${hasErrors(bean: agentInstance, field: 'wishes', 'error')}</span>
-			</div>
-		</div>
-	</div>
-	<div class="span6">
-		<g:render template="/_stakeholder/form" model="['stakeholderInstance':agentInstance]"/>
+	
 	</div>
 </div>
+
+<div class="control-group fieldcontain ${hasErrors(bean: agentInstance, field: 'wishes', 'error')} ">
+	<label for="wishes" class="control-label"><g:message code="agent.wishes.label" default="Wishes" /></label>
+	<div class="controls">
+		
+		<ul class="one-to-many">
+
+			<li class="add">
+				<g:link controller="wish" action="create" params="['agent.id': agentInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+			</li>
+		</ul>
+
+		<span class="help-inline">${hasErrors(bean: agentInstance, field: 'wishes', 'error')}</span>
+	</div>
+</div>
+
+<g:render template="/_stakeholder/form" model="['stakeholderInstance':agentInstance]"/>

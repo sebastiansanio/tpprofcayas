@@ -27,7 +27,10 @@
 				<g:field type="email" name="email" value="${shipperInstance?.email}"/>
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'email', 'error')}</span>
 			</div>
-		</div>
+		</div>	
+	</div>
+	
+	<div class="span6">
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')} required">
 			<label for="defaultReport" class="control-label"><g:message code="shipper.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
@@ -68,24 +71,23 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'locality', 'error')}</span>
 			</div>
 		</div>
-		
-
-		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'wishes', 'error')} ">
-			<label for="wishes" class="control-label"><g:message code="shipper.wishes.label" default="Wishes" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-
-						<li class="add">
-							<g:link controller="wish" action="create" params="['shipper.id': shipperInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
-						</li>
-					</ul>
-
-					<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'wishes', 'error')}</span>
-			</div>
-		</div>
-	</div>
-	<div class="span6">
-		<g:render template="/_stakeholder/form" model="['stakeholderInstance':shipperInstance]"/>
+	
 	</div>
 </div>
+
+<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'wishes', 'error')} ">
+	<label for="wishes" class="control-label"><g:message code="shipper.wishes.label" default="Wishes" /></label>
+		<div class="controls">
+			
+			<ul class="one-to-many">
+
+				<li class="add">
+					<g:link controller="wish" action="create" params="['shipper.id': shipperInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
+				</li>
+			</ul>
+
+			<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'wishes', 'error')}</span>
+	</div>
+</div>
+
+<g:render template="/_stakeholder/form" model="['stakeholderInstance':shipperInstance]"/>
