@@ -78,11 +78,30 @@ $(document).ready(function()
 		}
 	};
 	
+	var updateValueCheck = function( id ) {
+		
+		id = "#" + id
+		alert("invocado el actualizar: " + id + " prop: " + $(id).prop("checked"));
+
+	    if ($(id).prop("checked") == true)
+	    {
+	    	$(id).attr("value", true);
+	    }
+	    else
+	    {
+	    	$(id).attr("value", false);
+	    }
+		alert("invocado el actualizar: " + $(id).attr("value") );
+
+	};
+	
 	$("#btnAdd-contact").click(function()
 	{
 		var elementName, elementEmail, elementPosition, elementAlert, 
 			elementReport, elementBtnDel, elementParent, 
-			idElementParent = idParent(cantContact);
+			idElementParent = idParent(cantContact),
+			idAler = idAlert(cantContact),
+			idRepo = idReport(cantContact);
 		
 		
 		elementName = $("<td> <input type='text' id='" + idName(cantContact)+ "' name='" + nameName(cantContact) + "' required=''/> </td>");
@@ -93,21 +112,13 @@ $(document).ready(function()
 		
 		elementAlert = $("<td> \
 							<input type='hidden' name='_"+ nameAlert(cantContact) +"'> \
-							<input class='hide pull-right span1' type='checkbox' name='"+ nameAlert(cantContact) +"' id='"+ idAlert(cantContact) +"'> \
-							<div id='btngroup' class='btn-group radiocheckbox span1' data-toggle='buttons-radio'> \
-								<div class='btn btn-small on '>" + seleccLabel + "</div> \
-								<div class='btn btn-small off active btn-primary'>"+ noSeleccLabel +"</div> \
-							</div> \
+							<input type='checkbox' value='false' name='"+ nameAlert(cantContact) +"' id='"+ idAler +"' class='contact-check'> \
 						</td>");
-		
+
 		elementReport = $("<td> \
-				<input type='hidden' name='_"+ nameReport(cantContact) +"'> \
-				<input class='hide pull-right span1' type='checkbox' name='"+ nameReport(cantContact) +"' id='"+ idReport(cantContact) +"'> \
-				<div id='btngroup' class='btn-group radiocheckbox span1' data-toggle='buttons-radio'> \
-					<div class='btn btn-small on '>" + seleccLabel + "</div> \
-					<div class='btn btn-small off active btn-primary'>"+ noSeleccLabel +"</div> \
-				</div> \
-			</td>");
+							<input type='hidden' name='_"+ nameReport(cantContact) +"'> \
+							<input type='checkbox' value='false' name='"+ nameReport(cantContact) +"' id='"+ idRepo  +"' class='contact-check'> \
+						</td>");
 		
 		elementBtnDel = $("<td> <a role='button' class='btn btn-small btn-primary' id='"+ idBtnDelContact(cantContact) +"'> <i class='icon-trash'></i> </a> </td>");
 	
@@ -123,6 +134,14 @@ $(document).ready(function()
 		$(idElementParent).append(elementAlert);
 		$(idElementParent).append(elementReport);
 		$(idElementParent).append(elementBtnDel);
+		
+		$("#" + idAler).click(function() {
+			updateValueCheck( idAler );
+		});
+		
+		$("#" + idRepo).click(function() {
+			updateValueCheck( idRepo );
+		});
 		
 		$("#" + idBtnDelContact(cantContact)).click(function() {
 			deleteContact(this);
@@ -145,17 +164,6 @@ $(document).ready(function()
 	
 	$(".contact-check").click(function()
 	{
-		var id = "#" + this.id;
- 
-	    if ($(id).prop("checked") == true)
-	    {
-	    	$(id).attr("value", true);
-	    }
-	    else
-	    {
-	    	$(id).attr("value", false);
-	    }	
-	    
-	    alert($(id).attr("value"));
+		updateValueCheck( this.id ); 
 	});
 });

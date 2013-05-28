@@ -1,8 +1,9 @@
 <%@ page import="stakeholder.Customer" %>
 
+<h5><g:message code="stakeholder.companyInformation.label" default="Company information"/></h5>
+
 <div class="row-fluid">
 	<div class="span6">
-		<h5><g:message code="stakeholder.companyInformation.label" default="Company information"/></h5>
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'name', 'error')} required">
 				<label for="name" class="control-label"><g:message code="customer.name.label" default="Name" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -27,6 +28,24 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'address', 'error')} ">
+				<label for="address" class="control-label"><g:message code="customer.address.label" default="Address" /></label>
+				<div class="controls">
+					<g:textField name="address" value="${customerInstance?.address}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'address', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'cuit', 'error')} ">
+				<label for="cuit" class="control-label"><g:message code="customer.cuit.label" default="Cuit" /></label>
+				<div class="controls">
+					<g:textField name="cuit" value="${customerInstance?.cuit}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'cuit', 'error')}</span>
+				</div>
+			</div>			
+	</div>
+	<div class="span6">
+
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultReport', 'error')} required">
 				<label for="defaultReport" class="control-label"><g:message code="customer.defaultReport.label" default="Default Report"/><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -42,15 +61,7 @@
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultLocale', 'error')}</span>
 				</div>
 			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'address', 'error')} ">
-				<label for="address" class="control-label"><g:message code="customer.address.label" default="Address" /></label>
-				<div class="controls">
-					<g:textField name="address" value="${customerInstance?.address}"/>
-					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'address', 'error')}</span>
-				</div>
-			</div>
-
+	
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'country', 'error')} required">
 				<label for="country" class="control-label"><g:message code="customer.country.label" default="Country" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -75,15 +86,10 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'cuit', 'error')} ">
-				<label for="cuit" class="control-label"><g:message code="customer.cuit.label" default="Cuit" /></label>
-				<div class="controls">
-					<g:textField name="cuit" value="${customerInstance?.cuit}"/>
-					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'cuit', 'error')}</span>
-				</div>
-			</div>
+	</div>
+</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'wishes', 'error')} ">
+<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'wishes', 'error')} ">
 				<label for="wishes" class="control-label"><g:message code="customer.wishes.label" default="Wishes" /></label>
 				<div class="controls">
 					
@@ -96,8 +102,5 @@
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'wishes', 'error')}</span>
 				</div>
 			</div>
-	</div>
-	<div class="span6">
-		<g:render template="/_stakeholder/form" model="['stakeholderInstance':customerInstance]"/>
-	</div>
-</div>
+
+<g:render template="/_stakeholder/form" model="['stakeholderInstance':customerInstance]"/>

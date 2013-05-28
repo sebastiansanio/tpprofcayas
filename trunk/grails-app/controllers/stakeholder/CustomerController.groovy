@@ -25,6 +25,7 @@ class CustomerController {
 
     def save() {
         def customerInstance = new Customer(params)
+				System.out.println("_______________________________Param: " + params['contacts[0]'].sendAlerts);
 				
         if (!customerInstance.save(flush: true)) {
             render(view: "create", model: [customerInstance: customerInstance])
@@ -46,8 +47,12 @@ class CustomerController {
         [customerInstance: customerInstance]
     }
 
-    def edit() {
+    def edit() { 
         def customerInstance = Customer.get(params.id)
+		
+	//	System.out.println("_______________________________Param - edir: " + customerInstance.contacts[0].sendAlerts);
+	//	System.out.println("_______________________________Param - edir: " + customerInstance.contacts[0].sendReports);
+		
         if (!customerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'customer.label', default: 'Customer'), params.id])
             redirect(action: "list")
@@ -59,6 +64,7 @@ class CustomerController {
 
     def update() {
         def customerInstance = Customer.get(params.id)
+		
         if (!customerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'customer.label', default: 'Customer'), params.id])
             redirect(action: "list")
