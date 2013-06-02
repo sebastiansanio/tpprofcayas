@@ -30,7 +30,7 @@ class AlertController {
 	def listInspected() {
 		alertManagerService.checkAllAlerts()
 		alertManagerService.generateAllAlerts()
-		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.max = Math.min(params.max ? params.int('max') : 200, 1000)
 		if(params.sort==null)
 			params.sort = "attentionDate"
 		if(params.order==null)

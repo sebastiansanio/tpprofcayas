@@ -15,7 +15,13 @@ class AlertManagerService {
 	}
 	
 	def generateAlerts(Wish wish){
-		def alertTypes = AlertType.findAll()
+		def alertTypes = AlertType.list()
+		alertTypes.each{alertType ->
+			wish.addAlert(alertType)
+		}
+	}
+	
+	def generateAlerts(Wish wish,List alertTypes){
 		alertTypes.each{alertType ->
 			wish.addAlert(alertType)
 		}
@@ -27,7 +33,7 @@ class AlertManagerService {
 		}
 		def alertTypes = AlertType.findAll()
 		activeWishes.each{wish ->
-			generateAlerts(wish)
+			generateAlerts(wish,alertTypes)
 		}
     }
 	
