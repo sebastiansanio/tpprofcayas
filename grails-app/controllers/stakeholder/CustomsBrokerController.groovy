@@ -2,10 +2,8 @@ package stakeholder
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * CustomsBrokerController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class CustomsBrokerController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,6 +13,7 @@ class CustomsBrokerController {
     }
 
     def list() {
+		params.sort = params.sort?: 'name'
         params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [customsBrokerInstanceList: CustomsBroker.list(params), customsBrokerInstanceTotal: CustomsBroker.count()]
     }

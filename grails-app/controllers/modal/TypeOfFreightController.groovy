@@ -2,10 +2,8 @@ package modal
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * TypeOfFreightController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class TypeOfFreightController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,7 +13,8 @@ class TypeOfFreightController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.sort = params.sort?: 'name'
+		params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [typeOfFreightInstanceList: TypeOfFreight.list(params), typeOfFreightInstanceTotal: TypeOfFreight.count()]
     }
 
