@@ -117,22 +117,28 @@
 			</tr>
 		</tbody>
 	</table>
+						
+	<h4> <g:message code="wish.activeAlerts.label" default="Active Alerts" /> </h4>	
+	
+	<table class="table">
+		<tbody>
+			<tr class="prop">
+				<td colspan="2" valign="top" class="name">
+                    <ul>
+                        <g:each in="${wishInstance.activeAlerts.sort{it.attentionDate}}" var="a">
+                         <li class="alert ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())>0?'alert-info':''} ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())<=0?'alert-error':''}">${a?.encodeAsHTML() + " ("+a?.attentionDate?.format("dd/MM/yyyy")+")"}</li>
+                        </g:each>
+                    </ul>
+				</td>
+			</tr>
+		
+		</tbody>
+	</table>				
 									
 	<h4> <g:message code="wish.title.dates.label" default="Dates"/> </h4>
 
 	<table class="table">
 		<tbody>
-
-			<tr class="prop">
-				<td colspan="2" valign="top" class="name">
-				    <p><g:message code="wish.alerts.label" default="Alerts" /> <p>
-                    <ul>
-                        <g:each in="${wishInstance.activeAlerts}" var="a">
-                         <li class="alert <% if(!a?.isInspected()) out.println("alert-error") %>">${a?.encodeAsHTML() + " ("+a?.deadline?.format("dd/MM/yyyy")+")"}</li>
-                        </g:each>
-                    </ul>
-				</td>
-			</tr>
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.wishDate.label" default="Wish Date" /></td>
