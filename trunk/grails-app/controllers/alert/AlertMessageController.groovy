@@ -2,10 +2,8 @@ package alert
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * AlertMessageController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class AlertMessageController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,7 +13,8 @@ class AlertMessageController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.sort = params.sort?: 'message'
+        params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [alertMessageInstanceList: AlertMessage.list(params), alertMessageInstanceTotal: AlertMessage.count()]
     }
 

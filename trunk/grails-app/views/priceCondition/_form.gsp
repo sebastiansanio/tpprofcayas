@@ -18,11 +18,4 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: priceConditionInstance, field: 'wishes', 'error')} ">
-				<label for="wishes" class="control-label"><g:message code="priceCondition.wishes.label" default="Wishes" /></label>
-				<div class="controls">
-					<g:select name="wishes" from="${wish.Wish.list()}" multiple="multiple" optionKey="id" size="5" value="${priceConditionInstance?.wishes*.id}" class="many-to-many"/>
-					<span class="help-inline">${hasErrors(bean: priceConditionInstance, field: 'wishes', 'error')}</span>
-				</div>
-			</div>
 

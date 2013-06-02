@@ -3,10 +3,8 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * UserController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class UserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -16,7 +14,8 @@ class UserController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.sort = params.sort?: 'username'
+        params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 
