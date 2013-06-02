@@ -358,6 +358,10 @@ class Wish {
 		return blReceivedAux
 	}
 	
+	boolean isPending(){
+		return billDate == null && finishDate == null
+	}
+	
 	
 	public String toString() {
 		return opNumber

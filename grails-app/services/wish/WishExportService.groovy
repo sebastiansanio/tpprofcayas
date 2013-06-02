@@ -30,12 +30,13 @@ class WishExportService implements MessageSourceAware {
 		List fields = report.fields
 		List wishes = new ArrayList()
 		wishes.addAll(stakeholder.wishes)
-		wishes.sort{it.opNumber}
 		
-		if(report.pendingOnly==true)
+		if(report.pendingOnly==true){
 			wishes = wishes.findAll{
-				it.isActive()
+				it.isPending()
 			}
+		}
+		wishes = wishes.sort{it.opNumber}
 				
 		doExport(format,outputStream,locale,fields,wishes)
 	}
@@ -48,7 +49,7 @@ class WishExportService implements MessageSourceAware {
 		
 		if(report.pendingOnly==true)
 			wishes = wishes.findAll{
-				it.isActive()
+				it.isPending()
 			}
 		
 		doExport(format,outputStream,locale,report.fields,wishes)
@@ -56,11 +57,11 @@ class WishExportService implements MessageSourceAware {
 	
 	
 	
-	def getMaxWidth(List wishes,String label,int initialMaxWidth){
+	def getMaxWidth(List wishes,String fieldName,int initialMaxWidth){
 		int maxWidth = initialMaxWidth
 		wishes.each{
-			if(it[label].toString().length()>maxWidth){
-				maxWidth = it[label].toString().length()
+			if(it[fieldName].toString().length()>maxWidth){
+				maxWidth = it[fieldName].toString().length()
 			}
 		}
 		return maxWidth * 1.2
@@ -69,6 +70,9 @@ class WishExportService implements MessageSourceAware {
 	def doExport(String format,OutputStream outputStream,Locale locale,List fields,List wishes){	
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
+		}
+		def booleanFormatter = {domain, value->
+			return value?messageSource.getMessage("default.boolean.true",null,locale):messageSource.getMessage("default.boolean.false",null,locale)
 		}
 		Map labels = new HashMap()
 		Map formatters = new HashMap()
@@ -81,6 +85,8 @@ class WishExportService implements MessageSourceAware {
 			labels.put(it, label)
 			if(wishDomainClass.getPropertyByName(it).type == Date)
 				formatters.put(it, dateFormatter)
+			if(wishDomainClass.getPropertyByName(it).type == boolean)
+				formatters.put(it, booleanFormatter)
 			widths.add(getMaxWidth(wishes,it,label.length()))
 		}
 		Map parameters = [title: messageSource.getMessage("wish.label",null,locale),'column.widths':widths]
