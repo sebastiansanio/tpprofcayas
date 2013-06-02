@@ -102,11 +102,13 @@
 				</td>
 			</tr>
 			
-			<tr><td></td>
+			<tr>
+				<td></td>
 				<td>
 					<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
+				
+					<g:link role="button" class="btn btn-primary" action='listFinishedByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.finishedWishes.label')}</g:link>	
 				</td>
-			
 			</tr>
 		
 			<g:render template="/_stakeholder/show" model="['stakeholderInstance':supplierInstance]"/>
