@@ -2,10 +2,8 @@ package alert
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * AlertTypeController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class AlertTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,7 +13,8 @@ class AlertTypeController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.sort = params.sort?: 'description'
+        params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [alertTypeInstanceList: AlertType.list(params), alertTypeInstanceTotal: AlertType.count()]
     }
 
