@@ -2,10 +2,10 @@ package stakeholder
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * ContactController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+import org.springframework.transaction.annotation.Transactional
+
+
+@Transactional
 class ContactController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -58,6 +58,10 @@ class ContactController {
 
     def update() {
         def contactInstance = Contact.get(params.id)
+		
+		if(contactInstance.stakeholder.id != params.stakeholder.id)
+			contactInstance.stakeholder.removeFromContacts(contactInstance)	
+		
         if (!contactInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")

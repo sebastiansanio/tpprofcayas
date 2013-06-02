@@ -11,8 +11,8 @@
 					 	<p> <span class="contact-label"> <g:message code="contact.position.label" default="Position" />: </span> ${fieldValue(bean: contact, field: "position")}</p>
 					</div>
 					<div class="span6">
-					 	<p> <span class="contact-label"> <g:message code="contact.sendAlerts.label" default="Send alerts?"/>: </span> ${fieldValue(bean: contact, field: "sendAlerts")}</p>
-					 	<p> <span class="contact-label"> <g:message code="contact.sendReports.label" default="Send reports?" />: </span> ${fieldValue(bean: contact, field: "sendReports")}</p>
+					 	<p> <span class="contact-label"> <g:message code="contact.sendAlerts.label" default="Send alerts?"/>: </span> <g:formatBoolean boolean="${contact.sendAlerts}"/></p>
+					 	<p> <span class="contact-label"> <g:message code="contact.sendReports.label" default="Send reports?" />: </span> <g:formatBoolean boolean="${contact.sendReports}"/></p>
 					</div>
 				</div>		
 				<p></p>				

@@ -81,7 +81,6 @@ $(document).ready(function()
 	var updateValueCheck = function( id ) {
 		
 		id = "#" + id
-		alert("invocado el actualizar: " + id + " prop: " + $(id).prop("checked"));
 
 	    if ($(id).prop("checked") == true)
 	    {
@@ -91,7 +90,6 @@ $(document).ready(function()
 	    {
 	    	$(id).attr("value", false);
 	    }
-		alert("invocado el actualizar: " + $(id).attr("value") );
 
 	};
 	

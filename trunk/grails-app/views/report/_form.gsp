@@ -22,10 +22,12 @@
 					</div>
 					
 					<div class="span2">	
-					<p><button class="span12" type="button" onClick="addFields();">${message(code:'add.label')} </button></p>
-					<p><button class="span12" type="button" onClick="removeFields();"> ${message(code:'remove.label')} </button></p>
-					<p><button class="span12" type ="button" onClick="up();"> ${message(code:'up.label')}</button>		</p>
-					<p><button class="span12" type ="button" onClick="down();"> ${message(code:'down.label')}</button></p>
+						<div class="row-fluid">
+							<p><button class="span12" type="button" onClick="addFields();">${message(code:'add.label')} </button></p>
+							<p><button class="span12" type="button" onClick="removeFields();"> ${message(code:'remove.label')} </button></p>
+							<p><button class="span12" type ="button" onClick="up();"> ${message(code:'up.label')}</button>		</p>
+							<p><button class="span12" type ="button" onClick="down();"> ${message(code:'down.label')}</button></p>
+						</div>
 					</div>
 					
 					<div class="span3">			
