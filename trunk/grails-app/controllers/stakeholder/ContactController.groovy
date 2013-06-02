@@ -15,6 +15,7 @@ class ContactController {
     }
 
     def list() {
+		params.sort = params.sort?: 'name'
         params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [contactInstanceList: Contact.list(params), contactInstanceTotal: Contact.count()]
     }

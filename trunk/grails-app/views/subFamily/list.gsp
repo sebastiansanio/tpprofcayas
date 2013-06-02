@@ -16,10 +16,9 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'subFamily.dateCreated.label', default: 'Date Created')}" />
-			
 				<g:sortableColumn property="description" title="${message(code: 'subFamily.description.label', default: 'Description')}" />
+			
+				<g:sortableColumn property="dateCreated" title="${message(code: 'subFamily.dateCreated.label', default: 'Date Created')}" />			
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'subFamily.lastUpdated.label', default: 'Last Updated')}" />
 			
@@ -29,9 +28,9 @@
 		<g:each in="${subFamilyInstanceList}" status="i" var="subFamilyInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${subFamilyInstance.id}">${fieldValue(bean: subFamilyInstance, field: "dateCreated")}</g:link></td>
+				<td><g:link action="show" id="${subFamilyInstance.id}">${fieldValue(bean: subFamilyInstance, field: "description")}</g:link></td>
 			
-				<td>${fieldValue(bean: subFamilyInstance, field: "description")}</td>
+				<td>${fieldValue(bean: subFamilyInstance, field: "dateCreated")}</td>
 			
 				<td><g:formatDate date="${subFamilyInstance.lastUpdated}" /></td>
 			

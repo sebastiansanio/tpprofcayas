@@ -2,10 +2,8 @@ package stakeholder
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * ShipperController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class ShipperController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,6 +13,7 @@ class ShipperController {
     }
 
     def list() {
+		params.sort = params.sort?: 'name'
         params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [shipperInstanceList: Shipper.list(params), shipperInstanceTotal: Shipper.count()]
     }

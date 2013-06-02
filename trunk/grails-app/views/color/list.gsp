@@ -16,10 +16,9 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'color.dateCreated.label', default: 'Date Created')}" />
-			
 				<g:sortableColumn property="description" title="${message(code: 'color.description.label', default: 'Description')}" />
+
+				<g:sortableColumn property="dateCreated" title="${message(code: 'color.dateCreated.label', default: 'Date Created')}" />			
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'color.lastUpdated.label', default: 'Last Updated')}" />
 			
@@ -29,9 +28,10 @@
 		<g:each in="${colorInstanceList}" status="i" var="colorInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${colorInstance.id}">${fieldValue(bean: colorInstance, field: "dateCreated")}</g:link></td>
+				<td><g:link action="show" id="${colorInstance.id}">${fieldValue(bean: colorInstance, field: "description")}</g:link></td>
 			
-				<td>${fieldValue(bean: colorInstance, field: "description")}</td>
+				<td>${fieldValue(bean: colorInstance, field: "dateCreated")}</td>
+			
 			
 				<td><g:formatDate date="${colorInstance.lastUpdated}" /></td>
 			

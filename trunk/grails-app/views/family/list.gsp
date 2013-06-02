@@ -17,9 +17,9 @@
 		<thead>
 			<tr>
 			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'family.dateCreated.label', default: 'Date Created')}" />
-			
 				<g:sortableColumn property="description" title="${message(code: 'family.description.label', default: 'Description')}" />
+			
+				<g:sortableColumn property="dateCreated" title="${message(code: 'family.dateCreated.label', default: 'Date Created')}" />
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'family.lastUpdated.label', default: 'Last Updated')}" />
 			
@@ -29,9 +29,9 @@
 		<g:each in="${familyInstanceList}" status="i" var="familyInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${familyInstance.id}">${fieldValue(bean: familyInstance, field: "dateCreated")}</g:link></td>
+				<td><g:link action="show" id="${familyInstance.id}">${fieldValue(bean: familyInstance, field: "description")}</g:link></td>
 			
-				<td>${fieldValue(bean: familyInstance, field: "description")}</td>
+				<td>${fieldValue(bean: familyInstance, field: "dateCreated")}</td>
 			
 				<td><g:formatDate date="${familyInstance.lastUpdated}" /></td>
 			

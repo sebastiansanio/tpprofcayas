@@ -60,20 +60,16 @@ class WishController {
 	}
 		
     def list() {		
-		if(params.sort == null)
-			params.sort = 'opNumber'
-		if(params.order == null)
-			params.order = 'desc'
+		params.sort = params.sort?: 'opNumber'
+		params.order = params.order?: 'desc'
 			
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
 	def listPending(){
-		if(params.sort == null)
-			params.sort = 'opNumber'
-		if(params.order == null)
-			params.order = 'desc'
+		params.sort = params.sort?: 'opNumber'
+		params.order = params.order?: 'desc'
 			
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNull(params)
@@ -82,10 +78,8 @@ class WishController {
 	}
 	
 	def listBilled(){
-		if(params.sort == null)
-			params.sort = 'opNumber'
-		if(params.order == null)
-			params.order = 'desc'
+		params.sort = params.sort?: 'opNumber'
+		params.order = params.order?: 'desc'
 		
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNotNull(params)
@@ -106,10 +100,8 @@ class WishController {
 	}
 	
 	def listBilledByStakeholder(){
-		if(params.sort == null)
-			params.sort = 'opNumber'
-		if(params.order == null)
-			params.order = 'desc'
+		params.sort = params.sort?: 'opNumber'
+		params.order = params.order?: 'desc'
 		
 		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		Stakeholder stakeholder = Stakeholder.get(params.id)

@@ -2,10 +2,8 @@ package report
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * ReportController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+
+
 class ReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,7 +13,8 @@ class ReportController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.sort = params.sort?: 'name'
+		params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
     }
 
