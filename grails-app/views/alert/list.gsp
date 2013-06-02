@@ -18,12 +18,17 @@
 			<tr>
 				<g:sortableColumn property="attentionDate" title="${message(code: 'alert.attentionDate.label', default: 'Attention Date')}" />
 
-			
 				<th><g:message code="alert.alertType.label" default="Alert Type" /></th>
 			
-				<th><g:message code="alert.wish.label" default="Wish" /></th>
+				<g:sortableColumn property="wish.opNumber" title="${message(code: 'alert.wish.label', default: 'Wish')}" />
 			
 				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
+
+				<th><g:message code="wish.customer.label" default="Customer" /></th>
+
+				<th><g:message code="wish.supplier.label" default="Supplier" /></th>
+
+				<th><g:message code="wish.supplierOrder.label" default="Supplier Order" /></th>
 			
 			
 				<g:if test="${params.action =='list'}">				
@@ -44,7 +49,13 @@
 				<td><g:link action="show" controller="wish" id="${alertInstance.wish.id}">${fieldValue(bean: alertInstance, field: "wish")}</g:link></td>
 			
 				<td><g:formatDate date="${alertInstance.deadline}" /></td>
-			
+				
+				<td>${alertInstance.wish.customer}</td>
+				
+				<td>${alertInstance.wish.supplier}</td>
+				
+				<td>${alertInstance.wish.supplierOrder}</td>
+				
 				
 			 	<g:if test="${params.action =='list'}">		
 					<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link></td>
