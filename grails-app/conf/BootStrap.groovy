@@ -221,7 +221,7 @@ class BootStrap {
 				
 				alertType = new AlertType(description:"Enviar diseños de cajas",nameOfEstimatedDateField:"wishDate",nameOfCompletionField:"lastCartonPrintingInfoSentDate",alertTerm:0,frequency:3)
 				alertType.save(flush:true)
-				alertType = new AlertType(description:"Consultar fecha de delivery",nameOfEstimatedDateField:"dateToConfirmDeliveryDate",nameOfCompletionField:"confirmedDeliveryDate",alertTerm:5)
+				alertType = new AlertType(description:"Consultar fecha de delivery",nameOfEstimatedDateField:"dateToConfirmDeliveryDate",nameOfCompletionField:"deliveryDate",alertTerm:0)
 				alertType.save(flush:true)
 				alertType = new AlertType(description:"Reclamar swift al cliente",nameOfEstimatedDateField:"dateToDemandSwiftToClient",nameOfCompletionField:"swiftReceivedDate",alertTerm:0)
 				alertType.save(flush:true)
@@ -242,17 +242,17 @@ class BootStrap {
 				
 				
 				for(int i = 1;i<=150;i++){
-					Wish wish = new Wish('customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date())
+					Wish wish = new Wish('customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=150;i++){
-					Wish wish = new Wish('customer.id':2,finishDate:new Date(),'supplier.id':5,opNumber:(i+150),customerOpNumber:i,wishDate:new Date())
+					Wish wish = new Wish('customer.id':2,finishDate:new Date(),'supplier.id':5,opNumber:(i+150),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=150;i++){
-					Wish wish = new Wish('customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+300),customerOpNumber:i,wishDate:new Date())
+					Wish wish = new Wish('customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+300),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 

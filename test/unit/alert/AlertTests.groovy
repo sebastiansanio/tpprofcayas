@@ -47,6 +47,24 @@ class AlertTests {
 	}
 	
 	@Test
+	void testAlertFinalizedAttentionDateChanged() {
+		Date now = new Date().clearTime()
+		AlertType alertType = new AlertType(description:"Enviar diseños de cajas",nameOfEstimatedDateField:"wishDate",nameOfCompletionField:"lastCartonPrintingInfoSentDate",alertTerm:0,frequency:3)
+		Wish wish = new Wish(wishDate:now,alerts:new ArrayList())
+		Alert alert = new Alert(alertType:alertType,deadline:now,attentionDate:now,wish:wish)
+		wish.alerts.add(alert)
+		wish.checkAlerts()
+		assertTrue(alert.isActive())
+
+		
+		alertType.alertTerm = 1
+		wish.checkAlerts()
+		assertFalse(alert.isActive())
+		assertEquals("attentionDateChanged",alert.finalizedReason)
+		
+	}
+	
+	@Test
 	void testAlertFinalizedWishFinalized() {
 		Date now = new Date().clearTime()
 		AlertType alertType = new AlertType(description:"Enviar diseños de cajas",nameOfEstimatedDateField:"wishDate",nameOfCompletionField:"lastCartonPrintingInfoSentDate",alertTerm:0,frequency:3)
