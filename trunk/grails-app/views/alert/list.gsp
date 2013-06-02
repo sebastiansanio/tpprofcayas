@@ -26,8 +26,6 @@
 				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
 			
 			
-				<th><g:message code="alert.alertsQuantity.label" default="Alerts Quantity" /> </th>
-				
 				<g:if test="${params.action =='list'}">				
 					<th><g:message code="alert.doInspect.label" default="Inspected" /> </th>
 				</g:if>
@@ -47,9 +45,7 @@
 			
 				<td><g:formatDate date="${alertInstance.deadline}" /></td>
 			
-						
-				<td> <a href="#" class="popoverAlerts" rel="popover" data-content="<div><% alertInstance.wish.getActiveAlerts().each{out.println(it.deadline.format("dd/MM/yyyy")+": "+it.toString())} %>" data-original-title="Alertas activas" >${alertInstance.wish.getActiveAlerts().size()}</a></td>
-			 	
+				
 			 	<g:if test="${params.action =='list'}">		
 					<td> <g:link controller="alert" action="inspected" id="${alertInstance.id}">X</g:link></td>
 				</g:if>
@@ -63,11 +59,6 @@
 	</div>
 </section>
 
-<script>
-$(function()
-		{ $(".popoverAlerts").popover({template: '<div class="popover span3"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'});
-});
-</script>
 
 </body>
 
