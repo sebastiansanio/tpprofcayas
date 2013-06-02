@@ -39,11 +39,11 @@
 			
 				<td>${fieldValue(bean: wishInstance, field: "customerOpNumber")}</td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "customer")}</td>
+				<td><g:link controller="customer" action="show" id="${wishInstance.customer.id}">${fieldValue(bean: wishInstance, field: "customer")}</g:link></td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "supplier")}</td>
+				<td><g:link controller="supplier" action="show" id="${wishInstance.supplier.id}">${fieldValue(bean: wishInstance, field: "supplier")}</g:link></td>
 			
-				<td>${fieldValue(bean: wishInstance, field: "shipper")}</td>
+				<td><g:link controller="shipper" action="show" id="${wishInstance.shipper?.id}">${fieldValue(bean: wishInstance, field: "shipper")}</g:link></td>
 			
 				<td>${fieldValue(bean: wishInstance, field: "supplierOrder")}</td>
 			

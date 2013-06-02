@@ -15,11 +15,15 @@ import org.springframework.transaction.annotation.Transactional
 
 class WishController {
 
+	
+	static final Integer DEFAULT_PAGINATION_MAX = 100
+	
 	def wishExportService
 	def alertManagerService
 	def opNumberGeneratorService
 	def wishImportService
 	def documentImportService
+	
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -63,7 +67,7 @@ class WishController {
 		params.sort = params.sort?: 'opNumber'
 		params.order = params.order?: 'desc'
 			
-		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
         [wishInstanceList: Wish.list(params), wishInstanceTotal: Wish.count()]
     }
 	
@@ -71,7 +75,7 @@ class WishController {
 		params.sort = params.sort?: 'opNumber'
 		params.order = params.order?: 'desc'
 			
-		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNull(params)
 		int wishesSize = Wish.countByFinishDateIsNullAndBillDateIsNull()
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
@@ -81,7 +85,7 @@ class WishController {
 		params.sort = params.sort?: 'opNumber'
 		params.order = params.order?: 'desc'
 		
-		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
 		List wishes = Wish.findAllByFinishDateIsNullAndBillDateIsNotNull(params)
 		int wishesSize = Wish.countByFinishDateIsNullAndBillDateIsNotNull()
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
@@ -93,20 +97,32 @@ class WishController {
 		if(params.order == null)
 			params.order = 'desc'
 		
-		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
 		List wishes = Wish.findAllByFinishDateIsNotNull(params)
 		int wishesSize = Wish.countByFinishDateIsNotNull()
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
+	}
+	
+	def listFinishedByStakeholder(){
+		params.sort = params.sort?: 'opNumber'
+		params.order = params.order?: 'desc'
+		
+		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
+		Stakeholder stakeholder = Stakeholder.get(params.id)
+		
+		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and finish_date is not null order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id],params)
+		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and finish_date is not null",[stakeholder:stakeholder.id])
+		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesToCount.size()])
 	}
 	
 	def listBilledByStakeholder(){
 		params.sort = params.sort?: 'opNumber'
 		params.order = params.order?: 'desc'
 		
-		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
 		Stakeholder stakeholder = Stakeholder.get(params.id)
-		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and (finish_date is not null or bill_date is not null) order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id],params)
-		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and (finish_date is not null or bill_date is not null) order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id])
+		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and finish_date is null and bill_date is not null order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id],params)
+		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and finish_date is null and bill_date is not null",[stakeholder:stakeholder.id])
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesToCount.size()])
 	}
 
