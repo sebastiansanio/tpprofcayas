@@ -18,11 +18,9 @@ class AlertController {
     def list() {
 		alertManagerService.checkAllAlerts()
 		alertManagerService.generateAllAlerts()
-        params.max = Math.min(params.max ? params.int('max') : 200, 1000)
-		if(params.sort==null) 
-			params.sort = "attentionDate"
-		if(params.order==null)
-			params.order = "asc"
+        params.max = Math.min(params.max ? params.int('max') : 200, 1000)		
+		params.sort = params.sort?: 'attentionDate'
+		params.sort = params.sort?: 'asc'
 		
         [alertInstanceList: alertManagerService.getActiveAlerts(params), alertInstanceTotal: alertManagerService.getActiveAlerts().size()]
     }
@@ -31,11 +29,9 @@ class AlertController {
 		alertManagerService.checkAllAlerts()
 		alertManagerService.generateAllAlerts()
 		params.max = Math.min(params.max ? params.int('max') : 200, 1000)
-		if(params.sort==null)
-			params.sort = "attentionDate"
-		if(params.order==null)
-			params.order = "asc"
-		
+		params.sort = params.sort?: 'attentionDate'
+		params.sort = params.sort?: 'asc'
+	
 		render(view: "list", model: [alertInstanceList: alertManagerService.getInspectedAlerts(params), alertInstanceTotal: alertManagerService.getInspectedAlerts().size()])	
 	}
 	

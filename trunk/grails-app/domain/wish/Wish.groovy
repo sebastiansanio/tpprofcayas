@@ -149,8 +149,10 @@ class Wish {
 	}
 		
 	def beforeValidate(){
-		if(forwarder!= null &&forwarderSelectedDate == null)
+		if(forwarder!= null && forwarderSelectedDate == null)
 			forwarderSelectedDate = new Date().clearTime()
+		if(forwarder == null)
+			forwarderSelectedDate = null
 	}
 	
 	Date getTimeOfDeparture(){
@@ -244,10 +246,10 @@ class Wish {
 	
 	//Alert 2
 	Date getDateToConfirmDeliveryDate(){
-		Date cartonsPrintingInfoSentDate = getLastCartonPrintingInfoSentDate()
-		if (cartonsPrintingInfoSentDate == null)
-			return null
-		return cartonsPrintingInfoSentDate.plus(1)
+		if(paymentTerm?.percentPaymentBeforeDelivery == 0)
+			return wishDate?.plus(1)
+		else
+			return dateOfMoneyInAdvanceTransfer
 	}
 	
 	//Alert 3
