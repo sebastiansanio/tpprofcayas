@@ -2,6 +2,8 @@ package wish
 
 import importer.GenericExcelImporter
 import java.io.OutputStream;
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile
@@ -17,6 +19,7 @@ class WishController {
 
 	
 	static final Integer DEFAULT_PAGINATION_MAX = 100
+	static final DateFormat df = new SimpleDateFormat("yyyyMMdd")
 	
 	def wishExportService
 	def alertManagerService
@@ -129,7 +132,7 @@ class WishController {
 	def export() {
 		params.reportId = Long.parseLong(params.reportId)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}.${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}_"+df.format(new Date())+".${params.extension}")
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
 		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),params.reportId)
 	}
@@ -137,7 +140,7 @@ class WishController {
 	def exportByStakeholder() {
 		def stakeholder = Stakeholder.get(params.id)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${stakeholder}.${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${stakeholder}_"+df.format(new Date())+".${params.extension}")
 		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder)
 	}
 	
