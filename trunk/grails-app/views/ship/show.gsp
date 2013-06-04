@@ -23,6 +23,20 @@
 				<td valign="top" class="value">${fieldValue(bean: shipInstance, field: "name")}</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="ship.pendingWishes.label" default="Pending Orders" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${shipInstance.wishes.findAll{it.isPending()}.sort{it.opNumber}}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
+					</g:each>
+					</ul>
+					
+					
+				</td>
+			</tr>
 		
 		</tbody>
 	</table>

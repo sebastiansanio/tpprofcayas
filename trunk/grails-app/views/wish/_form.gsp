@@ -690,7 +690,7 @@
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'ship', 'error')} ">
 						<label for="ship" class="control-label"><g:message code="wish.ship.label" default="Ship" /></label>
 						<div class="controls">
-							<g:select id="ship" name="ship.id" from="${modal.Ship.list()}" optionKey="id" value="${wishInstance?.ship?.id}" class="many-to-one" noSelection="['null': '']"/>
+							<g:select id="ship" name="ship.id" from="${modal.Ship.list(sort:"name")}" optionKey="id" value="${wishInstance?.ship?.id}" class="many-to-one" noSelection="['null': '']"/>
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'ship', 'error')}</span>
 						</div>
 					</div>
