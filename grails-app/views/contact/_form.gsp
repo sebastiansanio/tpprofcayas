@@ -41,6 +41,14 @@
 					<span class="help-inline">${hasErrors(bean: contactInstance, field: 'phone', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: contactInstance, field: 'extensionNumber', 'error')} ">
+				<label for="extensionNumber" class="control-label"><g:message code="contact.extensionNumber.label" default="Extension Number" /></label>
+				<div class="controls">
+					<g:textField name="extensionNumber" value="${contactInstance?.extensionNumber}"/>
+					<span class="help-inline">${hasErrors(bean: contactInstance, field: 'extensionNumber', 'error')}</span>
+				</div>
+			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: contactInstance, field: 'cellPhone', 'error')} ">
 				<label for="cellPhone" class="control-label"><g:message code="contact.cellPhone.label" default="Cell Phone" /></label>

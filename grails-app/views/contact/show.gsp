@@ -51,6 +51,13 @@
 				<td valign="top" class="value">${fieldValue(bean: contactInstance, field: "phone")}</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="contact.extensionNumber.label" default="Extension Number" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: contactInstance, field: "extensionNumber")}</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="contact.cellPhone.label" default="Cell Phone" /></td>
