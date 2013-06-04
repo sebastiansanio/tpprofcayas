@@ -9,6 +9,7 @@ class Contact {
 	Date birthday
 	String phone
 	String cellPhone
+	String extensionNumber
 	String note
 	
 	boolean sendAlerts
@@ -24,6 +25,7 @@ class Contact {
 		
 		birthday nullable:true
 		phone nullable:true,blank:true
+		extensionNumber nullable:true,blank:true
 		cellPhone nullable:true,blank:true
 		note nullable:true,blank:true
     }

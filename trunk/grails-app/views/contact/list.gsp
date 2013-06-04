@@ -28,11 +28,13 @@
 			
 				<g:sortableColumn property="birthday" title="${message(code: 'contact.birthday.label', default: 'Birthday')}" />
 			
-			
-			
 				<g:sortableColumn property="phone" title="${message(code: 'contact.phone.label', default: 'Phone')}" />
+
+				<g:sortableColumn property="extensionNumber" title="${message(code: 'contact.extensionNumber.label', default: 'Extension Number')}" />
 			
 				<g:sortableColumn property="cellPhone" title="${message(code: 'contact.cellPhone.label', default: 'Cell Phone')}" />
+			
+			
 			
 			</tr>
 		</thead>
@@ -52,8 +54,14 @@
 				<td><g:formatDate date="${contactInstance.birthday}" /></td>
 			
 				<td>${fieldValue(bean: contactInstance, field: "phone")}</td>
+				
+				<td>${fieldValue(bean: contactInstance, field: "extensionNumber")}</td>
 			
 				<td>${fieldValue(bean: contactInstance, field: "cellPhone")}</td>
+				
+				
+				
+				
 			
 			</tr>
 		</g:each>
