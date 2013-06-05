@@ -43,8 +43,8 @@
 				<td valign="top" class="name"><g:message code="role.permissions.label" default="Permissions" /></td>
 				
 				<td valign="top" class="value">
-					<g:each in="${roleInstance?.permissions}" var="s">
-							<li>${Permission.findByPermissionString(s)}</li>
+					<g:each in="${Permission.findAllByPermissionStringInList(roleInstance?.permissions,[sort:'description'])}" var="s">
+							<li>${s.description}</li>
 					</g:each>
 				
 				</td>
