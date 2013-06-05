@@ -76,6 +76,8 @@ class BootStrap {
 				roleAdmin.addToPermissions("availableLocale:*")
 				roleAdmin.addToPermissions("report:*")
 				roleAdmin.addToPermissions("*:show")
+				roleAdmin.addToPermissions("permission:*")
+				roleAdmin.addToPermissions("role:*")
 				roleAdmin.save(flush:true)
 			
 				def roleOperator = new Role(name:"Operador")
