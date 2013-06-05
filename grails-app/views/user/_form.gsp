@@ -26,13 +26,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: userInstance, field: 'permissions', 'error')} ">
-				<label for="permissions" class="control-label"><g:message code="user.permissions.label" default="Permissions" /></label>
-				<div class="controls">
-					
-					<span class="help-inline">${hasErrors(bean: userInstance, field: 'permissions', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: userInstance, field: 'roles', 'error')} ">
 				<label for="roles" class="control-label"><g:message code="user.roles.label" default="Roles" /></label>
