@@ -24,6 +24,8 @@ class Stakeholder {
 	String 	email
 	Report 	defaultReport
 	AvailableLocale defaultLocale
+	String notes
+	
 
 	static constraints = {
 		name blank:false, nullable:true
@@ -33,6 +35,7 @@ class Stakeholder {
 		defaultLocale nullable: false
 		province nullable:true,blank:true
 		locality nullable:true,blank:true
+		notes blank:true,nullable:true
     }
 	
 	public String toString() {
