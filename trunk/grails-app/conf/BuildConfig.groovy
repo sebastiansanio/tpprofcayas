@@ -50,11 +50,17 @@ grails.project.dependency.resolution = {
 		compile ':cache:1.0.0'
 		
 		compile ":lesscss-resources:1.3.0.3"
-		compile ":shiro:1.1.4"
+		
+		compile (":shiro:1.1.4"){
+			excludes([name:'quartz',group:'org.opensymphony.quartz'])
+		}
+		compile ':quartz:1.0-RC8'
+		
 		compile ":kickstart-with-bootstrap:0.8.9"
 		compile ':joda-time:1.4'
 		compile ':export:1.5'
 		compile ':excel-import:1.0.0'
 		compile ':mail:1.0.1'
+		compile ":envers:2.1.0"
     }
 }
