@@ -27,6 +27,14 @@
 				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'email', 'error')}</span>
 			</div>
 		</div>
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'notes', 'error')} ">
+			<label for="notes" class="control-label"><g:message code="stakeholder.notes.label" default="Notes" /></label>
+			<div class="controls">
+				<g:textArea rows="5" name="notes" value="${supplierInstance?.notes}"/>
+				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'notes', 'error')}</span>
+			</div>
+		</div>
 
 		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'address', 'error')} ">
 			<label for="address" class="control-label"><g:message code="supplier.address.label" default="Address" /></label>

@@ -39,6 +39,13 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: forwarderInstance, field: "notes")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="forwarder.defaultReport.label" default="Default Report" /></td>
 				
 				<td valign="top" class="value"><g:link controller="report" action="show" id="${forwarderInstance?.defaultReport?.id}">${forwarderInstance?.defaultReport?.encodeAsHTML()}</g:link></td>

@@ -37,6 +37,13 @@
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "notes")}</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.defaultReport.label" default="Default Report" /></td>

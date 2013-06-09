@@ -28,6 +28,15 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'email', 'error')}</span>
 			</div>
 		</div>	
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'notes', 'error')} ">
+			<label for="notes" class="control-label"><g:message code="stakeholder.notes.label" default="Notes" /></label>
+			<div class="controls">
+				<g:textArea rows="5" name="notes" value="${shipperInstance?.notes}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'notes', 'error')}</span>
+			</div>
+		</div>
+		
 	</div>
 	
 	<div class="span6">

@@ -39,6 +39,13 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: customsBrokerInstance, field: "notes")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="customsBroker.defaultReport.label" default="Default Report" /></td>
 				
 				<td valign="top" class="value"><g:link controller="report" action="show" id="${customsBrokerInstance?.defaultReport?.id}">${customsBrokerInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
