@@ -1,9 +1,9 @@
 <%@ page import="stakeholder.Shipper" %>
+<h5><g:message code="stakeholder.shipperInformation.label" default="Shipper information"/></h5>
 
 <div class="row-fluid">
 	<div class="span6">
 		
-		<h5><g:message code="stakeholder.shipperInformation.label" default="Shipper information"/></h5>
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'name', 'error')} required">
 			<label for="name" class="control-label"><g:message code="shipper.name.label" default="Name" /><span class="required-indicator">*</span></label>
@@ -36,10 +36,6 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'notes', 'error')}</span>
 			</div>
 		</div>
-		
-	</div>
-	
-	<div class="span6">
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')} required">
 			<label for="defaultReport" class="control-label"><g:message code="shipper.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
@@ -56,6 +52,12 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'defaultLocale', 'error')}</span>
 			</div>
 		</div>
+		
+	</div>
+	
+	<div class="span6">
+
+
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'country', 'error')} required">
 			<label for="country" class="control-label"><g:message code="shipper.country.label" default="Country" /><span class="required-indicator">*</span></label>
@@ -144,7 +146,7 @@
 				</li>
 			</ul>
 
-			<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'wishes', 'error')}</span>
+
 	</div>
 </div>
 

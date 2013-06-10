@@ -51,9 +51,7 @@
 				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'taxRegistryNumber', 'error')}</span>
 			</div>
 		</div>	
-		
-	</div>
-	<div class="span6">
+
 		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'defaultReport', 'error')} required">
 			<label for="defaultReport" class="control-label"><g:message code="supplier.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
 			<div class="controls">
@@ -70,6 +68,10 @@
 			</div>
 		</div>
 
+
+		
+	</div>
+	<div class="span6">
 		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'country', 'error')} required">
 			<label for="country" class="control-label"><g:message code="supplier.country.label" default="Country" /><span class="required-indicator">*</span></label>
 			<div class="controls">
@@ -77,6 +79,7 @@
 				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'country', 'error')}</span>
 			</div>
 		</div>
+
 
 		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'province', 'error')}">
 			<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
@@ -154,8 +157,6 @@
 					<g:link controller="wish" action="create" params="['supplier.id': supplierInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
 				</li>
 				</ul>
-
-			<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'wishes', 'error')}</span>
 	</div>
 </div>
 
