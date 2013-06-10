@@ -80,7 +80,56 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'locality', 'error')}</span>
 			</div>
 		</div>
-	
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'accountName', 'error')} ">
+			<label for="accountName" class="control-label"><g:message code="stakeholder.accountName.label" default="Account name" /></label>
+			<div class="controls">
+				<g:textField name="accountName" value="${shipperInstance?.accountName}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'accountName', 'error')}</span>
+			</div>
+		</div>	
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'accountNumber', 'error')} ">
+			<label for="accountNumber" class="control-label"><g:message code="stakeholder.accountNumber.label" default="Account number" /></label>
+			<div class="controls">
+				<g:textField name="accountNumber" value="${shipperInstance?.accountNumber}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'accountNumber', 'error')}</span>
+			</div>
+		</div>	
+
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'bankName', 'error')} ">
+			<label for="bankName" class="control-label"><g:message code="stakeholder.bankName.label" default="Bank name" /></label>
+			<div class="controls">
+				<g:textField name="bankName" value="${shipperInstance?.bankName}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'bankName', 'error')}</span>
+			</div>
+		</div>	
+		
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'bankAddress', 'error')} ">
+			<label for="bankAddress" class="control-label"><g:message code="stakeholder.bankAddress.label" default="Bank address" /></label>
+			<div class="controls">
+				<g:textField name="bankAddress" value="${shipperInstance?.bankAddress}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'bankAddress', 'error')}</span>
+			</div>
+		</div>	
+
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'swiftCode', 'error')} ">
+			<label for="swiftCode" class="control-label"><g:message code="stakeholder.swiftCode.label" default="Swift code" /></label>
+			<div class="controls">
+				<g:textField name="swiftCode" value="${shipperInstance?.swiftCode}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'swiftCode', 'error')}</span>
+			</div>
+		</div>	
+
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'owner', 'error')} ">
+			<label for="owner" class="control-label"><g:message code="stakeholder.owner.label" default="Owner" /></label>
+			<div class="controls">
+				<g:textField name="owner" value="${shipperInstance?.owner}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'owner', 'error')}</span>
+			</div>
+		</div>	
+
+		
 	</div>
 </div>
 
