@@ -26,7 +26,13 @@ class Stakeholder {
 	AvailableLocale defaultLocale
 	String notes
 	
-
+	String accountName
+	String accountNumber
+	String bankName
+	String bankAddress
+	String swiftCode
+	String owner
+	
 	static constraints = {
 		name blank:false, nullable:true
 		telephone blank:true, nullable:true
@@ -36,6 +42,12 @@ class Stakeholder {
 		province nullable:true,blank:true
 		locality nullable:true,blank:true
 		notes blank:true,nullable:true
+		accountName blank:true,nullable:true
+		accountNumber blank:true,nullable:true
+		bankName blank:true,nullable:true
+		bankAddress blank:true,nullable:true
+		swiftCode blank:true,nullable:true
+		owner blank:true,nullable:true
     }
 	
 	public String toString() {

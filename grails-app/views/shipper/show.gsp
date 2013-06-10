@@ -105,7 +105,38 @@
 			</tr>
 
 			<g:render template="/_stakeholder/show" model="['stakeholderInstance':shipperInstance]"/>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.accountName.label" default="Account name" /></td>
+				<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "accountName")}</td>
+			</tr>
 
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.accountNumber.label" default="Account number" /></td>
+				<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "accountNumber")}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.bankName.label" default="Bank name" /></td>
+				<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "bankName")}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.bankAddress.label" default="Bank address" /></td>
+				<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "bankAddress")}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.swiftCode.label" default="Swift code" /></td>
+				<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "swiftCode")}</td>
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="stakeholder.owner.label" default="Owner" /></td>
+				<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "owner")}</td>
+			</tr>
+
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="shipper.dateCreated.label" default="Date Created" /></td>
 				
