@@ -119,7 +119,7 @@
 		
 		<div class="tab-pane" id="tab2">
 
-			<export:formats controller="wish" action="exportByStakeholder" params='[id: customerInstance.id]' formats="['csv','excel','ods','pdf']" /> <br>
+			<export:formats controller="wish" action="exportByStakeholder" params='[id: customerInstance.id]' formats="['csv','excel','ods','pdf']" style="width: auto;"/> <br>
 			
 			<p>
 				<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${customerInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>				
