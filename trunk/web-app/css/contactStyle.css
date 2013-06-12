@@ -9,3 +9,13 @@
 	font-weight:bold;
 	font-style:italic;
 }
+
+div.index { 
+	-webkit-columns: 16em;
+	-moz-column-width: 16em;
+	columns: 16em }
+
+div.index ul {
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none }

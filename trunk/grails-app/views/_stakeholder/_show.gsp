@@ -2,7 +2,6 @@
 
 <tr class="prop">
 	<td colspan="2" valign="top" class="name">
-		<g:message code="contact.label" default="Contact" />
 			<g:each in="${stakeholderInstance.contacts}" var="contact">
 				<div class="row-fluid contact-card">
 					<div class="span6">
