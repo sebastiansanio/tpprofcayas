@@ -14,159 +14,160 @@
 
 <section id="show-supplier" class="first">
 
-	<table class="table">
-		<tbody>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.name.label" default="Name" /></td>
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab1" data-toggle="tab"> <g:message code="stakeholder.generalData.label" default="General data" /> </a></li>
+		<li class=""><a href="#tab2" data-toggle="tab"> <g:message code="stakeholder.pendingWishes.label" default="Pending orders" /> </a> </li>
+		<li class=""><a href="#tab3" data-toggle="tab"> <g:message code="contact.label" default="Contact" /> </a></li>
+	</ul>
+	<div class="tab-content" >
+		<div class="tab-pane active" id="tab1">
+			<table class="table">
+				<tbody>
 				
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "name")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.telephone.label" default="Telephone" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "telephone")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.email.label" default="Email" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
-				
-			</tr>
-			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "notes")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.defaultReport.label" default="Default Report" /></td>
-				
-				<td valign="top" class="value"><g:link controller="report" action="show" id="${supplierInstance?.defaultReport?.id}">${supplierInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.defaultLocale.label" default="Default Locale" /></td>
-				
-				<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${supplierInstance?.defaultLocale?.id}">${supplierInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.address.label" default="Address" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "address")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.country.label" default="Country" /></td>
-				
-				<td valign="top" class="value"><g:link controller="country" action="show" id="${supplierInstance?.country?.id}">${supplierInstance?.country?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.name.label" default="Name" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "name")}</td>
+						
+					</tr>
 
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.province.label" default="Province" /></td>
-				
-				<td valign="top" class="value">${supplierInstance?.province?.encodeAsHTML()}</td>
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.locality.label" default="Locality" /></td>
-				
-				<td valign="top" class="value">${supplierInstance?.locality?.encodeAsHTML()}</td>
-			</tr>
-
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.country.label" default="Country" /></td>
+						
+						<td valign="top" class="value"><g:link controller="country" action="show" id="${supplierInstance?.country?.id}">${supplierInstance?.country?.encodeAsHTML()}</g:link></td>
+						
+					</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.taxRegistryNumber.label" default="Tax Registry Number" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "taxRegistryNumber")}</td>
-				
-			</tr>
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.province.label" default="Province" /></td>
+						
+						<td valign="top" class="value">${supplierInstance?.province?.encodeAsHTML()}</td>
+					</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.pendingWishes.label" default="Pending Orders" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${supplierInstance.wishes.findAll{it.billDate==null && it.finishDate==null}.sort{it.opNumber}}" var="w">
-						<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
-					</g:each>
-					</ul>
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.locality.label" default="Locality" /></td>
+						
+						<td valign="top" class="value">${supplierInstance?.locality?.encodeAsHTML()}</td>
+					</tr>
 
-					<export:formats controller="wish" action="exportByStakeholder" params='[id: supplierInstance.id]' formats="['csv','excel','ods','pdf']" />
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.address.label" default="Address" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "address")}</td>
+						
+					</tr>
+														
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.telephone.label" default="Telephone" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "telephone")}</td>
+						
+					</tr>
+				
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.email.label" default="Email" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
+						
+					</tr>
+
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.defaultLocale.label" default="Default Locale" /></td>
+						
+						<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${supplierInstance?.defaultLocale?.id}">${supplierInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
+						
+					</tr>
 					
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td></td>
-				<td>
-					<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.defaultReport.label" default="Default Report" /></td>
+						
+						<td valign="top" class="value"><g:link controller="report" action="show" id="${supplierInstance?.defaultReport?.id}">${supplierInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
+						
+					</tr>
 				
-					<g:link role="button" class="btn btn-primary" action='listFinishedByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.finishedWishes.label')}</g:link>	
-				</td>
-			</tr>
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.taxRegistryNumber.label" default="Tax Registry Number" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "taxRegistryNumber")}</td>
+						
+					</tr>
+				
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.accountName.label" default="Account name" /></td>
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "accountName")}</td>
+					</tr>
 		
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.accountNumber.label" default="Account number" /></td>
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "accountNumber")}</td>
+					</tr>
+		
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.bankName.label" default="Bank name" /></td>
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "bankName")}</td>
+					</tr>
+		
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.bankAddress.label" default="Bank address" /></td>
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "bankAddress")}</td>
+					</tr>
+		
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.swiftCode.label" default="Swift code" /></td>
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "swiftCode")}</td>
+					</tr>
+		
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.owner.label" default="Owner" /></td>
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "owner")}</td>
+					</tr>
+					
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "notes")}</td>
+						
+					</tr>
+								
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.dateCreated.label" default="Date Created" /></td>
+						
+						<td valign="top" class="value"><g:formatDate date="${supplierInstance?.dateCreated}" /></td>
+						
+					</tr>
+				
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.lastUpdated.label" default="Last Updated" /></td>
+						
+						<td valign="top" class="value"><g:formatDate date="${supplierInstance?.lastUpdated}" /></td>
+						
+					</tr>
+							
+				</tbody>
+			</table>
+		</div>
+
+		<div class="tab-pane" id="tab2">
+
+			<export:formats controller="wish" action="exportByStakeholder" params='[id: supplierInstance.id]' formats="['csv','excel','ods','pdf']"  style="width: auto;"/> <br>
+			<p>
+				<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
+				<g:link role="button" class="btn btn-primary" action='listFinishedByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.finishedWishes.label')}</g:link>	
+			</p>
+				
+			<ul>
+				<g:each in="${supplierInstance.wishes.findAll{it.billDate==null && it.finishDate==null}.sort{it.opNumber}}" var="w">
+					<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
+				</g:each>
+			</ul>
+		
+		</div>
+		
+		<div class="tab-pane" id="tab3">
 			<g:render template="/_stakeholder/show" model="['stakeholderInstance':supplierInstance]"/>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.accountName.label" default="Account name" /></td>
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "accountName")}</td>
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.accountNumber.label" default="Account number" /></td>
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "accountNumber")}</td>
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.bankName.label" default="Bank name" /></td>
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "bankName")}</td>
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.bankAddress.label" default="Bank address" /></td>
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "bankAddress")}</td>
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.swiftCode.label" default="Swift code" /></td>
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "swiftCode")}</td>
-			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="stakeholder.owner.label" default="Owner" /></td>
-				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "owner")}</td>
-			</tr>
-			
+		</div>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${supplierInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="supplier.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${supplierInstance?.lastUpdated}" /></td>
-				
-			</tr>
-					
-		</tbody>
-	</table>
 </section>
 
 </body>
