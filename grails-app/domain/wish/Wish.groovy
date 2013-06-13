@@ -6,7 +6,7 @@ import alert.*
 
 class Wish {
 
-	static hasMany		= [loadUnits: LoadUnit, alerts: Alert,notes: Note,firstStageRequiredDocuments: Document,secondStageRequiredDocuments: Document,picturesOfPrintingBoxes:Picture,picturesOfLoadingContainer:Picture,docDraftToBeApprovedBeforeDelivery:Draft]
+	static hasMany		= [loadUnits: LoadUnit, alerts: Alert,notes: Note,firstStageRequiredDocuments: FirstStageDocument,secondStageRequiredDocuments: SecondStageDocument,picturesOfPrintingBoxes:PrintingBoxesPicture,picturesOfLoadingContainer:LoadingContainerPicture,docDraftToBeApprovedBeforeDelivery:Draft]
 	
 	List loadUnits
 	List notes

@@ -293,7 +293,7 @@ class WishController {
 			
 			argPict.put("image", it.getBytes() );
 			
-			def picture = new Picture(argPict)
+			def picture = new PrintingBoxesPicture(argPict)
 			
 			if (!picture.save(flush: true)) {
 				redirect(action: "show", id: wishInstance.id)
@@ -322,7 +322,7 @@ class WishController {
 			
 			argPict.put("image", it.getBytes() );
 			
-			def picture = new Picture(argPict)
+			def picture = new LoadingContainerPicture(argPict)
 			
 			if (!picture.save(flush: true)) {
 				redirect(action: "show", id: wishInstance.id)
