@@ -1,15 +1,20 @@
 package wish
 
+import courier.DocumentsCourierRecord
 import modal.DocumentType
 
 class Document {
 
 	DocumentType documentType
 	Date received
-	String trackingNumber
+
+	DocumentsCourierRecord courierRecord
 	String fileName
 	byte[] file
 
+	Date deliveredToCustomsBrokerDate
+	Date deliveredToLawyerDate
+	Date deliveredToCustomerDate
 	
     static mapping = {
     }
@@ -17,8 +22,11 @@ class Document {
 	static constraints = {
 		file maxSize: 9999999,nullable:true
 		received nullable:true
-		trackingNumber nullable:true,blank:true
-		fileName nullable:true,blank:true		
+		courierRecord nullable:true
+		fileName nullable:true,blank:true	
+		deliveredToCustomsBrokerDate nullable:true
+		deliveredToLawyerDate nullable:true
+		deliveredToCustomerDate nullable:true
     }
 	
 	boolean requiresVisa(){
@@ -31,5 +39,9 @@ class Document {
 	
 	public String toString() {
 		return documentType.toString()
+	}
+	
+	Date getReceived(){
+		return courierRecord?.arrivalDate
 	}
 }
