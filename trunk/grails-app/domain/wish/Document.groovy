@@ -6,7 +6,6 @@ import modal.DocumentType
 class Document {
 
 	DocumentType documentType
-	Date received
 
 	DocumentsCourierRecord courierRecord
 	String fileName
@@ -21,7 +20,6 @@ class Document {
     
 	static constraints = {
 		file maxSize: 9999999,nullable:true
-		received nullable:true
 		courierRecord nullable:true
 		fileName nullable:true,blank:true	
 		deliveredToCustomsBrokerDate nullable:true

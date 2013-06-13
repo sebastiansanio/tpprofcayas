@@ -9,6 +9,8 @@ import org.quartz.Scheduler
 import org.quartz.SchedulerFactory
 import org.quartz.impl.StdSchedulerFactory
 import alert.AlertType
+import courier.Courier
+import courier.DocumentsCourierRecord
 import login.*
 import modal.*
 import wish.*
@@ -328,6 +330,16 @@ class BootStrap {
 					wish.save(failOnError:true)
 				}
 
+				Courier courier = new Courier(name: 'DHL')
+				courier.save()
+				DocumentsCourierRecord cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"1")
+				cr.save()
+				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"2")
+				cr.save()
+				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"3")
+				cr.save()
+				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"4")
+				cr.save()
 				
 			}
 		}
