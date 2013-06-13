@@ -300,12 +300,12 @@ class Wish {
 		
 		firstStageRequiredDocuments.each{
 			if (it.requiresVisa())
-				visaReceivedDateAux = it.received
+				visaReceivedDateAux = it.arrivalDate
 		}
 		
 		secondStageRequiredDocuments.each{
 			if (it.requiresVisa())
-				visaReceivedDateAux = it.received
+				visaReceivedDateAux = it.arrivalDate
 		}
 		return visaReceivedDateAux
 	}
@@ -348,12 +348,12 @@ class Wish {
 		Date blReceivedAux = null
 		firstStageRequiredDocuments.each{
 			if(it.isBl())
-				blReceivedAux = it.received
+				blReceivedAux = it.arrivalDate
 		}
 		
 		secondStageRequiredDocuments.each{
 			if(it.isBl())
-				blReceivedAux = it.received
+				blReceivedAux = it.arrivalDate
 		}
 		return blReceivedAux
 	}
