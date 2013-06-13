@@ -17,7 +17,7 @@
 
                 <td valign="top" class="value">${fieldValue(bean: document, field: "trackingNumber")}</td>
 
-                <td valign="top" class="value"><g:formatDate date="${document?.received}"/> </td>
+                <td valign="top" class="value"><g:formatDate date="${document?.arrivalDate}"/> </td>
                 
                 <td valign="top" class="value">
 	                <g:if test="${document?.file.length == 0}">
