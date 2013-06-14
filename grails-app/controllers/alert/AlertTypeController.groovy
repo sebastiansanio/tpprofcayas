@@ -3,7 +3,10 @@ package alert
 import org.springframework.dao.DataIntegrityViolationException
 
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class AlertTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

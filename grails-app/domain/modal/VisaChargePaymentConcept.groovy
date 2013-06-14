@@ -1,6 +1,8 @@
 package modal
 
+import org.hibernate.envers.Audited
 
+@Audited
 class VisaChargePaymentConcept {
 
 

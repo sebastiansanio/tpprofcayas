@@ -1,5 +1,7 @@
 package login
+import org.hibernate.envers.Audited
 
+@Audited
 class Permission {
 
 	

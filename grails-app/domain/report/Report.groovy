@@ -1,5 +1,7 @@
 package report
+import org.hibernate.envers.Audited
 
+@Audited
 class Report {
 
 	Date	dateCreated

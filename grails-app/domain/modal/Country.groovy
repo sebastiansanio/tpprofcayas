@@ -1,5 +1,7 @@
 package modal
+import org.hibernate.envers.Audited
 
+@Audited
 class Country {
 
 	String name

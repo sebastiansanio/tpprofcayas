@@ -1,6 +1,9 @@
 package stakeholder
 import wish.Wish
 
+import org.hibernate.envers.Audited
+
+@Audited
 class Supplier extends Stakeholder{
 
 	static final String type = "supplier"

@@ -3,7 +3,10 @@ package stakeholder
 import org.springframework.dao.DataIntegrityViolationException
 
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class CustomsBrokerController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

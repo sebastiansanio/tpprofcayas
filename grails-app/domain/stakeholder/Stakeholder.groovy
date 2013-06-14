@@ -6,6 +6,9 @@ import modal.Country
 import report.Report
 import login.User
 
+import org.hibernate.envers.Audited
+
+@Audited
 class Stakeholder {
 	
 	static hasMany		= [contacts: Contact]

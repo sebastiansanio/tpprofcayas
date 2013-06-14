@@ -1,5 +1,7 @@
 package wish
+import org.hibernate.envers.Audited
 
+@Audited
 class Picture {
 
 	byte[] image

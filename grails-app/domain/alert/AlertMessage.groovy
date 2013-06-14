@@ -1,7 +1,9 @@
 package alert
 
 import modal.AvailableLocale
+import org.hibernate.envers.Audited
 
+@Audited
 class AlertMessage {
 
 	Date	dateCreated

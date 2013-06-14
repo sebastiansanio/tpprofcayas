@@ -4,6 +4,10 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.servlet.support.RequestContextUtils
 
 
+import org.springframework.transaction.annotation.Transactional
+
+
+@Transactional
 class AlertController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

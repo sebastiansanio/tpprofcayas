@@ -1,5 +1,7 @@
 package stakeholder
+import org.hibernate.envers.Audited
 
+@Audited
 class Contact {
 	
 	Date	dateCreated

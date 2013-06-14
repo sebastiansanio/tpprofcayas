@@ -3,6 +3,9 @@ package wish
 import login.User
 import product.*
 
+import org.hibernate.envers.Audited
+
+@Audited
 class LoadUnit {
 	
 	Product product

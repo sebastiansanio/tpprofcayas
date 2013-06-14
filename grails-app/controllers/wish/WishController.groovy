@@ -14,7 +14,10 @@ import org.apache.shiro.SecurityUtils
 import stakeholder.*
 import org.springframework.transaction.annotation.Transactional
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class WishController {
 
 	

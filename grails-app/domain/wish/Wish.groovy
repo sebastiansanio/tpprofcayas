@@ -4,6 +4,9 @@ import stakeholder.*
 import modal.*
 import alert.*
 
+import org.hibernate.envers.Audited
+
+@Audited
 class Wish {
 
 	static hasMany		= [loadUnits: LoadUnit, alerts: Alert,notes: Note,firstStageRequiredDocuments: FirstStageDocument,secondStageRequiredDocuments: SecondStageDocument,picturesOfPrintingBoxes:PrintingBoxesPicture,picturesOfLoadingContainer:LoadingContainerPicture,docDraftToBeApprovedBeforeDelivery:Draft]

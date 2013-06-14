@@ -1,7 +1,9 @@
 package courier
 
 import wish.Document
+import org.hibernate.envers.Audited
 
+@Audited
 class CourierRecord {
 	
 	Date	dateCreated
