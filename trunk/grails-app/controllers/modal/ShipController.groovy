@@ -3,7 +3,10 @@ package modal
 import org.springframework.dao.DataIntegrityViolationException
 
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class ShipController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

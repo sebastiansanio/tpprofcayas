@@ -1,7 +1,9 @@
 package login
 
 import java.util.Date;
+import org.hibernate.envers.Audited
 
+@Audited
 class Role {
     String name
 	

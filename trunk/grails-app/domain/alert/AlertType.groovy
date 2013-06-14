@@ -1,7 +1,9 @@
 package alert
 
 import wish.Wish
+import org.hibernate.envers.Audited
 
+@Audited
 class AlertType {
 
 	String description

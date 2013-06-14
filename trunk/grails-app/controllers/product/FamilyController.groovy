@@ -2,8 +2,10 @@ package product
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import org.springframework.transaction.annotation.Transactional
 
 
+@Transactional
 class FamilyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

@@ -1,6 +1,9 @@
 package modal
 import wish.Wish
 
+import org.hibernate.envers.Audited
+
+@Audited
 class Ship {
 
 	String name

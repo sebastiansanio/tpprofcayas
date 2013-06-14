@@ -2,6 +2,9 @@ package wish
 
 import login.User
 
+import org.hibernate.envers.Audited
+
+@Audited
 class Note {
 	
 	Date dateCreated

@@ -1,7 +1,9 @@
 package modal
 
 import wish.Wish;
+import org.hibernate.envers.Audited
 
+@Audited
 class PaymentTerm {
 
 	String name

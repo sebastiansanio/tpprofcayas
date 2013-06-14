@@ -1,5 +1,7 @@
 package product
+import org.hibernate.envers.Audited
 
+@Audited
 class Color {
 
 	String description

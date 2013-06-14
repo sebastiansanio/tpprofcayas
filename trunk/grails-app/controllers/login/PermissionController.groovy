@@ -3,7 +3,10 @@ package login
 import org.springframework.dao.DataIntegrityViolationException
 
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class PermissionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

@@ -1,5 +1,7 @@
 package courier
+import org.hibernate.envers.Audited
 
+@Audited
 class Courier {
 
 	Date	dateCreated

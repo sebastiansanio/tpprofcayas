@@ -2,7 +2,9 @@ package login
 
 import java.util.Date;
 import stakeholder.Stakeholder
+import org.hibernate.envers.Audited
 
+@Audited
 class User {
     String username
     String passwordHash

@@ -3,7 +3,10 @@ package modal
 import org.springframework.dao.DataIntegrityViolationException
 
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class PaymentStatusController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

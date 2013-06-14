@@ -1,7 +1,9 @@
 package product
 import wish.*
 
+import org.hibernate.envers.Audited
 
+@Audited
 class Product {
 
 	String descriptionES
