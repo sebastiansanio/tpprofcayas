@@ -64,11 +64,14 @@ class Wish {
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
 	Date picturesOfPrintingBoxesAndLoadReceived
+	boolean picturesOfPrintingBoxesNotReceived
 	Date picturesOfLoadingContainerReceived
+	boolean picturesOfLoadingContainerNotReceived
 	Country sourceCountry
 	Port port
 	Ship ship
 	Date docDraftApproved
+	boolean docDraftNotReceived
 	Forwarder forwarder
 	Agent agent
 	BigDecimal freightQuote
