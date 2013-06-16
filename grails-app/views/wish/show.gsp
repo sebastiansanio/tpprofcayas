@@ -480,6 +480,13 @@
 			</tr>
 			
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.docDraftNotReceived.label" default="Drafts won't be received" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.docDraftNotReceived}" /></td>
+				
+			</tr>
+			
+			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
 					<p><g:message code="wish.docDraftToBeApprovedBeforeDelivery.label" default="Doc Draft To Be Approved Before Delivery"/></p>
 					<g:if test="${wishInstance?.docDraftToBeApprovedBeforeDelivery?.size() != 0}">
@@ -494,6 +501,12 @@
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfPrintingBoxesAndLoadReceived}" /></td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesNotReceived.label" default="Pictures of printing boxes won't be received" /></td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfPrintingBoxesNotReceived}" /></td>				
+			</tr>
+
 		
 			<tr class="prop" id="picturesOfLoadingContainerReceived">
 				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></td>
@@ -501,6 +514,14 @@
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.picturesOfLoadingContainerReceived}" /></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerNotReceived.label" default="Pictures of loading container won't be received" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfLoadingContainerNotReceived}" /></td>
+				
+			</tr>
+
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainer.label" default="Pictures Of Loading Container" /></td>

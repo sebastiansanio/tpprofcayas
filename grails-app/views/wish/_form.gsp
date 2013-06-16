@@ -634,6 +634,7 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'docDraftApproved', 'error')}</span>
 						</div>
 					</div>
+
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')} ">
 						<label for="picturesOfPrintingBoxesAndLoadReceived" class="control-label"><g:message code="wish.picturesOfPrintingBoxesAndLoadReceived.label" default="Pictures Of Printing Boxes And Load Received" /></label>
 						<div class="controls">
@@ -641,8 +642,6 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesAndLoadReceived', 'error')}</span>
 						</div>
 					</div>
-				</div>
-				<div class="span6">
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')} ">
 						<label for="picturesOfLoadingContainerReceived" class="control-label"><g:message code="wish.picturesOfLoadingContainerReceived.label" default="Pictures Of Loading Container Received" /></label>
 						<div class="controls">
@@ -650,6 +649,30 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerReceived', 'error')}</span>
 						</div>
 					</div>
+				</div>
+				<div class="span6">
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'docDraftNotReceived', 'error')} ">
+						<label for="docDraftNotReceived" class="control-label"><g:message code="wish.docDraftNotReceived.label" default="Draft won't be received" /></label>
+						<div class="controls">
+							<bs:checkBox name="docDraftNotReceived" value="${wishInstance?.docDraftNotReceived}" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'docDraftNotReceived', 'error')}</span>
+						</div>
+					</div>
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesNotReceived', 'error')} ">
+						<label for="picturesOfPrintingBoxesNotReceived" class="control-label"><g:message code="wish.picturesOfPrintingBoxesNotReceived.label" default="Pictures of printing boxes won't be received" /></label>
+						<div class="controls">
+							<bs:checkBox name="picturesOfPrintingBoxesNotReceived" value="${wishInstance?.picturesOfPrintingBoxesNotReceived}" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfPrintingBoxesNotReceived', 'error')}</span>
+						</div>
+					</div>
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerNotReceived', 'error')} ">
+						<label for="picturesOfLoadingContainerNotReceived" class="control-label"><g:message code="wish.picturesOfLoadingContainerNotReceived.label" default="Pictures of loading container won't be received" /></label>
+						<div class="controls">
+							<bs:checkBox name="picturesOfLoadingContainerNotReceived" value="${wishInstance?.picturesOfLoadingContainerNotReceived}" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'picturesOfLoadingContainerNotReceived', 'error')}</span>
+						</div>
+					</div>
+
 				</div>
 			</div>
 
