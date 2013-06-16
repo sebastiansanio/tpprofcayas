@@ -64,14 +64,14 @@ class Wish {
 	BigDecimal moneyBalance
 	Date dateOfBalancePayment
 	Date picturesOfPrintingBoxesAndLoadReceived
-	boolean picturesOfPrintingBoxesNotReceived
+	boolean picturesOfPrintingBoxesNotReceive
 	Date picturesOfLoadingContainerReceived
-	boolean picturesOfLoadingContainerNotReceived
+	boolean picturesOfLoadingContainerNotReceive
 	Country sourceCountry
 	Port port
 	Ship ship
 	Date docDraftApproved
-	boolean docDraftNotReceived
+	boolean docDraftNotReceive
 	Forwarder forwarder
 	Agent agent
 	BigDecimal freightQuote
@@ -372,4 +372,15 @@ class Wish {
 	public String toString() {
 		return opNumber
 	}
+	
+	Date getPicturesOfPrintingBoxesAndLoadFinished(){
+		return picturesOfPrintingBoxesNotReceive?wishDate:picturesOfPrintingBoxesAndLoadReceived
+	}
+	Date getPicturesOfLoadingContainerFinished(){
+		return picturesOfLoadingContainerNotReceive?wishDate:picturesOfLoadingContainerReceived
+	}
+	Date getDocDraftFinished(){
+		return docDraftNotReceive?wishDate:docDraftApproved
+	}
+
 }

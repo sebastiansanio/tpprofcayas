@@ -480,9 +480,9 @@
 			</tr>
 			
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.docDraftNotReceived.label" default="Drafts won't be received" /></td>
+				<td valign="top" class="name"><g:message code="wish.docDraftNotReceive.label" default="Drafts won't be received" /></td>
 				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.docDraftNotReceived}" /></td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.docDraftNotReceive}" /></td>
 				
 			</tr>
 			
@@ -503,8 +503,8 @@
 			</tr>
 			
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesNotReceived.label" default="Pictures of printing boxes won't be received" /></td>
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfPrintingBoxesNotReceived}" /></td>				
+				<td valign="top" class="name"><g:message code="wish.picturesOfPrintingBoxesNotReceive.label" default="Pictures of printing boxes won't be received" /></td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfPrintingBoxesNotReceive}" /></td>				
 			</tr>
 
 		
@@ -516,9 +516,9 @@
 			</tr>
 
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerNotReceived.label" default="Pictures of loading container won't be received" /></td>
+				<td valign="top" class="name"><g:message code="wish.picturesOfLoadingContainerNotReceive.label" default="Pictures of loading container won't be received" /></td>
 				
-				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfLoadingContainerNotReceived}" /></td>
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.picturesOfLoadingContainerNotReceive}" /></td>
 				
 			</tr>
 
