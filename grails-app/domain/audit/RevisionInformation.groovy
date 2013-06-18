@@ -14,7 +14,7 @@ class RevisionInformation{
 	Long id
 	
 	@RevisionTimestamp
-	Long timestamp
+	Date timestamp
 	
 	User currentUser
 	
