@@ -133,6 +133,10 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Contactos - control total',permissionString:'contact:*')
 				permission.save()
+				//Nuevo
+				permission = new Permission(description:'Envío automático de reportes - control total',permissionString:'reportSendConfiguration:*')
+				permission.save()
+				
 				
 				def roleAdmin = new Role(name:"Admin")
 				roleAdmin.addToPermissions("user:*")
@@ -169,6 +173,8 @@ class BootStrap {
 				roleOperator.addToPermissions("report:*")
 				roleOperator.addToPermissions("contact:*")
 				roleOperator.addToPermissions("*:show")
+				//Nuevo
+				roleOperator.addToPermissions("reportSendConfiguration:*")
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
