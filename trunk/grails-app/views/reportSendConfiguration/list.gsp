@@ -23,6 +23,9 @@
 			
 				<th><g:message code="reportSendConfiguration.stakeholder.label" default="Stakeholder" /></th>
 			
+				<th><g:message code="reportSendConfiguration.active.label" default="Active" /></th>
+			
+			
 				<g:sortableColumn property="subject" title="${message(code: 'reportSendConfiguration.subject.label', default: 'Subject')}" />
 			
 				<g:sortableColumn property="body" title="${message(code: 'reportSendConfiguration.body.label', default: 'Body')}" />
@@ -40,6 +43,8 @@
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "frequencyInDays")}</td>
 			
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "stakeholder")}</td>
+			
+				<td> <g:formatBoolean boolean="${reportSendConfigurationInstance.active}" /></td>
 			
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "subject")}</td>
 			
