@@ -34,7 +34,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.stakeholder.label" default="Stakeholder" /></td>
 				
-				<td valign="top" class="value">${reportSendConfigurationInstance?.stakeholder?.encodeAsHTML()}</td>
+				<td valign="top" class="value"><g:link controller="${reportSendConfigurationInstance?.stakeholder?.type }" action="show" id="${reportSendConfigurationInstance?.stakeholder?.id}">${reportSendConfigurationInstance?.stakeholder?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
