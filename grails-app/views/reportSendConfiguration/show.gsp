@@ -34,7 +34,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.stakeholder.label" default="Stakeholder" /></td>
 				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${reportSendConfigurationInstance?.stakeholder?.id}">${reportSendConfigurationInstance?.stakeholder?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value">${reportSendConfigurationInstance?.stakeholder?.encodeAsHTML()}</td>
 				
 			</tr>
 		
@@ -63,13 +63,6 @@
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.hour.label" default="Hour" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: reportSendConfigurationInstance, field: "hour")}</td>
-				
-			</tr>
-			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="reportSendConfiguration.nextSendDate.label" default="Next Send Date" /></td>
-				
-				<td valign="top" class="value"><g:formatDate format="dd/MM/yyyy HH:mm" date="${reportSendConfigurationInstance?.nextSendDateTime}" /></td>
 				
 			</tr>
 			

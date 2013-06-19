@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 
+import report.ReportSendConfiguration
 import stakeholder.Stakeholder
 
 class WishMailService  implements MessageSourceAware{
@@ -18,20 +19,49 @@ class WishMailService  implements MessageSourceAware{
 	MessageSource messageSource
 	
 	def sendReports(){
-
+		Date now = new Date()
+		List sendConfigurations = ReportSendConfiguration.findAllByActive(true)		
+		sendConfigurations.each{
+			if(it.nextSendDateTime.compareTo(now)<=0){
+				sendReport(it)					
+			}
+		}
+	}
+	
+	String transformText(String text){
+		String returnText
+		returnText = text.replace("[week]",new Date().toCalendar().getAt(Calendar.WEEK_OF_YEAR).toString() )
+		
+		return returnText
 	}
 
-	def sendMail(Stakeholder stakeholder){
+	def sendReport(ReportSendConfiguration configuration){
 		
-		ByteOutputStream outputStream = new ByteOutputStream()
-		wishExportService.exportWishByStakeholder('excel',outputStream,stakeholder.defaultLocale.locale,stakeholder)
-		
-		mailService.sendMail {
-			multipart true
-			to stakeholder.email
-			subject "Asunto"
-			body "Contenido"
-			attachBytes messageSource.getMessage("wish.label",null,stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+		try{
+			ByteOutputStream outputStream = new ByteOutputStream()
+			wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)
+			
+			List mails = new ArrayList()
+			
+			configuration.stakeholder.contacts.each{
+				if(it.sendReports)
+					mails.add(it.email)		
+			}
+					
+			mailService.sendMail {
+				multipart true
+				to mails.toArray()
+				subject transformText(configuration.subject)
+				body transformText(configuration.body)
+				attachBytes messageSource.getMessage("wish.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+			}
+			
+			if(configuration.frequencyInDays == null)
+				configuration.active = false
+			else
+				configuration.nextSendDate = configuration.nextSendDate.plus(configuration.frequencyInDays)
+		}catch(Exception e){
+			log.error("Error en envío de reporte",e)
 		}
 	}
 }
