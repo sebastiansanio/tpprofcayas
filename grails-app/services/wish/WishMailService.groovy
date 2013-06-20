@@ -55,11 +55,15 @@ class WishMailService  implements MessageSourceAware{
 				body transformText(configuration.body)
 				attachBytes messageSource.getMessage("wish.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
 			}
+			configuration.lastSentDate = new Date()
 			
-			if(configuration.frequencyInDays == null)
+			if(configuration.frequencyInDays == null){
 				configuration.active = false
-			else
+			}
+			else{
 				configuration.nextSendDate = configuration.nextSendDate.plus(configuration.frequencyInDays)
+			}
+				
 		}catch(Exception e){
 			log.error("Error en envío de reporte",e)
 		}

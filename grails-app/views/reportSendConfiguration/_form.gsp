@@ -1,6 +1,8 @@
 <%@ page import="report.ReportSendConfiguration" %>
 
+<div class="row-fluid">
 
+<div class="span5">
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'nextSendDate', 'error')} required">
 				<label for="nextSendDate" class="control-label"><g:message code="reportSendConfiguration.nextSendDate.label" default="Next Send Date" /><span class="required-indicator">*</span></label>
@@ -66,3 +68,11 @@
 				</div>
 			</div>
 
+</div>
+<div class="span5">
+
+	<p>	<g:message code="transformText.header.message" default="You can use the following variables:" /></p>
+	<p>	<g:message code="transformText.variable1.message" default="[week] = Number of week in year" /></p>
+	
+
+</div>

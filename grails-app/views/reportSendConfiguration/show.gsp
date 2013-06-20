@@ -23,6 +23,14 @@
 				<td valign="top" class="value"><g:formatDate date="${reportSendConfigurationInstance?.nextSendDate}" /></td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="reportSendConfiguration.lastSentDate.label" default="Last Sent Date" /></td>
+				
+				<td valign="top" class="value"><g:formatDate format="dd/MM/yyy HH:mm" date="${reportSendConfigurationInstance?.lastSentDate}" /></td>
+				
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.frequencyInDays.label" default="Frequency In Days" /></td>
@@ -74,6 +82,8 @@
 				<td valign="top" class="value"><g:formatBoolean boolean="${reportSendConfigurationInstance?.active}" /></td>
 				
 			</tr>
+
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.dateCreated.label" default="Date Created" /></td>

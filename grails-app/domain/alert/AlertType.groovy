@@ -1,6 +1,7 @@
 package alert
 
 import wish.Wish
+import modal.AvailableLocale
 import org.hibernate.envers.Audited
 
 @Audited
@@ -16,6 +17,15 @@ class AlertType {
 	
     static mapping = {
     }
+	
+	AlertMessage retrieveMessage(AvailableLocale locale){
+		messages.each{
+			if(it.language == locale){
+				return it
+			}
+		}
+		return null
+	}
     
 	static constraints = {
 		description blank:false,nullable:false
