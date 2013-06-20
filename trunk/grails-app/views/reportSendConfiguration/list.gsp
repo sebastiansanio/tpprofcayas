@@ -19,6 +19,9 @@
 			
 				<g:sortableColumn property="nextSendDate" title="${message(code: 'reportSendConfiguration.nextSendDate.label', default: 'Next Send Date')}" />
 			
+				<g:sortableColumn property="lastSentDate" title="${message(code: 'reportSendConfiguration.lastSentDate.label', default: 'Last Sent Date')}" />
+			
+			
 				<g:sortableColumn property="frequencyInDays" title="${message(code: 'reportSendConfiguration.frequencyInDays.label', default: 'Frequency In Days')}" />
 			
 				<th><g:message code="reportSendConfiguration.stakeholder.label" default="Stakeholder" /></th>
@@ -27,8 +30,8 @@
 			
 			
 				<g:sortableColumn property="subject" title="${message(code: 'reportSendConfiguration.subject.label', default: 'Subject')}" />
+
 			
-				<g:sortableColumn property="body" title="${message(code: 'reportSendConfiguration.body.label', default: 'Body')}" />
 			
 				<th><g:message code="reportSendConfiguration.report.label" default="Report" /></th>
 			
@@ -40,6 +43,8 @@
 			
 				<td><g:link action="show" id="${reportSendConfigurationInstance.id}">${fieldValue(bean: reportSendConfigurationInstance, field: "nextSendDate")}</g:link></td>
 			
+				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "lastSentDate")}</td>
+			
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "frequencyInDays")}</td>
 			
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "stakeholder")}</td>
@@ -48,7 +53,7 @@
 			
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "subject")}</td>
 			
-				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "body")}</td>
+				
 			
 				<td>${fieldValue(bean: reportSendConfigurationInstance, field: "report")}</td>
 			

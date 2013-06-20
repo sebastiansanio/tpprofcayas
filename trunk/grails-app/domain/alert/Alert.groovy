@@ -14,6 +14,7 @@ class Alert {
 	String finalizedReason
 	Date lastInspected
 	int timesRegenerated
+	Date sentDate
 	
 	static belongsTo	= [wish:Wish]	
 	
@@ -28,6 +29,7 @@ class Alert {
 		dateFinalized nullable:true
 		finalizedReason nullable:true,inList: ["activityFinished","deadlineChanged","wishFinalized","attDateChanged"]
 		lastInspected nullable:true
+		sentDate nullable:true
     }
 	
 	void finalize(String reason){

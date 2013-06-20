@@ -24,6 +24,7 @@ class ReportSendConfiguration {
 	
 	boolean active
 
+	Date lastSentDate
 	    
 	static constraints = {
 		nextSendDate nullable:false
@@ -33,6 +34,7 @@ class ReportSendConfiguration {
 		body nullable:false,blank:false,maxSize: 1000
 		report nullable:false
 		hour nullable:false,blank:false,matches: "^([0-1]?[0-9]|2[0-3]):([0-5][0-9])\$"
+		lastSentDate nullable:true
     }
 	
 	Date getNextSendDateTime(){

@@ -1,8 +1,8 @@
 package schedule
 
 
-class ReportsMailingJob {
-	def wishMailService
+class AlertsMailingJob {
+	def alertsMailService
 	def concurrent = false
 	
 	static triggers = {
@@ -10,6 +10,6 @@ class ReportsMailingJob {
     }
 
     def execute() {
-		wishMailService.sendReports()
+		alertsMailService.sendAlerts()
     }
 }
