@@ -72,7 +72,8 @@
 <div class="span5">
 
 	<p>	<g:message code="transformText.header.message" default="You can use the following variables:" /></p>
-	<p>	<g:message code="transformText.variable1.message" default="[week] = Number of week in year" /></p>
+	<p>	<g:message code="transformText.variable.week.message" default="[week] = Number of week in year" /></p>
 	
 
+</div>
 </div>
