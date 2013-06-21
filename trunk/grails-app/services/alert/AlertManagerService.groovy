@@ -28,9 +28,7 @@ class AlertManagerService {
 	}
 	
     def generateAllAlerts() {
-		def activeWishes = Wish.findAll().findAll{
-			it.isActive()	
-		}
+		def activeWishes = Wish.findAllByFinishDateIsNull()
 		def alertTypes = AlertType.findAll()
 		activeWishes.each{wish ->
 			generateAlerts(wish,alertTypes)
@@ -38,10 +36,7 @@ class AlertManagerService {
     }
 	
 	def checkAllAlerts() {
-		def activeAlerts = Alert.findAll().findAll{
-			it.isActive()
-			
-		}
+		def activeAlerts = Alert.findAllByDateFinalizedIsNull()
 		activeAlerts.each{
 			it.check()
 		}

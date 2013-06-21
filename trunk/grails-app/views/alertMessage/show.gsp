@@ -16,6 +16,15 @@
 
 	<table class="table">
 		<tbody>
+
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="alertMessage.subject.label" default="Subject" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: alertMessageInstance, field: "subject")}</td>
+				
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="alertMessage.message.label" default="Message" /></td>
@@ -23,6 +32,9 @@
 				<td valign="top" class="value">${fieldValue(bean: alertMessageInstance, field: "message")}</td>
 				
 			</tr>
+
+
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="alertMessage.language.label" default="Language" /></td>
