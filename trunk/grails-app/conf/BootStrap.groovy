@@ -8,6 +8,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 import org.quartz.Scheduler
 import org.quartz.SchedulerFactory
 import org.quartz.impl.StdSchedulerFactory
+import alert.AlertMessage
 import alert.AlertType
 import courier.Courier
 import courier.DocumentsCourierRecord
@@ -302,7 +303,11 @@ class BootStrap {
 				alertType = new AlertType(description:"Enviar diseños de cajas",nameOfEstimatedDateField:"wishDate",nameOfCompletionField:"lastCartonPrintingInfoSentDate",alertTerm:0,frequency:3)
 				alertType.save(flush:true)
 				alertType = new AlertType(description:"Consultar fecha de delivery",nameOfEstimatedDateField:"dateToConfirmDeliveryDate",nameOfCompletionField:"deliveryDate",alertTerm:0)
+				alertType.addToStakeholders('supplier')
 				alertType.save(flush:true)
+				AlertMessage alertMessage = new AlertMessage(language:localeEn,alertType:alertType,subject:'Fecha de delivery',message:'Hello...\n [supplier]:[supplierOrder] [customerOpNumber] \n Bye')
+				alertMessage.save()
+				
 				alertType = new AlertType(description:"Reclamar swift al cliente",nameOfEstimatedDateField:"dateToDemandSwiftToClient",nameOfCompletionField:"swiftReceivedDate",alertTerm:0)
 				alertType.save(flush:true)
 				alertType = new AlertType(description:"Enviar swift al proveedor",nameOfEstimatedDateField:"swiftReceivedDate",nameOfCompletionField:"swiftSentToSupplierDate",alertTerm:0)
@@ -332,9 +337,10 @@ class BootStrap {
 				}
 
 				for(int i = 1;i<=10;i++){
-					Wish wish = new Wish('customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+300),customerOpNumber:i,wishDate:new Date().clearTime())
+					Wish wish = new Wish('paymentTerm.id':1,'customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+300),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
+								
 
 				Courier courier = new Courier(name: 'DHL')
 				courier.save()

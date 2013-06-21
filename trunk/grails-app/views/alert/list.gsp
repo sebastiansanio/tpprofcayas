@@ -21,8 +21,11 @@
 				<th><g:message code="alert.alertType.label" default="Alert Type" /></th>
 			
 				<g:sortableColumn property="wish.opNumber" title="${message(code: 'alert.wish.label', default: 'Wish')}" />
-			
+						
 				<g:sortableColumn property="deadline" title="${message(code: 'alert.deadline.label', default: 'Deadline')}" />
+
+				<g:sortableColumn property="sentDate" title="${message(code: 'alert.sentDate.label', default: 'Sent Date')}" />
+
 
 				<th><g:message code="wish.customer.label" default="Customer" /></th>
 
@@ -49,6 +52,9 @@
 				<td><g:link action="show" controller="wish" id="${alertInstance.wish.id}">${fieldValue(bean: alertInstance, field: "wish")}</g:link></td>
 			
 				<td><g:formatDate date="${alertInstance.deadline}" /></td>
+				
+				<td><g:formatDate date="${alertInstance.sentDate}" /></td>
+				
 				
 				<td>${alertInstance.wish.customer}</td>
 				

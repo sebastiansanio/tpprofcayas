@@ -60,8 +60,14 @@ class AlertsMailService {
 	String transformText(String text,Alert alert){
 		String returnText
 		returnText = text.replace("[supplierOrder]",alert.wish.supplierOrder?:'')
-		returnText = returnText.replace("[customerOpNumber]",alert.wish.customerOpNumber.toString()?:'')
-				
+		returnText = returnText.replace("[customerOpNumber]",alert.wish.customerOpNumber!=null?alert.wish.customerOpNumber.toString():'')
+		returnText = returnText.replace("[customer]",alert.wish.customer!=null?alert.wish.customer.toString():'')
+		returnText = returnText.replace("[supplier]",alert.wish.supplier!=null?alert.wish.supplier.toString():'')
+		returnText = returnText.replace("[agent]",alert.wish.agent!=null?alert.wish.agent.toString():'')
+		returnText = returnText.replace("[customsBroker]",alert.wish.customsBroker!=null?alert.wish.customsBroker.toString():'')
+		returnText = returnText.replace("[forwarder]",alert.wish.forwarder!=null?alert.wish.forwarder.toString():'')
+		returnText = returnText.replace("[shipper]",alert.wish.shipper!=null?alert.wish.shipper.toString():'')
+		
 		return returnText
 	}
 }

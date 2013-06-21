@@ -16,8 +16,8 @@ class AlertMessage {
 
     
 	static constraints = {
-		subject blank:false
-		message blank:false
+		subject blank:false,nullable:false
+		message blank:false,nullable:false,maxSize: 1000
 		language nullable:false,unique: 'alertType'
 		alertType nullable:false
     }
