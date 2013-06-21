@@ -47,23 +47,25 @@ class WishMailService  implements MessageSourceAware{
 				if(it.sendReports)
 					mails.add(it.email)		
 			}
-					
-			mailService.sendMail {
-				multipart true
-				to mails.toArray()
-				subject transformText(configuration.subject)
-				body transformText(configuration.body)
-				attachBytes messageSource.getMessage("wish.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
-			}
-			configuration.lastSentDate = new Date()
 			
-			if(configuration.frequencyInDays == null){
-				configuration.active = false
-			}
-			else{
-				configuration.nextSendDate = configuration.nextSendDate.plus(configuration.frequencyInDays)
-			}
+			if(mails.size()>0){
+					
+				mailService.sendMail {
+					multipart true
+					to mails.toArray()
+					subject transformText(configuration.subject)
+					body transformText(configuration.body)
+					attachBytes messageSource.getMessage("wish.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+				}
+				configuration.lastSentDate = new Date()
 				
+				if(configuration.frequencyInDays == null){
+					configuration.active = false
+				}
+				else{
+					configuration.nextSendDate = configuration.nextSendDate.plus(configuration.frequencyInDays)
+				}
+			}
 		}catch(Exception e){
 			log.error("Error en envío de reporte",e)
 		}

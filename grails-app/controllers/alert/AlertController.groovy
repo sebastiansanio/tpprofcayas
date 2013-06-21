@@ -4,10 +4,6 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.servlet.support.RequestContextUtils
 
 
-import org.springframework.transaction.annotation.Transactional
-
-
-@Transactional
 class AlertController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -55,15 +51,15 @@ class AlertController {
 	}
 	
 	def inspected(){
-		alertManagerService.checkAllAlerts()
-		alertManagerService.generateAllAlerts()
 		def alertInstance = Alert.get(params.id)
 		if (!alertInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'alert.label', default: 'Alert'), params.id])
 			redirect(action: "list")
 			return
 		}
-		alertInstance.inspected()
+		Alert.withTransaction {
+			alertInstance.inspected()
+		}
 		flash.message = message(code: 'alert.inspected.label')
 		redirect(action: "list")
 		

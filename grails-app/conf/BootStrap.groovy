@@ -321,7 +321,7 @@ class BootStrap {
 				alertType.save(flush:true)
 				
 				
-				for(int i = 1;i<=150;i++){
+				for(int i = 1;i<=10;i++){
 					Wish wish = new Wish('customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
@@ -331,7 +331,7 @@ class BootStrap {
 					wish.save(failOnError:true)
 				}
 
-				for(int i = 1;i<=150;i++){
+				for(int i = 1;i<=10;i++){
 					Wish wish = new Wish('customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+300),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}

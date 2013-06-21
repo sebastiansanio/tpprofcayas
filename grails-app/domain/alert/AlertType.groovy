@@ -19,12 +19,11 @@ class AlertType {
     }
 	
 	AlertMessage retrieveMessage(AvailableLocale locale){
-		messages.each{
-			if(it.language == locale){
-				return it
-			}
+		AlertMessage returnMessage = null
+		returnMessage = messages.find {
+			it.language == locale 
 		}
-		return null
+		return returnMessage
 	}
     
 	static constraints = {
