@@ -141,7 +141,8 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Otras empresas - control total',permissionString:'otherStakeholder:*')
 				permission.save()
-				
+				permission = new Permission(description:'Registros de courier - control total',permissionString:'courierRecord:*')
+				permission.save()
 				
 				def roleAdmin = new Role(name:"Admin")
 				roleAdmin.addToPermissions("user:*")
@@ -184,6 +185,8 @@ class BootStrap {
 				//Nuevo
 				roleOperator.addToPermissions("reportSendConfiguration:*")
 				roleOperator.addToPermissions("courier:*")
+				roleOperator.addToPermissions("courierRecord:*")
+				
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
@@ -358,13 +361,13 @@ class BootStrap {
 				Courier courier = new Courier(name: 'DHL')
 				courier.save()
 				DocumentsCourierRecord cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"1")
-				cr.save()
+				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"2")
-				cr.save()
+				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"3")
-				cr.save()
+				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"4")
-				cr.save()
+				cr.save(failOnError:true)
 				
 			}
 		}
