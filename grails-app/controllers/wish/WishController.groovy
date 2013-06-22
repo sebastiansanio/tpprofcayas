@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.dao.DataIntegrityViolationException
 import login.User
 import org.apache.shiro.SecurityUtils
+import report.Report
 import stakeholder.*
 import org.springframework.transaction.annotation.Transactional
 
@@ -109,29 +110,6 @@ class WishController {
 		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesSize])
 	}
 	
-	def listFinishedByStakeholder(){
-		params.sort = params.sort?: 'opNumber'
-		params.order = params.order?: 'desc'
-		
-		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
-		Stakeholder stakeholder = Stakeholder.get(params.id)
-		
-		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and finish_date is not null order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id],params)
-		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and finish_date is not null",[stakeholder:stakeholder.id])
-		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesToCount.size()])
-	}
-	
-	def listBilledByStakeholder(){
-		params.sort = params.sort?: 'opNumber'
-		params.order = params.order?: 'desc'
-		
-		params.max = Math.min(params.max ? params.int('max') : DEFAULT_PAGINATION_MAX, 1000)
-		Stakeholder stakeholder = Stakeholder.get(params.id)
-		List wishes = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type)  +"_id=:stakeholder and finish_date is null and bill_date is not null order by ${params.sort} ${params.order}",[stakeholder:stakeholder.id],params)
-		List wishesToCount = Wish.findAll("from Wish as w where "+(stakeholder.type == 'customsBroker'?'customs_broker':stakeholder.type) +"_id=:stakeholder and finish_date is null and bill_date is not null",[stakeholder:stakeholder.id])
-		render(view: "list", model: [wishInstanceList: wishes, wishInstanceTotal: wishesToCount.size()])
-	}
-
 	def export() {
 		params.reportId = Long.parseLong(params.reportId)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
@@ -141,10 +119,13 @@ class WishController {
 	}
 		
 	def exportByStakeholder() {
+		Long reportId = Long.parseLong(params.reportId)
+		Report report = Report.get(reportId)
+		
 		def stakeholder = Stakeholder.get(params.id)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${stakeholder}_"+df.format(new Date())+".${params.extension}")
-		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder)
+		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder,report)
 	}
 	
     def create() {
