@@ -11,7 +11,7 @@ class Note {
 	String text
 	User user
 	
-	
+	static belongsTo	= [wish:Wish]
     
 	static constraints = {
 		text nullable:true

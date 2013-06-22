@@ -13,7 +13,7 @@
 	
 <section id="list-wish" class="first">
 
-	<table class="table table-bordered">
+	<table class="table table-condensed table-bordered">
 		<thead>
 			<tr>
 			

@@ -8,7 +8,8 @@ import org.hibernate.envers.Audited
 @Audited
 class SecondStageDocument extends Document{
 
-	Wish wish
+	static belongsTo	= [wish:Wish]
+	
 	static constraints = {
 		wish nullable:true
 	}
