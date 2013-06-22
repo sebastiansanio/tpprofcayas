@@ -39,11 +39,12 @@ class WishController {
     }
 	
 	def query(){
+		[:]
 		
 	}
 
-	def importForm(){
-		
+	def importForm(){	
+		[:]
 	}
 	
 	def importDocuments(){		
