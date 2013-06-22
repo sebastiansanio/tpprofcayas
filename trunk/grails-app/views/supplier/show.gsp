@@ -17,8 +17,11 @@
 <div class="tabbable">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab1" data-toggle="tab"> <g:message code="stakeholder.generalData.label" default="General data" /> </a></li>
-		<li class=""><a href="#tab2" data-toggle="tab"> <g:message code="stakeholder.pendingWishes.label" default="Pending orders" /> </a> </li>
-		<li class=""><a href="#tab3" data-toggle="tab"> <g:message code="contact.label" default="Contact" /> </a></li>
+		<li class=""><a href="#tab3" data-toggle="tab"> <g:message code="stakeholder.contacts.label" default="Contacts" /> </a></li>
+		<li class=""><a href="#tab2" data-toggle="tab"> <g:message code="stakeholder.pendingWishes.label" default="Pending Orders" /> </a> </li>
+		<li class=""><a href="#tab4" data-toggle="tab"> <g:message code="stakeholder.billedWishes.label" default="Billed Orders" /> </a></li>
+		<li class=""><a href="#tab5" data-toggle="tab"> <g:message code="stakeholder.finishedWishes.label" default="Finished Orders" /> </a></li>
+		<li class=""><a href="#tab6" data-toggle="tab"> <g:message code="stakeholder.exportWishes.label" default="Export Orders" /> </a></li>
 	</ul>
 	<div class="tab-content" >
 		<div class="tab-pane active" id="tab1">
@@ -149,25 +152,28 @@
 		</div>
 
 		<div class="tab-pane" id="tab2">
-
-			<export:formats controller="wish" action="exportByStakeholder" params='[id: supplierInstance.id]' formats="['csv','excel','ods','pdf']"  style="width: auto;"/> <br>
-			<p>
-				<g:link role="button" class="btn btn-primary" action='listBilledByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.billedWishes.label')}</g:link>					
-				<g:link role="button" class="btn btn-primary" action='listFinishedByStakeholder' controller='wish' id='${supplierInstance.id}'>${message(code:'stakeholder.finishedWishes.label')}</g:link>	
-			</p>
-				
-			<ul>
-				<g:each in="${supplierInstance.wishes.findAll{it.billDate==null && it.finishDate==null}.sort{it.opNumber}}" var="w">
-					<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
-				</g:each>
-			</ul>
-		
+			<g:render template="/_stakeholder/wishes" model="['wishes':supplierInstance.wishes.findAll{it.billDate==null && it.finishDate==null}.sort{it.opNumber}]"/>
 		</div>
 		
 		<div class="tab-pane" id="tab3">
-			<g:render template="/_stakeholder/show" model="['stakeholderInstance':supplierInstance]"/>
+			<g:render template="/_stakeholder/show" model="['stakeholderInstance':supplierInstance]"/>	
+
 		</div>
 		
+		<div class="tab-pane" id="tab4">
+			<g:render template="/_stakeholder/wishes" model="['wishes':supplierInstance.wishes.findAll{it.billDate!=null && it.finishDate==null}.sort{it.opNumber}]"/>		
+		</div>
+		
+		<div class="tab-pane" id="tab5">
+			<g:render template="/_stakeholder/wishes" model="['wishes':supplierInstance.wishes.findAll{it.finishDate!=null}.sort{it.opNumber}]"/>
+		</div>
+		
+		<div class="tab-pane" id="tab6">
+			<g:render template="/_stakeholder/exportWishes" model="['stakeholderInstance':supplierInstance]"/>			
+		</div>
+		
+	</div>
+	</div>
 </section>
 
 </body>

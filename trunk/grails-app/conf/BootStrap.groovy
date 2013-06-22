@@ -326,21 +326,26 @@ class BootStrap {
 				alertType.save(flush:true)
 				
 				
-				for(int i = 1;i<=10;i++){
-					Wish wish = new Wish('customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
+				for(int i = 1;i<=5;i++){
+					Wish wish = new Wish(customsBroker:customsBroker,'customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
-				for(int i = 1;i<=150;i++){
-					Wish wish = new Wish('customer.id':2,finishDate:new Date(),'supplier.id':5,opNumber:(i+150),customerOpNumber:i,wishDate:new Date().clearTime())
+				for(int i = 1;i<=5;i++){
+					Wish wish = new Wish(forwarder:forwarder,shipper:shipper,'customer.id':2,finishDate:new Date(),'supplier.id':5,opNumber:(i+10),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
-				for(int i = 1;i<=10;i++){
-					Wish wish = new Wish('paymentTerm.id':1,'customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+300),customerOpNumber:i,wishDate:new Date().clearTime())
+				for(int i = 1;i<=5;i++){
+					Wish wish = new Wish(agent:agent,'paymentTerm.id':1,'customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+20),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
-								
+
+				for(int i = 1;i<=5;i++){
+					Wish wish = new Wish(agent:agent,'paymentTerm.id':1,'customer.id':3,'supplier.id':5,opNumber:(i+30),customerOpNumber:i+15,wishDate:new Date().clearTime())
+					wish.save(failOnError:true)
+				}
+
 
 				Courier courier = new Courier(name: 'DHL')
 				courier.save()
