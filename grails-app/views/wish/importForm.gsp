@@ -19,11 +19,18 @@
 
 <h4> <g:message code="wish.import.label" default="Import"/> </h4>
 
+
+
+
 <g:form action="importWishes" class="form-horizontal" enctype="multipart/form-data">
 <g:field type="file" id="importFile" name="importFile" required="" />
+
+<p><a href="${resource(dir:'models',file: 'Pedidos-Modelo.xls')}">
+${message(code:'default.downloadModel.label',default:'Download Model')}
+</a></p>
+
 <div class="form-actions">
 <g:submitButton name="importWishes" class="btn btn-primary" value="${message(code: 'wish.import.label', default: 'Import')}" />
-
 
 </div>
 </g:form>
@@ -33,9 +40,17 @@
 
 <g:form action="importDocuments" class="form-horizontal" enctype="multipart/form-data">
 <g:field type="file" id="importFile" name="importFile" required="" />
+
+<p><a href="${resource(dir:'models',file: 'Documentos-Modelo.xls')}">
+${message(code:'default.downloadModel.label',default:'Download File Model')}
+</a></p>
+
 <div class="form-actions">
 
 <g:submitButton name="importDocuments" class="btn btn-primary" value="${message(code: 'document.import.label', default: 'Import')}" />
+
+
+
 
 </div>
 </g:form>
