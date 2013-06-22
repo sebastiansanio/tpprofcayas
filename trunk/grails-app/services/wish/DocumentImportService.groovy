@@ -15,8 +15,11 @@ class DocumentImportService {
 			'A': 'opNumber',
 			'B': 'documentType.id',
 			'C': 'received',
-			'D': 'trackingNumber',
-			'E': 'phase'
+			'D': 'courierRecord.id',
+			'E': 'phase',
+			'F': 'deliveredToCustomsBrokerDate',
+			'G': 'deliveredToLawyerDate',
+			'H': 'deliveredToCustomerDate'
 
 		]
 	]
@@ -35,30 +38,31 @@ class DocumentImportService {
 
 			objects.each{
 				def wish = Wish.findByOpNumber(it['opNumber'])
-				
-				System.out.println(wish)			
-				['opNumber','documentType.id','trackingNumber'].each{attribute ->
+						
+				['opNumber','documentType.id','trackingNumber','courierRecord.id'].each{attribute ->
 					if(it[attribute] == null)
 						it.remove(attribute)
 				}
-				['received'].each{attribute ->
+				['received','deliveredToCustomsBrokerDate','deliveredToLawyerDate','deliveredToCustomerDate'].each{attribute ->
 					if(it[attribute] == null)
 						it.remove(attribute)
 					else
 						it[attribute] = it[attribute].toDateTimeAtStartOfDay().toDate()
 				}
-				
-				Document document = new Document(it)
-				document.file = ""
 
 				if(it['phase'] == 1){
+					FirstStageDocument document = new FirstStageDocument(it)
+					document.file = ""
 					wish.addToFirstStageRequiredDocuments(document)
 				}else if(it['phase'] == 2){
+					SecondStageDocument document = new SecondStageDocument(it)
+					document.file = ""
 					wish.addToSecondStageRequiredDocuments(document)
 				}else{
 					throw new RuntimeException("Phase not valid")
 				}
-				wish.save(flush:true)
+				
+				wish.save(flush:true,failOnError:true)
 				
 			}
 		}catch(Exception e){
