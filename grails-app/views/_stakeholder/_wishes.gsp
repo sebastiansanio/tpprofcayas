@@ -1,6 +1,6 @@
 <div>
 
-		<table class="table table-bordered">
+		<table class="table table-condensed table-bordered">
 		<thead>
 			<tr>
 				<th>${message(code: 'wish.opNumber.label', default: 'Op Number')}</th>
