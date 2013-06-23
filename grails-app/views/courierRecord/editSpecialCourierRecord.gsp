@@ -19,7 +19,7 @@
 	</div>
 	</g:hasErrors>
 
-	<g:form method="post" class="form-horizontal" >
+	<g:form method="post" >
 		<g:hiddenField name="id" value="${specialCourierRecordInstance?.id}" />
 		<g:hiddenField name="version" value="${specialCourierRecordInstance?.version}" />
 		<fieldset class="form">

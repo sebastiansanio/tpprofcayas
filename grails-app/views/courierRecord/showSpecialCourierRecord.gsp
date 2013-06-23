@@ -18,91 +18,77 @@
 		<tbody>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.courier.label" default="Courier" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.courier.label" default="Courier" /></td>
 				
 				<td valign="top" class="value"><g:link controller="courier" action="show" id="${specialCourierRecordInstance?.courier?.id}">${specialCourierRecordInstance?.courier?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.trackingNumber.label" default="Tracking Number" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.trackingNumber.label" default="Tracking Number" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "trackingNumber")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.departureDate.label" default="Departure Date" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.departureDate.label" default="Departure Date" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.departureDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.estimatedArrivalDate.label" default="Estimated Arrival Date" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.estimatedArrivalDate.label" default="Estimated Arrival Date" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.estimatedArrivalDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.arrivalDate.label" default="Arrival Date" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.arrivalDate.label" default="Arrival Date" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.arrivalDate}" /></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.costsInChargeOf.label" default="Costs In Charge Of" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.costsInChargeOf.label" default="Costs In Charge Of" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "costsInChargeOf")}</td>
+				<td valign="top" class="value"><g:message code="courierRecord.costsInChargeOf.${specialCourierRecordInstance.costsInChargeOf}" default="${specialCourierRecordInstance.costsInChargeOf}"/></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.aditionalCosts.label" default="Aditional Costs" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.aditionalCosts.label" default="Aditional Costs" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "aditionalCosts")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.observations.label" default="Observations" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.observations.label" default="Observations" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "observations")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.description.label" default="Description" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.description.label" default="Description" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "description")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.issuer.label" default="Issuer" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.issuer.label" default="Issuer" /></td>
 				
 				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${specialCourierRecordInstance?.issuer?.id}">${specialCourierRecordInstance?.issuer?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
-		
+				
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.lastUpdated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="specialCourierRecord.receivers.label" default="Receivers" /></td>
+				<td valign="top" class="name"><g:message code="courierRecord.receivers.label" default="Receivers" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
@@ -111,6 +97,20 @@
 					</g:each>
 					</ul>
 				</td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.dateCreated}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.lastUpdated.label" default="Last Updated" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${specialCourierRecordInstance?.lastUpdated}" /></td>
 				
 			</tr>
 		

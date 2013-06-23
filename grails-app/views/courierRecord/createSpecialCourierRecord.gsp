@@ -19,7 +19,7 @@
 	</div>
 	</g:hasErrors>
 	
-	<g:form action="save" class="form-horizontal" >
+	<g:form action="saveSpecialCourierRecord" >
 		<fieldset class="form">
 			<g:render template="formSpecialCourierRecord"/>
 		</fieldset>
