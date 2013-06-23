@@ -1,5 +1,7 @@
 <%@ page import="wish.Wish" %>
 <%@ page import="modal.DocumentType" %>
+<%@ page import="courier.DocumentsCourierRecord" %>
+
 
 <h5><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></h5>
 	<div id="docPhases1" class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'firstStageRequiredDocuments', 'error')} ">
@@ -7,7 +9,7 @@
 			<thead>
 				<tr>
 					<th>${message(code: 'wish.requiredDocumentation.label', default: 'Required documentation')}</th>
-                  	<th>${message(code: 'document.trackingNumber.label', default: 'Tracking number')}</th>
+                  	<th>${message(code: 'document.courierRecord.label', default: 'Courier Record')}</th>
                   	<th>${message(code: 'document.received.label', default: 'Date received')}</th>
                   	<th> </th>
                 </tr>
@@ -21,7 +23,7 @@
 	                  	    </label>
 	                  	</td>
 
-	                  	<td> <g:textField name="documentTrackingNumber" id="txt1-${i}"/> </td>
+	                  	<td> <g:select from="${DocumentsCourierRecord.list()}" optionKey="id" noSelection="['null': '']" name="courier" id="courier1-${i}"/> </td>
 
 	                  	<td> <bs:datePicker name="documentDay" precision="day"default="none" noSelection="['': '']" id="date1-${i}"/> </td>
 
@@ -43,7 +45,7 @@
  			<thead>
  				<tr>
  					<th>${message(code: 'wish.requiredDocumentation.label', default: 'Required documentation')}</th>
-                   	<th>${message(code: 'document.trackingNumber.label', default: 'Tracking number')}</th>
+                   	<th>${message(code: 'document.courierRecord.label', default: 'Courier Record')}</th>
                    	<th>${message(code: 'document.received.label', default: 'Date received')}</th>
                    	<th> </th>
                  </tr>
@@ -57,7 +59,7 @@
 	                  	    </label>
 	                  	</td>
 
-	                  	<td> <g:textField name="documentTrackingNumber" id="txt2-${i}"/> </td>
+	                  	<td> <g:select from="${DocumentsCourierRecord.list()}" optionKey="id" noSelection="['null': '']" name="courier" id="courier2-${i}"/> </td>
 
 	                  	<td> <bs:datePicker name="documentDay" precision="day" default="none" noSelection="['': '']" id="date2-${i}"/> </td>
 
@@ -83,8 +85,8 @@ function checkName(nroDoc, nroId) {
 	return "#check" + nroDoc + "-" + nroId;
 };
 
-function textName(nroDoc, nroId) {
-	return "#txt" + nroDoc + "-" + nroId;
+function courierName(nroDoc, nroId) {
+	return "#courier" + nroDoc + "-" + nroId;
 };
 
 function dateName(nroDoc, nroId) {
@@ -109,17 +111,17 @@ $(document).ready(function() {
 	 
     var init = function(countElement, nroDoc)
     {
-        var text, date, btnAdd, btnDel;
+        var courier, date, btnAdd, btnDel;
 
         for(var i = 0; i < countElement; i++)
         {
-            text   = textName(nroDoc, i);
+            courier   = courierName(nroDoc, i);
             date   = dateName(nroDoc, i);
             btnAdd = btnAddName(nroDoc, i);
             btnDel = btnDelName(nroDoc, i);
 			btnRep = btnRepName(nroDoc, i);
 			
-            $(text).prop("disabled", true);
+            $(courier).prop("disabled", true);
             $(date).prop("disabled", true);
             $(btnAdd).attr("disabled", "disabled");
             $(btnDel).attr("disabled", "disabled");
@@ -192,21 +194,21 @@ function enableDisable(nroId, nroDoc)
 {
     /* habilita los demás inputs si el check está marcado  */
     var	check  = checkName(nroDoc, nroId);
-    var	text   = textName(nroDoc, nroId);
+    var	courier   = courierName(nroDoc, nroId);
     var	date   = dateName(nroDoc, nroId);
     var	btnAdd = btnAddName(nroDoc, nroId);
     var	btnDel = btnDelName(nroDoc, nroId);
 
     if ($(check).prop("checked") == true)
     {
-        $(text).prop("disabled", false);
+        $(courier).prop("disabled", false);
         $(date).prop("disabled", false);
         $(btnAdd).removeAttr("disabled");
         $(btnDel).removeAttr("disabled");
     }
     else
     {
-        $(text).prop("disabled", true);
+        $(courier).prop("disabled", true);
         $(date).prop("disabled", true);
         $(btnAdd).attr("disabled", "disabled");
         $(btnDel).attr("disabled", "disabled");
@@ -219,7 +221,7 @@ function setName(elementCount, nroDoc, list)
     for (var i = 0, id = (nroDoc==1)?nextUseDoc1:nextUseDoc2; i < elementCount; i++)
     {
         var	check  = "#check"  + nroDoc + "-" + i;
-        var	text   = "#txt"    + nroDoc + "-" + i;
+        var	courier   = "#courier"    + nroDoc + "-" + i;
         var	date   = "#date"   + nroDoc + "-" + i;
         var	btnAdd = "#btnAdd" + nroDoc + "-" + i;
         var	btnDel = "#btnDel" + nroDoc + "-" + i;
@@ -229,12 +231,12 @@ function setName(elementCount, nroDoc, list)
 	         if ($(check).prop("checked") == true)
 	         {
 	            var checkName  = list + "[" + id + "].documentType.id";
-	            var	textName   = list + "[" + id + "].trackingNumber";
+	            var	courierName   = list + "[" + id + "].courierRecord.id";
 	            var	dateName   = list + "[" + id + "].received";
 	            var	btnAddName = list + "[" + id + "].file";
 	
 	            $(check).attr("name", checkName);
-	            $(text).attr("name", textName);
+	            $(courier).attr("name", courierName);
 	            $(date).attr("name", dateName);
 	            $(btnAdd).attr("name", btnAddName);
 	
@@ -243,7 +245,7 @@ function setName(elementCount, nroDoc, list)
 	         else
 	         {
 	            $(check).removeAttr("name");
-	            $(text).removeAttr("name");
+	            $(courier).removeAttr("name");
 	            $(date).removeAttr("name");
 	            $(btnAdd).removeAttr("name");
 	         }
@@ -278,7 +280,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
 
 	clickFunc(nroId); //habilito los demás componentes
 	
-    var	text   = "#txt"   + numDoc + "-" + nroId;
+    var	courier   = "#courier"   + numDoc + "-" + nroId;
     var	date   = "#date"  + numDoc + "-" + nroId;
     var	btnAdd = "#btnAdd"+ numDoc + "-" + nroId;
     var	btnDel = "#btnDel"+ numDoc + "-" + nroId;
@@ -286,7 +288,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     
 
     $(idTypeDoc).prop("disabled", true);
-    $(text).attr("value", datos[1]);
+    $(courier).attr("value", datos[1]);
     $(date).attr("value", datos[2]);
 
     $(btnDel).show();	
@@ -307,7 +309,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     <script type="text/javascript">
         $(document).ready(function() {
 
-            var datos = ["${doc1?.documentType?.id}", "${doc1?.trackingNumber}", '${doc1?.received?.format("dd/MM/yyyy")}', "${doc1?.file?.length}" == "0"];
+            var datos = ["${doc1?.documentType?.id}", "${doc1?.courierRecord?.id}", '${doc1?.received?.format("dd/MM/yyyy")}', "${doc1?.file?.length}" == "0"];
             
             enableComponentCheck(1, datos, clickDocPhase1);      
 
@@ -320,7 +322,7 @@ function enableComponentCheck(numDoc, datos, clickFunc)
     <script type="text/javascript">
         $(document).ready(function() {
 
-        	var datos = ["${doc2?.documentType?.id}", "${doc2?.trackingNumber}", '${doc2?.received?.format("dd/MM/yyyy")}', "${doc2?.file?.length}" == "0"];
+        	var datos = ["${doc2?.documentType?.id}", "${doc2?.courierRecord?.id}", '${doc2?.received?.format("dd/MM/yyyy")}', "${doc2?.file?.length}" == "0"];
         	
             enableComponentCheck(2, datos, clickDocPhase2);			
 
