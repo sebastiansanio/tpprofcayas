@@ -80,7 +80,7 @@
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
 					<g:each in="${documentsCourierRecordInstance.documents}" var="d">
-						<li><g:link controller="document" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+						<li><g:link controller="wish" action="show" id="${d.wish?.id}"> ${d.toString() + ' (' + message(code:'wish.opNumber.label',default:'Op Number')+ ' '+ d.wish?.opNumber +')'}</g:link></li>
 					</g:each>
 					</ul>
 				</td>

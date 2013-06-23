@@ -33,6 +33,6 @@ class CourierRecord {
     }
 
 	public String toString() {
-		return courier.toString + ' - '+trackingNumber
+		return courier.toString() + ' - '+trackingNumber
 	}
 }
