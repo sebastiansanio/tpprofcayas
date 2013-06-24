@@ -19,7 +19,8 @@ import stakeholder.*
 import product.*
 
 class BootStrap {
-
+	def alertManagerService
+	
     def init = { servletContext ->
 		
 		if(Environment.current != Environment.PRODUCTION) {
@@ -143,6 +144,9 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Registros de courier - control total',permissionString:'courierRecord:*')
 				permission.save()
+				permission = new Permission(description:'Ver auditoría',permissionString:'audit:*')
+				permission.save()
+				
 				
 				def roleAdmin = new Role(name:"Admin")
 				roleAdmin.addToPermissions("user:*")
@@ -186,6 +190,7 @@ class BootStrap {
 				roleOperator.addToPermissions("reportSendConfiguration:*")
 				roleOperator.addToPermissions("courier:*")
 				roleOperator.addToPermissions("courierRecord:*")
+				roleOperator.addToPermissions("audit:*")
 				
 				roleOperator.save(flush:true)
 				
@@ -368,6 +373,9 @@ class BootStrap {
 				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"4")
 				cr.save(failOnError:true)
+				
+				alertManagerService.checkAllAlerts()
+				alertManagerService.generateAllAlerts()
 				
 			}
 		}

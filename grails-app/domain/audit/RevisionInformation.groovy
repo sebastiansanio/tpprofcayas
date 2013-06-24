@@ -22,9 +22,4 @@ class RevisionInformation{
 		currentUser nullable: true
     }
 	
-	static transients = ['revisionDate']
-	
-	public Date getRevisionDate(){
-		return new Date(timestamp)
-	}
 }

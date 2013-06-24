@@ -3,7 +3,10 @@ package courier
 import org.springframework.dao.DataIntegrityViolationException
 
 
+import org.springframework.transaction.annotation.Transactional
 
+
+@Transactional
 class CourierRecordController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
