@@ -450,7 +450,7 @@
 		<tbody>
 			<tr class="prop">
 				<td colspan="2" valign="top" class="name">
-					<p><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></p>
+					<h5><g:message code="wish.firstStageRequiredDocuments.label" default="First Stage Required Documents"/></h5>
 					<g:if test="${wishInstance?.firstStageRequiredDocuments?.size() != 0}">
 						<g:render template="documentShow" model="['documents':wishInstance?.firstStageRequiredDocuments]"/>
 					</g:if>						
@@ -459,7 +459,7 @@
 
             <tr class="prop">
                 <td colspan="2" valign="top" class="name">
-                    <p><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents"/></p>
+                    <h5><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents"/></h5>
                     <g:if test="${wishInstance?.secondStageRequiredDocuments?.size() != 0}">
                     	<g:render template="documentShow" model="['documents':wishInstance?.secondStageRequiredDocuments]"/>
                     </g:if>
