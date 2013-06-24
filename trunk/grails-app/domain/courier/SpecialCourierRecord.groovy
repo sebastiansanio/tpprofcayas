@@ -1,7 +1,9 @@
 package courier
 
 import stakeholder.Stakeholder
+import org.hibernate.envers.Audited
 
+@Audited
 class SpecialCourierRecord extends CourierRecord {
 
 	static hasMany = [receivers:Stakeholder]

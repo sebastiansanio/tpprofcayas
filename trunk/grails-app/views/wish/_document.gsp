@@ -48,7 +48,7 @@
 <hr>
  <h5><g:message code="wish.secondStageRequiredDocuments.label" default="Second Stage Required Documents"/></h5>
     <div id="docPhases2" class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'secondStageRequiredDocuments', 'error')} ">
- 		<table class="table table-hover">
+ 		<table class="table table-condensed table-hover">
  			<thead>
  				<tr>
  					<th>${message(code: 'wish.requiredDocumentation.label', default: 'Required documentation')}</th>
