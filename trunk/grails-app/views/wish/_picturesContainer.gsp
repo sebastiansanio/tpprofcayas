@@ -1,11 +1,8 @@
 <%@ page import="wish.Picture" %>
 <%@ page import="wish.Wish" %>
 
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'inputFile.css')}" />
-<script type="text/javascript" src="${resource(dir:'js', file:'multipleInput.js')}"> </script>	
 
-<p>
-	<div id="create-picture-container">
+<div id="create-picture-container">
 
 	<!-- Button to trigger modal -->
 	<a href="#modalCreateContainer" role="button" class="btn btn-primary" data-toggle="modal"> ${message(code: 'wish.loadFile.label', default: 'Add file')}</a>
@@ -60,12 +57,14 @@
 	</div>
 
 </div>
-</p>
 
 <div id="modal-view-picture-container">
 	<!-- Button to trigger modal -->
+
+	<g:if test="${wishInstance.picturesOfLoadingContainer!=null && wishInstance.picturesOfLoadingContainer.size()>0}">
 	<a href="#modalPictureContainer" role="button" class="btn btn-primary" data-toggle="modal">${message( code: 'wish.viewPicture.label', default: 'View picture')}</a>
-	 
+	</g:if>
+
 	<!-- Modal -->
 	<div id="modalPictureContainer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalPictureContainerLabel" aria-hidden="true">
 	 	<div class="modal-header">
@@ -82,6 +81,7 @@
             </ul>
             
 	  	</div>
+
 
 		<div class="modal-body">
 		    <!-- carousel para mostrar las fotos -->
