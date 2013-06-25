@@ -30,7 +30,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: documentTypeInstance, field: 'isBl', 'error')} ">
 				<label for="isBl" class="control-label"><g:message code="documentType.isBl.label" default="Is Bl?" /></label>
 				<div class="controls">
-					<bs:checkBox name="requiresVisa" value="${documentTypeInstance?.isBl}" />
+					<bs:checkBox name="isBl" value="${documentTypeInstance?.isBl}" />
 					<span class="help-inline">${hasErrors(bean: documentTypeInstance, field: 'isBl', 'error')}</span>
 				</div>
 			</div>
