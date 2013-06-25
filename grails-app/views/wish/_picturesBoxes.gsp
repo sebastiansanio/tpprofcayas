@@ -1,10 +1,8 @@
 <%@ page import="wish.Picture" %>
 <%@ page import="wish.Wish" %>
 
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'inputFile.css')}" />
-<script type="text/javascript" src="${resource(dir:'js', file:'multipleInput.js')}"> </script>	
 
-<p>
+
 	<div id="create-picture-box">
 	<!-- Button to trigger modal -->
 	<a href="#modalCreateBox" role="button" class="btn btn-primary" data-toggle="modal"> ${message(code: 'wish.loadFile.label', default: 'Add file')}</a>
@@ -59,12 +57,13 @@
 	</div>
 
 </div>
-</p>
 
 <!-- ver fotos  -->
 <div id="modal-view-picture-box">
 	<!-- Button to trigger modal -->
+	<g:if test="${wishInstance.picturesOfPrintingBoxes!=null && wishInstance.picturesOfPrintingBoxes.size()>0}">
 	<a href="#modalPictureBoxes" role="button" class="btn btn-primary" data-toggle="modal">${message( code: 'wish.viewPicture.label', default: 'View picture')}</a>
+	 </g:if>
 	 
 	<!-- modal para ver las fotos -->
 	<div id="modalPictureBoxes" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalPictureBoxesLabel" aria-hidden="true">

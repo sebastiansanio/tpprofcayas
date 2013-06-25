@@ -644,8 +644,7 @@
 		<tbody>
 			
 			<tr class="prop">
-				<td colspan="2" "valign="top" class="name">
-					<p><g:message code="wish.notes.label" default="Notes"/></p>
+				<td colspan="2" valign="top" class="name">
 					<g:render template="notesShow" model="['notes':wishInstance.notes]"/>
 				</td>
 			</tr>
@@ -674,6 +673,10 @@
 		</tbody>
 	</table>
 </section>
+
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'inputFile.css')}" />
+<script type="text/javascript" src="${resource(dir:'js', file:'multipleInput.js')}"> </script>	
+
 
 </body>
 
