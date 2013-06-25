@@ -11,7 +11,8 @@ class SpecialCourierRecord extends CourierRecord {
 	Stakeholder issuer
 	
 	String description
-		
+	boolean requiresVisa
+	
 	
     static mapping = {
     }

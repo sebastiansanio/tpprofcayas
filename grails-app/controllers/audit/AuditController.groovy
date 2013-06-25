@@ -1,7 +1,12 @@
 package audit
 
+import org.hibernate.envers.AuditReader
+import org.hibernate.envers.AuditReaderFactory
+
 class AuditController {
 
+	def sessionFactory
+	
 	def index (){ 
 		redirect(action: "list", params: params)
 	}
@@ -12,6 +17,10 @@ class AuditController {
 	}
 	
 	def show(){
+		
+		AuditReader auditReader = AuditReaderFactory.get(sessionFactory.currentSession)
+		System.out.println(grailsApplication.getDomainClass("courier.Courier").clazz.get(1).findAllRevisions())
+
 		def revisionInformationInstance = RevisionInformation.get(params.id)
 		if (!revisionInformationInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'audit.label', default: 'Audit'), params.id])

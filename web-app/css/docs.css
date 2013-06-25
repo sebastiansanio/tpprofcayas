@@ -1,12 +1,3 @@
-table.entries {
-	width: 100%;
-	border-spacing: 0px;
-	margin: 0;	
-}
-table.entries thead {
-	position:fixed;
-}
-
 /* Tweak navbar brand link to be super sleek
 -------------------------------------------------- */
 
