@@ -21,6 +21,9 @@ class CourierRecord {
 	String aditionalCosts
 	String observations
 
+	String source
+	String destination
+		
 	static constraints = {
 		courier nullable:false
 		trackingNumber nullable:false,blank:false,unique: 'courier'
@@ -30,7 +33,13 @@ class CourierRecord {
 		costsInChargeOf nullable:true,blank:true,inList: ["Supplier","Customer"]
 		aditionalCosts nullable:true,blank:true
 		observations nullable:true,blank:true
+		source nullable:true,blank:true
+		destination nullable:true,blank:true
     }
+	
+	boolean delivered(){
+		arrivalDate!=null
+	}
 
 	public String toString() {
 		return courier.toString() + ' - '+trackingNumber

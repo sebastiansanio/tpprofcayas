@@ -1,5 +1,6 @@
 
 <%@ page import="audit.RevisionInformation" %>
+<%@ page import="courier.*" %>
 <!doctype html>
 <html>
 
@@ -30,9 +31,25 @@
 				<td valign="top" class="value"><g:formatDate date="${revisionInformationInstance?.timestamp}" /></td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name">${revisionInformationInstance.domainClass.persistentProperties*.name }</td>
+				
+				<td valign="top" class="value">${Courier.findAllRevisionsById(1L).get(0)}</td>
+				
+			</tr>
 		
 		</tbody>
 	</table>
+	
+	<g:each in="${new Courier().domainClass.persistentProperties*.name }" var="w">
+		<g:if test="${Courier.findAllRevisionsById(1L).get(0)[w] != Courier.findAllRevisionsById(1L).get(1)[w]}">
+			<p>${w} ${Courier.findAllRevisionsById(1L).get(0)[w]}-${Courier.findAllRevisionsById(1L).get(1)[w]}</p>
+		</g:if>
+
+		
+	</g:each>
+	
 </section>
 
 </body>

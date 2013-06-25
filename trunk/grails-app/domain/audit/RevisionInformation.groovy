@@ -17,7 +17,9 @@ class RevisionInformation{
 	Date timestamp
 	
 	User currentUser
-	
+
+	static hasMany = [details:RevisionDetail]
+		
 	static constraints = {
 		currentUser nullable: true
     }
