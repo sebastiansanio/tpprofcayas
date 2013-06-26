@@ -12,6 +12,7 @@ import alert.AlertMessage
 import alert.AlertType
 import courier.Courier
 import courier.DocumentsCourierRecord
+import courier.SpecialCourierRecord
 import login.*
 import modal.*
 import wish.*
@@ -363,8 +364,11 @@ class BootStrap {
 				}
 
 
-				Courier courier = new Courier(name: 'DHL')
+				Courier courier = new Courier(name: 'DHL',web: 'www.dhl.com.ar')
 				courier.save()
+				Courier courier2 = new Courier(name:'TNT')
+				courier2.save()
+
 				DocumentsCourierRecord cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"1")
 				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"2")
@@ -373,6 +377,11 @@ class BootStrap {
 				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"4")
 				cr.save(failOnError:true)
+				SpecialCourierRecord scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"1",issuer:customer,requiresVisa:true)
+				scr.save()
+				scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"2",issuer:customer,requiresVisa:false)
+				scr.save()
+				
 				
 				alertManagerService.checkAllAlerts()
 				alertManagerService.generateAllAlerts()

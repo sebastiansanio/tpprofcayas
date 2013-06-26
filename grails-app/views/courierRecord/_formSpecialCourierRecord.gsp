@@ -18,6 +18,23 @@
 					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'trackingNumber', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'source', 'error')} ">
+				<label for="source" class="control-label"><g:message code="courierRecord.source.label" default="Source" /></label>
+				<div class="controls">
+					<g:textField name="source" value="${specialCourierRecordInstance?.source}"/>
+					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'source', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'destination', 'error')} ">
+				<label for="destination" class="control-label"><g:message code="courierRecord.destination.label" default="Destination" /></label>
+				<div class="controls">
+					<g:textField name="destination" value="${specialCourierRecordInstance?.destination}"/>
+					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'destination', 'error')}</span>
+				</div>
+			</div>
+			
 
 			<div class=" fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'description', 'error')} ">
 				<label for="description" class="control-label"><g:message code="courierRecord.description.label" default="Description" /></label>
@@ -27,9 +44,9 @@
 				</div>
 			</div>
 
-
 </div>
 <div class="span3">
+
 
 			<div class=" fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'departureDate', 'error')} ">
 				<label for="departureDate" class="control-label"><g:message code="courierRecord.departureDate.label" default="Departure Date" /></label>
@@ -55,10 +72,15 @@
 					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'arrivalDate', 'error')}</span>
 				</div>
 			</div>
-
-</div>
-<div class="span3">
-
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'requiresVisa', 'error')} ">
+				<label for="requiresVisa" class="control-label"><g:message code="courierRecord.requiresVisa.label" default="Requires Visa" /></label>
+				<div class="controls">
+					<bs:checkBox name="requiresVisa" value="${specialCourierRecordInstance?.requiresVisa}" />
+					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'requiresVisa', 'error')}</span>
+				</div>
+			</div>
+			
 			<div class=" fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'costsInChargeOf', 'error')} ">
 				<label for="costsInChargeOf" class="control-label"><g:message code="courierRecord.costsInChargeOf.label" default="Costs In Charge Of" /></label>
 				<div class="controls">
@@ -75,6 +97,8 @@
 				</div>
 			</div>
 
+</div>
+<div class="span3">
 
 
 			<div class=" fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'observations', 'error')} ">
@@ -84,13 +108,6 @@
 					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'observations', 'error')}</span>
 				</div>
 			</div>
-
-
-
-
-
-</div>
-<div class="span3">
 
 
 			<div class=" fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'issuer', 'error')} ">

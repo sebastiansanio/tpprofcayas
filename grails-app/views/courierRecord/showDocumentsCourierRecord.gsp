@@ -30,6 +30,20 @@
 				<td valign="top" class="value">${fieldValue(bean: documentsCourierRecordInstance, field: "trackingNumber")}</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.source.label" default="Source" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: documentsCourierRecordInstance, field: "source")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.destination.label" default="Destination" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: documentsCourierRecordInstance, field: "destination")}</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="courierRecord.departureDate.label" default="Departure Date" /></td>
