@@ -30,6 +30,21 @@
 				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "trackingNumber")}</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.source.label" default="Source" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "source")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.destination.label" default="Destination" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: specialCourierRecordInstance, field: "destination")}</td>
+				
+			</tr>
+			
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="courierRecord.departureDate.label" default="Departure Date" /></td>
@@ -83,7 +98,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="courierRecord.issuer.label" default="Issuer" /></td>
 				
-				<td valign="top" class="value"><g:link controller="stakeholder" action="show" id="${specialCourierRecordInstance?.issuer?.id}">${specialCourierRecordInstance?.issuer?.encodeAsHTML()}</g:link></td>
+				<td valign="top" class="value"><g:link controller="${specialCourierRecordInstance?.issuer?.type}" action="show" id="${specialCourierRecordInstance?.issuer?.id}">${specialCourierRecordInstance?.issuer?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 				
@@ -93,12 +108,19 @@
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>
 					<g:each in="${specialCourierRecordInstance.receivers}" var="r">
-						<li><g:link controller="stakeholder" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+						<li><g:link controller="${r.type }" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
 					</g:each>
 					</ul>
 				</td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="courierRecord.requiresVisa.label" default="Requires Visa" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${specialCourierRecordInstance?.requiresVisa}" /></td>
+				
+			</tr>	
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="courierRecord.dateCreated.label" default="Date Created" /></td>
