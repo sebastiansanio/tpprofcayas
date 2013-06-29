@@ -382,5 +382,9 @@ class Wish {
 	Date getDocDraftFinished(){
 		return docDraftNotReceive?wishDate:docDraftApproved
 	}
+	
+	Date getOriginalDjaiFinished(){
+		return djaiExtendedExpiration?:billDate
+	}
 
 }
