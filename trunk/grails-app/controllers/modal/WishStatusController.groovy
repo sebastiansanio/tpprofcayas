@@ -1,14 +1,23 @@
 package modal
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.web.servlet.support.RequestContextUtils
 
 
 import org.springframework.transaction.annotation.Transactional
+import report.Report
 
 
 @Transactional
 class WishStatusController {
 
+	static final DateFormat df = new SimpleDateFormat("yyyyMMdd")
+	
+	def wishExportService
+	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -106,4 +115,14 @@ class WishStatusController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def exportByWishStatus() {
+		Long reportId = Long.parseLong(params.reportId)
+		Report report = Report.get(reportId)
+		
+		WishStatus wishStatus = WishStatus.get(params.id)
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${wishStatus}_"+df.format(new Date())+".${params.extension}")
+		wishExportService.exportWishByWishStatus(params.format,response.outputStream,RequestContextUtils.getLocale(request),wishStatus,report)
+	}
 }

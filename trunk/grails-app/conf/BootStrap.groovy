@@ -303,8 +303,13 @@ class BootStrap {
 				def paymentStatus = new PaymentStatus(name:"A la espera del 100%")
 				paymentStatus.save(flush:true)
 				
-				def wishStatus = new WishStatus(name:"At production")
-				wishStatus.save(flush:true)
+				def wishStatus1 = new WishStatus(name:"At production")
+				wishStatus1.save(flush:true)
+				def wishStatus2 = new WishStatus(name:"Traveling")
+				wishStatus2.save(flush:true)
+				def wishStatus3 = new WishStatus(name:"Arrived")
+				wishStatus3.save(flush:true)
+				
 				
 				def currency = new Currency(name:"PESO")
 				currency.save(flush:true)
@@ -349,17 +354,17 @@ class BootStrap {
 				}
 
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(forwarder:forwarder,shipper:shipper,'customer.id':2,finishDate:new Date(),'supplier.id':5,opNumber:(i+10),customerOpNumber:i,wishDate:new Date().clearTime())
+					Wish wish = new Wish(djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus1,forwarder:forwarder,shipper:shipper,'customer.id':2,finishDate:new Date().clearTime(),'supplier.id':5,opNumber:(i+10),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(agent:agent,'paymentTerm.id':1,'customer.id':3,billDate:new Date(),'supplier.id':5,opNumber:(i+20),customerOpNumber:i,wishDate:new Date().clearTime())
+					Wish wish = new Wish(djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus2,agent:agent,'paymentTerm.id':1,'customer.id':3,billDate:new Date().clearTime(),'supplier.id':5,opNumber:(i+20),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(agent:agent,'paymentTerm.id':1,'customer.id':3,'supplier.id':5,opNumber:(i+30),customerOpNumber:i+15,wishDate:new Date().clearTime())
+					Wish wish = new Wish(djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus3,agent:agent,'paymentTerm.id':1,'customer.id':3,'supplier.id':5,opNumber:(i+30),customerOpNumber:i+15,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 

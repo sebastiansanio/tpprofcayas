@@ -1,4 +1,4 @@
-
+<%@ page import="report.Report" %>
 <%@ page import="modal.WishStatus" %>
 <!doctype html>
 <html>
@@ -35,9 +35,37 @@
 				<td valign="top" class="name"><g:message code="wishStatus.wishes.label" default="Wishes" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
+					<h4> <g:message code="export.label" default="Export" /> </h4>
+
+<g:form>
+
+<g:message code="report.label" default="Report" />
+<g:select id="reportId" name="reportId" from="${Report.list()}" optionKey="id" />
+<g:hiddenField name="id" value="${wishStatusInstance.id}" />
+
+<div>
+	<button type="submit" formaction="${createLink(action:'exportByWishStatus',controller:'wishStatus',params:[format:'csv',extension:'csv'])}" >
+	<img src="${resource(dir: 'images/skin',file: 'csv.png')}"/> CSV
+	</button>
+	
+	<button type="submit" formaction="${createLink(action:'exportByWishStatus',controller:'wishStatus',params:[format:'excel',extension:'xls'])}" >
+	<img src="${resource(dir: 'images/skin',file: 'excel.png')}"/> EXCEL
+	</button>
+	
+	<button type="submit" formaction="${createLink(action:'exportByWishStatus',controller:'wishStatus',params:[format:'ods',extension:'ods'])}" >
+	<img src="${resource(dir: 'images/skin',file: 'ods.png')}"/> ODS
+	</button>
+
+	<button type="submit" formaction="${createLink(action:'exportByWishStatus',controller:'wishStatus',params:[format:'pdf',extension:'pdf'])}" >
+	<img src="${resource(dir: 'images/skin',file: 'pdf.png')}"/> PDF
+	</button>
+</div>
+</g:form>
+					
+				
 					<ul>
-					<g:each in="${wishStatusInstance.wishes}" var="w">
-						<li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
+					<g:each in="${wishStatusInstance.wishes.sort{it.opNumber}}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber.toString() + ' - '+w.supplier.toString()+' > '+w.customer.toString() + (w.supplierOrder!=null?' ('+ w.supplierOrder +')':'')}</g:link></li>
 					</g:each>
 					</ul>
 				</td>
