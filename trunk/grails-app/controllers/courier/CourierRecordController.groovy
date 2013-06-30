@@ -1,7 +1,9 @@
 package courier
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import org.springframework.dao.DataIntegrityViolationException
-
+import org.springframework.web.servlet.support.RequestContextUtils
 
 import org.springframework.transaction.annotation.Transactional
 
@@ -9,16 +11,42 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class CourierRecordController {
 
+	private static DateFormat DATE_FORMAT = new SimpleDateFormat("_yyyyMMdd")
+	
+	def courierExportService
+	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def query() {
+	
+	}
 
+	def export() {
+		boolean pendingOnly = params.pendingOnly
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'courierRecord.label')}"+DATE_FORMAT.format(new Date())+".${params.extension}")
+		courierExportService.exportCourierRecord(params.format,response.outputStream,RequestContextUtils.getLocale(request),pendingOnly)
+	}
+	
+	
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+        params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [courierRecordInstanceList: CourierRecord.list(params), courierRecordInstanceTotal: CourierRecord.count()]
     }
+	
+	def listPending(){
+		params.sort = params.sort?: 'departureDate'
+		params.order = params.order?: 'desc'
+			
+		params.max = Math.min(params.max ? params.int('max') : 100, 200)
+		List couriers = CourierRecord.findAllByArrivalDateIsNull(params)
+		int couriersSize = CourierRecord.countByArrivalDateIsNull()
+		render(view: "list", model: [courierRecordInstanceList: couriers, courierRecordInstanceTotal: couriersSize])
+	}
 
     def create() {
         [:]

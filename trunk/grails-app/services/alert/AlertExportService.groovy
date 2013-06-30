@@ -27,11 +27,6 @@ class AlertExportService {
 			return value?.format("dd/MM/yyyy")	
 		}
 
-		Date dateFinalized
-		String finalizedReason
-		
-		Date lastInspected
-		
 		List fields = ["alertType","attentionDate","deadline","wish.customer","wish.supplier",
 			"wish.supplierOrder","wish.opNumber","dateFinalized","finalizedReason","lastInspected"]
 		
