@@ -12,15 +12,15 @@ class AuditController {
 	}
 	
 	def list(){
+		params.sort = params.sort?:'id'
+		params.order = params.order?:'desc'
+		
 		params.max = Math.min(params.max ? params.int('max') : 100, 200)
 		[revisionInformationInstanceList: RevisionInformation.list(params), revisionInformationInstanceTotal: RevisionInformation.count()]
 	}
 	
 	def show(){
 		
-		AuditReader auditReader = AuditReaderFactory.get(sessionFactory.currentSession)
-		System.out.println(grailsApplication.getDomainClass("courier.Courier").clazz.get(1).findAllRevisions())
-
 		def revisionInformationInstance = RevisionInformation.get(params.id)
 		if (!revisionInformationInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'audit.label', default: 'Audit'), params.id])

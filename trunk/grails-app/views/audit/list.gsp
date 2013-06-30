@@ -1,4 +1,5 @@
 
+<%@page import="org.hibernate.envers.RevisionType"%>
 <%@ page import="audit.RevisionInformation" %>
 <!doctype html>
 <html>
@@ -22,6 +23,8 @@
 				<th><g:message code="revisionInformation.currentUser.label" default="Current User" /></th>
 			
 				<g:sortableColumn property="timestamp" title="${message(code: 'revisionInformation.timestamp.label', default: 'Timestamp')}" />
+
+				<th><g:message code="revisionInformation.details.label" default="Details" /></th>
 			
 			</tr>
 		</thead>
@@ -34,6 +37,16 @@
 				<td>${fieldValue(bean: revisionInformationInstance, field: "currentUser")}</td>
 			
 				<td><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${revisionInformationInstance.timestamp}" /></td>
+
+				<td>
+				<g:each in="${revisionInformationInstance.details.sort{it.id}}" var="detail">
+				<p>
+				${message(code:'revisionType.'+detail.revisionType.toString().toLowerCase()+'.label') + ' '+ message(code:(grailsApplication.getDomainClass(detail.className).name.substring(0,1).toLowerCase() + grailsApplication.getDomainClass(detail.className).name.substring(1))+'.label') + ' (id '+detail.entityId+')'}
+				</p>
+				</g:each>
+				
+				</td>
+
 			
 			</tr>
 		</g:each>

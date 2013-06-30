@@ -33,23 +33,22 @@
 			</tr>
 			
 			<tr class="prop">
-				<td valign="top" class="name">${revisionInformationInstance.domainClass.persistentProperties*.name }</td>
+				<td valign="top" class="name"><g:message code="revisionInformation.details.label" default="Details" /></td>
 				
-				<td valign="top" class="value">${Courier.findAllRevisionsById(1L).get(0)}</td>
+				<td valign="top" class="value">
+				<g:each in ="${revisionInformationInstance.details.sort{it.id}}" var="detail">
+					<h5>${message(code:'revisionType.'+detail.revisionType.toString().toLowerCase()+'.label') + ' '+ message(code:(grailsApplication.getDomainClass(detail.className).name.substring(0,1).toLowerCase() + grailsApplication.getDomainClass(detail.className).name.substring(1))+'.label') + ' (id '+detail.entityId+')'}
+					</h5>
+				
+				
+				</g:each>
+				</td>
 				
 			</tr>
 		
 		</tbody>
 	</table>
-	
-	<g:each in="${new Courier().domainClass.persistentProperties*.name }" var="w">
-		<g:if test="${Courier.findAllRevisionsById(1L).get(0)[w] != Courier.findAllRevisionsById(1L).get(1)[w]}">
-			<p>${w} ${Courier.findAllRevisionsById(1L).get(0)[w]}-${Courier.findAllRevisionsById(1L).get(1)[w]}</p>
-		</g:if>
-
 		
-	</g:each>
-	
 </section>
 
 </body>
