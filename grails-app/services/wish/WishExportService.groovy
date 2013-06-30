@@ -10,6 +10,7 @@ import modal.Port;
 import modal.Ship;
 import modal.ShippingMark;
 import modal.TypeOfFreight
+import modal.WishStatus
 import org.springframework.context.MessageSource
 import report.Report
 import stakeholder.*
@@ -23,15 +24,27 @@ class WishExportService implements MessageSourceAware {
 	def exportService
 	MessageSource messageSource
 	
+	def exportWishByWishStatus(String format,OutputStream outputStream,Locale locale,WishStatus wishStatus,Report report){
+		List fields = report.fields
+		List wishes = new ArrayList()
+		wishes.addAll(wishStatus.wishes)
+		
+		if(report.pendingOnly==true){
+			wishes = wishes.findAll{
+				it.isPending()
+			}
+		}
+		wishes = wishes.sort{it.opNumber}
+		doExport(format,outputStream,locale,fields,wishes)
+	}
+	
 	
 	def exportWishByStakeholder(String format,OutputStream outputStream,Locale locale,def stakeholder){
 		Report report = stakeholder.defaultReport
 		exportWishByStakeholder(format,outputStream,locale,stakeholder,report)
-		
 	}
 	
 	def exportWishByStakeholder(String format,OutputStream outputStream,Locale locale,def stakeholder,Report report){
-	
 		List fields = report.fields
 		List wishes = new ArrayList()
 		wishes.addAll(stakeholder.wishes)
@@ -42,23 +55,17 @@ class WishExportService implements MessageSourceAware {
 			}
 		}
 		wishes = wishes.sort{it.opNumber}
-				
-		doExport(format,outputStream,locale,fields,wishes)
-			
+		doExport(format,outputStream,locale,fields,wishes)		
 	}
 	
 	
 	def exportWish(String format,OutputStream outputStream,Locale locale,long reportId) {
-
 		Report report = Report.get(reportId)
-		
 		List wishes = Wish.list(sort:'opNumber')
-		
 		if(report.pendingOnly==true)
 			wishes = wishes.findAll{
 				it.isPending()
 			}
-		
 		doExport(format,outputStream,locale,report.fields,wishes)
 	}
 	
