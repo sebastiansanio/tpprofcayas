@@ -7,7 +7,7 @@ class Port {
 	
 	String name
 	
-	static belongsTo	= [country: Country]	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
+	static belongsTo	= [country: Country]	
 	
     static mapping = {
     }

@@ -95,7 +95,12 @@ class ShipController {
             redirect(action: "list")
             return
         }
-
+		
+		if(shipInstance.wishes!=null && shipInstance.wishes.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'ship.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             shipInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'ship.label', default: 'Ship'), params.id])

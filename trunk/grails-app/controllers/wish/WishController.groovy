@@ -197,6 +197,12 @@ class WishController {
 
     def update() {
 		def wishInstance = Wish.get(params.id)
+		if (!wishInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
+			redirect(action: "list")
+			return
+		}
+		
 		def keys = params.keySet().toArray()
 		keys.each{
 			if(it.matches("firstStageRequiredDocuments\\[[0-9]*\\]\\.file"))
@@ -207,11 +213,6 @@ class WishController {
 				params[it.replace(".draft",".fileName")]=params[it].getOriginalFilename()
 		}
 		
-        if (!wishInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
-            redirect(action: "list")
-            return
-        }
 
         if (params.version) {
             def version = params.version.toLong()
@@ -223,15 +224,13 @@ class WishController {
                 return
             }
         }
-
-        wishInstance.properties = params
-		
+        wishInstance.properties = params		
+				
         if (!wishInstance.save(flush: true)) {
 			render(view: "edit", model: [wishInstance: wishInstance])
             return
         }
-		alertManagerService.generateAlerts(wishInstance)
-				
+		alertManagerService.generateAlerts(wishInstance)		
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'wish.label', default: 'Wish'), wishInstance.id])
         redirect(action: "show", id: wishInstance.id)
     }

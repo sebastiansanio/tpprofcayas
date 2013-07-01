@@ -96,6 +96,13 @@ class CustomsBrokerController {
             return
         }
 
+		if(customsBrokerInstance.wishes!=null && customsBrokerInstance.wishes.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'customsBroker.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+
+		
         try {
             customsBrokerInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'customsBroker.label', default: 'CustomsBroker'), params.id])

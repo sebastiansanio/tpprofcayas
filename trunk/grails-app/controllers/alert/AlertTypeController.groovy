@@ -96,6 +96,12 @@ class AlertTypeController {
             return
         }
 
+		if(alertTypeInstance.alerts!=null && alertTypeInstance.alerts.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'alertType.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}		
+		
         try {
             alertTypeInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'alertType.label', default: 'AlertType'), params.id])
