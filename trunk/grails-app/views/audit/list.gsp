@@ -14,7 +14,7 @@
 	
 <section id="list-revisionInformation" class="first">
 
-	<table class="table table-bordered">
+	<table class="table table-bordered table-condensed">
 		<thead>
 			<tr>
 				
