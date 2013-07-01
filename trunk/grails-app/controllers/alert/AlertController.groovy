@@ -1,11 +1,17 @@
 package alert
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.servlet.support.RequestContextUtils
 
 
 class AlertController {
 
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("_yyyyMMdd")
+	
+	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 	def alertManagerService
@@ -46,7 +52,7 @@ class AlertController {
 		Date toDate = Date.parse('dd/MM/yyyy',params.toDate)
 		boolean pendingOnly = params.pendingOnly
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alert.label')}.${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alert.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
 		alertExportService.exportAlert(params.format,response.outputStream,RequestContextUtils.getLocale(request),fromDate,toDate,pendingOnly)
 	}
 	

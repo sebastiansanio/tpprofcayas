@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class CourierRecordController {
 
-	private static DateFormat DATE_FORMAT = new SimpleDateFormat("_yyyyMMdd")
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("_yyyyMMdd")
 	
 	def courierExportService
 	
