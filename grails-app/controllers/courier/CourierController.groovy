@@ -93,7 +93,12 @@ class CourierController {
             redirect(action: "list")
             return
         }
-
+		if(courierInstance.courierRecords!=null && courierInstance.courierRecords.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'courier.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+		
         try {
             courierInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'courier.label', default: 'Courier'), params.id])

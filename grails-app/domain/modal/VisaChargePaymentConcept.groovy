@@ -5,7 +5,6 @@ import org.hibernate.envers.Audited
 @Audited
 class VisaChargePaymentConcept {
 
-
 	String name
 		
     static mapping = {

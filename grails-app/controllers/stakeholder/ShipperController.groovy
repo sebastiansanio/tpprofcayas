@@ -95,6 +95,12 @@ class ShipperController {
             redirect(action: "list")
             return
         }
+		if(shipperInstance.wishes!=null && shipperInstance.wishes.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'shipper.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+
 
         try {
             shipperInstance.delete(flush: true)

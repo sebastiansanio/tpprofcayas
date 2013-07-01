@@ -98,6 +98,13 @@ class CustomerController {
             redirect(action: "list")
             return
         }
+		if(customerInstance.wishes!=null && customerInstance.wishes.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'customer.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+	
+		
 
         try {
             customerInstance.delete(flush: true)

@@ -7,6 +7,8 @@ class Courier {
 	Date	dateCreated
 	Date	lastUpdated
 	
+	static hasMany = [courierRecords:CourierRecord]
+	
 	String name
 	String web
 	String telephone
