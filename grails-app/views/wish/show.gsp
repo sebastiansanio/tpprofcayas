@@ -640,16 +640,9 @@
 			
 	<h4> <g:message code="wish.notes.label" default="Notes"/> </h4>
 
-	<table class="table">
-		<tbody>
-			
-			<tr class="prop">
-				<td colspan="2" valign="top" class="name">
-					<g:render template="notesShow" model="['notes':wishInstance.notes]"/>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+
+	<g:render template="notesShow" model="['notes':wishInstance.notes]"/>
+
 	
 	<h4> <g:message code=" " default=" "/> </h4>
 											

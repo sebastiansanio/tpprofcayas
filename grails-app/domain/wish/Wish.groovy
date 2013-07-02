@@ -349,6 +349,13 @@ class Wish {
 		
 	}
 	
+	Date getDateToRequirePicturesOfLoadingContainer(){
+		if(typeOfFreight?.requiresPicturesOfLoadingContainer)
+			return forwarderSelectedDate
+		else
+			return null
+	}
+	
 	Date getBlReceivedDate(){
 		
 		Date blReceivedAux = null

@@ -14,7 +14,7 @@ class Note {
 	static belongsTo	= [wish:Wish]
     
 	static constraints = {
-		text nullable:true,maxSize:255
+		text nullable:true,maxSize:512
     }
 	
 	public String toString() {

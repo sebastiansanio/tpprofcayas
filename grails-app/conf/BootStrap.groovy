@@ -342,7 +342,7 @@ class BootStrap {
 				alertType.save(flush:true)
 				alertType = new AlertType(description:"Pedir pago del saldo",nameOfEstimatedDateField:"estimatedBalancePaymentDate",nameOfCompletionField:"dateOfBalancePayment",alertTerm:10)
 				alertType.save(flush:true)
-				alertType = new AlertType(description:"Pedir fotos del container",nameOfEstimatedDateField:"forwarderSelectedDate",nameOfCompletionField:"picturesOfLoadingContainerFinished",alertTerm:0)
+				alertType = new AlertType(description:"Pedir fotos del container",nameOfEstimatedDateField:"dateToRequirePicturesOfLoadingContainer",nameOfCompletionField:"picturesOfLoadingContainerFinished",alertTerm:0)
 				alertType.save(flush:true)
 				alertType = new AlertType(description:"Pedir Bl",nameOfEstimatedDateField:"requireBlDate",nameOfCompletionField:"blReceivedDate",alertTerm:0)
 				alertType.save(flush:true)
