@@ -17,7 +17,7 @@
 		templateHtml += "${message(code:'note.label')}:";
 		templateHtml += "</label>";
 		templateHtml += "<div class='controls'>";
-		templateHtml += "<textarea row='3' type='text' class='input-xxlarge' name='notes["+notesCount+"].text' />";
+		templateHtml += "<textarea row='3' maxlength='512' type='text' class='input-xxlarge' name='notes["+notesCount+"].text' />";
 		templateHtml += "</div>";
 		templateHtml += "</div>";
 
@@ -50,7 +50,7 @@
 				(<g:formatDate value="noteInstance.dateCreated" />):
 				</label>
 				<div class="controls">
-					<g:textArea class='input-xxlarge' rows='3' name="notes[${i}].text" >${noteInstance?.text}</g:textArea>
+					<g:textArea maxlength="512" class='input-xxlarge' rows='3' name="notes[${i}].text" >${noteInstance?.text}</g:textArea>
 					<span class="help-inline">${hasErrors(bean: noteInstance, field: 'text', 'error')}</span>
 					
 					<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" class="btn btn-primary" action="deleteNote" id="${noteInstance.id}" params="[noteWishId: wishInstance.id]"><i class="icon-trash"></i></g:link>

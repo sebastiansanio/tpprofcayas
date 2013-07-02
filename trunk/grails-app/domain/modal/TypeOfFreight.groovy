@@ -5,6 +5,7 @@ import org.hibernate.envers.Audited
 class TypeOfFreight {
 
 	String name	
+	boolean requiresPicturesOfLoadingContainer
 	
     static mapping = {
     }

@@ -23,6 +23,14 @@
 				<td valign="top" class="value">${fieldValue(bean: typeOfFreightInstance, field: "name")}</td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="typeOfFreight.requiresPicturesOfLoadingContainer.label"/></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${typeOfFreightInstance.requiresPicturesOfLoadingContainer}"/></td>
+				
+			</tr>
+
 		
 		</tbody>
 	</table>

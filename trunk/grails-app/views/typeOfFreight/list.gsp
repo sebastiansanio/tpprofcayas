@@ -18,7 +18,8 @@
 			<tr>
 			
 				<g:sortableColumn property="name" title="${message(code: 'typeOfFreight.name.label', default: 'Name')}" />
-			
+				<g:sortableColumn property="requiresPicturesOfLoadingContainer" title="${message(code: 'typeOfFreight.requiresPicturesOfLoadingContainer.label')}" />
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -26,7 +27,8 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
 				<td><g:link action="show" id="${typeOfFreightInstance.id}">${fieldValue(bean: typeOfFreightInstance, field: "name")}</g:link></td>
-			
+				<td><g:formatBoolean boolean="${typeOfFreightInstance.requiresPicturesOfLoadingContainer}"/></td>
+				
 			</tr>
 		</g:each>
 		</tbody>

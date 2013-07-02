@@ -207,7 +207,7 @@ $(document).ready(function() {
     	$(replaceIdButton).hide(); 
     });	
 
-    $('.date').addClass('input-small');
+    $('td input.date').addClass('input-small');
 });
     
 function clickDocPhase1(nroId)
