@@ -6,7 +6,7 @@ import modal.DocumentType
 import org.hibernate.envers.Audited
 
 @Audited
-class Document {
+abstract class Document {
 
 	DocumentType documentType
 	Date received
@@ -20,6 +20,7 @@ class Document {
 	Date deliveredToCustomerDate
 	
     static mapping = {
+		tablePerHierarchy false
     }
     
 	static constraints = {

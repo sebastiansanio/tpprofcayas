@@ -58,23 +58,33 @@
 					</g:each>
 				
 					<g:if test="${detail.revisionType == RevisionType.DEL}">
-						<g:each var="prop" in="${domainClassInstance.persistentProperties.findAll{!(it.isOneToMany() || (it.isManyToMany() && !(it.isOwningSide())))}}">						
-							<g:if test="${prop.type== byte[]}">
-							<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+						<g:each var="prop" in="${domainClassInstance.persistentProperties}">						
+							<g:if test="${!(prop.isOneToMany() || (prop.isManyToMany() && !(prop.isOwningSide())))}">
+								<g:if test="${prop.type== byte[]}">
+								<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+								</g:if>
+								<g:else>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' = '+previousInstance[prop.name]}</p>
+								</g:else>
 							</g:if>
 							<g:else>
-							<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' = '+previousInstance[prop.name]}</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' (ids) = '+currentInstance[prop.name]*.id.toString()}</p>
 							</g:else>
 						</g:each>
 					</g:if>
 
 					<g:if test="${detail.revisionType == RevisionType.ADD}">
-						<g:each var="prop" in="${domainClassInstance.persistentProperties.findAll{!(it.isOneToMany() || (it.isManyToMany() && !(it.isOwningSide())))}}">						
-							<g:if test="${prop.type== byte[]}">
-							<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+						<g:each var="prop" in="${domainClassInstance.persistentProperties}">						
+							<g:if test="${!(prop.isOneToMany() || (prop.isManyToMany() && !(prop.isOwningSide())))}">
+								<g:if test="${prop.type== byte[]}">
+								<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+								</g:if>
+								<g:else>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' = '+currentInstance[prop.name]}</p>
+								</g:else>
 							</g:if>
 							<g:else>
-							<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' = '+currentInstance[prop.name]}</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' (ids) = '+currentInstance[prop.name]*.id.toString()}</p>
 							</g:else>
 						</g:each>
 					</g:if>
@@ -84,6 +94,7 @@
 						${message(code:'revisionInformation.id.label') + ': '}
 						<g:link action="show" id="${previousInstance.revisionEntity.id}"> ${previousInstance.revisionEntity.id}</g:link>
 						${' > '+ currentInstance.revisionEntity.id}
+						
 						<g:each var="prop" in="${domainClassInstance.persistentProperties}">						
 						
 							<g:if test="${!(prop.isOneToMany() || (prop.isManyToMany() && !(prop.isOwningSide())))}">
@@ -96,6 +107,11 @@
 									</g:else>
 								</g:if>
 							</g:if>
+							<g:else>
+								<g:if test="${!previousInstance[prop.name]*.id.toSet().equals(currentInstance[prop.name]*.id.toSet())}">
+									<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' (ids) : ' + previousInstance[prop.name]*.id.toString() + ' > '+ currentInstance[prop.name]*.id.toString()} </p>
+								</g:if>								
+							</g:else>
 							
 						</g:each>
 					</g:if>
