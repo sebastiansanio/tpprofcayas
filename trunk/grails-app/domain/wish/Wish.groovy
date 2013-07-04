@@ -284,36 +284,60 @@ class Wish {
 	}
 	
 	//Alert 6
-	Date getRequireVisaDate(){
-		boolean requiresVisa = false
-		firstStageRequiredDocuments.each{
-			if (it.requiresVisa())
-				requiresVisa = true
+	Date getRequireVisaFirstStageDate(){
+		Date returnDate = null
+		for(Document document: firstStageRequiredDocuments){
+			if(document.requiresVisa()){
+				returnDate = deliveryDate
+				break
+			}
+			
 		}
-		
-		secondStageRequiredDocuments.each{
-			if (it.requiresVisa())
-				requiresVisa = true
-		}
-		if(requiresVisa)
-			return deliveryDate
-		return null
+		return returnDate
 	}
 	
-	Date getVisaReceivedDate(){
-		boolean requiresVisa = false
-		Date visaReceivedDateAux = null
-		
-		firstStageRequiredDocuments.each{
-			if (it.requiresVisa())
-				visaReceivedDateAux = it.arrivalDate
+	Date getRequireVisaSecondStageDate(){
+		Date returnDate = null
+		for(Document document: secondStageRequiredDocuments){
+			if(document.requiresVisa()){
+				returnDate = estimatedTimeOfDeparture?.plus(20)
+				break
+			}
+			
 		}
-		
-		secondStageRequiredDocuments.each{
-			if (it.requiresVisa())
-				visaReceivedDateAux = it.arrivalDate
+		return returnDate
+	}
+	
+	Date getVisaFirstStageReceivedDate(){
+		Date returnDate = null
+		for(Document document:firstStageRequiredDocuments){
+			if(document.requiresVisa()){
+				if(document.arrivalDate==null){
+					returnDate = null
+					break
+				}else{
+					if(returnDate == null || returnDate.compareTo(document.arrivalDate)<0)
+						returnDate = document.arrivalDate
+				}
+			}
 		}
-		return visaReceivedDateAux
+		return returnDate
+	}
+	
+	Date getVisaSecondStageReceivedDate(){
+		Date returnDate = null
+		for(Document document:secondStageRequiredDocuments){
+			if(document.requiresVisa()){
+				if(document.arrivalDate==null){
+					returnDate = null
+					break
+				}else{
+					if(returnDate == null || returnDate.compareTo(document.arrivalDate)<0)
+						returnDate = document.arrivalDate
+				}
+			}
+		}
+		return returnDate
 	}
 	
 	//Alert 8 - Alert 11
