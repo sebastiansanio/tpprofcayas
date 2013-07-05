@@ -95,6 +95,11 @@ class RoleController {
             redirect(action: "list")
             return
         }
+		if(roleInstance.users!=null && roleInstance.users.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'role.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
 
         try {
             roleInstance.delete(flush: true)
