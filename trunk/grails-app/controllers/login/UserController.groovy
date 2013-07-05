@@ -1,4 +1,6 @@
 package login
+import audit.RevisionInformation
+import org.apache.shiro.SecurityUtils
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 import org.springframework.dao.DataIntegrityViolationException
@@ -75,7 +77,6 @@ class UserController {
             redirect(action: "list")
             return
         }
-
         if (params.version) {
             def version = params.version.toLong()
             if (userInstance.version > version) {
@@ -105,6 +106,18 @@ class UserController {
             redirect(action: "list")
             return
         }
+		if(userInstance.username.equals(SecurityUtils.subject.principal)){
+			flash.message = message(code:'default.user.delete.error.message')
+			redirect(action: "show", id: params.id)
+			return
+		}
+		
+		if(RevisionInformation.countByCurrentUser(userInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'user.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+
 
         try {
             userInstance.delete(flush: true)

@@ -2,6 +2,7 @@ package courier
 
 import stakeholder.Stakeholder
 import wish.Document
+import wish.Wish
 import org.hibernate.envers.Audited
 
 @Audited
@@ -31,10 +32,10 @@ class DocumentsCourierRecord extends CourierRecord {
 	String getDescription(){
 		StringBuilder sb = new StringBuilder()
 		String prefix = ""
-		for(Document document:documents){
+		for(Wish wish:documents*.wish.toSet()){
 			sb.append(prefix)
 			prefix = ", "
-			sb.append(document.wish.supplierOrder)
+			sb.append(wish.supplierOrder)
 		}
 		return sb.toString()
 	}
