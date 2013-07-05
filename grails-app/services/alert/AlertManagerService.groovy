@@ -6,6 +6,8 @@ class AlertManagerService {
 
     static transactional = true
 
+	Object lock = new Object()
+	
 	def getActiveAlerts(params){
 		return Alert.findAllByDateFinalizedIsNullAndLastInspectedIsNull(params)
 	}
@@ -15,30 +17,38 @@ class AlertManagerService {
 	}
 	
 	def generateAlerts(Wish wish){
-		def alertTypes = AlertType.list()
-		alertTypes.each{alertType ->
-			wish.addAlert(alertType)
+		synchronized(lock){
+			def alertTypes = AlertType.list()
+			alertTypes.each{alertType ->
+				wish.addAlert(alertType)
+			}
 		}
 	}
 	
 	def generateAlerts(Wish wish,List alertTypes){
-		alertTypes.each{alertType ->
-			wish.addAlert(alertType)
+		synchronized(lock){
+			alertTypes.each{alertType ->
+				wish.addAlert(alertType)
+			}
 		}
 	}
 	
     def generateAllAlerts() {
-		def activeWishes = Wish.findAllByFinishDateIsNull()
-		def alertTypes = AlertType.findAll()
-		activeWishes.each{wish ->
-			generateAlerts(wish,alertTypes)
+		synchronized(lock){
+			def activeWishes = Wish.findAllByFinishDateIsNull()
+			def alertTypes = AlertType.findAll()
+			activeWishes.each{wish ->
+				generateAlerts(wish,alertTypes)
+			}
 		}
     }
 	
 	def checkAllAlerts() {
-		def activeAlerts = Alert.findAllByDateFinalizedIsNull()
-		activeAlerts.each{
-			it.check()
+		synchronized(lock){
+			def activeAlerts = Alert.findAllByDateFinalizedIsNull()
+			activeAlerts.each{
+				it.check()
+			}
 		}
 	}
 }
