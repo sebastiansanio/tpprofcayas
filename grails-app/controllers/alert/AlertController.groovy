@@ -20,10 +20,24 @@ class AlertController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def refresh(){
+		[:]
+	}
+	
+	def doRefresh(){
+		try{
+			alertManagerService.checkAllAlerts()
+			alertManagerService.generateAllAlerts()
+			flash.message = message(code:'default.refresh.ok.label')
+		}catch(Exception e){
+			flash.message = message(code:'default.refresh.error.label')+': '+e.getMessage()
+		}
+		redirect(action: "refresh",params:params)
+		
+	}
 
     def list() {
-		alertManagerService.checkAllAlerts()
-		alertManagerService.generateAllAlerts()
         params.max = Math.min(params.max ? params.int('max') : 200, 1000)		
 		params.sort = params.sort?: 'attentionDate'
 		params.sort = params.sort?: 'asc'
@@ -32,8 +46,6 @@ class AlertController {
     }
 	
 	def listInspected() {
-		alertManagerService.checkAllAlerts()
-		alertManagerService.generateAllAlerts()
 		params.max = Math.min(params.max ? params.int('max') : 200, 1000)
 		params.sort = params.sort?: 'attentionDate'
 		params.sort = params.sort?: 'asc'
@@ -46,8 +58,6 @@ class AlertController {
 	}
 	
 	def export() {
-		alertManagerService.checkAllAlerts()
-		alertManagerService.generateAllAlerts()
 		Date fromDate = Date.parse('dd/MM/yyyy',params.fromDate)
 		Date toDate = Date.parse('dd/MM/yyyy',params.toDate)
 		boolean pendingOnly = params.pendingOnly
