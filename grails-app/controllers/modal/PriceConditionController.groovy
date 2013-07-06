@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Wish
 
 
 @Transactional
@@ -95,6 +96,11 @@ class PriceConditionController {
             redirect(action: "list")
             return
         }
+		if(Wish.countByPriceCondition(priceConditionInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'priceCondition.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
 
         try {
             priceConditionInstance.delete(flush: true)

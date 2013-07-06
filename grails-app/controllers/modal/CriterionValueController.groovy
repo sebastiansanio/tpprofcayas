@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Wish
 
 
 @Transactional
@@ -95,7 +96,11 @@ class CriterionValueController {
             redirect(action: "list")
             return
         }
-
+		if(Wish.countByCriterionValue(criterionValueInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'criterionValue.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             criterionValueInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'criterionValue.label', default: 'CriterionValue'), params.id])

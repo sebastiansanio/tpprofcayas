@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.LoadUnit
 
 
 @Transactional
@@ -95,7 +96,11 @@ class ProductController {
             redirect(action: "list")
             return
         }
-
+		if(LoadUnit.countByProduct(productInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'product.label'),message(code: 'loadUnit.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             productInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'product.label', default: 'Product'), params.id])

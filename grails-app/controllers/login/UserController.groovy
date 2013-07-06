@@ -113,7 +113,7 @@ class UserController {
 		}
 		
 		if(RevisionInformation.countByCurrentUser(userInstance)>0){
-			flash.message = message(code:'default.delete.error.message',args: [message(code: 'user.label')])
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'user.label'),message(code: 'audit.label')])
 			redirect(action: "show", id: params.id)
 			return
 		}

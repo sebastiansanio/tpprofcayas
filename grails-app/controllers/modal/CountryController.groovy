@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import stakeholder.Stakeholder
 
 
 @Transactional
@@ -95,6 +96,17 @@ class CountryController {
             redirect(action: "list")
             return
         }
+		if(Stakeholder.countByCountry(countryInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'country.label'),message(code: 'stakeholder.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+		if(countryInstance.ports!=null && countryInstance.ports.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'country.label'),message(code: 'port.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+
 
         try {
             countryInstance.delete(flush: true)

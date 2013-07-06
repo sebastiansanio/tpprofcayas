@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Wish
 
 
 @Transactional
@@ -95,7 +96,11 @@ class PaymentTermController {
             redirect(action: "list")
             return
         }
-
+		if(Wish.countByPaymentTerm(paymentTermInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'paymentTerm.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             paymentTermInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'paymentTerm.label', default: 'PaymentTerm'), params.id])

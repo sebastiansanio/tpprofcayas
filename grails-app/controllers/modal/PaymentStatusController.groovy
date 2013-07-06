@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Wish
 
 
 @Transactional
@@ -95,7 +96,11 @@ class PaymentStatusController {
             redirect(action: "list")
             return
         }
-
+		if(Wish.countByPaymentStatus(paymentStatusInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'paymentStatus.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             paymentStatusInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'paymentStatus.label', default: 'PaymentStatus'), params.id])

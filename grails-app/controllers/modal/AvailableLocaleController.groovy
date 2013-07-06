@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import stakeholder.Stakeholder
 
 
 @Transactional
@@ -95,7 +96,12 @@ class AvailableLocaleController {
             redirect(action: "list")
             return
         }
-
+		if(Stakeholder.countByDefaultLocale(availableLocaleInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'availableLocale.label'),message(code: 'stakeholder.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+		
         try {
             availableLocaleInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'availableLocale.label', default: 'AvailableLocale'), params.id])

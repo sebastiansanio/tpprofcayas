@@ -161,8 +161,8 @@ class CourierRecordController {
             redirect(action: "list")
             return
         }
-		if(courierRecordInstance.documents!=null && courierRecordInstance.documents.size()>0){
-			flash.message = message(code:'default.delete.error.message',args: [message(code: 'courierRecord.label')])
+		if(courierRecordInstance instanceof DocumentsCourierRecord && courierRecordInstance.documents!=null && courierRecordInstance.documents.size()>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'courierRecord.label'),message(code: 'document.label')])
 			redirect(action: "show", id: params.id)
 			return
 		}
