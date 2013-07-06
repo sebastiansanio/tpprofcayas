@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import stakeholder.Stakeholder
 
 
 @Transactional
@@ -95,7 +96,16 @@ class ReportController {
             redirect(action: "list")
             return
         }
-
+		if(Stakeholder.countByDefaultReport(reportInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'report.label'),message(code: 'stakeholder.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
+		if(ReportSendConfiguration.countByReport(reportInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'report.label'),message(code: 'reportSendConfiguration.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             reportInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'report.label', default: 'Report'), params.id])

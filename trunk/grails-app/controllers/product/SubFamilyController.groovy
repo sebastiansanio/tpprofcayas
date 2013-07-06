@@ -95,7 +95,11 @@ class SubFamilyController {
             redirect(action: "list")
             return
         }
-
+		if(Product.countBySubFamily(subFamilyInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'subFamily.label'),message(code: 'product.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             subFamilyInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'subFamily.label', default: 'SubFamily'), params.id])

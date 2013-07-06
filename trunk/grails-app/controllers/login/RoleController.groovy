@@ -96,7 +96,7 @@ class RoleController {
             return
         }
 		if(roleInstance.users!=null && roleInstance.users.size()>0){
-			flash.message = message(code:'default.delete.error.message',args: [message(code: 'role.label')])
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'role.label'),message(code: 'user.label')])
 			redirect(action: "show", id: params.id)
 			return
 		}

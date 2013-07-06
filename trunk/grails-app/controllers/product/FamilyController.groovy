@@ -94,7 +94,11 @@ class FamilyController {
             redirect(action: "list")
             return
         }
-
+		if(Product.countByFamily(familyInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'family.label'),message(code: 'product.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             familyInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'family.label', default: 'Family'), params.id])

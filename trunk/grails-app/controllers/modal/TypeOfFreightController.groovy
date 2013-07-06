@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Wish
 
 
 @Transactional
@@ -95,7 +96,11 @@ class TypeOfFreightController {
             redirect(action: "list")
             return
         }
-
+		if(Wish.countByTypeOfFreight(typeOfFreightInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'typeOfFreight.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             typeOfFreightInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'typeOfFreight.label', default: 'TypeOfFreight'), params.id])

@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Wish
 
 
 @Transactional
@@ -95,7 +96,11 @@ class PortController {
             redirect(action: "list")
             return
         }
-
+		if(Wish.countByPort(portInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'port.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             portInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'port.label', default: 'Port'), params.id])

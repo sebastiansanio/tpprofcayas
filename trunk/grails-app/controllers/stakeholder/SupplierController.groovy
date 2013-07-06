@@ -96,7 +96,7 @@ class SupplierController {
             return
         }
 		if(supplierInstance.wishes!=null && supplierInstance.wishes.size()>0){
-			flash.message = message(code:'default.delete.error.message',args: [message(code: 'supplier.label')])
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'supplier.label'),message(code: 'wish.label')])
 			redirect(action: "show", id: params.id)
 			return
 		}

@@ -95,7 +95,11 @@ class ColorController {
             redirect(action: "list")
             return
         }
-
+		if(Product.countByColor(colorInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'color.label'),message(code: 'product.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             colorInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'color.label', default: 'Color'), params.id])

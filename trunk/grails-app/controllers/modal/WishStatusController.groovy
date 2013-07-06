@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.RequestContextUtils
 
 import org.springframework.transaction.annotation.Transactional
 import report.Report
+import wish.Wish
 
 
 @Transactional
@@ -104,6 +105,11 @@ class WishStatusController {
             redirect(action: "list")
             return
         }
+		if(Wish.countByWishStatus(wishStatusInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'wishStatus.label'),message(code: 'wish.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
 
         try {
             wishStatusInstance.delete(flush: true)

@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
+import wish.Document
 
 
 @Transactional
@@ -95,7 +96,11 @@ class DocumentTypeController {
             redirect(action: "list")
             return
         }
-
+		if(Document.countByDocumentType(documentTypeInstance)>0){
+			flash.message = message(code:'default.delete.error.message',args: [message(code: 'documentType.label'),message(code: 'document.label')])
+			redirect(action: "show", id: params.id)
+			return
+		}
         try {
             documentTypeInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'documentType.label', default: 'DocumentType'), params.id])
