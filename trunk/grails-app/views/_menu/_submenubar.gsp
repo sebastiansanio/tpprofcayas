@@ -70,7 +70,12 @@
 				<g:link action="listFinished"><i class="icon-th-list"></i> <g:message code="default.listFinished.label" args="[entityName]"/></g:link>
 			</li>
 		</g:if>
-		
+
+		<g:if test="${ SecurityUtils.subject.isPermitted(params.controller+":refresh") && grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris.contains('/'+params.controller+'/refresh')}">									
+			<li class="${ params.action == "refresh" ? 'active' : '' }">
+				<g:link action="refresh"><i class="icon-plus"></i> <g:message code="default.refresh.label"/></g:link>
+			</li>
+		</g:if>		
 		
 	</ul>
 </g:if>

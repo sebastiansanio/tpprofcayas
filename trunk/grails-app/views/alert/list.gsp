@@ -1,4 +1,3 @@
-
 <%@ page import="alert.Alert" %>
 <!doctype html>
 <html>
