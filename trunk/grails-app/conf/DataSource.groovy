@@ -33,7 +33,7 @@ environments {
     }
 	
 	//create user 'usrcayas'@'localhost' identified by 'gUrrUch4g4';
-	//create schema cayas;
+	//create schema cayas character set utf8;
 	//grant all privileges on cayas.* to 'usrcayas'@'localhost' with grant option;
     production {
         dataSource {
@@ -42,8 +42,8 @@ environments {
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "usrcayas"
 			password = "gUrrUch4g4"
-            dbCreate = "update"
-            url = "jdbc:mysql://localhost/cayas?useUnicode=yes&characterEncoding=UTF-8"
+            dbCreate = "validate"
+            url = "jdbc:mysql://localhost/cayasv2?useUnicode=yes&characterEncoding=UTF-8"
             pooled = true
             properties {
                maxActive = -1
