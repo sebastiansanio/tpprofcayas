@@ -166,9 +166,6 @@ class BootStrap {
 				roleAdmin.addToPermissions("*:show")
 				roleAdmin.addToPermissions("permission:*")
 				roleAdmin.addToPermissions("role:*")
-				
-				//Nuevo
-				roleAdmin.addToPermissions("otherStakeholder:*")
 				roleAdmin.save(flush:true)
 			
 				def roleOperator = new Role(name:"Operador")
@@ -188,7 +185,6 @@ class BootStrap {
 				roleOperator.addToPermissions("contact:*")
 				roleOperator.addToPermissions("*:show")
 				//Nuevo
-				roleOperator.addToPermissions("reportSendConfiguration:*")
 				roleOperator.addToPermissions("courier:*")
 				roleOperator.addToPermissions("courierRecord:*")
 				roleOperator.addToPermissions("audit:*")
@@ -205,6 +201,11 @@ class BootStrap {
 				roleManager.addToPermissions("country:*")
 				roleManager.addToPermissions("currency:*")
 				roleManager.addToPermissions("*:show")
+				
+				//Nuevo
+				roleManager.addToPermissions("reportSendConfiguration:*")
+				roleManager.addToPermissions("otherStakeholder:*")
+				
 				roleManager.save(flush:true)
 				
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
