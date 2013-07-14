@@ -136,7 +136,6 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Contactos - control total',permissionString:'contact:*')
 				permission.save()
-				//Nuevo
 				permission = new Permission(description:'Envío automático de reportes - control total',permissionString:'reportSendConfiguration:*')
 				permission.save()
 				permission = new Permission(description:'Couriers - control total',permissionString:'courier:*')
@@ -147,7 +146,14 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Ver auditoría',permissionString:'audit:*')
 				permission.save()
+				//Nuevo
+				permission = new Permission(description:'Pedidos - Consulta de externos',permissionString:'wishExternal:*')
+				permission.save()
 				
+				def roleExternal = new Role(name:"Externo")
+				roleExternal.addToPermissions("wishExternal:*")
+				roleExternal.addToPermissions("main:*")
+				roleExternal.save(flush:true)
 				
 				def roleAdmin = new Role(name:"Admin")
 				roleAdmin.addToPermissions("user:*")
@@ -184,11 +190,9 @@ class BootStrap {
 				roleOperator.addToPermissions("report:*")
 				roleOperator.addToPermissions("contact:*")
 				roleOperator.addToPermissions("*:show")
-				//Nuevo
 				roleOperator.addToPermissions("courier:*")
 				roleOperator.addToPermissions("courierRecord:*")
 				roleOperator.addToPermissions("audit:*")
-				
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
@@ -201,11 +205,8 @@ class BootStrap {
 				roleManager.addToPermissions("country:*")
 				roleManager.addToPermissions("currency:*")
 				roleManager.addToPermissions("*:show")
-				
-				//Nuevo
 				roleManager.addToPermissions("reportSendConfiguration:*")
 				roleManager.addToPermissions("otherStakeholder:*")
-				
 				roleManager.save(flush:true)
 				
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
@@ -251,6 +252,10 @@ class BootStrap {
 										
 				def customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"PLACASUR",country:country,address:".",cuit:"30-34948484-4")
 				customer.save(flush:true)
+				def userCustomer = new User(stakeholder:customer,username:"placasur", passwordHash: new Sha256Hash("placasur").toHex())
+				userCustomer.addToRoles(roleExternal)
+				userCustomer.save(flush:true)
+				
 				customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"DELTA",country:country,address:".",cuit:"30-34948484-4")
 				customer.save(flush:true)
 				customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"RICCHEZZE",country:country,address:".",cuit:"30-34948484-4")

@@ -56,6 +56,7 @@ class WishExportService implements MessageSourceAware {
 		}
 		wishes = wishes.sort{it.opNumber}
 		doExport(format,outputStream,locale,fields,wishes)		
+		return wishes.size()
 	}
 	
 	
