@@ -38,8 +38,6 @@ class WishMailService  implements MessageSourceAware{
 	def sendReport(ReportSendConfiguration configuration){
 		
 		try{
-			ByteOutputStream outputStream = new ByteOutputStream()
-			wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)
 			
 			List mails = new ArrayList()
 			
@@ -49,13 +47,18 @@ class WishMailService  implements MessageSourceAware{
 			}
 			
 			if(mails.size()>0){
+				ByteOutputStream outputStream = new ByteOutputStream()
+				int quantity = wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)
+				
+				if(quantity > 0){
 					
-				mailService.sendMail {
-					multipart true
-					to mails.toArray()
-					subject transformText(configuration.subject)
-					body transformText(configuration.body)
-					attachBytes messageSource.getMessage("wish.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+					mailService.sendMail {
+						multipart true
+						to mails.toArray()
+						subject transformText(configuration.subject)
+						body transformText(configuration.body)
+						attachBytes messageSource.getMessage("wishes.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+					}
 				}
 				configuration.lastSentDate = new Date()
 				
