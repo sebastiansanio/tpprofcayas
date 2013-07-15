@@ -20,21 +20,20 @@ class WishExternalController {
 			wishes.addAll(user.stakeholder.wishes)
 			wishes.sort{it.opNumber}
 		}		
-		[wishInstanceList: wishes]
+		[wishInstanceList: wishes,user:user]
 	}
 
     def show() {
         def wishInstance = Wish.findByCustomerAndCustomerOpNumber(Customer.get(params.customerId),params.customerOpNumber)
 		User user = User.findByUsername(SecurityUtils.subject.principal)
 		
-			
-        if (!wishInstance || wishInstance[user.stakeholder.type]!=user.stakeholder) {
+        if (!wishInstance || user.stakeholder==null || wishInstance[user.stakeholder.type]!=user.stakeholder) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'wish.label', default: 'Wish'), params.id])
             redirect(action: "list")
             return
         }
 
-        [wishInstance: wishInstance, idPictureUpdate: params.idPictureUpdate]
+        [wishInstance: wishInstance,user:user]
     }
 		
 }
