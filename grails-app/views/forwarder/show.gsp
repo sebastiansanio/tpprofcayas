@@ -70,14 +70,14 @@
 					</tr>
 				
 					<tr class="prop">
-						<td valign="top" class="name"><g:message code="forwarder.defaultLocale.label" default="Default Locale" /></td>
+						<td valign="top" class="name"><g:message code="stakeholder.defaultLocale.label" default="Default Locale" /></td>
 						
 						<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${forwarderInstance?.defaultLocale?.id}">${forwarderInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
 						
 					</tr>
 					
 					<tr class="prop">
-						<td valign="top" class="name"><g:message code="forwarder.defaultReport.label" default="Default Report" /></td>
+						<td valign="top" class="name"><g:message code="stakeholder.defaultReport.label" default="Default Report" /></td>
 						
 						<td valign="top" class="value"><g:link controller="report" action="show" id="${forwarderInstance?.defaultReport?.id}">${forwarderInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
 						

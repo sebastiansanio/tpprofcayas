@@ -38,7 +38,7 @@
 		</div>
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')} required">
-			<label for="defaultReport" class="control-label"><g:message code="shipper.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
+			<label for="defaultReport" class="control-label"><g:message code="stakeholder.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
 			<div class="controls">
 				<g:select id="defaultReport" name="defaultReport.id" from="${report.Report.list()}" optionKey="id" value="${shipperInstance?.defaultReport?.id}" class="many-to-one" noSelection="['null': '']"/>
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')}</span>
@@ -46,7 +46,7 @@
 		</div>
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultLocale', 'error')} required">
-			<label for="defaultLocale" class="control-label"><g:message code="shipper.defaultLocale.label" default="Default Locale" /><span class="required-indicator">*</span></label>
+			<label for="defaultLocale" class="control-label"><g:message code="stakeholder.defaultLocale.label" default="Default Locale" /><span class="required-indicator">*</span></label>
 			<div class="controls">
 				<g:select id="defaultLocale" name="defaultLocale.id" from="${modal.AvailableLocale.list()}" optionKey="id" value="${shipperInstance?.defaultLocale?.id}" class="many-to-one" noSelection="['null': '']"/>
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'defaultLocale', 'error')}</span>

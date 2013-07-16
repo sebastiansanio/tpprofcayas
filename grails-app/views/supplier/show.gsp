@@ -76,14 +76,14 @@
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><g:message code="supplier.defaultLocale.label" default="Default Locale" /></td>
+						<td valign="top" class="name"><g:message code="stakeholder.defaultLocale.label" default="Default Locale" /></td>
 						
 						<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${supplierInstance?.defaultLocale?.id}">${supplierInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
 						
 					</tr>
 					
 					<tr class="prop">
-						<td valign="top" class="name"><g:message code="supplier.defaultReport.label" default="Default Report" /></td>
+						<td valign="top" class="name"><g:message code="stakeholder.defaultReport.label" default="Default Report" /></td>
 						
 						<td valign="top" class="value"><g:link controller="report" action="show" id="${supplierInstance?.defaultReport?.id}">${supplierInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
 						
