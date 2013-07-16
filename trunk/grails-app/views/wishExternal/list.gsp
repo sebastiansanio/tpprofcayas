@@ -22,27 +22,27 @@
 				<th> ${message(code:'default.view.label') }</th>
 							
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('opNumber')}">
-					<g:sortableColumn property="opNumber" title="${message(code: 'wish.opNumber.label', default: 'Op Number')}" />
+					<th>${message(code: 'wish.opNumber.label', default: 'Op Number')}" </th>
 				</g:if>
 
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('customerOpNumber')}">			
-				<g:sortableColumn property="customerOpNumber" title="${message(code: 'wish.customerOpNumber.label', default: 'Customer Op Number')}" />
+					<th>${message(code: 'wish.customerOpNumber.label', default: 'Customer Op Number')}</th>
 				</g:if>
 			
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('customer')}">
-				<g:sortableColumn property="customer.name" title="${message(code: 'wish.customer.label', default: 'Customer')}" />
+					<th>${message(code: 'wish.customer.label', default: 'Customer')} </th>
 				</g:if>
 
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('supplier')}">
-				<g:sortableColumn property="supplier.name" title="${message(code: 'wish.supplier.label', default: 'Supplier')}" />
+					<th>${message(code: 'wish.supplier.label', default: 'Supplier')} </th>
 				</g:if>
 			
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('shipper')}">
-				<g:sortableColumn property="shipper.name" title="${message(code: 'wish.shipper.label', default: 'Shipper')}" />
+					<th>${message(code: 'wish.shipper.label', default: 'Shipper')} </th>
 				</g:if>
 						
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('supplierOrder')}">
-				<g:sortableColumn property="supplierOrder" title="${message(code: 'wish.supplierOrder.label', default: 'Supplier Order')}" />
+					<th>${message(code: 'wish.supplierOrder.label', default: 'Supplier Order')} </th>
 				</g:if>
 			
 			</tr>

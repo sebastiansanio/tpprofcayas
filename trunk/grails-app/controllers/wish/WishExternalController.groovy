@@ -10,7 +10,7 @@ class WishExternalController {
 	
 	
     def index() {
-        redirect(action: "list", params: params)
+        redirect(action: "listPending", params: params)
     }
 	
 	def list() {
@@ -22,6 +22,37 @@ class WishExternalController {
 		}		
 		[wishInstanceList: wishes,user:user]
 	}
+	
+	def listPending(){
+		List wishes = new ArrayList()
+		User user = User.findByUsername(SecurityUtils.subject.principal)
+		if(user.stakeholder!=null){
+			wishes.addAll(user.stakeholder.wishes.findAll{it.isPending()})
+			wishes.sort{it.opNumber}
+		}
+		render(view: "list", model: [wishInstanceList: wishes,user:user])
+	}
+	
+	def listBilled(){
+		List wishes = new ArrayList()
+		User user = User.findByUsername(SecurityUtils.subject.principal)
+		if(user.stakeholder!=null){
+			wishes.addAll(user.stakeholder.wishes.findAll{it.finishDate==null && it.billDate!=null})
+			wishes.sort{it.opNumber}
+		}
+		render(view: "list", model: [wishInstanceList: wishes,user:user])
+	}
+
+	def listFinished(){
+		List wishes = new ArrayList()
+		User user = User.findByUsername(SecurityUtils.subject.principal)
+		if(user.stakeholder!=null){
+			wishes.addAll(user.stakeholder.wishes.findAll{it.finishDate!=null})
+			wishes.sort{it.opNumber}
+		}
+		render(view: "list", model: [wishInstanceList: wishes,user:user])
+	}
+
 
     def show() {
         def wishInstance = Wish.findByCustomerAndCustomerOpNumber(Customer.get(params.customerId),params.customerOpNumber)

@@ -69,14 +69,14 @@
 						</tr>
 						
 						<tr class="prop">
-							<td valign="top" class="name"><g:message code="agent.defaultLocale.label" default="Default Locale" /></td>
+							<td valign="top" class="name"><g:message code="stakeholder.defaultLocale.label" default="Default Locale" /></td>
 							
 							<td valign="top" class="value"><g:link controller="availableLocale" action="show" id="${agentInstance?.defaultLocale?.id}">${agentInstance?.defaultLocale?.encodeAsHTML()}</g:link></td>
 							
 						</tr>
 					
 						<tr class="prop">
-							<td valign="top" class="name"><g:message code="agent.defaultReport.label" default="Default Report" /></td>
+							<td valign="top" class="name"><g:message code="stakeholder.defaultReport.label" default="Default Report" /></td>
 							
 							<td valign="top" class="value"><g:link controller="report" action="show" id="${agentInstance?.defaultReport?.id}">${agentInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
 							

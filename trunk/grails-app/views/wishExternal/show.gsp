@@ -660,7 +660,7 @@
 	</g:if>
 	
 	
-	
+	<g:if test="${fields.contains('dateCreated') || fields.contains('lastUpdated')}">	
 	<h4> <g:message code=" " default=" "/> </h4>
 	<table class="table">
 		<tbody>
@@ -681,6 +681,7 @@
 		
 		</tbody>
 	</table>
+	</g:if>
 </section>
 
 
