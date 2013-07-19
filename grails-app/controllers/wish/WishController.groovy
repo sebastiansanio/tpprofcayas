@@ -21,7 +21,7 @@ class WishController {
 
 	
 	static final Integer DEFAULT_PAGINATION_MAX = 100
-	static final DateFormat df = new SimpleDateFormat("yyyyMMdd")
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	
 	def wishExportService
 	def alertManagerService
@@ -112,7 +112,7 @@ class WishController {
 	def export() {
 		params.reportId = Long.parseLong(params.reportId)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}_"+df.format(new Date())+".${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wishes.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
 		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),params.reportId)
 	}
@@ -122,8 +122,9 @@ class WishController {
 		Report report = Report.get(reportId)
 		
 		def stakeholder = Stakeholder.get(params.id)
+		String filename = message(code:'wish.reportByStakeholder.label',args:[stakeholder.toString(),DATE_FORMAT.format(new Date())])+params.extension
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${stakeholder}_"+df.format(new Date())+".${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${filename}")
 		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder,report)
 	}
 	

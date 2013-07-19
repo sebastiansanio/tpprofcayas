@@ -15,7 +15,7 @@ import wish.Wish
 @Transactional
 class WishStatusController {
 
-	static final DateFormat df = new SimpleDateFormat("yyyyMMdd")
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	
 	def wishExportService
 	
@@ -128,7 +128,7 @@ class WishStatusController {
 		
 		WishStatus wishStatus = WishStatus.get(params.id)
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')} ${wishStatus}_"+df.format(new Date())+".${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wishes.label')} ${wishStatus}_"+DATE_FORMAT.format(new Date())+".${params.extension}")
 		wishExportService.exportWishByWishStatus(params.format,response.outputStream,RequestContextUtils.getLocale(request),wishStatus,report)
 	}
 }
