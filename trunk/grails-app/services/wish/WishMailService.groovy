@@ -2,6 +2,8 @@ package wish
 
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
@@ -13,7 +15,8 @@ import stakeholder.Stakeholder
 class WishMailService  implements MessageSourceAware{
 
     static transactional = true
-	
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
+		
 	def mailService
 	def wishExportService
 	MessageSource messageSource
@@ -49,7 +52,7 @@ class WishMailService  implements MessageSourceAware{
 			if(mails.size()>0){
 				ByteOutputStream outputStream = new ByteOutputStream()
 				int quantity = wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)
-				
+							
 				if(quantity > 0){
 					
 					mailService.sendMail {
@@ -57,7 +60,7 @@ class WishMailService  implements MessageSourceAware{
 						to mails.toArray()
 						subject transformText(configuration.subject)
 						body transformText(configuration.body)
-						attachBytes messageSource.getMessage("wishes.label",null,configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+						attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
 					}
 				}
 				configuration.lastSentDate = new Date()
