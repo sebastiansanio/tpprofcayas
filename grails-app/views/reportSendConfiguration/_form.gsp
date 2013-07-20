@@ -2,7 +2,7 @@
 
 <div class="row-fluid">
 
-<div class="span5">
+<div class="span7">
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'nextSendDate', 'error')} required">
 				<label for="nextSendDate" class="control-label"><g:message code="reportSendConfiguration.nextSendDate.label" default="Next Send Date" /><span class="required-indicator">*</span></label>
@@ -31,7 +31,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'subject', 'error')} required">
 				<label for="subject" class="control-label"><g:message code="reportSendConfiguration.subject.label" default="Subject" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:textField name="subject" required="" value="${reportSendConfigurationInstance?.subject}"/>
+					<g:textField class="span12" name="subject" required="" value="${reportSendConfigurationInstance?.subject}"/>
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'subject', 'error')}</span>
 				</div>
 			</div>
@@ -39,8 +39,8 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'body', 'error')} required">
 				<label for="body" class="control-label"><g:message code="reportSendConfiguration.body.label" default="Body" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:textArea name="body" cols="40" rows="5" maxlength="1000" required="" value="${reportSendConfigurationInstance?.body}"/>
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'body', 'error')}</span>
+					<g:textArea class="span12"  name="body" cols="60" rows="7" maxlength="1000" required="" value="${reportSendConfigurationInstance?.body}"/>
 				</div>
 			</div>
 
@@ -69,10 +69,11 @@
 			</div>
 
 </div>
-<div class="span5">
+<div class="span4">
 
-	<p>	<g:message code="transformText.header.message" default="You can use the following variables:" /></p>
+	<p>	<g:message code="transformText.header.message" default="In subject and body you can use the following variables:" /></p>
 	<p>	<g:message code="transformText.variable.week.message" default="[week] = Number of week in year" /></p>
+	<p>	<g:message code="transformText.variable.signature.message" default="[signature] = Signature (.png)" /></p>
 	
 
 </div>

@@ -6,9 +6,10 @@ class AlertsMailService {
 
     static transactional = true
 	def mailService
+	def grailsApplication
 
 	def sendAlerts(){
-		List alerts = Alert.findAllByDateFinalizedIsNullAndSentDateIsNull()
+		List alerts = Alert.findAllByDateFinalizedIsNullAndSentDateIsNullAndAttentionDateLessThanEquals(new Date())
 		alerts.each{
 			sendAlert(it)
 		}
@@ -42,11 +43,24 @@ class AlertsMailService {
 					
 					if(mails.size()>0){
 
-											
-						mailService.sendMail {
-							to mails.toArray()
-							subject transformText(message.subject,alert)
-							body transformText(message.message,alert)
+						if(message.message.contains("[signature]")){
+							mailService.sendMail {
+								multipart true
+								to mails.toArray()
+								subject transformText(message.subject,alert)
+								html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(message.message,alert).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
+								text transformText(message.message,alert)
+								inline 'signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file
+							}
+							
+						}else{
+							mailService.sendMail {
+								multipart true
+								to mails.toArray()
+								subject transformText(message.subject,alert)
+								html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(message.message,alert).replace("\n", "<br/>")+'</p>'
+								text transformText(message.message,alert)
+							}
 						}
 						alert.sentDate = new Date()	
 					}
