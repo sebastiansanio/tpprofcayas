@@ -20,6 +20,7 @@ class WishMailService  implements MessageSourceAware{
 	def mailService
 	def wishExportService
 	MessageSource messageSource
+	def grailsApplication
 	
 	def sendReports(){
 		Date now = new Date()
@@ -51,16 +52,27 @@ class WishMailService  implements MessageSourceAware{
 			
 			if(mails.size()>0){
 				ByteOutputStream outputStream = new ByteOutputStream()
-				int quantity = wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)
-							
+				int quantity = wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)		
 				if(quantity > 0){
-					
-					mailService.sendMail {
-						multipart true
-						to mails.toArray()
-						subject transformText(configuration.subject)
-						body transformText(configuration.body)
-						attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+					if(configuration.body.contains("[signature]")){
+						mailService.sendMail {
+							multipart true
+							to mails.toArray()
+							subject transformText(configuration.subject)
+							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
+							text transformText(configuration.body)
+							attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+							inline 'signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file
+						}
+					}else{
+						mailService.sendMail {
+							multipart true
+							to mails.toArray()
+							subject transformText(configuration.subject)
+							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body).replace("\n", "<br/>")+'</p>'
+							text transformText(configuration.body)
+							attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
+						}
 					}
 				}
 				configuration.lastSentDate = new Date()
