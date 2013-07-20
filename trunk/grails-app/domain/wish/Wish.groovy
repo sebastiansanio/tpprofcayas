@@ -346,6 +346,8 @@ class Wish {
 			return deliveryDate
 		if(paymentTerm?.hasCad() && paymentTerm?.percentPaymentAfterDelivery==70)
 			return getBlReceivedDate()
+		if(paymentTerm?.percentPaymentAfterDelivery==100 && paymentTerm?.paymentDaysAfterTimeOfArrival > 0)
+			return estimatedTimeOfArrival?.plus(paymentTerm?.paymentDaysAfterTimeOfArrival)
 		return null
 	}
 	
