@@ -23,19 +23,19 @@
 
 
 	<button type="submit" formaction='export?format=csv&amp;extension=csv' >
-	<img src="../images/skin/csv.png"/> CSV
+	<img src="${resource(dir: 'images/skin',file: 'csv.png')}"/> CSV
 	</button>
 	
 	<button type="submit" formaction='export?format=excel&amp;extension=xls' >
-	<img src="../images/skin/excel.png"/> EXCEL
+	<img src="${resource(dir: 'images/skin',file: 'excel.png')}"/> EXCEL
 	</button>
 	
 	<button type="submit" formaction='export?format=ods&amp;extension=ods' >
-	<img src="../images/skin/ods.png"/> ODS
+	<img src="${resource(dir: 'images/skin',file: 'ods.png')}"/> ODS
 	</button>
 
 	<button type="submit" formaction='export?format=pdf&amp;extension=pdf' >
-	<img src="../images/skin/pdf.png"/> PDF
+	<img src="${resource(dir: 'images/skin',file: 'pdf.png')}"/> PDF
 	</button>
 	
 
