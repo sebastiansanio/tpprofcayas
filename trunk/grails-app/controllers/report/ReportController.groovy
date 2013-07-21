@@ -1,7 +1,11 @@
 package report
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+import login.User
+import org.apache.shiro.SecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
-
+import org.springframework.web.servlet.support.RequestContextUtils
 
 import org.springframework.transaction.annotation.Transactional
 import stakeholder.Stakeholder
@@ -13,6 +17,7 @@ class ReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	def wishExportService
 
     def index() {
@@ -120,16 +125,21 @@ class ReportController {
         }
     }
 	
-	def export(){
-		
-		
+	def export() {
+		params.reportId = Long.parseLong(params.reportId)
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wishes.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),params.reportId)
+	}
+	
+	def exportTemp(){
 		List wishes = Wish.list(sort:'opNumber')
 		if(report.pendingOnly==true)
 			wishes = wishes.findAll{
 				it.isPending()
 			}
-		wishExportService.doExport(format,outputStream,locale,report.fields,wishes)
-		
+		wishExportService.doExport(format,outputStream,locale,report.fields,wishes)	
 	}
 	
 }
