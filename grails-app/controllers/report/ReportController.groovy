@@ -5,12 +5,15 @@ import org.springframework.dao.DataIntegrityViolationException
 
 import org.springframework.transaction.annotation.Transactional
 import stakeholder.Stakeholder
+import wish.Wish
 
 
 @Transactional
 class ReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	def wishExportService
 
     def index() {
         redirect(action: "list", params: params)
@@ -116,4 +119,17 @@ class ReportController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def export(){
+		
+		
+		List wishes = Wish.list(sort:'opNumber')
+		if(report.pendingOnly==true)
+			wishes = wishes.findAll{
+				it.isPending()
+			}
+		wishExportService.doExport(format,outputStream,locale,report.fields,wishes)
+		
+	}
+	
 }

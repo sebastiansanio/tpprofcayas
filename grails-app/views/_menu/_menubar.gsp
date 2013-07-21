@@ -27,7 +27,7 @@
 	<ul class="${menutype} bs-docs-sidenavMenu" data-role="listview" data-split-icon="gear" data-filter="true">
 		<g:each status="i" var="c" in="${grailsApplication.controllerClasses.sort { it.logicalPropertyName}}">
 						
-			<g:if test="${SecurityUtils.subject.isPermitted(c.logicalPropertyName+":index")}">
+			<g:if test="${c.logicalPropertyName=='main' || SecurityUtils.subject.isPermitted(c.logicalPropertyName+":index")}">
 				<li class="controller${params.controller == c.logicalPropertyName ? " active" : ""}">
 					<g:link controller="${c.logicalPropertyName}" action="index">
 						<g:message code="${c.logicalPropertyName}.label" default="${c.logicalPropertyName.capitalize()}"/>
