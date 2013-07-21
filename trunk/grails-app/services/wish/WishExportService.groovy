@@ -104,7 +104,7 @@ class WishExportService implements MessageSourceAware {
 				formatters.put(it, booleanFormatter)
 			widths.add(getMaxWidth(wishes,it,label.length()))
 		}
-		Map parameters = [title: messageSource.getMessage("wish.label",null,locale),'column.widths':widths]
+		Map parameters = [title: messageSource.getMessage("wishes.label",null,locale),'column.widths':widths]
 		exportService.export(format,outputStream,wishes,fields,labels,formatters,parameters)
 	}
 

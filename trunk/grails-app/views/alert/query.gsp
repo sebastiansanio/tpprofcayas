@@ -13,13 +13,11 @@
 
 <h4> <g:message code="export.label" default="Export" /> </h4>
 
-<g:form>
+<g:form action="export">
 
 <div class="row-fluid">
 
-<div class="span4">
-
-
+<div class="span3">
 	
 	<div class="control-group fieldcontain required">
 		<label for="fromDate" class="control-label"><g:message code="default.fromDate.label" default="From date" /><span class="required-indicator">*</span></label>
@@ -42,46 +40,40 @@
 
 		</div>
 	</div>
-	
-
 </div>
 
-<div class="row-fluid">
-<div class="span2 btn-toolbar">
-<button class="btn span12" type="button" onClick="setToday();">${message(code:'default.today.label')}</button>
-<button class="btn span12" type="button" onClick="setTomorrow();">${message(code:'default.tomorrow.label')}</button>
-<button class="btn span12" type="button" onClick="setThisWeek();">${message(code:'default.thisWeek.label')}</button>
-<button class="btn span12" type="button" onClick="setNextWeek();">${message(code:'default.nextWeek.label')}</button>
-<button class="btn span12" type="button" onClick="setThisMonth();">${message(code:'default.thisMonth.label')}</button>
-<button class="btn span12" type="button" onClick="setNextMonth();">${message(code:'default.nextMonth.label')}</button>
-<button class="btn span12" type="button" onClick="setAll();">${message(code:'default.all.label')}</button>
+<div class="offset1 span2">
+	<div class="btn-toolbar">
+	<button class="btn span12" type="button" onClick="setToday();">${message(code:'default.today.label')}</button>
+	<button class="btn span12" type="button" onClick="setTomorrow();">${message(code:'default.tomorrow.label')}</button>
+	<button class="btn span12" type="button" onClick="setThisWeek();">${message(code:'default.thisWeek.label')}</button>
+	<button class="btn span12" type="button" onClick="setNextWeek();">${message(code:'default.nextWeek.label')}</button>
+	<button class="btn span12" type="button" onClick="setThisMonth();">${message(code:'default.thisMonth.label')}</button>
+	<button class="btn span12" type="button" onClick="setNextMonth();">${message(code:'default.nextMonth.label')}</button>
+	<button class="btn span12" type="button" onClick="setAll();">${message(code:'default.all.label')}</button>
+	</div>
 
-</div>
 </div>
 </div>
 
 	
 <div class="row">
-<div class='span4 export'>
+	<g:hiddenField id="exportFormat" name="format" />
+	<g:hiddenField id="exportExtension" name="extension" />
 
-
-	<button type="submit" formaction='export?format=csv&amp;extension=csv' >
-	<img src="../images/skin/csv.png"/> CSV
+<div class='export'>
+	<button type="submit" onclick="$('#exportFormat').val('csv');$('#exportExtension').val('csv');">
+	<img src="${resource(dir: 'images/skin',file: 'csv.png')}"/> CSV
 	</button>
-	
-	<button type="submit" formaction='export?format=excel&amp;extension=xls' >
-	<img src="../images/skin/excel.png"/> EXCEL
+	<button type="submit" onclick="$('#exportFormat').val('excel');$('#exportExtension').val('xls');">
+	<img src="${resource(dir: 'images/skin',file: 'excel.png')}"/> EXCEL
 	</button>
-	
-	<button type="submit" formaction='export?format=ods&amp;extension=ods' >
-	<img src="../images/skin/ods.png"/> ODS
+	<button type="submit" onclick="$('#exportFormat').val('ods');$('#exportExtension').val('ods');">
+	<img src="${resource(dir: 'images/skin',file: 'ods.png')}"/> ODS
 	</button>
-
-	<button type="submit" formaction='export?format=pdf&amp;extension=pdf' >
-	<img src="../images/skin/pdf.png"/> PDF
+	<button type="submit" onclick="$('#exportFormat').val('pdf');$('#exportExtension').val('pdf');" >
+	<img src="${resource(dir: 'images/skin',file: 'pdf.png')}"/> PDF
 	</button>
-	
-
 </div>
 </div>
 </g:form>
