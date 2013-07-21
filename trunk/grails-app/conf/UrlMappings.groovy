@@ -1,15 +1,7 @@
 class UrlMappings {
 
 	static mappings = {
-		
-
-		"/about"		(view:"/siteinfo/about")
-		"/blog"			(view:"/siteinfo/blog")
-		"/systeminfo"	(view:"/siteinfo/systeminfo")
-		"/contact"		(view:"/siteinfo/contact")
-		"/terms"		(view:"/siteinfo/terms")
-		"/imprint"		(view:"/siteinfo/imprint")
-		
+				
 
         "/"	{
 			controller	= 'Auth'
@@ -22,11 +14,12 @@ class UrlMappings {
 		  	}
 		}
 		
-		/* 
-		 * System Pages without controller 
-		 */
 		"403"	(view:'/_errors/403')
-		"404"	(view:'/_errors/404')
+		"404"{
+			controller = 'Auth'
+			action = {'unauthorized'}
+			
+		}
 		"500"	(view:'/_errors/error')
 		"503"	(view:'/_errors/503')
 	}
