@@ -46,7 +46,7 @@ class AlertExportService {
 		
 		
 
-		Map parameters = [title: messageSource.getMessage("alert.label",null,locale)]
+		Map parameters = [title: messageSource.getMessage("alerts.label",null,locale)]
 		exportService.export(format,outputStream,alerts,fields,labels,formatters,parameters)
 		
 				

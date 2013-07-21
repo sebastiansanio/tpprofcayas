@@ -9,7 +9,7 @@ import org.springframework.web.servlet.support.RequestContextUtils
 
 class AlertController {
 
-	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("_yyyyMMdd")
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -62,7 +62,7 @@ class AlertController {
 		Date toDate = Date.parse('dd/MM/yyyy',params.toDate)
 		boolean pendingOnly = params.pendingOnly
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alert.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alerts.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
 		alertExportService.exportAlert(params.format,response.outputStream,RequestContextUtils.getLocale(request),fromDate,toDate,pendingOnly)
 	}
 	

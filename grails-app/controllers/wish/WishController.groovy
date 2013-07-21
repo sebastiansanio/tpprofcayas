@@ -122,7 +122,7 @@ class WishController {
 		Report report = Report.get(reportId)
 		
 		def stakeholder = Stakeholder.get(params.id)
-		String filename = message(code:'wish.reportByStakeholder.label',args:[stakeholder.toString(),DATE_FORMAT.format(new Date())])+params.extension
+		String filename = message(code:'wish.reportByStakeholder.label',args:[stakeholder.toString(),DATE_FORMAT.format(new Date())])+"."+params.extension
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${filename}")
 		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),stakeholder,report)
