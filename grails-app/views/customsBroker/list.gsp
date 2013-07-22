@@ -24,9 +24,9 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'customsBroker.email.label', default: 'Email')}" />
 			
-				<th><g:message code="customsBroker.defaultReport.label" default="Default Report" /></th>
+				<th><g:message code="stakeholder.defaultReport.label" default="Default Report" /></th>
 			
-				<th><g:message code="customsBroker.defaultLocale.label" default="Default Locale" /></th>
+				<th><g:message code="stakeholder.defaultLocale.label" default="Default Locale" /></th>
 			
 				<th><g:message code="customsBroker.country.label" default="Country" /></th>
 			
