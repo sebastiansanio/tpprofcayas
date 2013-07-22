@@ -24,9 +24,9 @@
 			
 				<g:sortableColumn property="email" title="${message(code: 'forwarder.email.label', default: 'Email')}" />
 			
-				<th><g:message code="forwarder.defaultReport.label" default="Default Report" /></th>
+				<th><g:message code="stakeholder.defaultReport.label" default="Default Report" /></th>
 			
-				<th><g:message code="forwarder.defaultLocale.label" default="Default Locale" /></th>
+				<th><g:message code="stakeholder.defaultLocale.label" default="Default Locale" /></th>
 			
 				<th><g:message code="forwarder.country.label" default="Country" /></th>
 			
