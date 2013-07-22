@@ -89,7 +89,7 @@
   }
   
   .bs-docs-sidenavMenu {
-  	background: red;
+  	background: white;
   }
 }
 
@@ -105,9 +105,9 @@
     padding-bottom: 30px;
   }
   
-    .bs-docs-sidenavMenu {
+/*    .bs-docs-sidenavMenu {
   	background: blue;
-  }
+  }*/
   
 }
 
@@ -128,9 +128,9 @@
   top: 0px;
   }
   
-   .bs-docs-sidenavMenu {
+ /*  .bs-docs-sidenavMenu {
   	background: green;
-  }
+  }*/
 }
 
 /* Tablet
