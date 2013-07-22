@@ -10,7 +10,7 @@
     <meta name="description"	content="">
     <meta name="author"			content="">
 	<link rel="shortcut icon"		href="${resource(dir:'images',file:'logo.jpg')}" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'docs.css')}" />
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'menuesFijo.css')}" />
 	<r:require modules="jquery"/>
 	<r:require modules="${session.skin ? session.skin            : 'bootstrap'}"/>
 	<r:require modules="${session.skin ? session.skin + '_utils' : 'bootstrap_utils'}"/>
