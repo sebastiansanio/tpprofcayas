@@ -6,13 +6,14 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'alert.label', default: 'Alert')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-alert" class="first">
 
-	<table class="table table-bordered">
+	<table class="table table-bordered cabeceraFija">
 		<thead>
 			<tr>
 				<g:sortableColumn property="attentionDate" title="${message(code: 'alert.attentionDate.label', default: 'Attention Date')}" />

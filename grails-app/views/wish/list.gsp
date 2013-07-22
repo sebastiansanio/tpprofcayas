@@ -7,13 +7,14 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'wish.label', default: 'Wish')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-wish" class="first">
 
-	<table class="table table-condensed table-bordered">
+	<table class="table table-condensed table-bordered display cabeceraFija">
 		<thead>
 			<tr>
 			

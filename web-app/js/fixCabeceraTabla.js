@@ -1,7 +1,8 @@
 var fixedHeader;
 
 $(document).ready( function () {
-	var oTable = $('#tableList').dataTable( {
+	/*id=tableList  q tiene que tener la tabla para que la cabecera se quede fija*/
+	var oTable = $('.cabeceraFija').dataTable( {
 	     "bInfo": false, "bPaginate": false, "bFilter": false
 	    } );   
     

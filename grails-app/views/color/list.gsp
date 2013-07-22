@@ -7,13 +7,14 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'color.label', default: 'Color')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-color" class="first">
 
-	<table class="table table-bordered">
+	<table class="table table-bordered cabeceraFija">
 		<thead>
 			<tr>
 				<g:sortableColumn property="description" title="${message(code: 'color.description.label', default: 'Description')}" />

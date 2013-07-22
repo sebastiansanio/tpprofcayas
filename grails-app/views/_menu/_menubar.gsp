@@ -24,7 +24,7 @@
 
 
 <div class="${menuposition}">
-	<ul class="${menutype} bs-docs-sidenavMenu" data-role="listview" data-split-icon="gear" data-filter="true">
+	<ul id="menuPpal" class="${menutype} bs-docs-sidenavMenu" data-role="listview" data-split-icon="gear" data-filter="true">
 		<g:each status="i" var="c" in="${grailsApplication.controllerClasses.sort { it.logicalPropertyName}}">
 						
 			<g:if test="${c.logicalPropertyName=='main' || SecurityUtils.subject.isPermitted(c.logicalPropertyName+":index")}">

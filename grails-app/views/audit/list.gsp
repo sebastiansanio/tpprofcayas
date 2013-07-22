@@ -8,13 +8,14 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'audit.label', default: 'Audit')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-revisionInformation" class="first">
 
-	<table class="table table-bordered table-condensed">
+	<table class="table table-bordered table-condensed cabeceraFija">
 		<thead>
 			<tr>
 				
