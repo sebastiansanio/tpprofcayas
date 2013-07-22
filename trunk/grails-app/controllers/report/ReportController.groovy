@@ -133,13 +133,21 @@ class ReportController {
 		wishExportService.exportWish(params.format,response.outputStream,RequestContextUtils.getLocale(request),params.reportId)
 	}
 	
-	def exportTemp(){
+	def exportCurrent(){
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wishes.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		
+		Report report = new Report(params)
+		
 		List wishes = Wish.list(sort:'opNumber')
 		if(report.pendingOnly==true)
 			wishes = wishes.findAll{
 				it.isPending()
 			}
-		wishExportService.doExport(format,outputStream,locale,report.fields,wishes)	
+			
+			
+		wishExportService.doExport(params.format,response.outputStream,RequestContextUtils.getLocale(request),report.fields,wishes)	
 	}
 	
 }
