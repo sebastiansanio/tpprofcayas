@@ -1,4 +1,4 @@
-<header id="Header">
+<div id="Header">
 	<div class="row-fluid">
 		
 		<br/>
@@ -7,4 +7,4 @@
 		<br/>
 		<br/>
 	</div>
-</header>
+</div>
