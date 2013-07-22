@@ -5,7 +5,7 @@
 			&&	params.controller != ''
 
 }">
-	<ul id="Menu" class="nav nav-list bs-docs-sidenav" >
+	<ul id="subMenuPpal" class="nav nav-list bs-docs-sidenav" >
 
 		<g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />
 		
@@ -78,4 +78,5 @@
 		</g:if>		
 		
 	</ul>
+	
 </g:if>

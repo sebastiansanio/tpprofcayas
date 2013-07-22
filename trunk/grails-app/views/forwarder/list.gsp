@@ -7,13 +7,14 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'forwarder.label', default: 'Forwarder')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-forwarder" class="first">
 
-	<table class="table table-bordered">
+	<table class="table table-bordered cabeceraFija">
 		<thead>
 			<tr>
 			

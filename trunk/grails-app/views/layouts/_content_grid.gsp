@@ -1,15 +1,15 @@
 <div id="Content" class="container">
 
 	<!-- Main menu in one line (e.g., controller entry points -->
-	<div class="row">
-		<div class="span12 bs-docs-sidebar">
+	<div id="panelMenuPpal" class="row">
+		<div class="span12">
 			<g:render template="/_menu/menubar"/>
 		</div>
 	</div>
 	
-	<div class="row">
+	<div id="panelSubMenu" class="row">
 		<!-- Secondary menu in one line (e.g., actions for current controller) -->
-		<div class="span2 bs-docs-sidebar">
+		<div class="span2">
 			<g:render template="/_menu/submenubar"/>														
 		</div>
 		

@@ -7,13 +7,15 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'customer.label', default: 'Customer')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-customer" class="first">
 
-	<table class="table table-bordered">
+
+	<table class="table table-bordered display cabeceraFija">
 		<thead>
 			<tr>
 			
@@ -54,6 +56,7 @@
 	<div class="pagination">
 		<bs:paginate total="${customerInstanceTotal}" />
 	</div>
+
 </section>
 
 </body>
