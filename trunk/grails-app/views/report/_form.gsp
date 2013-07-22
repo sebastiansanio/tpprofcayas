@@ -11,22 +11,27 @@
 
 	<div class="row-fluid">
 			<label class="span1" for="fields" class="control-label"><g:message code="report.fields.label" default="Fields" /></label>
+			
 			<div class="span4">									
 				<g:select class="span12" size="13" id="avFields" name="avFields" from="${new Wish().domainClass.properties.findAll{!(it.name in reportInstance?.fields)}.sort{message(code:'wish.'+it.name+'.label')}}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" multiple="multiple"/>
 			</div>
+			
 			<div class="span2">	
-				<div class="row-fluid">
-					<p><button class="span12" type="button" onClick="addFields();">${message(code:'add.label')} </button></p>
-					<p><button class="span12" type="button" onClick="removeFields();"> ${message(code:'remove.label')} </button></p>
-					<p><button class="span12" type ="button" onClick="up();"> ${message(code:'up.label')}</button>		</p>
-					<p><button class="span12" type ="button" onClick="down();"> ${message(code:'down.label')}</button></p>
+				<div class="btn-group btn-group-vertical"  style="display:block;">
+					<button type="button" class="btn" onClick="addFields();">${message(code:'add.label')} </button>
+					<button type="button" class="btn" onClick="removeFields();"> ${message(code:'remove.label')} </button>
+					<button type ="button" class="btn" onClick="up();"> ${message(code:'up.label')}</button>		
+					<button type ="button" class="btn" onClick="down();"> ${message(code:'down.label')}</button>
 				</div>
 			</div>
+			
 			<div class="span4">			
 				<g:select class="span12" onSubmit="selectAll();"size="13" id="fields" name="fields" from="${reportInstance?.fields}" optionValue="${{message(code:'wish.'+it+'.label')}}" multiple="multiple" required=""/>
 			</div>
 	</div>
+	
 	<div class="row-fluid">
+		<br>
 		<div class="span4">
 			<div class="control-group">
 			<label class="control-label" for="pendingOnly"><g:message code="report.pendingOnly.label" default="Pending Only" /></label>

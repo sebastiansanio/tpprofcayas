@@ -43,7 +43,7 @@
 </div>
 
 <div class="offset1 span2">
-	<div class="btn-toolbar">
+	<div class="btn-toolbar btn-group-vertical">
 	<button class="btn span12" type="button" onClick="setToday();">${message(code:'default.today.label')}</button>
 	<button class="btn span12" type="button" onClick="setTomorrow();">${message(code:'default.tomorrow.label')}</button>
 	<button class="btn span12" type="button" onClick="setThisWeek();">${message(code:'default.thisWeek.label')}</button>
