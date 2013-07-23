@@ -56,7 +56,7 @@
 	
 	<r:layoutResources />
 	
-	<script type="text/javascript" src="${resource(dir:'js', file:'applicationFixes.js')}"> </script>
+	<script type="text/javascript" src="${resource(dir:'js', file:'fixMenues.js')}"> </script>
 	
 </body>
 
