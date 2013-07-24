@@ -188,6 +188,7 @@ class BootStrap {
 				roleOperator.addToPermissions("*:show")
 				roleOperator.addToPermissions("courier:*")
 				roleOperator.addToPermissions("courierRecord:*")
+				roleOperator.addToPermissions("letterOfGuarantee:*")
 				roleOperator.addToPermissions("audit:*")
 				roleOperator.save(flush:true)
 				
