@@ -1,6 +1,7 @@
 package stakeholder
-import wish.Wish
 
+import wish.Wish
+import wish.LetterOfGuarantee
 import org.hibernate.envers.Audited
 
 @Audited
