@@ -59,7 +59,7 @@ class WishMailService  implements MessageSourceAware{
 							multipart true
 							to mails.toArray()
 							subject transformText(configuration.subject)
-							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
+							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
 							text transformText(configuration.body)
 							attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
 							inline 'signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file
@@ -69,7 +69,7 @@ class WishMailService  implements MessageSourceAware{
 							multipart true
 							to mails.toArray()
 							subject transformText(configuration.subject)
-							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body).replace("\n", "<br/>")+'</p>'
+							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>")+'</p>'
 							text transformText(configuration.body)
 							attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
 						}
