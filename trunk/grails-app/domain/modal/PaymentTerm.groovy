@@ -21,15 +21,6 @@ class PaymentTerm {
 		paymentDaysAfterTimeOfArrival nullable:true,min:0
     }
 	
-	boolean hasCad(){
-		if(percentPaymentAfterDelivery==0)
-			return false
-		
-		if(paymentDaysAfterTimeOfArrival != null || paymentDaysAfterTimeOfArrival == 0 )
-			return true
-		return false
-	}
-	
 	Integer getPercentPaymentBeforeDelivery(){
 		return 100 - percentPaymentAfterDelivery
 	}

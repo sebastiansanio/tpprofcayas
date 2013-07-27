@@ -344,10 +344,10 @@ class Wish {
 	Date getEstimatedBalancePaymentDate(){
 		if(paymentTerm?.percentPaymentAfterDelivery==0)
 			return deliveryDate
-		if(paymentTerm?.hasCad() && paymentTerm?.percentPaymentAfterDelivery==70)
-			return getBlReceivedDate()
 		if(paymentTerm?.percentPaymentAfterDelivery==100 && paymentTerm?.paymentDaysAfterTimeOfArrival > 0)
 			return estimatedTimeOfArrival?.plus(paymentTerm?.paymentDaysAfterTimeOfArrival)
+		if(paymentTerm?.percentPaymentAfterDelivery>0)
+			return getBlReceivedDate()
 		return null
 	}
 	

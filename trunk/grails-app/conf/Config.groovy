@@ -90,9 +90,9 @@ log4j = {
 
 grails.mail.host = "smtp.gmail.com"
 grails.mail.port = 465
-grails.mail.username = "operaciones.cayas@gmail.com"
-grails.mail.default.from = "Operaciones Cayas <operaciones.cayas@gmail.com>"
-grails.mail.password = "Cayas5854"
+grails.mail.username = "onlinecayas@gmail.com"
+grails.mail.default.from = "Cayas Online <cayasonline@cayas.com.ar>"
+grails.mail.password = "temamaspapa"
 grails.mail.props = ["mail.transport.protocol":"smtps",
 			 "mail.smtps.host":"smtp.gmail.com",
 			 "mail.smtps.port":"465",
