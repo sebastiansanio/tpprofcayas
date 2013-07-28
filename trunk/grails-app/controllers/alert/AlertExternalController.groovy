@@ -41,36 +41,8 @@ class AlertExternalController {
 			alertsQuantity = Alert.countByDateFinalizedIsNullAndWishInListAndAlertTypeInList(wishes,alertTypes)
 		}
 		
-        [alertInstanceList: alerts, alertInstanceTotal: alertsQuantity]
+        [alertInstanceList: alerts, alertInstanceTotal: alertsQuantity,user:user]
     }
 	
-
-	def query() {
-		
-	}
-	
-	def export() {
-		Date fromDate = Date.parse('dd/MM/yyyy',params.fromDate)
-		Date toDate = Date.parse('dd/MM/yyyy',params.toDate)
-		boolean pendingOnly = params.pendingOnly
-		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alerts.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
-		alertExportService.exportAlert(params.format,response.outputStream,RequestContextUtils.getLocale(request),fromDate,toDate,pendingOnly)
-	}
-	
-	def inspected(){
-		def alertInstance = Alert.get(params.id)
-		if (!alertInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'alert.label', default: 'Alert'), params.id])
-			redirect(action: "list")
-			return
-		}
-		Alert.withTransaction {
-			alertInstance.inspected()
-		}
-		flash.message = message(code: 'alert.inspected.label')
-		redirect(action: "list")
-		
-	}
 
 }
