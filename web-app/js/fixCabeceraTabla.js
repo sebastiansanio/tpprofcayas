@@ -3,7 +3,10 @@ var fixedHeader;
 $(document).ready( function () {
 	/*id=tableList  q tiene que tener la tabla para que la cabecera se quede fija*/
 	var oTable = $('.cabeceraFija').dataTable( {
-	     "bInfo": false, "bPaginate": false, "bFilter": false, "bSort": false
+	     "bInfo": false, "bPaginate": false, "bFilter": false, "bSort": false,
+	     "oLanguage": {
+	    	 "sEmptyTable": "-"
+	     }
 	    } );   
 	
     
