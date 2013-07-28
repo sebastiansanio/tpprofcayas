@@ -134,7 +134,10 @@
 				<td colspan="2" valign="top" class="name">
                     <ul>
                         <g:each in="${wishInstance.activeAlerts.sort{it.attentionDate}}" var="a">
-                         <li class="alert ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())>0?'alert-info':''} ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())<=0?'alert-error':''}">${a?.encodeAsHTML() + " ("+a?.attentionDate?.format("dd/MM/yyyy")+")"}</li>
+                        
+	                        <g:if test="${a.alertType.stakeholders.contains(user.stakeholder.type)}">
+	                        <li class="alert ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())>0?'alert-info':''} ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())<=0?'alert-error':''}">${a?.encodeAsHTML() + " ("+a?.attentionDate?.format("dd/MM/yyyy")+")"}</li>
+	                       	</g:if>
                         </g:each>
                     </ul>
 				</td>

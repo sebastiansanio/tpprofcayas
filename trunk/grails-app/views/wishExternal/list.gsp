@@ -23,7 +23,7 @@
 				<th> ${message(code:'default.view.label') }</th>
 							
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('opNumber')}">
-					<th>${message(code: 'wish.opNumber.label', default: 'Op Number')}" </th>
+					<th>${message(code: 'wish.opNumber.label', default: 'Op Number')} </th>
 				</g:if>
 
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('customerOpNumber')}">			
