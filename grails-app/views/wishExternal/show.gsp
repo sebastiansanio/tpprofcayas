@@ -136,7 +136,7 @@
                         <g:each in="${wishInstance.activeAlerts.sort{it.attentionDate}}" var="a">
                         
 	                        <g:if test="${a.alertType.stakeholders.contains(user.stakeholder.type)}">
-	                        <li class="alert ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())>0?'alert-info':''} ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())<=0?'alert-error':''}">${a?.encodeAsHTML() + " ("+a?.attentionDate?.format("dd/MM/yyyy")+")"}</li>
+	                        <li class="alert ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())>0?'alert-info':''} ${(!a.isInspected()) && a?.attentionDate.compareTo(new Date().clearTime())<=0?'alert-error':''}">${a?.alertType?.externalMessage?.encodeAsHTML() + " ("+a?.attentionDate?.format("dd/MM/yyyy")+")"}</li>
 	                       	</g:if>
                         </g:each>
                     </ul>
