@@ -12,6 +12,7 @@ class AlertType {
 	Integer frequency
 	String nameOfEstimatedDateField
 	String nameOfCompletionField
+	String externalMessage
 	
 	static hasMany		= [alerts:Alert,stakeholders:String,messages:AlertMessage]
 	
@@ -32,6 +33,7 @@ class AlertType {
 		nameOfCompletionField blank:false,nullable:false
 		alertTerm nullable:false
 		frequency nullable:true
+		externalMessage nullable:true
     }
 		
 	public String toString() {

@@ -54,7 +54,7 @@
 
 				<td><g:formatDate date="${alertInstance.deadline}" /></td>				
 			
-				<td>${fieldValue(bean: alertInstance, field: "alertType")}</td>
+				<td>${alertInstance.alertType.externalMessage}</td>
 
 				<g:if test="${user.stakeholder.defaultReport.fields.contains('opNumber')}">					
 					<td><g:link action="show" controller="wishExternal" params="[customerId:alertInstance.wish.customer.id,customerOpNumber:alertInstance.wish.customerOpNumber]">${alertInstance.wish.opNumber}</g:link></td>

@@ -51,22 +51,23 @@
 				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "frequency")}</td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="alertType.externalMessage.label" default="Description" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: alertTypeInstance, field: "externalMessage")}</td>
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="alertType.stakeholders.label" default="Stakeholders" />
-				
 				<td>
 					<ul>
 					<g:each in="${alertTypeInstance.stakeholders}" var="a">
 						<li>${message(code:'wish.'+a+'.label')}</li>
 					</g:each>
 					</ul>
-				
-				
-				</td>
-				
-				
-				
+				</td>			
 			</tr>
 		
 			<tr class="prop">

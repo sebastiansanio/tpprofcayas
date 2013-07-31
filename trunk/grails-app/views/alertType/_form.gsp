@@ -1,6 +1,9 @@
 <%@ page import="alert.AlertType" %>
 <%@ page import="wish.Wish" %>
 
+<div class="row-fluid">
+
+<div class="span5">
 
 
 			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'description', 'error')} required">
@@ -45,6 +48,17 @@
 					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'frequency', 'error')}</span>
 				</div>
 			</div>
+</div>
+<div class="span5">
+
+			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'externalMessage', 'error')}">
+				<label for="externalMessage" class="control-label"><g:message code="alertType.externalMessage.label"/></label>
+				<div class="controls">
+					<g:textArea rows="5" name="externalMessage" value="${alertTypeInstance?.externalMessage}"/>
+					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'externalMessage', 'error')}</span>
+				</div>
+			</div>
+
 
 			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'stakeholders', 'error')} ">
 				<label for="stakeholders" class="control-label"><g:message code="alertType.stakeholders.label" default="Stakeholders" /></label>
@@ -54,6 +68,7 @@
 					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'stakeholders', 'error')}</span>
 				</div>
 			</div>
-
+</div>
+</div>
 					
 
