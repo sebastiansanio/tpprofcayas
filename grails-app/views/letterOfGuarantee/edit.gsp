@@ -7,6 +7,8 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee')}" />
 	<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<script type="text/javascript" src="${resource(dir:'js', file:'letterGuaranteeFunc.js')}"> </script>	
+	
 </head>
 
 <body>
@@ -34,6 +36,39 @@
 
 </section>
 			
+<div id="linkNuevo">
+	<g:link action="edit" params="[customer:'[id:'+letterOfGuaranteeInstance?.customer?.id+']', 'customer.id':letterOfGuaranteeInstance?.customer?.id, forwarder:'[id:'+letterOfGuaranteeInstance?.forwarder?.id+']', 'forwarder.id':letterOfGuaranteeInstance?.forwarder?.id, year:letterOfGuaranteeInstance?.year]"></g:link>
+</div>
+
+<div id="linkDelete">
+	<g:link action="delete" params="[customer:'[id:'+letterOfGuaranteeInstance?.customer?.id+']', 'customer.id':letterOfGuaranteeInstance?.customer?.id, forwarder:'[id:'+letterOfGuaranteeInstance?.forwarder?.id+']', 'forwarder.id':letterOfGuaranteeInstance?.forwarder?.id, year:letterOfGuaranteeInstance?.year]"></g:link>
+</div>
+
+<script type="text/javascript">
+
+$("document").ready( function() {
+
+	<input type="submit" name="_action_delete" value="Eliminar" class="btn btn-danger">
+
+	//para el delete
+	var panelDelete = $("#DeleteModal").children(".modal-footer").children("form");
+
+	var year = "<input type='hidden' name='year' value='"+2013+"' id='year'>"
+	var idCustomer = "<input type='hidden' name='year' value='"+2013+"' id='year'>"
+	var customer = "<input type='hidden' name='year' value='"+2013+"' id='year'>"
+	var idForwarder = "<input type='hidden' name='year' value='"+2013+"' id='year'>"
+	var forwarder = "<input type='hidden' name='year' value='"+2013+"' id='year'>"
+	
+	
+	panelDelete.append(year);
+
+	var panelDelete = $("#DeleteModal").find(".btn btn-danger");
+	
+	
+	//alert("a");
+});
+
+</script>
 </body>
 
 </html>

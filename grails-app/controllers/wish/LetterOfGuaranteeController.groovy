@@ -1,16 +1,10 @@
 package wish
 
-import java.awt.GraphicsConfiguration.DefaultBufferCapabilities;
-
-import org.springframework.dao.DataIntegrityViolationException
-
 import stakeholder.Customer;
 import stakeholder.Forwarder;
 
-/**
- * LetterOfGuaranteeController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+import org.springframework.dao.DataIntegrityViolationException
+
 class LetterOfGuaranteeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -21,39 +15,47 @@ class LetterOfGuaranteeController {
 
     def list() {
 		
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def yearCurrent
+
+		if (params.year != null )
+			yearCurrent = params.year.toInteger()
+		else
+			yearCurrent = Calendar.getInstance().get(Calendar.YEAR)
 		
 		def year = new Date()
-				
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(year);
+		
+		//esto se va despues
+		Calendar cal = Calendar.getInstance()
+		cal.setTime(year)
+		
+		def letters = LetterOfGuarantee.findAllWhere( year:yearCurrent )
 		
 		def forwarders = Forwarder.findAllByDateCreatedLessThanEquals(year)
 		def customers = Customer.findAllByDateCreatedLessThanEquals(year)
-		def letters = LetterOfGuarantee.findAllByYearBetween( cal.get(Calendar.YEAR) - 1, cal.get(Calendar.YEAR))
 		
-        [yearInit: 2012, yearCurrent: cal.get(Calendar.YEAR), forwarders: forwarders.asList(), customers: customers.asList(), letters: letters.asList()]
+		[yearInit: 2012, yearCurrent: Calendar.getInstance().get(Calendar.YEAR), yearSelect: yearCurrent, forwarders: forwarders.asList(), customers: customers.asList(), letters: letters.asList()]
+
     }
 
     def create() {
-        [letterOfGuaranteeInstance: new LetterOfGuarantee(params)]
+		def letter = new LetterOfGuarantee(params)
+		letter.year = Calendar.getInstance().get(Calendar.YEAR);
+        [letterOfGuaranteeInstance: letter]
     }
 
     def save() {
         def letterOfGuaranteeInstance = new LetterOfGuarantee(params)
-		
         if (!letterOfGuaranteeInstance.save(flush: true)) {
             render(view: "create", model: [letterOfGuaranteeInstance: letterOfGuaranteeInstance])
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), letterOfGuaranteeInstance.id])
+		flash.message = message(code: 'default.created.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), letterOfGuaranteeInstance])
         redirect(action: "show", params: params)
     }
 
-    def show() {		
-		def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
-		
+    def show() {
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
         if (!letterOfGuaranteeInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
             redirect(action: "list")
@@ -64,7 +66,6 @@ class LetterOfGuaranteeController {
     }
 
     def edit() {
-		
         def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
         if (!letterOfGuaranteeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
@@ -76,7 +77,7 @@ class LetterOfGuaranteeController {
     }
 
     def update() {
-        def letterOfGuaranteeInstance = LetterOfGuarantee.get(params.id)
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
         if (!letterOfGuaranteeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
             redirect(action: "list")
@@ -102,11 +103,12 @@ class LetterOfGuaranteeController {
         }
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), letterOfGuaranteeInstance.id])
-        redirect(action: "show", id: letterOfGuaranteeInstance.id)
+        redirect(action: "show", params: params)
     }
 
     def delete() {
-        def letterOfGuaranteeInstance = LetterOfGuarantee.get(params.id)
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
+
         if (!letterOfGuaranteeInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
             redirect(action: "list")
@@ -120,7 +122,7 @@ class LetterOfGuaranteeController {
         }
         catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
-            redirect(action: "show", id: params.id)
+            redirect(action: "show", params: params)
         }
     }
 }

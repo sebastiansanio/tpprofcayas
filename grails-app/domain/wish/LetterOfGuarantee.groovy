@@ -18,33 +18,15 @@ class LetterOfGuarantee implements Serializable {
 	Date 	deliveryDate
 	int 	year
 
-    boolean equals(other) {
-        if (!(other instanceof LetterOfGuarantee)) {
-            return false
-        }
-
-        other.customer == customer && other.forwarder == forwarder && other.year == year
-    }
-
-    int hashCode() {
-        def builder = new HashCodeBuilder()
-        builder.append customer
-		builder.append forwarder
-		builder.append year
-        builder.toHashCode() 
-    }
-
-    static mapping = {
-        id composite: ['customer', 'forwarder', 'year']
-    }
-	
 	static constraints = {
 		
+		year(unique: ['forwarder', 'customer'])
 		deliveryDate nullable:true
+		year min:2011 
 	}
 	
-//	@Override	// Override toString for a nicer / more descriptive UI 
-//	public String toString() {
-//		return "${name}";
-//	}
+	@Override
+	public String toString() {
+		return "${customer} - ${forwarder} - ${year}";
+	}
 }
