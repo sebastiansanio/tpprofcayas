@@ -1,4 +1,4 @@
-
+<%@page import="java.lang.LinkageError"%>
 <%@page import="javax.tools.ForwardingFileObject"%>
 <%@ page import="wish.LetterOfGuarantee" %>
 <!doctype html>
@@ -19,8 +19,37 @@
 	
 	
 	<label class="control-label" for="year" style="display:inline;"><g:message code="letterOfGuarantee.year.label" default="Year" /></label>
-	<g:select id="year" name="year" from="${yearInit..yearCurrent}" value="${yearCurrent}" class="offset1" />
-  
+	<select id="year" name="year" class="offset1">
+		<g:each in="${(yearInit..yearCurrent)}" var="year" >
+	    	<option value=${year}>${year} </option>
+		</g:each>
+	</select> 
+
+	<div id="linkList" hidden="true">  
+  		<g:each in="${(yearInit..yearCurrent)}" var="year" >
+	    	<g:link action="list" params="[year:year]"></g:link>
+		</g:each>
+  	</div>
+  	
+  	<script type="text/javascript">
+
+  		$( "document" ).ready( function() {
+
+  			$( "#year option[value='${yearSelect}']").attr('selected', true);
+  			
+  		  	$( "#year" ).change( function () {
+
+  		  		var nroSeleccionado = $("#year option:selected").prop('index');
+				var direccion = $("#linkList").children().eq(nroSeleccionado).attr("href");
+
+				if (direccion != '') {
+  		            window.location = direccion; // redirect
+  		        }
+  		    });
+  	  	});
+
+  	</script>
+  	
   <br>
 	Cant de forwardes: ${forwarders?.size()}
 	<br>
@@ -44,21 +73,22 @@
 					<td>${customer}</td>
 		
 					<g:each in="${forwarders}" var="forwarder">
-						<td class="label label-important">
-							<g:findAll in="${letters}" expr="it.customer.id == customer.id && it.forwarder.id == forwarder.id">	 
-     								     									
-     								<g:link action="show" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:year]"><i class="icon-edit icon-white "></i>	</g:link>
-     								
-     								<script>
-     									$("td").last().removeClass("label-important").addClass("label-success");	
-     								</script>
-     								
-							</g:findAll>
-						</td>
+					
+						<g:set var="esta" value="${letters?.find{it.customer.id == customer.id && it.forwarder.id == forwarder.id}?'label-success' : 'label-important'}"/>
+						
+						<g:if test="${esta == 'label-success'}">
+						    <td class="label ${esta}">
+								<g:link action="show" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
+						    </td>
+						</g:if>
+						<g:else>
+							<td class= "label ${esta}">
+								<g:link action="create" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
+							</td>
+						</g:else>
 						 
 					</g:each>
-				
-				
+					
 				</tr>			
 					
 			</g:each>
@@ -67,6 +97,21 @@
 	
 </section>
 
+<script type="text/javascript">
+
+	$("document").ready( function() {
+
+		$("td").click( function() {
+
+			var direccion = $(this).children("a").attr("href");
+
+				if (direccion != '') {
+  		            window.location = direccion; // redirect
+  		        }
+		});
+	});
+	
+</script>
 </body>
 
 </html>
