@@ -269,12 +269,11 @@ class Wish {
 				i++
 			}
 			return date
+		}else if(paymentTerm?.percentPaymentBeforeDelivery!=0){
+			return getBlReceivedDate()?.plus(5)
 		}
-		Date date = getBlReceivedDate()
-		if(date!= null)
-			date.plus(5)
 		
-		return date
+		return null
 	}
 	
 	//Alert 5
