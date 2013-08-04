@@ -86,13 +86,7 @@
 				<td valign="top" class="value"><g:formatBoolean boolean="${contactInstance?.sendAlerts}" /></td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="contact.sendReports.label" default="Send Reports" /></td>
-				
-				<td valign="top" class="value"><g:formatBoolean boolean="${contactInstance?.sendReports}" /></td>
-				
-			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="contact.stakeholder.label" default="Stakeholder" /></td>

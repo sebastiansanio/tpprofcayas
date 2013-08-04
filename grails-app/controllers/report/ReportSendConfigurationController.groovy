@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat
 import org.springframework.dao.DataIntegrityViolationException
 
 import org.springframework.transaction.annotation.Transactional
+import stakeholder.Stakeholder
 
 
 @Transactional
@@ -16,6 +17,11 @@ class ReportSendConfigurationController {
         redirect(action: "list", params: params)
     }
 
+	def contactsByStakeholder(){
+		[stakeholder:Stakeholder.get(params.id)]				
+		
+	}
+	
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 100, 500)
         [reportSendConfigurationInstanceList: ReportSendConfiguration.list(params), reportSendConfigurationInstanceTotal: ReportSendConfiguration.count()]

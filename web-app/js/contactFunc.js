@@ -12,9 +12,6 @@ $(document).ready(function()
 	var nameAlert = function(nro){
 		return "contacts[" + nro + "].sendAlerts";
 	};
-	var nameReport = function(nro){
-		return "contacts[" + nro + "].sendReports";
-	};
 	
 	var idParent = function(nro){
 		return "contact-" + nro;
@@ -31,9 +28,6 @@ $(document).ready(function()
 	var idAlert = function(nro){
 		return "contacts-sendAlerts-" + nro;
 	};
-	var idReport = function(nro){
-		return "contacts-sendReports-" + nro;
-	};
 	var idBtnDelContact = function(nro){
 		return "btnDel-contact-" + nro;
 	};
@@ -45,7 +39,7 @@ $(document).ready(function()
 		cantContact--;
 
 		var idParentNuevo, idNameNuevo, idEmailNuevo, idPositionNuevo,
-		idAlertNuevo, idReportNuevo, idBtnDelNuevo;
+		idAlertNuevo, idBtnDelNuevo;
 		
 		for (var i = nroRef; i < cantContact; i++)
 		{
@@ -54,7 +48,6 @@ $(document).ready(function()
 			idEmailNuevo 	= "#" + idEmail((i+1));
 			idPositionNuevo	= "#" + idPosition((i+1));
 			idAlertNuevo	= "#" + idAlert((i+1));
-			idReportNuevo	= "#" + idReport((i+1));
 			idBtnDelNuevo 	= "#" + idBtnDelContact((i+1));
 			
 			$(idParentNuevo).attr( "id"	, idParent(i) );
@@ -70,9 +63,6 @@ $(document).ready(function()
 
 			$(idAlertNuevo).attr( "name", nameAlert(i) );
 			$(idAlertNuevo).attr( "id"	, idAlert(i) );
-
-			$(idReportNuevo).attr( "name", nameReport(i) );
-			$(idReportNuevo).attr( "id"	 , idReport(i) );
 
 			$(idBtnDelNuevo).attr("id"	, idBtnDelContact(i) );
 		}
@@ -96,10 +86,9 @@ $(document).ready(function()
 	$("#btnAdd-contact").click(function()
 	{
 		var elementName, elementEmail, elementPosition, elementAlert, 
-			elementReport, elementBtnDel, elementParent, 
+			elementBtnDel, elementParent, 
 			idElementParent = idParent(cantContact),
-			idAler = idAlert(cantContact),
-			idRepo = idReport(cantContact);
+			idAler = idAlert(cantContact);
 		
 		
 		elementName = $("<td> <input type='text' id='" + idName(cantContact)+ "' name='" + nameName(cantContact) + "' required=''/> </td>");
@@ -113,10 +102,6 @@ $(document).ready(function()
 							<input type='checkbox' value='false' name='"+ nameAlert(cantContact) +"' id='"+ idAler +"' class='contact-check'> \
 						</td>");
 
-		elementReport = $("<td> \
-							<input type='hidden' name='_"+ nameReport(cantContact) +"'> \
-							<input type='checkbox' value='false' name='"+ nameReport(cantContact) +"' id='"+ idRepo  +"' class='contact-check'> \
-						</td>");
 		
 		elementBtnDel = $("<td> <a role='button' class='btn btn-small btn-primary' id='"+ idBtnDelContact(cantContact) +"'> <i class='icon-trash'></i> </a> </td>");
 	
@@ -130,15 +115,10 @@ $(document).ready(function()
 		$(idElementParent).append(elementEmail);
 		$(idElementParent).append(elementPosition);
 		$(idElementParent).append(elementAlert);
-		$(idElementParent).append(elementReport);
 		$(idElementParent).append(elementBtnDel);
 		
 		$("#" + idAler).click(function() {
 			updateValueCheck( idAler );
-		});
-		
-		$("#" + idRepo).click(function() {
-			updateValueCheck( idRepo );
 		});
 		
 		$("#" + idBtnDelContact(cantContact)).click(function() {

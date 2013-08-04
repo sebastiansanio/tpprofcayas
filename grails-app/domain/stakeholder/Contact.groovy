@@ -15,7 +15,6 @@ class Contact {
 	String note
 	
 	boolean sendAlerts
-	boolean sendReports
 	
 	
 	static belongsTo	= [stakeholder:Stakeholder]

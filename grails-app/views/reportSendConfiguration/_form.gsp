@@ -1,5 +1,18 @@
 <%@ page import="report.ReportSendConfiguration" %>
 
+<script>
+
+function reportStakeholderChanged(){
+	if($('#stakeholder').val()=='')
+		$('#contacts').empty();
+	else
+		$('#contacts').load("${createLink(action:'contactsByStakeholder')}/"+$('#stakeholder').val());
+}
+
+
+</script>
+
+
 <div class="row-fluid">
 
 <div class="span7">
@@ -23,10 +36,19 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'stakeholder', 'error')} required">
 				<label for="stakeholder" class="control-label"><g:message code="reportSendConfiguration.stakeholder.label" default="Stakeholder" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="stakeholder" name="stakeholder.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${reportSendConfigurationInstance?.stakeholder?.id}" class="many-to-one"/>
+					<g:select noSelection="['':'']" onchange="reportStakeholderChanged();" id="stakeholder" name="stakeholder.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${reportSendConfigurationInstance?.stakeholder?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'stakeholder', 'error')}</span>
 				</div>
 			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'contacts', 'error')} ">
+				<label for="contacts" class="control-label"><g:message code="reportSendConfiguration.contacts.label" default="Contacts" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:select required="" id="contacts" name="contacts" from="${reportSendConfigurationInstance?.stakeholder?.contacts}" multiple="multiple" optionKey="id" size="7" value="${reportSendConfigurationInstance?.contacts*.id}" class="many-to-many"/>
+					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'contacts', 'error')}</span>
+				</div>
+			</div>
+
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'subject', 'error')} required">
 				<label for="subject" class="control-label"><g:message code="reportSendConfiguration.subject.label" default="Subject" /><span class="required-indicator">*</span></label>
@@ -40,18 +62,18 @@
 				<label for="body" class="control-label"><g:message code="reportSendConfiguration.body.label" default="Body" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'body', 'error')}</span>
-					<g:textArea class="span12"  name="body" cols="60" rows="7" maxlength="1000" required="" value="${reportSendConfigurationInstance?.body}"/>
+					<g:textArea class="span12" name="body" cols="60" rows="7" maxlength="1000" required="" value="${reportSendConfigurationInstance?.body}"/>
 				</div>
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'report', 'error')} required">
 				<label for="report" class="control-label"><g:message code="reportSendConfiguration.report.label" default="Report" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="report" name="report.id" from="${report.Report.list()}" optionKey="id" required="" value="${reportSendConfigurationInstance?.report?.id}" class="many-to-one"/>
+					<g:select onChange id="report" name="report.id" from="${report.Report.list()}" optionKey="id" required="" value="${reportSendConfigurationInstance?.report?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'report', 'error')}</span>
 				</div>
 			</div>
-
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'hour', 'error')} ">
 				<label for="hour" class="control-label"><g:message code="reportSendConfiguration.hour.label" default="Hour" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -67,6 +89,8 @@
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')}</span>
 				</div>
 			</div>
+
+
 
 </div>
 <div class="span4">

@@ -18,7 +18,6 @@
                   	<th>${message(code: 'contact.email.label', default: 'Email')}</th>
                   	<th>${message(code: 'contact.position.label', default: 'Position')}</th>
                   	<th>${message(code: 'contact.sendAlerts.label', default: 'Send alerts?')}</th>
-                  	<th>${message(code: 'contact.sendReports.label', default: 'Send reports?')}</th>
                   	<th> </th>
                 </tr>
             </thead>
@@ -49,16 +48,6 @@
 							</g:else>
 					
 							<span class="help-inline">${hasErrors(bean: contactInstance, field: 'sendAlerts', 'error')}</span>
-						</td>
-
-						<td>
-							<g:if test="${contactInstance?.sendReports == true}">
-								<input name="contacts[${i}].sendReports" type="checkbox" id="contacts-reports-${i}" class="contact-check" value="${contactInstance?.sendReports}" checked="checked">							</g:if>
-							<g:else>
-								<input name="contacts[${i}].sendReports" type="checkbox" id="contacts-reports-${i}" class="contact-check" value="${contactInstance?.sendReports}">
-							</g:else>
-														
-							<span class="help-inline">${hasErrors(bean: contactInstance, field: 'sendReports', 'error')}</span>
 						</td>
 												
 						<td>	

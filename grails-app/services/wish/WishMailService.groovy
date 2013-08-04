@@ -44,11 +44,8 @@ class WishMailService  implements MessageSourceAware{
 		try{
 			
 			List mails = new ArrayList()
+			mails.addAll(configuration.contacts*.email)
 			
-			configuration.stakeholder.contacts.each{
-				if(it.sendReports)
-					mails.add(it.email)		
-			}
 			
 			if(mails.size()>0){
 				ByteOutputStream outputStream = new ByteOutputStream()
