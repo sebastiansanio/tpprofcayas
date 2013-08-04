@@ -1,6 +1,7 @@
 package report
 
 import stakeholder.Stakeholder
+import stakeholder.Contact
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import org.hibernate.envers.Audited
@@ -9,6 +10,8 @@ import org.hibernate.envers.Audited
 class ReportSendConfiguration {
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("H:mm")
+	
+	static hasMany = [contacts: Contact]
 	
 	Date	dateCreated
 	Date	lastUpdated

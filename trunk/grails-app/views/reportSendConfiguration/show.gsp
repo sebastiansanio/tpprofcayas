@@ -45,6 +45,18 @@
 				<td valign="top" class="value"><g:link controller="${reportSendConfigurationInstance?.stakeholder?.type }" action="show" id="${reportSendConfigurationInstance?.stakeholder?.id}">${reportSendConfigurationInstance?.stakeholder?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="reportSendConfiguration.contacts.label" default="Contacts" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${reportSendConfigurationInstance.contacts.sort{it.name}}" var="r">
+						<li><g:link controller="contact" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>	
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.subject.label" default="Subject" /></td>
