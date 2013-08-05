@@ -1,5 +1,10 @@
 package wish
 
+import java.awt.GraphicsConfiguration.DefaultBufferCapabilities;
+import java.util.TreeMap.AscendingSubMap.AscendingEntrySetView;
+
+import javax.swing.text.html.HTMLDocument.HTMLReader.MapAction;
+
 import stakeholder.Customer;
 import stakeholder.Forwarder;
 
@@ -21,19 +26,67 @@ class LetterOfGuaranteeController {
 			yearCurrent = params.year.toInteger()
 		else
 			yearCurrent = Calendar.getInstance().get(Calendar.YEAR)
+
+		def firstDay = new Date()
+		firstDay.set(year: yearCurrent, month: 1, date: 1)
 		
-		def year = new Date()
-		
-		//esto se va despues
-		Calendar cal = Calendar.getInstance()
-		cal.setTime(year)
+		def lastDay = new Date()
+		lastDay.set(year: yearCurrent, month: 12, date: 31)
 		
 		def letters = LetterOfGuarantee.findAllWhere( year:yearCurrent )
 		
-		def forwarders = Forwarder.findAllByDateCreatedLessThanEquals(year)
-		def customers = Customer.findAllByDateCreatedLessThanEquals(year)
+		println "Leteers: "
+		letters.each {
+			println it
+				
+		}
 		
-		[yearInit: 2012, yearCurrent: Calendar.getInstance().get(Calendar.YEAR), yearSelect: yearCurrent, forwarders: forwarders.asList(), customers: customers.asList(), letters: letters.asList()]
+		
+		def wishes = Wish.executeQuery("select distinct new list( w.customer, w.forwarder) from Wish w " + 
+										"where w.wishDate >= ? and w.wishDate <= ?",
+										[firstDay, lastDay])	
+		
+		def customers = [] as Set 
+		def forwarders = [] as Set
+		def listLetters = []
+		
+		wishes.each {
+			
+			def customerTemp = it[0]
+			def forwarderTemp = it[1] 
+			customers.add(customerTemp)
+			forwarders.add(forwarderTemp)
+			listLetters.add([customerTemp, forwarderTemp, letters.find {
+			it.customer.id == customerTemp.id && it.forwarder.id == forwarderTemp.id }?.id])
+		}
+		
+		println "Clientes: "		
+		customers.each {
+			println it
+				
+		}
+		
+
+		println  "Forwarders"
+		forwarders.each {
+			println it
+				
+		}
+		
+		println "pedidos"
+		
+		wishes.each {
+			println it
+		
+		}
+		
+		println "lista: "
+		listLetters.each {
+			println it
+		
+		}
+		
+		[yearInit: 2012, yearCurrent: Calendar.getInstance().get(Calendar.YEAR), yearSelect: yearCurrent, forwarders: forwarders, customers: customers, letters: listLetters]
 
     }
 
@@ -51,11 +104,11 @@ class LetterOfGuaranteeController {
         }
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), letterOfGuaranteeInstance])
-        redirect(action: "show", params: params)
+        redirect(action: "show", id: letterOfGuaranteeInstance.id)
     }
 
     def show() {
-        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get( params.id )
         if (!letterOfGuaranteeInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
             redirect(action: "list")
@@ -66,7 +119,7 @@ class LetterOfGuaranteeController {
     }
 
     def edit() {
-        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get(params.id)
         if (!letterOfGuaranteeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
             redirect(action: "list")
@@ -77,7 +130,7 @@ class LetterOfGuaranteeController {
     }
 
     def update() {
-        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get(params.id)
         if (!letterOfGuaranteeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
             redirect(action: "list")
@@ -103,11 +156,11 @@ class LetterOfGuaranteeController {
         }
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), letterOfGuaranteeInstance.id])
-        redirect(action: "show", params: params)
+        redirect(action: "show", id: letterOfGuaranteeInstance.id)
     }
 
     def delete() {
-        def letterOfGuaranteeInstance = LetterOfGuarantee.get( new LetterOfGuarantee(params) )
+        def letterOfGuaranteeInstance = LetterOfGuarantee.get(params.id)
 
         if (!letterOfGuaranteeInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
@@ -122,7 +175,7 @@ class LetterOfGuaranteeController {
         }
         catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee'), params.id])
-            redirect(action: "show", params: params)
+            redirect(action: "show", id: params.id)
         }
     }
 }

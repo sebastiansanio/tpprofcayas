@@ -1,22 +1,18 @@
 package wish
 
-import java.io.Serializable;
-import java.sql.Date;
-
-import org.apache.commons.lang.builder.HashCodeBuilder
 import stakeholder.Customer
 import stakeholder.Forwarder
 
-
-class LetterOfGuarantee implements Serializable {
+class LetterOfGuarantee {
 	
 	
-	static hasOne		= [ customer:Customer, forwarder:Forwarder ]
+	Customer	customer
+	Forwarder	forwarder
 
-	Date	dateCreated
-	Date	lastUpdated
-	Date 	deliveryDate
-	int 	year
+	Date		dateCreated
+	Date		lastUpdated
+	Date 		deliveryDate
+	int 		year
 
 	static constraints = {
 		
