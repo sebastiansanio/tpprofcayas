@@ -57,7 +57,7 @@
 							</g:if>
 							<g:else>
 								<td class= "label label-important">
-									<g:link action="create" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
+									<g:link action="create" params="['customer.id':customer?.id, 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
 								</td>
 							</g:else>
 						</g:if>
