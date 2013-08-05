@@ -10,6 +10,8 @@ import stakeholder.Forwarder;
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import com.sun.org.apache.xerces.internal.impl.dv.xs.YearDV;
+
 class LetterOfGuaranteeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -35,13 +37,6 @@ class LetterOfGuaranteeController {
 		
 		def letters = LetterOfGuarantee.findAllWhere( year:yearCurrent )
 		
-		println "Leteers: "
-		letters.each {
-			println it
-				
-		}
-		
-		
 		def wishes = Wish.executeQuery("select distinct new list( w.customer, w.forwarder) from Wish w " + 
 										"where w.wishDate >= ? and w.wishDate <= ?",
 										[firstDay, lastDay])	
@@ -58,32 +53,6 @@ class LetterOfGuaranteeController {
 			forwarders.add(forwarderTemp)
 			listLetters.add([customerTemp, forwarderTemp, letters.find {
 			it.customer.id == customerTemp.id && it.forwarder.id == forwarderTemp.id }?.id])
-		}
-		
-		println "Clientes: "		
-		customers.each {
-			println it
-				
-		}
-		
-
-		println  "Forwarders"
-		forwarders.each {
-			println it
-				
-		}
-		
-		println "pedidos"
-		
-		wishes.each {
-			println it
-		
-		}
-		
-		println "lista: "
-		listLetters.each {
-			println it
-		
 		}
 		
 		[yearInit: 2012, yearCurrent: Calendar.getInstance().get(Calendar.YEAR), yearSelect: yearCurrent, forwarders: forwarders, customers: customers, letters: listLetters]
