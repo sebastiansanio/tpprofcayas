@@ -4,6 +4,7 @@ import modal.AvailableLocale
 import wish.Wish
 import modal.Country
 import report.Report
+import report.StakeholderReport
 import login.User
 
 import org.hibernate.envers.Audited
@@ -11,7 +12,7 @@ import org.hibernate.envers.Audited
 @Audited
 class Stakeholder {
 	
-	static hasMany		= [contacts: Contact]
+	static hasMany		= [contacts: Contact,reports: StakeholderReport]
    
 	List 	contacts
 	

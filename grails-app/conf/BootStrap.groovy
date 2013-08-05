@@ -151,10 +151,13 @@ class BootStrap {
 				//Nuevo
 				permission = new Permission(description:'Alertas - Consulta por externos',permissionString:'alertExternal:*')
 				permission.save()
+				permission = new Permission(description:'Reportes de externos - Control total',permissionString:'stakeholderReport:*')
+				permission.save()
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
 				roleExternal.addToPermissions("alertExternal:*")
+				roleExternal.addToPermissions("stakeholderReport:*")
 				roleExternal.save(flush:true)
 				
 				def roleAdmin = new Role(name:"Admin")
