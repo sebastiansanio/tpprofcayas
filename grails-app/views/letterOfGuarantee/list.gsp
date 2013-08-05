@@ -31,33 +31,6 @@
 		</g:each>
   	</div>
   	
-  	<script type="text/javascript">
-
-  		$( "document" ).ready( function() {
-
-  			$( "#year option[value='${yearSelect}']").attr('selected', true);
-  			
-  		  	$( "#year" ).change( function () {
-
-  		  		var nroSeleccionado = $("#year option:selected").prop('index');
-				var direccion = $("#linkList").children().eq(nroSeleccionado).attr("href");
-
-				if (direccion != '') {
-  		            window.location = direccion; // redirect
-  		        }
-  		    });
-  	  	});
-
-  	</script>
-  	
-  <br>
-	Cant de forwardes: ${forwarders?.size()}
-	<br>
-	Cant de customers: ${customers?.size()}
-	<br>
-	Cant de letters: ${letters?.size()}
-	<br>
-	
 	<table class="table table-bordered">
 		<thead>
 			<th>  </th>
@@ -73,20 +46,25 @@
 					<td>${customer}</td>
 		
 					<g:each in="${forwarders}" var="forwarder">
-					
-						<g:set var="esta" value="${letters?.find{it.customer.id == customer.id && it.forwarder.id == forwarder.id}?'label-success' : 'label-important'}"/>
-						
-						<g:if test="${esta == 'label-success'}">
-						    <td class="label ${esta}">
-								<g:link action="show" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
-						    </td>
+								
+						<g:if test="${letters?.find{it[0].id == customer.id && it[1].id == forwarder.id} != null}">
+							<g:set var="letter" value="${letters?.find{it[0].id == customer.id && it[1].id == forwarder.id && it[2] != null}}"/>
+							
+							<g:if test="${letter != null}">
+							    <td class="label label-success">
+									<g:link action="show" id="${letter[2]}"></g:link>				    	
+							    </td>
+							</g:if>
+							<g:else>
+								<td class= "label label-important">
+									<g:link action="create" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
+								</td>
+							</g:else>
 						</g:if>
 						<g:else>
-							<td class= "label ${esta}">
-								<g:link action="create" params="[customer:'[id:'+customer?.id+']', 'customer.id':customer?.id, forwarder:'[id:'+forwarder?.id+']', 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
-							</td>
-						</g:else>
-						 
+							<td class="label label-info">				    	
+						    </td>	
+						</g:else> 
 					</g:each>
 					
 				</tr>			
@@ -101,16 +79,40 @@
 
 	$("document").ready( function() {
 
-		$("td").click( function() {
-
+		function eventClick() {
+			
 			var direccion = $(this).children("a").attr("href");
 
-				if (direccion != '') {
-  		            window.location = direccion; // redirect
-  		        }
-		});
+			if (direccion != '') {
+ 		            window.location = direccion; // redirect
+ 		    }
+		};
+		
+		$(".label-success").click(  eventClick );
+
+		$(".label-important").click(  eventClick );
+
 	});
 	
+</script>
+
+<script type="text/javascript">
+
+	$( "document" ).ready( function() {
+
+		$( "#year option[value='${yearSelect}']").attr('selected', true);
+		
+	  	$( "#year" ).change( function () {
+
+	  		var nroSeleccionado = $("#year option:selected").prop('index');
+			var direccion = $("#linkList").children().eq(nroSeleccionado).attr("href");
+		
+			if (direccion != '') {
+	            window.location = direccion; // redirect
+	        }
+	    });
+  	});
+
 </script>
 </body>
 

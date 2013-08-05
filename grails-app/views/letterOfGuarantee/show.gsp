@@ -8,8 +8,6 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'letterOfGuarantee.label', default: 'LetterOfGuarantee')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
-	<script type="text/javascript" src="${resource(dir:'js', file:'letterGuaranteeFunc.js')}"> </script>	
-	
 </head>
 
 <body>
@@ -64,11 +62,6 @@
 		</tbody>
 	</table>
 </section>
-
-<div id="linkNuevo">
-	<g:link action="edit" params="[customer:'[id:'+letterOfGuaranteeInstance?.customer?.id+']', 'customer.id':letterOfGuaranteeInstance?.customer?.id, forwarder:'[id:'+letterOfGuaranteeInstance?.forwarder?.id+']', 'forwarder.id':letterOfGuaranteeInstance?.forwarder?.id, year:letterOfGuaranteeInstance?.year]"></g:link>
-</div>
-
 
 </body>
 
