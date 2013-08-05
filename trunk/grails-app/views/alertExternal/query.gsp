@@ -33,13 +33,6 @@
 		</div>
 	</div>
 	
-	<div class="control-group fieldcontain">
-		<label for="pendingOnly" class="control-label"><g:message code="report.pendingOnly.label" default="Pending Only?" /></label>
-		<div class="controls">
-			<bs:checkBox name="pendingOnly" value="true" />
-
-		</div>
-	</div>
 </div>
 
 <div class="offset1 span2">

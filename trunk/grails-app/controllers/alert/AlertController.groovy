@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.RequestContextUtils
 class AlertController {
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
+	private static final DateFormat DATE_FORMAT_SOURCE = new SimpleDateFormat("dd/MM/yyyy")
 	
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -58,8 +59,8 @@ class AlertController {
 	}
 	
 	def export() {
-		Date fromDate = Date.parse('dd/MM/yyyy',params.fromDate)
-		Date toDate = Date.parse('dd/MM/yyyy',params.toDate)
+		Date fromDate = DATE_FORMAT_SOURCE.parse(params.fromDate)
+		Date toDate = DATE_FORMAT_SOURCE.parse(params.toDate)
 		boolean pendingOnly = params.pendingOnly
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alerts.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
