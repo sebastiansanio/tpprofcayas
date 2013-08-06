@@ -153,6 +153,10 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Reportes de externos - Control total',permissionString:'stakeholderReport:*')
 				permission.save()
+				permission = new Permission(description:'Cartas de garantía - Control total',permissionString:'letterOfGuarantee:*')
+				permission.save()
+				
+				
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -404,8 +408,7 @@ class BootStrap {
 				scr.save()
 				scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"2",issuer:customer,requiresVisa:false)
 				scr.save()
-				
-				
+								
 				alertManagerService.checkAllAlerts()
 				alertManagerService.generateAllAlerts()
 				
