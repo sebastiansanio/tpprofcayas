@@ -46,10 +46,10 @@
 			<g:hiddenField id="exportExtension" name="extension" />
 			
 			<span><g:message code="export.label" default="Export" /></span>
-			<g:actionSubmit onclick="\$('#exportFormat').val('csv');\$('#exportExtension').val('csv');" action="exportCurrent" value="CSV" />
-			<g:actionSubmit onclick="\$('#exportFormat').val('excel');\$('#exportExtension').val('xls');" action="exportCurrent" value="EXCEL" />
-			<g:actionSubmit onclick="\$('#exportFormat').val('ods');\$('#exportExtension').val('ods');" action="exportCurrent" value="ODS" />
-			<g:actionSubmit onclick="\$('#exportFormat').val('pdf');\$('#exportExtension').val('pdf');" action="exportCurrent" value="PDF" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('csv');\$('#exportExtension').val('csv');selectAll();" action="exportCurrent" value="CSV" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('excel');\$('#exportExtension').val('xls');selectAll();" action="exportCurrent" value="EXCEL" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('ods');\$('#exportExtension').val('ods');selectAll();" action="exportCurrent" value="ODS" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('pdf');\$('#exportExtension').val('pdf');selectAll();" action="exportCurrent" value="PDF" />
 		
 		</div>
 	</div>
@@ -79,8 +79,12 @@ function down(){
 	}
 }
 
+function selectAll(){
+	$("#fields option").attr('selected','selected');
+}
+
 $('form').submit(function(){
-		$("#fields option").attr('selected','selected');
+		selectAll();
 	}
 )
 </script>

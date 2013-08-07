@@ -44,7 +44,7 @@ class WishExportService implements MessageSourceAware {
 		exportWishByStakeholder(format,outputStream,locale,stakeholder,report)
 	}
 	
-	def exportWishByStakeholder(String format,OutputStream outputStream,Locale locale,def stakeholder,Report report){
+	def exportWishByStakeholder(String format,OutputStream outputStream,Locale locale,def stakeholder,def report){
 		List fields = report.fields
 		List wishes = new ArrayList()
 		wishes.addAll(stakeholder.wishes)

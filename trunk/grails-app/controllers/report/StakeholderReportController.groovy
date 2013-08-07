@@ -1,8 +1,14 @@
 package report
 
+import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+import java.util.Locale;
+
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
 import org.apache.shiro.SecurityUtils
+import org.springframework.web.servlet.support.RequestContextUtils
 import login.User
 
 @Transactional
@@ -10,6 +16,9 @@ class StakeholderReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
+	def wishExportService
+	
     def index() {
         redirect(action: "list", params: params)
     }
@@ -135,4 +144,41 @@ class StakeholderReportController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def export() {
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wishes.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		StakeholderReport report = StakeholderReport.get(params.reportId.toLong())
+        if (!report || user.stakeholder!=report.stakeholder) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'stakeholderReport.label', default: 'StakeholderReport'), params.id])
+            redirect(action: "list")
+            return
+        }
+		
+		wishExportService.exportWishByStakeholder(params.format,response.outputStream,RequestContextUtils.getLocale(request),report.stakeholder,report)
+	}
+	
+	def exportCurrent(){
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wishes.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		if(user.stakeholder==null){
+			flash.message = message(code:'default.notPermitted.label')
+			redirect(action: "list", params: params)
+			return
+		}
+		StakeholderReport report = new StakeholderReport(params)
+		report.stakeholder = user.stakeholder
+		
+		List wishes = user.stakeholder.wishes.toList()
+		if(report.pendingOnly==true){
+			wishes = wishes.findAll{
+				it.isPending()
+			}
+		}
+		wishes.sort{it.opNumber}
+			
+		wishExportService.doExport(params.format,response.outputStream,RequestContextUtils.getLocale(request),report.fields,wishes)
+	}
 }
