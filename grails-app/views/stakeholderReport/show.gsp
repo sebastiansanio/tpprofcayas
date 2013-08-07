@@ -13,6 +13,8 @@
 <body>
 
 <section id="show-stakeholderReport" class="first">
+<div class="row-fluid">
+<div class="span8">
 
 	<table class="table">
 		<tbody>
@@ -70,7 +72,37 @@
 		
 		</tbody>
 	</table>
+</div>
+
+<div class="span4">
+
+<h4> <g:message code="export.label" default="Export" /> </h4>
+<g:form action="export" method="POST">
+	<g:hiddenField name="reportId" value="${stakeholderReportInstance?.id}"/>
+	<g:hiddenField id="exportFormat" name="format" />
+	<g:hiddenField id="exportExtension" name="extension" />
+	
+	<div class='export'>
+		<button type="submit" onclick="$('#exportFormat').val('csv');$('#exportExtension').val('csv');">
+		<img src="${resource(dir: 'images/skin',file: 'csv.png')}"/> CSV
+		</button>
+		<button type="submit" onclick="$('#exportFormat').val('excel');$('#exportExtension').val('xls');">
+		<img src="${resource(dir: 'images/skin',file: 'excel.png')}"/> EXCEL
+		</button>
+		<button type="submit" onclick="$('#exportFormat').val('ods');$('#exportExtension').val('ods');">
+		<img src="${resource(dir: 'images/skin',file: 'ods.png')}"/> ODS
+		</button>
+		<button type="submit" onclick="$('#exportFormat').val('pdf');$('#exportExtension').val('pdf');" >
+		<img src="${resource(dir: 'images/skin',file: 'pdf.png')}"/> PDF
+		</button>
+	</div>
+</g:form>
+
+</div>
+
+</div>
 </section>
+
 
 </body>
 

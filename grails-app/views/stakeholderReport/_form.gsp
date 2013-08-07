@@ -30,14 +30,32 @@
 		</div>
 	</div>
 	
+	<div class="row-fluid">
+		<br>
+		<div class="span4">
+		<div class="control-group fieldcontain ${hasErrors(bean: stakeholderReportInstance, field: 'pendingOnly', 'error')} ">
+			<label for="pendingOnly" class="control-label"><g:message code="report.pendingOnly.label" default="Pending Only" /></label>
+			<div class="controls">
+				<bs:checkBox name="pendingOnly" value="${stakeholderReportInstance?.pendingOnly}" />
+				<span class="help-inline">${hasErrors(bean: stakeholderReportInstance, field: 'pendingOnly', 'error')}</span>
+			</div>
+		</div>
+		</div>
+		<div class="span5">	
+			
+			<g:hiddenField id="exportFormat" name="format" />
+			<g:hiddenField id="exportExtension" name="extension" />
+			
+			<span><g:message code="export.label" default="Export" /></span>
+			<g:actionSubmit onclick="\$('#exportFormat').val('csv');\$('#exportExtension').val('csv');selectAll();" action="exportCurrent" value="CSV" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('excel');\$('#exportExtension').val('xls');selectAll();" action="exportCurrent" value="EXCEL" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('ods');\$('#exportExtension').val('ods');selectAll();" action="exportCurrent" value="ODS" />
+			<g:actionSubmit onclick="\$('#exportFormat').val('pdf');\$('#exportExtension').val('pdf');selectAll();" action="exportCurrent" value="PDF" />
 		
-	<div class="control-group fieldcontain ${hasErrors(bean: stakeholderReportInstance, field: 'pendingOnly', 'error')} ">
-		<label for="pendingOnly" class="control-label"><g:message code="report.pendingOnly.label" default="Pending Only" /></label>
-		<div class="controls">
-			<bs:checkBox name="pendingOnly" value="${stakeholderReportInstance?.pendingOnly}" />
-			<span class="help-inline">${hasErrors(bean: stakeholderReportInstance, field: 'pendingOnly', 'error')}</span>
 		</div>
 	</div>
+	
+	
 
 
 <script>
@@ -65,8 +83,12 @@ function down(){
 	}
 }
 
+function selectAll(){
+	$("#fields option").attr('selected','selected');
+}
+
 $('form').submit(function(){
-		$("#fields option").attr('selected','selected');
+		selectAll();
 	}
 )
 </script>
