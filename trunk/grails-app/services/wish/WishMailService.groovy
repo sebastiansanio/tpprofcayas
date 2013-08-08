@@ -19,6 +19,7 @@ class WishMailService  implements MessageSourceAware{
 		
 	def mailService
 	def wishExportService
+	def alertExportService
 	MessageSource messageSource
 	def grailsApplication
 	
@@ -49,28 +50,30 @@ class WishMailService  implements MessageSourceAware{
 			
 			if(mails.size()>0){
 				ByteOutputStream outputStream = new ByteOutputStream()
+				ByteOutputStream outputStreamAlerts = new ByteOutputStream()
+				
 				int quantity = wishExportService.exportWishByStakeholder('excel',outputStream,configuration.stakeholder.defaultLocale.locale,configuration.stakeholder,configuration.report)		
+				int alertsQuantity = 0
+				if(configuration.sendAlerts)
+					alertsQuantity = alertExportService.exportAlertsByStakeholder('excel',outputStreamAlerts, configuration.stakeholder,configuration.stakeholder.defaultLocale.locale)
+				
 				if(quantity > 0){
-					if(configuration.body.contains("[signature]")){
-						mailService.sendMail {
-							multipart true
-							to mails.toArray()
-							subject transformText(configuration.subject)
-							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
-							text transformText(configuration.body)
-							attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
-							inline 'signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file
-						}
-					}else{
-						mailService.sendMail {
-							multipart true
-							to mails.toArray()
-							subject transformText(configuration.subject)
-							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>")+'</p>'
-							text transformText(configuration.body)
-							attachBytes messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes
-						}
+					
+					boolean hasSignature = configuration.body.contains("[signature]")
+
+					mailService.sendMail {
+						multipart true
+						to mails.toArray()
+						subject transformText(configuration.subject)
+						html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
+						text transformText(configuration.body)
+						attach(messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes)
+						if(alertsQuantity>0)
+							attach(messageSource.getMessage("wish.alertsByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStreamAlerts.bytes)
+						if(hasSignature) 
+							inline('signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file)
 					}
+						
 				}
 				configuration.lastSentDate = new Date()
 				

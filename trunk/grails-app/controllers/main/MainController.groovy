@@ -4,7 +4,6 @@ class MainController {
 
 	
 	def index () { 
-		
-		
+				
 	}
 }

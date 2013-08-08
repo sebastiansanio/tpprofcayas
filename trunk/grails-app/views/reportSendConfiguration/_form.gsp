@@ -83,13 +83,20 @@ function reportStakeholderChanged(){
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')} ">
-				<label for="active" class="control-label"><g:message code="reportSendConfiguration.active.label" default="Active" /></label>
+				<label for="active" class="control-label"><g:message code="reportSendConfiguration.active.label" default="Active?" /></label>
 				<div class="controls">
 					<bs:checkBox name="active" value="${reportSendConfigurationInstance?.active}" />
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')}</span>
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'sendAlerts', 'error')} ">
+				<label for="sendAlerts" class="control-label"><g:message code="reportSendConfiguration.sendAlerts.label" default="Send Alerts?" /></label>
+				<div class="controls">
+					<bs:checkBox name="sendAlerts" value="${reportSendConfigurationInstance?.sendAlerts}" />
+					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'sendAlerts', 'error')}</span>
+				</div>
+			</div>
 
 
 </div>

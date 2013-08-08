@@ -42,25 +42,16 @@ class AlertsMailService {
 
 					
 					if(mails.size()>0){
-
-						if(message.message.contains("[signature]")){
-							mailService.sendMail {
-								multipart true
-								to mails.toArray()
-								subject transformText(message.subject,alert)
-								html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(message.message.encodeAsHTML(),alert).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
-								text transformText(message.message,alert)
-								inline 'signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file
-							}
-							
-						}else{
-							mailService.sendMail {
-								multipart true
-								to mails.toArray()
-								subject transformText(message.subject,alert)
-								html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(message.message.encodeAsHTML(),alert).replace("\n", "<br/>")+'</p>'
-								text transformText(message.message,alert)
-							}
+						
+						boolean hasSignature = configuration.body.contains("[signature]")
+						mailService.sendMail {
+							multipart true
+							to mails.toArray()
+							subject transformText(message.subject,alert)
+							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(message.message.encodeAsHTML(),alert).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
+							text transformText(message.message,alert)
+							if(hasSignature) 
+								inline('signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file)
 						}
 						alert.sentDate = new Date()	
 					}
