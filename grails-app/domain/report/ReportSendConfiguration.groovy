@@ -26,7 +26,8 @@ class ReportSendConfiguration {
 	Report report
 	
 	boolean active
-
+	boolean sendAlerts
+	
 	Date lastSentDate
 	    
 	static constraints = {

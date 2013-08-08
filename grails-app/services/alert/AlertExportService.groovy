@@ -57,7 +57,8 @@ class AlertExportService {
 		}
 		def wishes = stakeholder?.wishes
 		if(alertTypes.size()>0 && wishes.size()>0){
-			alerts = Alert.findAllByDateFinalizedIsNullAndWishInListAndAlertTypeInList(wishes,alertTypes,[sort:"attentionDate"])	
+			alerts = Alert.findAllByAttentionDateGreaterThanEqualsAndAttentionDateLessThanEqualsAndDateFinalizedIsNullAndWishInListAndAlertTypeInList(fromDate,toDate,wishes,alertTypes,[sort:"attentionDate"])	
+			alertsQuantity = alerts.size()
 		}		
 		
 		def dateFormatter = {domain, value->
@@ -81,7 +82,43 @@ class AlertExportService {
 		
 		Map parameters = [title: messageSource.getMessage("alerts.label",null,locale)]
 		exportService.export(format,outputStream,alerts,fields,labels,formatters,parameters)
+		return alertsQuantity
+	}
+	
+	def exportAlertsByStakeholder(String format,OutputStream outputStream,Stakeholder stakeholder,Locale locale){
+		def alerts = new ArrayList()
+		def alertsQuantity = 0
+		def alertTypes = AlertType.list().findAll{
+			stakeholder?.type in it.stakeholders
+		}
+		def wishes = stakeholder?.wishes
+		if(alertTypes.size()>0 && wishes.size()>0){
+			alerts = Alert.findAllByDateFinalizedIsNullAndWishInListAndAlertTypeInList(wishes,alertTypes,[sort:"attentionDate"])
+			alertsQuantity = alerts.size()
+		}
 		
+		def dateFormatter = {domain, value->
+			return value?.format("dd/MM/yyyy")
+		}
+
+		List fields = ["alertType.externalMessage","attentionDate","deadline"]
+		for (field in ["customer","supplier","supplierOrder","customerOpNumber","opNumber"]){
+			if(stakeholder?.defaultReport?.fields?.contains(field))
+				fields.add("wish."+field)
+		}
+		Map labels = ["alertType.externalMessage":messageSource.getMessage("alertType.label",null,locale),
+			"attentionDate":messageSource.getMessage("alert.attentionDate.label",null,locale),
+			"deadline":messageSource.getMessage("alert.deadline.label",null,locale),
+			"wish.customer":messageSource.getMessage("wish.customer.label",null,locale),
+			"wish.supplier":messageSource.getMessage("wish.supplier.label",null,locale),
+			"wish.supplierOrder":messageSource.getMessage("wish.supplierOrder.label",null,locale),
+			"wish.customerOpNumber":messageSource.getMessage("wish.customerOpNumber.label",null,locale),
+			"wish.opNumber":messageSource.getMessage("wish.opNumber.label",null,locale)]
+		Map formatters = ["attentionDate":dateFormatter,"deadline":dateFormatter]
+		
+		Map parameters = [title: messageSource.getMessage("alerts.label",null,locale)]
+		exportService.export(format,outputStream,alerts,fields,labels,formatters,parameters)
+		return alertsQuantity
 	}
 
 }
