@@ -1,17 +1,13 @@
 package wish
 
-import java.awt.GraphicsConfiguration.DefaultBufferCapabilities;
-import java.util.TreeMap.AscendingSubMap.AscendingEntrySetView;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.MapAction;
-
 import stakeholder.Customer;
 import stakeholder.Forwarder;
 
 import org.springframework.dao.DataIntegrityViolationException
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.YearDV;
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 class LetterOfGuaranteeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

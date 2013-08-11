@@ -2,7 +2,9 @@ package wish
 
 import stakeholder.Customer
 import stakeholder.Forwarder
+import org.hibernate.envers.Audited
 
+@Audited
 class LetterOfGuarantee {
 	
 	
@@ -18,7 +20,7 @@ class LetterOfGuarantee {
 		
 		year(unique: ['forwarder', 'customer'])
 		deliveryDate nullable:true
-		year min:2011 
+		year min:0
 	}
 	
 	@Override

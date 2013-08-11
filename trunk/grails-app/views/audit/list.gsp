@@ -19,7 +19,7 @@
 		<thead>
 			<tr>
 				
-				<th><g:message code="default.view.label" default="View" /></th>
+				<th><g:message code="revisionInformation.id.label" default="Revision" /></th>
 				
 				<th><g:message code="revisionInformation.currentUser.label" default="Current User" /></th>
 			
@@ -33,7 +33,7 @@
 		<g:each in="${revisionInformationInstanceList}" status="i" var="revisionInformationInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-				<td><g:link action="show" id="${revisionInformationInstance.id}"><i class="icon-eye-open"></i></g:link></td>
+				<td><g:link action="show" id="${revisionInformationInstance.id}">${revisionInformationInstance.id}</g:link></td>
 			
 				<td>${fieldValue(bean: revisionInformationInstance, field: "currentUser")}</td>
 			
