@@ -17,6 +17,14 @@
 
 	<table class="table">
 		<tbody>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="revisionInformation.id.label" default="Revision" /></td>
+				
+				<td valign="top" class="value">${revisionInformationInstance.id}</td>
+				
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="revisionInformation.currentUser.label" default="Current User" /></td>
