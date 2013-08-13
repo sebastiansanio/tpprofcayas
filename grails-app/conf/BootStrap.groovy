@@ -148,15 +148,13 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Pedidos - Consulta por externos',permissionString:'wishExternal:*')
 				permission.save()
-				//Nuevo
 				permission = new Permission(description:'Alertas - Consulta por externos',permissionString:'alertExternal:*')
 				permission.save()
 				permission = new Permission(description:'Reportes de externos - Control total',permissionString:'stakeholderReport:*')
 				permission.save()
+				//Nuevo
 				permission = new Permission(description:'Cartas de garantía - Control total',permissionString:'letterOfGuarantee:*')
 				permission.save()
-				
-				
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -199,8 +197,9 @@ class BootStrap {
 				roleOperator.addToPermissions("*:show")
 				roleOperator.addToPermissions("courier:*")
 				roleOperator.addToPermissions("courierRecord:*")
-				roleOperator.addToPermissions("letterOfGuarantee:*")
 				roleOperator.addToPermissions("audit:*")
+				//Nuevo
+				roleOperator.addToPermissions("letterOfGuarantee:*")
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
