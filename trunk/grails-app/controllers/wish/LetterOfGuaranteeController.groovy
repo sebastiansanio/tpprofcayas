@@ -3,8 +3,10 @@ package wish
 import stakeholder.Customer;
 import stakeholder.Forwarder;
 
-import org.springframework.dao.DataIntegrityViolationException
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
@@ -18,12 +20,8 @@ class LetterOfGuaranteeController {
 
     def list() {
 		
-		def yearCurrent
-
-		if (params.year != null )
-			yearCurrent = params.year.toInteger()
-		else
-			yearCurrent = Calendar.getInstance().get(Calendar.YEAR)
+		//año que se va a visualizar
+		def yearCurrent = (params.year != null )? params.year.toInteger() : Calendar.getInstance().get(Calendar.YEAR);
 
 		def firstDay = new Date()
 		firstDay.set(year: yearCurrent, month: 1, date: 1)
@@ -31,27 +29,76 @@ class LetterOfGuaranteeController {
 		def lastDay = new Date()
 		lastDay.set(year: yearCurrent, month: 12, date: 31)
 		
-		def letters = LetterOfGuarantee.findAllWhere( year:yearCurrent )
+		//cartas y pedidos del año actual
+		def letters = LetterOfGuarantee.createCriteria()
+			.add (Restrictions.eq("year", yearCurrent))
+			.setProjection ( Projections.projectionList()
+				.add( Projections.property("customer") )
+				.add( Projections.property("forwarder") )
+				.add( Projections.property("id") )
+			)
+			.list();
+	
+		def wishes = Wish.createCriteria()
+			.add(Restrictions.ge("estimatedTimeOfArrival", firstDay))
+			.add(Restrictions.le("estimatedTimeOfArrival", lastDay))
+			.setProjection( Projections.projectionList()
+				.add( Projections.property("customer") )
+				.add( Projections.property("forwarder") )
+			)
+			.list();
 		
-		def wishes = Wish.executeQuery("select distinct new list( w.customer, w.forwarder) from Wish w " + 
-										"where w.wishDate >= ? and w.wishDate <= ?",
-										[firstDay, lastDay])	
+		//min y max de los años para elegir
+		def yearsWish = Wish.createCriteria().get{
+			projections { 
+				max("estimatedTimeOfArrival") 
+				min("estimatedTimeOfArrival") 
+			}
+		}
 		
-		def customers = [] as Set 
+		def yearsLetter = LetterOfGuarantee.createCriteria().get{
+			projections {
+				max("year")
+				min("year")
+			}
+		}
+		
+		def yearMax = Math.max(1900 + yearsWish[0]?.year, (yearsLetter[0] == null)? 0: yearsLetter[0])
+		def yearMin = Math.min(1900 + yearsWish[1]?.year, (yearsLetter[1] == null)? yearMax: yearsLetter[1])
+		
+
+		def customers = [] as Set
 		def forwarders = [] as Set
 		def listLetters = []
 		
+		// lista de cartas + pedidos
 		wishes.each {
 			
 			def customerTemp = it[0]
 			def forwarderTemp = it[1] 
+			def letter = letters.find{
+					it[0].id == customerTemp.id && it[1].id == forwarderTemp.id  
+				}
+			
 			customers.add(customerTemp)
 			forwarders.add(forwarderTemp)
-			listLetters.add([customerTemp, forwarderTemp, letters.find {
-			it.customer.id == customerTemp.id && it.forwarder.id == forwarderTemp.id }?.id])
+			listLetters.add([customerTemp, forwarderTemp, (letter != null)? letter[2]: null, true ])
+			
+			if ( letter != null )
+				letters.remove(letter)
 		}
 		
-		[yearInit: 2012, yearCurrent: Calendar.getInstance().get(Calendar.YEAR), yearSelect: yearCurrent, forwarders: forwarders, customers: customers, letters: listLetters]
+		letters.each {
+
+			def customerTemp = it[0]
+			def forwarderTemp = it[1] 
+			
+			customers.add(customerTemp)
+			forwarders.add(forwarderTemp)
+			listLetters.add([customerTemp, forwarderTemp, it[2], false])
+		}
+		
+		[yearInit: yearMin, yearCurrent: yearMax, yearSelect: yearCurrent, forwarders: forwarders, customers: customers, letters: listLetters]
 
     }
 
