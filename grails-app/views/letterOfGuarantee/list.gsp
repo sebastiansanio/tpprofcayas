@@ -46,23 +46,33 @@
 					<td>${customer}</td>
 		
 					<g:each in="${forwarders}" var="forwarder">
-								
-						<g:if test="${letters?.find{it[0].id == customer.id && it[1].id == forwarder.id} != null}">
+											
+						<g:if test="${letters?.find{it[0].id == customer.id && it[1].id == forwarder.id} != null}"> <!-- figura en la lista -->
+						
 							<g:set var="letter" value="${letters?.find{it[0].id == customer.id && it[1].id == forwarder.id && it[2] != null}}"/>
-							
+						
 							<g:if test="${letter != null}">
-							    <td class="label label-success">
-									<g:link action="show" id="${letter[2]}"></g:link>				    	
-							    </td>
+								<g:if test="${letter[3] == true }">
+								    <td class="label label-success" title="<g:message code="letterOfGuarantee.labelNeedAndReady.label" />">
+										<g:link action="show" id="${letter[2]}"></g:link>
+													    	
+								    </td>
+								</g:if>
+								<g:else>
+								    <td class="label label-warning" title="<g:message code="letterOfGuarantee.labelNotNeedAndReady.label" />">
+										<g:link action="show" id="${letter[2]}"></g:link>				    	
+								    </td>
+								</g:else>
 							</g:if>
 							<g:else>
-								<td class= "label label-important">
+								<td class= "label label-important" title="<g:message code="letterOfGuarantee.labelNeedAndNotReady.label" />">
 									<g:link action="create" params="['customer.id':customer?.id, 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
 								</td>
 							</g:else>
 						</g:if>
-						<g:else>
-							<td class="label label-info">				    	
+						<g:else> <!-- no figura en la lista -->
+							<td class="label label-info" title="<g:message code="letterOfGuarantee.labelNotNeedAndNotReady.label" />">	
+									<g:link action="create" params="['customer.id':customer?.id, 'forwarder.id':forwarder?.id, year:yearSelect]"></g:link>				    	
 						    </td>	
 						</g:else> 
 					</g:each>
@@ -73,24 +83,26 @@
 		</tbody>
 	</table>	
 	
+	<ul>
+		<li class="label label-info"> <h6> <g:message code="letterOfGuarantee.labelNotNeedAndNotReady.label" /> </h6> </li>
+		<li class="label label-success"> <h6> <g:message code="letterOfGuarantee.labelNeedAndReady.label" /> </h6> </li>
+		<li class="label label-warning"> <h6> <g:message code="letterOfGuarantee.labelNotNeedAndReady.label" /> </h6> </li>
+		<li class="label label-important"> <h6> <g:message code="letterOfGuarantee.labelNeedAndNotReady.label" /> </h6> </li>
+	</ul>
 </section>
 
 <script type="text/javascript">
 
 	$("document").ready( function() {
 
-		function eventClick() {
+		$("td").on( "click" ,function() {
 			
 			var direccion = $(this).children("a").attr("href");
 
 			if (direccion != '') {
  		            window.location = direccion; // redirect
  		    }
-		};
-		
-		$(".label-success").click(  eventClick );
-
-		$(".label-important").click(  eventClick );
+		});
 
 	});
 	
