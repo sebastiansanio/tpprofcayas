@@ -63,8 +63,8 @@ class LetterOfGuaranteeController {
 			}
 		}
 		
-		def yearMax = Math.max(1900 + yearsWish[0]?.year, (yearsLetter[0] == null)? 0: yearsLetter[0])
-		def yearMin = Math.min(1900 + yearsWish[1]?.year, (yearsLetter[1] == null)? yearMax: yearsLetter[1])
+		def yearMax = Math.max(1900 + ((yearsWish[0]?.year)?:new Date().year), (yearsLetter[0] == null)? 0: yearsLetter[0])
+		def yearMin = Math.min(1900 + ((yearsWish[1]?.year)?:new Date().year), (yearsLetter[1] == null)? yearMax: yearsLetter[1])
 		
 
 		def customers = [] as Set
