@@ -82,7 +82,20 @@
 						<td valign="top" class="value"><g:link controller="report" action="show" id="${shipperInstance?.defaultReport?.id}">${shipperInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
 						
 					</tr>
-				
+					
+					<tr class="prop">
+						<td valign="top" class="taxRegistryNumber"><g:message code="shipper.taxRegistryNumber.label" default="Tax Registry Number" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "taxRegistryNumber")}</td>
+					
+					</tr>
+					
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="shipper.exportingName.label" default="Exporting Name" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "exportingName")}</td>
+					</tr>
+						
 					<tr class="prop">
 						<td valign="top" class="name"><g:message code="stakeholder.accountName.label" default="Account name" /></td>
 						<td valign="top" class="value">${fieldValue(bean: shipperInstance, field: "accountName")}</td>

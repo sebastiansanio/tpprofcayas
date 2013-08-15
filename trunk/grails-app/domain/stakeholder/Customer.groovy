@@ -2,7 +2,6 @@ package stakeholder
 
 import modal.Country
 import wish.Wish
-import wish.LetterOfGuarantee
 import org.hibernate.envers.Audited
 
 @Audited
