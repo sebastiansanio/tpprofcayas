@@ -28,14 +28,6 @@
 				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'email', 'error')}</span>
 			</div>
 		</div>	
-		
-		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'notes', 'error')} ">
-			<label for="notes" class="control-label"><g:message code="stakeholder.notes.label" default="Notes" /></label>
-			<div class="controls">
-				<g:textArea rows="5" name="notes" value="${shipperInstance?.notes}"/>
-				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'notes', 'error')}</span>
-			</div>
-		</div>
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'defaultReport', 'error')} required">
 			<label for="defaultReport" class="control-label"><g:message code="stakeholder.defaultReport.label" default="Default Report" /><span class="required-indicator">*</span></label>
@@ -53,11 +45,25 @@
 			</div>
 		</div>
 		
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'taxRegistryNumber', 'error')} ">
+			<label for="taxRegistryNumber" class="control-label"><g:message code="shipper.taxRegistryNumber.label" default="Tax Registry Number" /></label>
+			<div class="controls">
+				<g:textField name="taxRegistryNumber" value="${shipperInstance?.taxRegistryNumber}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'taxRegistryNumber', 'error')}</span>
+			</div>
+		</div>
+
+		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'exportingName', 'error')} ">
+			<label for="exportingName" class="control-label"><g:message code="stakeholder.exportingName.label" default="Exporting Name" /></label>
+			<div class="controls">
+				<g:textArea rows="4" name="exportingName" value="${shipperInstance?.exportingName}"/>
+				<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'exportingName', 'error')}</span>
+			</div>
+		</div>
+								
 	</div>
 	
 	<div class="span6">
-
-
 
 		<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'country', 'error')} required">
 			<label for="country" class="control-label"><g:message code="shipper.country.label" default="Country" /><span class="required-indicator">*</span></label>
@@ -132,6 +138,14 @@
 		</div>	
 
 		
+	</div>
+</div>
+
+<div class="control-group fieldcontain ${hasErrors(bean: shipperInstance, field: 'notes', 'error')} ">
+	<label for="notes" class="control-label"><g:message code="stakeholder.notes.label" default="Notes" /></label>
+	<div class="controls">
+		<g:textArea rows="5" name="notes" value="${shipperInstance?.notes}" style="width: 70%;"/>
+		<span class="help-inline">${hasErrors(bean: shipperInstance, field: 'notes', 'error')}</span>
 	</div>
 </div>
 
