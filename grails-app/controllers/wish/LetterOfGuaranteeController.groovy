@@ -42,6 +42,7 @@ class LetterOfGuaranteeController {
 		def wishes = Wish.createCriteria()
 			.add(Restrictions.ge("estimatedTimeOfArrival", firstDay))
 			.add(Restrictions.le("estimatedTimeOfArrival", lastDay))
+			.add(Restrictions.isNotNull("forwarder"))
 			.setProjection( Projections.projectionList()
 				.add( Projections.property("customer") )
 				.add( Projections.property("forwarder") )
