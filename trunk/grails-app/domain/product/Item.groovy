@@ -26,7 +26,7 @@ class Item {
 	String				supplierCode
 	String				customerCode
 	
-	ItemState			state
+	ItemStatus			state
 	
 	//las cosas raras
 	

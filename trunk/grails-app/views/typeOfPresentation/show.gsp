@@ -17,12 +17,6 @@
 	<table class="table">
 		<tbody>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="typeOfPresentation.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${typeOfPresentationInstance?.dateCreated}" /></td>
-				
-			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="typeOfPresentation.description.label" default="Description" /></td>
@@ -31,6 +25,12 @@
 				
 			</tr>
 		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="typeOfPresentation.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${typeOfPresentationInstance?.dateCreated}" /></td>
+				
+			</tr>
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="typeOfPresentation.lastUpdated.label" default="Last Updated" /></td>
 				

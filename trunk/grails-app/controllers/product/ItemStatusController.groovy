@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
  * ItemStateController
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
-class ItemStateController {
+class ItemStatusController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -16,15 +16,15 @@ class ItemStateController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [itemStateInstanceList: ItemState.list(params), itemStateInstanceTotal: ItemState.count()]
+        [itemStateInstanceList: ItemStatus.list(params), itemStateInstanceTotal: ItemStatus.count()]
     }
 
     def create() {
-        [itemStateInstance: new ItemState(params)]
+        [itemStateInstance: new ItemStatus(params)]
     }
 
     def save() {
-        def itemStateInstance = new ItemState(params)
+        def itemStateInstance = new ItemStatus(params)
         if (!itemStateInstance.save(flush: true)) {
             render(view: "create", model: [itemStateInstance: itemStateInstance])
             return
@@ -35,7 +35,7 @@ class ItemStateController {
     }
 
     def show() {
-        def itemStateInstance = ItemState.get(params.id)
+        def itemStateInstance = ItemStatus.get(params.id)
         if (!itemStateInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'itemState.label', default: 'ItemState'), params.id])
             redirect(action: "list")
@@ -46,7 +46,7 @@ class ItemStateController {
     }
 
     def edit() {
-        def itemStateInstance = ItemState.get(params.id)
+        def itemStateInstance = ItemStatus.get(params.id)
         if (!itemStateInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'itemState.label', default: 'ItemState'), params.id])
             redirect(action: "list")
@@ -57,7 +57,7 @@ class ItemStateController {
     }
 
     def update() {
-        def itemStateInstance = ItemState.get(params.id)
+        def itemStateInstance = ItemStatus.get(params.id)
         if (!itemStateInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'itemState.label', default: 'ItemState'), params.id])
             redirect(action: "list")
@@ -87,7 +87,7 @@ class ItemStateController {
     }
 
     def delete() {
-        def itemStateInstance = ItemState.get(params.id)
+        def itemStateInstance = ItemStatus.get(params.id)
         if (!itemStateInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'itemState.label', default: 'ItemState'), params.id])
             redirect(action: "list")
