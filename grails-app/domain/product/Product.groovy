@@ -43,6 +43,7 @@ class Product {
 	//PRECIO POR UNIDAD DE VENTA / UNIT PRICE (MR)
 	//PRECIO POR UNIDAD DE VENTA / UNIT PRICE (DP)
 	//PRECIO POR UNIDAD DE VENTA / UNIT PRICE
+	BigDecimal			pricePerUnit
 
 	Port				port
 	Port				consolidationArea
@@ -53,21 +54,21 @@ class Product {
 	TypeOfPresentation	typeOfPresentation
 	Supplier			supplier
 	Shipper				shipper
-	Country				contry
+	Country				country
 	BigDecimal			criterionValue
 	BigDecimal			valuePerKilo
 	String				hsCode
-	Long				tax //serían los derechos
+	BigDecimal			tax //serían los derechos
 	
 	Long				quantityPerCarton
 	Long				innerBoxQuantity
 	Long				articlesQuantityPerInnerBox
 	BigDecimal 			netWeightPerBox
 	BigDecimal 			grossWeightPerBox
-	String				outterDimensionUnit
-	BigDecimal 			outterBoxLength
-	BigDecimal 			outterBoxWidth
-	BigDecimal 			outterBoxHeight
+	String				outerDimensionUnit
+	BigDecimal 			outerBoxLength
+	BigDecimal 			outerBoxWidth
+	BigDecimal 			outerBoxHeight
 	String				innerDimensionUnit
 	BigDecimal 			innerBoxLength
 	BigDecimal 			innerBoxWidth
@@ -86,14 +87,35 @@ class Product {
 		descriptionSP blank:false
 		descriptionEN blank:false
 		color nullable:true
-		status inList: ["Sock", "Discontinuado"]
+		status inList: ["Stock", "Discontinuado"]
 		unit  nullable:true
 		currency nullable:true
-		family nullable:true, blank:true
-		subFamily nullable:true, blank:true
+		family nullable:false
+		subFamily nullable:false
 		typeOfPresentation nullable:true
 		supplier nullable:true
-		tax min:0L, max:100L
+		tax min:0.00, max:100.00, scale:2, nullable:true
+		priceCondition nullable:true
+		pricePerUnit min:0.0000, scale:4, nullable:true
+		port nullable:true
+		consolidationArea nullable:true
+		country nullable:true
+		criterionValue min:0.0000, scale:4, nullable:true
+		valuePerKilo min:0.0000, scale:4, nullable:true
+		quantityPerCarton min:0L, nullable:true
+		innerBoxQuantity min:0L, nullable:true
+		articlesQuantityPerInnerBox min:0L, nullable:true
+		netWeightPerBox min:0.0000, scale:4, nullable:true
+		grossWeightPerBox min:0.0000, scale:4, nullable:true
+		outerBoxLength min:0.0000, scale:4, nullable:true
+		outerBoxWidth min:0.0000, scale:4, nullable:true
+		outerBoxHeight min:0.0000, scale:4, nullable:true
+		innerBoxLength min:0.0000, scale:4, nullable:true
+		innerBoxWidth min:0.0000, scale:4, nullable:true
+		innerBoxHeight min:0.0000, scale:4, nullable:true
+		boxesPerPallets min:0L, nullable:true
+		piecesPerPallet min:0L, nullable:true
+
     }
 	
 	public String toString() {
