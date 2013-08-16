@@ -10,10 +10,10 @@ class SubFamily {
 	Date	dateCreated
 	Date	lastUpdated
 	
-    static mapping = {
-    }
-    
+	static belongsTo	= [family: Family]
+	
 	static constraints = {
+		description unique:true, blank:false 
     }
 	
 	public String toString() {

@@ -62,11 +62,9 @@ class Product {
 	Long				articlesQuantityPerInnerBox
 	BigDecimal 			netWeightPerBox
 	BigDecimal 			grossWeightPerBox
-	String				outerDimensionUnit
 	BigDecimal 			outerBoxLength
 	BigDecimal 			outerBoxWidth
 	BigDecimal 			outerBoxHeight
-	String				innerDimensionUnit
 	BigDecimal 			innerBoxLength
 	BigDecimal 			innerBoxWidth
 	BigDecimal 			innerBoxHeight

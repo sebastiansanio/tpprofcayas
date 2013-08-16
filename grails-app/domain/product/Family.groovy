@@ -11,12 +11,10 @@ class Family {
 	Date	dateCreated
 	Date	lastUpdated
 	
-	static hasMany		= [products: Product]	// tells GORM to associate other domain objects for a 1-n or n-m mapping
+	static hasMany		= [products: Product, subFamily: SubFamily]
 	
-    static mapping = {
-    }
-    
 	static constraints = {
+		description unique:true, blank:false
     }
 	
 	public String toString() {

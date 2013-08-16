@@ -18,26 +18,25 @@
 		<tbody>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="family.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${familyInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="family.description.label" default="Description" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: familyInstance, field: "description")}</td>
 				
 			</tr>
-		
+
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="family.lastUpdated.label" default="Last Updated" /></td>
+				<td valign="top" class="name"><g:message code="family.subFamily.label" default="Sub Family" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${familyInstance?.lastUpdated}" /></td>
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${familyInstance.subFamily}" var="s">
+						<li><g:link controller="subFamily" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
-		
+
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="family.products.label" default="Products" /></td>
 				
@@ -48,6 +47,20 @@
 					</g:each>
 					</ul>
 				</td>
+				
+			</tr>
+						
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="family.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${familyInstance?.dateCreated}" /></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="family.lastUpdated.label" default="Last Updated" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${familyInstance?.lastUpdated}" /></td>
 				
 			</tr>
 		

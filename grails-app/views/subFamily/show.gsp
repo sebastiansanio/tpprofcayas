@@ -16,18 +16,24 @@
 
 	<table class="table">
 		<tbody>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="subFamily.description.label" default="Description" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: subFamilyInstance, field: "description")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="subFamily.family.label" default="Family" /></td>
+				
+				<td valign="top" class="value"><g:link controller="family" action="show" id="${subFamilyInstance?.family?.id}">${subFamilyInstance?.family?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="subFamily.dateCreated.label" default="Date Created" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${subFamilyInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="subFamily.description.label" default="Description" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: subFamilyInstance, field: "description")}</td>
 				
 			</tr>
 		
