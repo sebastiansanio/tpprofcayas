@@ -55,7 +55,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.currency.label" default="Currency" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "currency")}</td>
+				<td valign="top" class="value"><g:link controller="currency" action="show" id="${productInstance?.currency?.id}">${productInstance?.currency?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -84,6 +84,13 @@
 				<td valign="top" class="name"><g:message code="product.supplier.label" default="Supplier" /></td>
 				
 				<td valign="top" class="value"><g:link controller="supplier" action="show" id="${productInstance?.supplier?.id}">${productInstance?.supplier?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.shipper.label" default="Shipper" /></td>
+				
+				<td valign="top" class="value"><g:link controller="shipper" action="show" id="${productInstance?.shipper?.id}">${productInstance?.shipper?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -242,6 +249,19 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.codePerCustomer.label" default="Code Per Customer" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${productInstance.codePerCustomer}" var="c">
+						<li><g:link controller="codePerCustomer" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.customerCode.label" default="Customer Code" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "customerCode")}</td>
@@ -304,16 +324,28 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.previousPrice.label" default="Previous Price" /></td>
+				<td valign="top" class="name"><g:message code="product.previousPrices.label" default="Previous Prices" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "previousPrice")}</td>
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${productInstance.previousPrices}" var="p">
+						<li><g:link controller="historicalPrice" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.shipper.label" default="Shipper" /></td>
+				<td valign="top" class="name"><g:message code="product.pricePerCustomer.label" default="Price Per Customer" /></td>
 				
-				<td valign="top" class="value"><g:link controller="shipper" action="show" id="${productInstance?.shipper?.id}">${productInstance?.shipper?.encodeAsHTML()}</g:link></td>
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${productInstance.pricePerCustomer}" var="p">
+						<li><g:link controller="pricePerCustomer" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				</td>
 				
 			</tr>
 		

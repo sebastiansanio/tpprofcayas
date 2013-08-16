@@ -27,7 +27,7 @@
 			
 				<th><g:message code="product.unit.label" default="Unit" /></th>
 			
-				<g:sortableColumn property="currency" title="${message(code: 'product.currency.label', default: 'Currency')}" />
+				<th><g:message code="product.currency.label" default="Currency" /></th>
 			
 			</tr>
 		</thead>

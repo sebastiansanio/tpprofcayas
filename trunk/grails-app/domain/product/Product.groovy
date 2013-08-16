@@ -1,6 +1,5 @@
 package product
 
-import java.util.Currency;
 import java.util.Date;
 
 import stakeholder.Shipper
@@ -8,6 +7,7 @@ import stakeholder.Supplier
 import modal.Country;
 import modal.Port
 import modal.PriceCondition
+import modal.Currency
 import wish.LoadUnit
 
 import org.hibernate.envers.Audited
@@ -21,7 +21,7 @@ class Product {
 	Date	dateCreated
 	Date	lastUpdated
 	
-	static hasMany		= [loadsUnits: LoadUnit]	
+	static hasMany		= [loadsUnits: LoadUnit, codePerCustomer: CodePerCustomer, pricePerCustomer: PricePerCustomer, previousPrices: HistoricalPrice]
 	
 	String 				descriptionSP
 	String 				descriptionEN
@@ -33,18 +33,15 @@ class Product {
 	
 	String				status
 	
-	//las cosas raras
+	List				codePerCustomer
 	
 	ItemUnit			unit
 	Currency			currency
 	PriceCondition		priceCondition
-	BigDecimal			previousPrice
-	
-	//PRECIO POR UNIDAD DE VENTA / UNIT PRICE (MR)
-	//PRECIO POR UNIDAD DE VENTA / UNIT PRICE (DP)
-	//PRECIO POR UNIDAD DE VENTA / UNIT PRICE
+	List				previousPrices	
 	BigDecimal			pricePerUnit
-
+	List				pricePerCustomer
+	
 	Port				port
 	Port				consolidationArea
 
@@ -91,9 +88,10 @@ class Product {
 		unit  nullable:true
 		currency nullable:true
 		family nullable:false
-		subFamily nullable:false
+		subFamily nullable:true
 		typeOfPresentation nullable:true
 		supplier nullable:true
+		shipper nullable:true
 		tax min:0.00, max:100.00, scale:2, nullable:true
 		priceCondition nullable:true
 		pricePerUnit min:0.0000, scale:4, nullable:true
