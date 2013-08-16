@@ -16,7 +16,7 @@ class Shipper extends Stakeholder{
 	
 	static constraints = {
 		taxRegistryNumber blank:true,nullable:true
-		exportingName blank:true,nullable:true
+		exportingName blank:true,nullable:true,maxSize:512
     }
 	
 
