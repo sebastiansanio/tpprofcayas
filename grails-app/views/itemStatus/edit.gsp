@@ -1,4 +1,4 @@
-<%@ page import="product.ItemState" %>
+<%@ page import="product.ItemStatus" %>
 <!doctype html>
 <html>
 

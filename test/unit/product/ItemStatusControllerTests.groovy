@@ -9,9 +9,9 @@ import grails.test.mixin.*
  * ItemStateControllerTests
  * A unit test class is used to test individual methods or blocks of code without considering the surrounding infrastructure
  */
-@TestFor(ItemStateController)
-@Mock(ItemState)
-class ItemStateControllerTests {
+@TestFor(ItemStatusController)
+@Mock(ItemStatus)
+class ItemStatusControllerTests {
 
 
     def populateValidParams(params) {
@@ -52,7 +52,7 @@ class ItemStateControllerTests {
 
         assert response.redirectedUrl == '/itemState/show/1'
         assert controller.flash.message != null
-        assert ItemState.count() == 1
+        assert ItemStatus.count() == 1
     }
 
     void testShow() {
@@ -63,7 +63,7 @@ class ItemStateControllerTests {
 
 
         populateValidParams(params)
-        def itemState = new ItemState(params)
+        def itemState = new ItemStatus(params)
 
         assert itemState.save() != null
 
@@ -82,7 +82,7 @@ class ItemStateControllerTests {
 
 
         populateValidParams(params)
-        def itemState = new ItemState(params)
+        def itemState = new ItemStatus(params)
 
         assert itemState.save() != null
 
@@ -103,7 +103,7 @@ class ItemStateControllerTests {
 
 
         populateValidParams(params)
-        def itemState = new ItemState(params)
+        def itemState = new ItemStatus(params)
 
         assert itemState.save() != null
 
@@ -147,17 +147,17 @@ class ItemStateControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def itemState = new ItemState(params)
+        def itemState = new ItemStatus(params)
 
         assert itemState.save() != null
-        assert ItemState.count() == 1
+        assert ItemStatus.count() == 1
 
         params.id = itemState.id
 
         controller.delete()
 
-        assert ItemState.count() == 0
-        assert ItemState.get(itemState.id) == null
+        assert ItemStatus.count() == 0
+        assert ItemStatus.get(itemState.id) == null
         assert response.redirectedUrl == '/itemState/list'
     }
 }

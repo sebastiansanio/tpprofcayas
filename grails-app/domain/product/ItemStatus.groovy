@@ -3,7 +3,7 @@ package product
 import java.util.Date;
 
 
-class ItemState {
+class ItemStatus {
 
 	Date	dateCreated
 	Date	lastUpdated

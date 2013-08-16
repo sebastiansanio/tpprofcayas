@@ -18,16 +18,16 @@
 		<tbody>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="itemUnit.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${itemUnitInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="itemUnit.description.label" default="Description" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: itemUnitInstance, field: "description")}</td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="itemUnit.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${itemUnitInstance?.dateCreated}" /></td>
 				
 			</tr>
 		

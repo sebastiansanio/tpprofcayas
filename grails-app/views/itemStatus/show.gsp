@@ -1,5 +1,5 @@
 
-<%@ page import="product.ItemState" %>
+<%@ page import="product.ItemStatus" %>
 <!doctype html>
 <html>
 
@@ -18,16 +18,16 @@
 		<tbody>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="itemState.dateCreated.label" default="Date Created" /></td>
+				<td valign="top" class="name"><g:message code="itemState.description.label" default="Description" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${itemStateInstance?.dateCreated}" /></td>
+				<td valign="top" class="value">${fieldValue(bean: itemStateInstance, field: "description")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="itemState.description.label" default="Description" /></td>
+				<td valign="top" class="name"><g:message code="itemState.dateCreated.label" default="Date Created" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: itemStateInstance, field: "description")}</td>
+				<td valign="top" class="value"><g:formatDate date="${itemStateInstance?.dateCreated}" /></td>
 				
 			</tr>
 		
