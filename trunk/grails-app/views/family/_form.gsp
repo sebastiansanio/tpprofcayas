@@ -10,20 +10,19 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: familyInstance, field: 'products', 'error')} ">
-				<label for="products" class="control-label"><g:message code="family.products.label" default="Products" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: familyInstance, field: 'subFamily', 'error')} ">
+				<label for="subFamily" class="control-label"><g:message code="family.subFamily.label" default="Sub Family" /></label>
 				<div class="controls">
 					
-<ul class="one-to-many">
-<g:each in="${familyInstance?.products?}" var="p">
-    <li><g:link controller="product" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="product" action="create" params="['family.id': familyInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'product.label', default: 'Product')])}</g:link>
-</li>
-</ul>
+					<ul class="one-to-many">
+						<g:each in="${familyInstance?.subFamily?}" var="s">
+						    <li><g:link controller="subFamily" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						<li class="add">
+							<g:link controller="subFamily" action="create" params="['family.id': familyInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'subFamily.label', default: 'SubFamily')])}</g:link>
+						</li>
+					</ul>
 
-					<span class="help-inline">${hasErrors(bean: familyInstance, field: 'products', 'error')}</span>
+					<span class="help-inline">${hasErrors(bean: familyInstance, field: 'subFamily', 'error')}</span>
 				</div>
 			</div>
-

@@ -354,6 +354,12 @@ class BootStrap {
 				
 				Family family = new Family(description:"BACHAS")
 				family.save(flush:true)
+				
+				SubFamily subfamily = new SubFamily(description:"Ø26mm", family: family)
+				subfamily.save(flush:true)
+				subfamily = new SubFamily(description:"Ø35mm", family: family)
+				subfamily.save(flush:true)
+				
 				family = new Family(description:"BISAGRAS")
 				family.save(flush:true)
 				family = new Family(description:"CERRADURAS")
@@ -361,10 +367,6 @@ class BootStrap {
 				family = new Family(description:"PASACABLE")
 				family.save(flush:true)
 				
-				SubFamily subfamily = new SubFamily(description:"Ø26mm")
-				subfamily.save(flush:true)
-				subfamily = new SubFamily(description:"Ø35mm")
-				subfamily.save(flush:true)
 				
 				def alertType = new AlertType(externalMessage:"Vencimiento de la djai",description:"Vencimiento de la Djai",nameOfEstimatedDateField:"djaiExpirationDate",nameOfCompletionField:"originalDjaiFinished",alertTerm:10)
 		    	alertType.save(flush:true)

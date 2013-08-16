@@ -7,23 +7,16 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'family.label', default: 'Family')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
-	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-family" class="first">
 
-	<table class="table table-bordered cabeceraFija">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
-			
 				<g:sortableColumn property="description" title="${message(code: 'family.description.label', default: 'Description')}" />
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'family.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'family.lastUpdated.label', default: 'Last Updated')}" />
-			
 			</tr>
 		</thead>
 		<tbody>
@@ -31,10 +24,6 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
 				<td><g:link action="show" id="${familyInstance.id}">${fieldValue(bean: familyInstance, field: "description")}</g:link></td>
-			
-				<td>${fieldValue(bean: familyInstance, field: "dateCreated")}</td>
-			
-				<td><g:formatDate date="${familyInstance.lastUpdated}" /></td>
 			
 			</tr>
 		</g:each>
