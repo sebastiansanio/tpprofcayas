@@ -213,6 +213,10 @@ class BootStrap {
 				roleManager.addToPermissions("*:show")
 				roleManager.addToPermissions("reportSendConfiguration:*")
 				roleManager.addToPermissions("otherStakeholder:*")
+				//Nuevo
+				roleManager.addToPermissions("typeOfPresentation:*")
+				roleManager.addToPermissions("itemState:*")
+				roleManager.addToPermissions("itemUnit:*")
 				roleManager.save(flush:true)
 				
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
