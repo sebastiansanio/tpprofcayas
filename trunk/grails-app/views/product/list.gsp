@@ -7,28 +7,27 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
-	<g:render template="../menuFijo"></g:render>
 </head>
 
 <body>
 	
 <section id="list-product" class="first">
 
-	<table class="table table-bordered cabeceraFija">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 			
-				<g:sortableColumn property="descriptionES" title="${message(code: 'product.descriptionES.label', default: 'Description ES')}" />
+				<g:sortableColumn property="descriptionSP" title="${message(code: 'product.descriptionSP.label', default: 'Description SP')}" />
 			
-				<g:sortableColumn property="description" title="${message(code: 'product.description.label', default: 'Description')}" />
+				<g:sortableColumn property="descriptionEN" title="${message(code: 'product.descriptionEN.label', default: 'Description EN')}" />
 			
 				<th><g:message code="product.color.label" default="Color" /></th>
 			
-				<th><g:message code="product.family.label" default="Family" /></th>
+				<g:sortableColumn property="status" title="${message(code: 'product.status.label', default: 'Status')}" />
 			
-				<th><g:message code="product.subFamily.label" default="Sub Family" /></th>
+				<th><g:message code="product.unit.label" default="Unit" /></th>
 			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'product.dateCreated.label', default: 'Date Created')}" />
+				<g:sortableColumn property="currency" title="${message(code: 'product.currency.label', default: 'Currency')}" />
 			
 			</tr>
 		</thead>
@@ -36,17 +35,17 @@
 		<g:each in="${productInstanceList}" status="i" var="productInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${productInstance.id}">${fieldValue(bean: productInstance, field: "descriptionES")}</g:link></td>
+				<td><g:link action="show" id="${productInstance.id}">${fieldValue(bean: productInstance, field: "descriptionSP")}</g:link></td>
 			
-				<td>${fieldValue(bean: productInstance, field: "description")}</td>
+				<td>${fieldValue(bean: productInstance, field: "descriptionEN")}</td>
 			
 				<td>${fieldValue(bean: productInstance, field: "color")}</td>
 			
-				<td>${fieldValue(bean: productInstance, field: "family")}</td>
+				<td>${fieldValue(bean: productInstance, field: "status")}</td>
 			
-				<td>${fieldValue(bean: productInstance, field: "subFamily")}</td>
+				<td>${fieldValue(bean: productInstance, field: "unit")}</td>
 			
-				<td><g:formatDate date="${productInstance.dateCreated}" /></td>
+				<td>${fieldValue(bean: productInstance, field: "currency")}</td>
 			
 			</tr>
 		</g:each>

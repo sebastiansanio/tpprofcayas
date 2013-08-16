@@ -344,6 +344,14 @@ class BootStrap {
 				itemUnit.save(flush:true)
 				itemUnit = new ItemUnit(description: "SET")
 				itemUnit.save(flush:true)
+
+				TypeOfPresentation presentationType = new TypeOfPresentation(description: "KIT")
+				presentationType.save(flush:true)
+				presentationType = new TypeOfPresentation(description: "ARMADAS")
+				presentationType.save(flush:true)
+				presentationType = new TypeOfPresentation(description: "SIN ARMAR")
+				presentationType.save(flush:true)
+				
 				
 				def alertType = new AlertType(externalMessage:"Vencimiento de la djai",description:"Vencimiento de la Djai",nameOfEstimatedDateField:"djaiExpirationDate",nameOfCompletionField:"originalDjaiFinished",alertTerm:10)
 		    	alertType.save(flush:true)
