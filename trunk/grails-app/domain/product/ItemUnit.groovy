@@ -2,6 +2,9 @@ package product
 
 import java.util.Date;
 
+import org.hibernate.envers.Audited;
+
+@Audited
 class ItemUnit {
 
 	Date	dateCreated

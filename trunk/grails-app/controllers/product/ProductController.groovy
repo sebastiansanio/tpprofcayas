@@ -17,7 +17,7 @@ class ProductController {
     }
 
     def list() {
-		params.sort = params.sort?: 'description'
+		params.sort = params.sort?: 'descriptionEN'
 		params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [productInstanceList: Product.list(params), productInstanceTotal: Product.count()]
     }

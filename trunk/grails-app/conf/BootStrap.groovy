@@ -215,7 +215,6 @@ class BootStrap {
 				roleManager.addToPermissions("otherStakeholder:*")
 				//Nuevo
 				roleManager.addToPermissions("typeOfPresentation:*")
-				roleManager.addToPermissions("itemState:*")
 				roleManager.addToPermissions("itemUnit:*")
 				roleManager.save(flush:true)
 				
@@ -308,10 +307,10 @@ class BootStrap {
 				color = new Color(description:"NEGRO")
 				color.save(flush:true)
 				
-				def product = new Product(descriptionES:"Artículo 1",description:'Product 1',color:color)
+				def product = new Product(descriptionSP:"Artículo 1",descriptionEN:'Product 1',color:color, status:"Sock")
 				product.save(flush:true)
 				
-				def product2 = new Product(descriptionES:"Artículo 2",description:'Product 2',color:color)
+				def product2 = new Product(descriptionSP:"Artículo 2",descriptionEN:'Product 2',color:color, status:"Sock")
 				product2.save(flush:true)
 				
 				
@@ -341,6 +340,10 @@ class BootStrap {
 				currency = new Currency(name:"YUAN")
 				currency.save(flush:true)
 				
+				ItemUnit itemUnit = new ItemUnit(description: "PZA")
+				itemUnit.save(flush:true)
+				itemUnit = new ItemUnit(description: "SET")
+				itemUnit.save(flush:true)
 				
 				def alertType = new AlertType(externalMessage:"Vencimiento de la djai",description:"Vencimiento de la Djai",nameOfEstimatedDateField:"djaiExpirationDate",nameOfCompletionField:"originalDjaiFinished",alertTerm:10)
 		    	alertType.save(flush:true)
@@ -411,7 +414,7 @@ class BootStrap {
 				scr.save()
 				scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"2",issuer:customer,requiresVisa:false)
 				scr.save()
-								
+				
 				alertManagerService.checkAllAlerts()
 				alertManagerService.generateAllAlerts()
 				
