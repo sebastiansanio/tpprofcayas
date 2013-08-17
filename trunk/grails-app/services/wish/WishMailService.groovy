@@ -57,7 +57,7 @@ class WishMailService  implements MessageSourceAware{
 				if(configuration.sendAlerts)
 					alertsQuantity = alertExportService.exportAlertsByStakeholder('excel',outputStreamAlerts, configuration.stakeholder,configuration.stakeholder.defaultLocale.locale)
 				
-				if(quantity > 0){
+				if(quantity > 0 && (configuration.sendReport || alertsQuantity>0)){
 					
 					boolean hasSignature = configuration.body.contains("[signature]")
 
@@ -67,20 +67,19 @@ class WishMailService  implements MessageSourceAware{
 						subject transformText(configuration.subject)
 						html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
 						text transformText(configuration.body)
-						attach(messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes)
+						if(configuration.sendReport)
+							attach(messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes)
 						if(alertsQuantity>0)
 							attach(messageSource.getMessage("wish.alertsByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStreamAlerts.bytes)
 						if(hasSignature) 
 							inline('signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file)
 					}
-						
+					configuration.lastSentDate = new Date()
 				}
-				configuration.lastSentDate = new Date()
 				
 				if(configuration.frequencyInDays == null){
 					configuration.active = false
-				}
-				else{
+				}else{
 					configuration.nextSendDate = configuration.nextSendDate.plus(configuration.frequencyInDays)
 				}
 			}
