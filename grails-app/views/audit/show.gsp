@@ -52,7 +52,7 @@
 					<g:set var="messageClassName" value="${(messageClass.name.substring(0,1).toLowerCase() + messageClass.name.substring(1))}"/>
 					
 					<h5>
-					${message(code:'revisionType.'+detail.revisionType.toString().toLowerCase()+'.label') + ' '+ message(code:domainClassInstanceName+'.label') + ' (id '+detail.entityId+')'}
+					${message(code:'revisionType.'+detail.revisionType.toString().toLowerCase()+'.label') + ' '+ message(code:domainClassInstanceName+'.label',,default:domainClassInstanceName.capitalize()) + ' (id '+detail.entityId+')'}
 					</h5>
 					
 										
@@ -69,14 +69,14 @@
 						<g:each var="prop" in="${domainClassInstance.persistentProperties}">						
 							<g:if test="${!(prop.isOneToMany() || (prop.isManyToMany() && !(prop.isOwningSide())))}">
 								<g:if test="${prop.type== byte[]}">
-								<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) }</p>
 								</g:if>
 								<g:else>
-								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' = '+previousInstance[prop.name]}</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) + ' = '+previousInstance[prop.name]}</p>
 								</g:else>
 							</g:if>
 							<g:else>
-								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' (ids) = '+currentInstance[prop.name]*.id.toString()}</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) + ' (ids) = '+currentInstance[prop.name]*.id.toString()}</p>
 							</g:else>
 						</g:each>
 					</g:if>
@@ -85,14 +85,14 @@
 						<g:each var="prop" in="${domainClassInstance.persistentProperties}">						
 							<g:if test="${!(prop.isOneToMany() || (prop.isManyToMany() && !(prop.isOwningSide())))}">
 								<g:if test="${prop.type== byte[]}">
-								<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) }</p>
 								</g:if>
 								<g:else>
-								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' = '+currentInstance[prop.name]}</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) + ' = '+currentInstance[prop.name]}</p>
 								</g:else>
 							</g:if>
 							<g:else>
-								<p>${message(code:messageClassName+'.'+prop.name+'.label') + ' (ids) = '+currentInstance[prop.name]*.id.toString()}</p>
+								<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) + ' (ids) = '+currentInstance[prop.name]*.id.toString()}</p>
 							</g:else>
 						</g:each>
 					</g:if>
@@ -108,10 +108,10 @@
 							<g:if test="${!(prop.isOneToMany() || (prop.isManyToMany() && !(prop.isOwningSide())))}">
 								<g:if test="${previousInstance[prop.name].hasProperty('id')?previousInstance[prop.name].id!=currentInstance[prop.name].id:previousInstance[prop.name]!=currentInstance[prop.name]}">
 									<g:if test="${prop.type== byte[]}">
-									<p>${message(code:messageClassName+'.'+prop.name+'.label') }</p>
+									<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) }</p>
 									</g:if>
 									<g:else>
-									<p>${message(code:messageClassName+'.'+prop.name+'.label') + ': ' + previousInstance[prop.name].toString() + ' > '+ currentInstance[prop.name].toString()} </p>
+									<p>${message(code:messageClassName+'.'+prop.name+'.label',default:prop.name.capitalize()) + ': ' + previousInstance[prop.name].toString() + ' > '+ currentInstance[prop.name].toString()} </p>
 									</g:else>
 								</g:if>
 							</g:if>
