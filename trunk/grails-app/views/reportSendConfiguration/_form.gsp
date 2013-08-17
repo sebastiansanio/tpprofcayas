@@ -36,7 +36,7 @@ function reportStakeholderChanged(){
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'stakeholder', 'error')} required">
 				<label for="stakeholder" class="control-label"><g:message code="reportSendConfiguration.stakeholder.label" default="Stakeholder" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select noSelection="['':'']" onchange="reportStakeholderChanged();" id="stakeholder" name="stakeholder.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" required="" value="${reportSendConfigurationInstance?.stakeholder?.id}" class="many-to-one"/>
+					<g:select noSelection="['':'']" onchange="reportStakeholderChanged();" id="stakeholder" name="stakeholder.id" from="${stakeholder.Stakeholder.list(sort:'name')}" optionKey="id" required="" value="${reportSendConfigurationInstance?.stakeholder?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'stakeholder', 'error')}</span>
 				</div>
 			</div>

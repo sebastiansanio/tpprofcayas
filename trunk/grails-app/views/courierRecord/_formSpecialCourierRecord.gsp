@@ -113,7 +113,7 @@
 			<div class=" fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'issuer', 'error')} ">
 				<label for="issuer" class="control-label"><g:message code="courierRecord.issuer.label" default="Issuer" /></label>
 				<div class="controls">
-					<g:select id="issuer" name="issuer.id" from="${stakeholder.Stakeholder.list()}" optionKey="id" value="${specialCourierRecordInstance?.issuer?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<g:select id="issuer" name="issuer.id" from="${stakeholder.Stakeholder.list(sort:'name')}" optionKey="id" value="${specialCourierRecordInstance?.issuer?.id}" class="many-to-one" noSelection="['null': '']"/>
 					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'issuer', 'error')}</span>
 				</div>
 			</div>
@@ -123,7 +123,7 @@
 			<div class="fieldcontain ${hasErrors(bean: specialCourierRecordInstance, field: 'receivers', 'error')} ">
 				<label for="receivers" class="control-label"><g:message code="courierRecord.receivers.label" default="Receivers" /></label>
 				<div class="controls">
-					<g:select name="receivers" from="${stakeholder.Stakeholder.list()}" multiple="multiple" optionKey="id" size="10" value="${specialCourierRecordInstance?.receivers*.id}" class="many-to-many"/>
+					<g:select name="receivers" from="${stakeholder.Stakeholder.list(sort:'name')}" multiple="multiple" optionKey="id" size="10" value="${specialCourierRecordInstance?.receivers*.id}" class="many-to-many"/>
 					<span class="help-inline">${hasErrors(bean: specialCourierRecordInstance, field: 'receivers', 'error')}</span>
 				</div>
 			</div>
