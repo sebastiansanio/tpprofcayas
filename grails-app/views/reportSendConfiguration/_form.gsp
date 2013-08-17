@@ -82,13 +82,14 @@ function reportStakeholderChanged(){
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')} ">
-				<label for="active" class="control-label"><g:message code="reportSendConfiguration.active.label" default="Active?" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'sendReport', 'error')} ">
+				<label for="sendReport" class="control-label"><g:message code="reportSendConfiguration.sendReport.label" default="Send Report?" /></label>
 				<div class="controls">
-					<bs:checkBox name="active" value="${reportSendConfigurationInstance?.active}" />
-					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')}</span>
+					<bs:checkBox name="sendReport" value="${reportSendConfigurationInstance?.sendReport}" />
+					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'sendReport', 'error')}</span>
 				</div>
 			</div>
+
 
 			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'sendAlerts', 'error')} ">
 				<label for="sendAlerts" class="control-label"><g:message code="reportSendConfiguration.sendAlerts.label" default="Send Alerts?" /></label>
@@ -98,6 +99,13 @@ function reportStakeholderChanged(){
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')} ">
+				<label for="active" class="control-label"><g:message code="reportSendConfiguration.active.label" default="Active?" /></label>
+				<div class="controls">
+					<bs:checkBox name="active" value="${reportSendConfigurationInstance?.active}" />
+					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'active', 'error')}</span>
+				</div>
+			</div>
 
 </div>
 <div class="span4">

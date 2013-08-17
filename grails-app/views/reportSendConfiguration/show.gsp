@@ -97,6 +97,14 @@
 
 
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="reportSendConfiguration.sendReport.label" default="Send Report?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${reportSendConfigurationInstance?.sendReport}" /></td>
+				
+			</tr>
+
+
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.sendAlerts.label" default="Send Alerts?" /></td>
 				
 				<td valign="top" class="value"><g:formatBoolean boolean="${reportSendConfigurationInstance?.sendAlerts}" /></td>

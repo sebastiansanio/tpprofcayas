@@ -27,6 +27,7 @@ class ReportSendConfiguration {
 	
 	boolean active
 	boolean sendAlerts
+	boolean sendReport
 	
 	Date lastSentDate
 	    
