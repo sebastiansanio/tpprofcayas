@@ -47,7 +47,7 @@ class Product {
 
 	Family				family
 	SubFamily			subFamily
-	String				atribute
+	String				attribute
 	TypeOfPresentation	typeOfPresentation
 	Supplier			supplier
 	Shipper				shipper

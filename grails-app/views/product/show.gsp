@@ -242,9 +242,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.atribute.label" default="Atribute" /></td>
+				<td valign="top" class="name"><g:message code="product.attribute.label" default="Attribute" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "atribute")}</td>
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "attribute")}</td>
 				
 			</tr>
 		
