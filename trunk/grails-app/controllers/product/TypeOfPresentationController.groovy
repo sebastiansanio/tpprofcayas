@@ -2,10 +2,10 @@ package product
 
 import org.springframework.dao.DataIntegrityViolationException
 
-/**
- * TypeOfPresentationController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+import org.springframework.transaction.annotation.Transactional
+
+
+@Transactional
 class TypeOfPresentationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
