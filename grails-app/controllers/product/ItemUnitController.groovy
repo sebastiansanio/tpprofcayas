@@ -16,7 +16,7 @@ class ItemUnitController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [itemUnitInstanceList: ItemUnit.list(params), itemUnitInstanceTotal: ItemUnit.count()]
     }
 

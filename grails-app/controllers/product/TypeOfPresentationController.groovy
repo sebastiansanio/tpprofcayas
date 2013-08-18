@@ -15,7 +15,7 @@ class TypeOfPresentationController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [typeOfPresentationInstanceList: TypeOfPresentation.list(params), typeOfPresentationInstanceTotal: TypeOfPresentation.count()]
     }
 
