@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 import wish.LoadUnit
 
 import org.springframework.web.servlet.support.RequestContextUtils
+import stakeholder.Supplier
 
 @Transactional
 class ProductController {
@@ -146,7 +147,16 @@ class ProductController {
 	
 	def export() {
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.label',default:'Product')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
-		productExportService.exportProducts(params.format,response.outputStream,RequestContextUtils.getLocale(request))
+		
+		if(params.supplierId == 'null'){
+			response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.pl.label',default:'Products')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+			productExportService.exportProducts(params.format,response.outputStream,RequestContextUtils.getLocale(request))
+			return
+		}else{
+			Supplier supplier = Supplier.get(params.supplierId.toLong())
+			response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.pl.label',default:'Products')} ${supplier.name}"+DATE_FORMAT.format(new Date())+".${params.extension}")
+			productExportService.exportProductsBySupplier(supplier,params.format,response.outputStream,RequestContextUtils.getLocale(request))
+			return
+		}
 	}
 }
