@@ -16,6 +16,8 @@
 				</div>
 			</div>
 
+			<span id="codePerCustomer"></span> 
+
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'color', 'error')} ">
 				<label for="color" class="control-label"><g:message code="color.label" default="Color" /></label>
 				<div class="controls">
@@ -23,7 +25,7 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'color', 'error')}</span>
 				</div>
 			</div>
-
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'supplierCode', 'error')} ">
 				<label for="supplierCode" class="control-label"><g:message code="product.supplierCode.label" default="Code" /></label>
 				<div class="controls">
