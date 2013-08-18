@@ -21,7 +21,7 @@
 <g:form action="importProducts" class="form-horizontal" enctype="multipart/form-data">
 <g:field type="file" id="importFile" name="importFile" required="" />
 
-<p><a href="${resource(dir:'models',file: 'Productos-Modelo.xls')}">
+<p><a href="${resource(dir:'models',file: 'Articulos-Modelo.xls')}">
 ${message(code:'default.downloadModel.label',default:'Download Model')}
 </a></p>
 

@@ -1,18 +1,24 @@
 package product
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+
 import org.springframework.dao.DataIntegrityViolationException
 
 
 import org.springframework.transaction.annotation.Transactional
 import wish.LoadUnit
 
+import org.springframework.web.servlet.support.RequestContextUtils
 
 @Transactional
 class ProductController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	def productImportService
+	def productExportService
 	
     def index() {
         redirect(action: "list", params: params)
@@ -132,5 +138,15 @@ class ProductController {
 		}
 		
 		redirect(action: "importForm", params: params)
+	}
+	
+	def query(){
+		[:]
+	}
+	
+	def export() {
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.label',default:'Product')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		productExportService.exportProducts(params.format,response.outputStream,RequestContextUtils.getLocale(request))
 	}
 }
