@@ -18,6 +18,8 @@
 			<tr>
 			
 				<g:sortableColumn property="descriptionSP" title="${message(code: 'product.descriptionSP.label', default: 'Description SP')}" />
+				
+				<th><g:message code="product.color.label" default="Color" /></th>
 						
 				<th><g:message code="product.supplierCode.label" default="Supplier Code" /></th>
 
@@ -32,6 +34,8 @@
 			
 				<td><g:link action="show" id="${productInstance.id}">${fieldValue(bean: productInstance, field: "descriptionSP")}</g:link></td>
 			
+				<td>${fieldValue(bean: productInstance, field: "color")}</td>
+				
 				<td>${fieldValue(bean: productInstance, field: "supplierCode")}</td>			
 
 				<td>${fieldValue(bean: productInstance, field: "customerCode")}</td>

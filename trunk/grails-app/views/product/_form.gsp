@@ -24,6 +24,32 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'supplierCode', 'error')} ">
+				<label for="supplierCode" class="control-label"><g:message code="product.supplierCode.label" default="Code" /></label>
+				<div class="controls">
+					<g:textField name="supplierCode" value="${productInstance?.supplierCode}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'supplierCode', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'customerCode', 'error')} ">
+				<label for="customerCode" class="control-label"><g:message code="product.customerCode.label" default="Customer Code" /></label>
+				<div class="controls">
+					<g:textField name="customerCode" value="${productInstance?.customerCode}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'customerCode', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'codePerCustomer', 'error')} ">
+				<label for="codePerCustomer" class="control-label"><g:message code="product.codePerCustomer.label" default="Code Per Customer" /></label>
+				<div class="controls">
+					
+					<g:render template="codePerCustomerForm" model="['productInstance':productInstance]"/>
+
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'codePerCustomer', 'error')}</span>
+				</div>
+			</div>
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'status', 'error')} ">
 				<label for="status" class="control-label"><g:message code="product.status.label" default="Status" /></label>
 				<div class="controls">
@@ -48,6 +74,55 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'priceCondition', 'error')} ">
+				<label for="priceCondition" class="control-label"><g:message code="priceCondition.label" default="Price Condition" /></label>
+				<div class="controls">
+					<g:select id="priceCondition" name="priceCondition.id" from="${modal.PriceCondition.list()}" optionKey="id" value="${productInstance?.priceCondition?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'priceCondition', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'pricePerUnit', 'error')} ">
+				<label for="pricePerUnit" class="control-label"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></label>
+				<div class="controls">
+					<g:field type="number" name="pricePerUnit" step="0.0001" min="0.0000" value="${productInstance.pricePerUnit}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'pricePerUnit', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')} ">
+				<label for="pricePerCustomer" class="control-label"><g:message code="product.pricePerCustomer.label" default="Price Per Customer" /></label>
+				<div class="controls">
+					
+					<ul class="one-to-many">
+						<g:each in="${productInstance?.pricePerCustomer?}" var="p">
+						    <li><g:link controller="pricePerCustomer" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						<li class="add">
+							<g:link controller="pricePerCustomer" action="create" params="['product.id': productInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'pricePerCustomer.label', default: 'PricePerCustomer')])}</g:link>
+						</li>
+					</ul>
+
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')}</span>
+				</div>
+			</div>
+						
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'port', 'error')} ">
+				<label for="port" class="control-label"><g:message code="port.label" default="Port" /></label>
+				<div class="controls">
+					<g:select id="port" name="port.id" from="${modal.Port.list()}" optionKey="id" value="${productInstance?.port?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'port', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'consolidationArea', 'error')} ">
+				<label for="consolidationArea" class="control-label"><g:message code="product.consolidationArea.label" default="Consolidation Area" /></label>
+				<div class="controls">
+					<g:select id="consolidationArea" name="consolidationArea.id" from="${modal.Port.list()}" optionKey="id" value="${productInstance?.consolidationArea?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'consolidationArea', 'error')}</span>
+				</div>
+			</div>
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'family', 'error')} required">
 				<label for="family" class="control-label"><g:message code="family.label" default="Family" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -65,6 +140,14 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'attribute', 'error')} ">
+				<label for="attribute" class="control-label"><g:message code="product.attribute.label" default="Attribute" /></label>
+				<div class="controls">
+					<g:textField name="attribute" value="${productInstance?.attribute}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'attribute', 'error')}</span>
+				</div>
+			</div>
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'typeOfPresentation', 'error')} ">
 				<label for="typeOfPresentation" class="control-label"><g:message code="typeOfPresentation.label" default="Type Of Presentation" /></label>
 				<div class="controls">
@@ -89,46 +172,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'tax', 'error')} ">
-				<label for="tax" class="control-label"><g:message code="product.tax.label" default="Tax" /></label>
-				<div class="controls">
-					<g:field type="number" name="tax" step="0.01" min="0.00" max="100.00" value="${productInstance.tax}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'tax', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'priceCondition', 'error')} ">
-				<label for="priceCondition" class="control-label"><g:message code="priceCondition.label" default="Price Condition" /></label>
-				<div class="controls">
-					<g:select id="priceCondition" name="priceCondition.id" from="${modal.PriceCondition.list()}" optionKey="id" value="${productInstance?.priceCondition?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'priceCondition', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'pricePerUnit', 'error')} ">
-				<label for="pricePerUnit" class="control-label"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></label>
-				<div class="controls">
-					<g:field type="number" name="pricePerUnit" step="0.0001" min="0.0000" value="${productInstance.pricePerUnit}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'pricePerUnit', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'port', 'error')} ">
-				<label for="port" class="control-label"><g:message code="port.label" default="Port" /></label>
-				<div class="controls">
-					<g:select id="port" name="port.id" from="${modal.Port.list()}" optionKey="id" value="${productInstance?.port?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'port', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'consolidationArea', 'error')} ">
-				<label for="consolidationArea" class="control-label"><g:message code="product.consolidationArea.label" default="Consolidation Area" /></label>
-				<div class="controls">
-					<g:select id="consolidationArea" name="consolidationArea.id" from="${modal.Port.list()}" optionKey="id" value="${productInstance?.consolidationArea?.id}" class="many-to-one" noSelection="['null': '']"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'consolidationArea', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'country', 'error')} ">
 				<label for="country" class="control-label"><g:message code="product.country.label" default="Country" /></label>
 				<div class="controls">
@@ -150,6 +193,22 @@
 				<div class="controls">
 					<g:field type="number" name="valuePerKilo" step="0.0001" min="0.0000" value="${productInstance.valuePerKilo}"/>
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'valuePerKilo', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'hsCode', 'error')} ">
+				<label for="hsCode" class="control-label"><g:message code="product.hsCode.label" default="Hs Code" /></label>
+				<div class="controls">
+					<g:textField name="hsCode" value="${productInstance?.hsCode}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'hsCode', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'tax', 'error')} ">
+				<label for="tax" class="control-label"><g:message code="product.tax.label" default="Tax" /></label>
+				<div class="controls">
+					<g:field type="number" name="tax" step="0.01" min="0.00" max="100.00" value="${productInstance.tax}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'tax', 'error')}</span>
 				</div>
 			</div>
 
@@ -257,47 +316,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'attribute', 'error')} ">
-				<label for="attribute" class="control-label"><g:message code="product.attribute.label" default="Attribute" /></label>
-				<div class="controls">
-					<g:textField name="attribute" value="${productInstance?.attribute}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'attribute', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'codePerCustomer', 'error')} ">
-				<label for="codePerCustomer" class="control-label"><g:message code="product.codePerCustomer.label" default="Code Per Customer" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-						<g:each in="${productInstance?.codePerCustomer?}" var="c">
-						    <li><g:link controller="codePerCustomer" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						<li class="add">
-							<g:link controller="codePerCustomer" action="create" params="['product.id': productInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'codePerCustomer.label', default: 'CodePerCustomer')])}</g:link>
-						</li>
-					</ul>
-
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'codePerCustomer', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'customerCode', 'error')} ">
-				<label for="customerCode" class="control-label"><g:message code="product.customerCode.label" default="Customer Code" /></label>
-				<div class="controls">
-					<g:textField name="customerCode" value="${productInstance?.customerCode}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'customerCode', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'hsCode', 'error')} ">
-				<label for="hsCode" class="control-label"><g:message code="product.hsCode.label" default="Hs Code" /></label>
-				<div class="controls">
-					<g:textField name="hsCode" value="${productInstance?.hsCode}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'hsCode', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'loadsUnits', 'error')} ">
 				<label for="loadsUnits" class="control-label"><g:message code="loadsUnits.label" default="Loads Units" /></label>
 				<div class="controls">
@@ -314,55 +332,12 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'loadsUnits', 'error')}</span>
 				</div>
 			</div>
-
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'notes', 'error')} ">
 				<label for="notes" class="control-label"><g:message code="product.notes.label" default="Notes" /></label>
 				<div class="controls">
-					<g:textField name="notes" value="${productInstance?.notes}"/>
+					<textarea rows="4" name="notes" value="${productInstance?.notes}" style="width:80%;"></textarea>
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'notes', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'previousPrices', 'error')} ">
-				<label for="previousPrices" class="control-label"><g:message code="product.previousPrices.label" default="Previous Prices" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-						<g:each in="${productInstance?.previousPrices?}" var="p">
-						    <li><g:link controller="historicalPrice" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						<li class="add">
-							<g:link controller="historicalPrice" action="create" params="['product.id': productInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'historicalPrice.label', default: 'HistoricalPrice')])}</g:link>
-						</li>
-					</ul>
-
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'previousPrices', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')} ">
-				<label for="pricePerCustomer" class="control-label"><g:message code="product.pricePerCustomer.label" default="Price Per Customer" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-						<g:each in="${productInstance?.pricePerCustomer?}" var="p">
-						    <li><g:link controller="pricePerCustomer" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						<li class="add">
-							<g:link controller="pricePerCustomer" action="create" params="['product.id': productInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'pricePerCustomer.label', default: 'PricePerCustomer')])}</g:link>
-						</li>
-					</ul>
-
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'supplierCode', 'error')} ">
-				<label for="supplierCode" class="control-label"><g:message code="product.supplierCode.label" default="
- Code" /></label>
-				<div class="controls">
-					<g:textField name="supplierCode" value="${productInstance?.supplierCode}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'supplierCode', 'error')}</span>
 				</div>
 			</div>
 
