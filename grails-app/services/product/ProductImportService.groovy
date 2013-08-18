@@ -10,7 +10,7 @@ class ProductImportService {
     static transactional = true
 
 	Map configuration = [
-		sheet:'Artículo',
+		sheet:'Items',
 		startRow:1,
 		columnMap: [
 			'A':'descriptionSP',

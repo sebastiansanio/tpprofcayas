@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import stakeholder.Supplier
 
 
 class ProductExportService implements MessageSourceAware{
@@ -21,17 +22,28 @@ class ProductExportService implements MessageSourceAware{
 				maxWidth = product[fieldName].toString().length()
 			}
 		}
-		return maxWidth * 1.2
+		return maxWidth * 1.7
 	}
-	
-	def exportProducts(String format,OutputStream outputStream,Locale locale) {	
-		List products = Product.list(sort:'id')
-		List fields = ['id','descriptionEN']
+
+	def exportProductsBySupplier(Supplier supplier, String format,OutputStream outputStream,Locale locale) {
+		List products = Product.findAllBySupplier(supplier,[sort:'id'])
+		doExport(format,outputStream,locale,products)
+	}
 		
-		doExport(format,outputStream,locale,fields,products)
+	def exportProducts(String format,OutputStream outputStream,Locale locale) {	
+		List products = Product.list(sort:'id')		
+		doExport(format,outputStream,locale,products)
 	}
 	
-	def doExport(String format,OutputStream outputStream,Locale locale,List fields,List products){
+	def doExport(String format,OutputStream outputStream,Locale locale,List products){
+		List fields = ['id','pricePerUnit','descriptionEN','color','supplierCode','customerCode','status',
+			'unit','currency','priceCondition','port','consolidationArea','family',
+			'subFamily','attribute','typeOfPresentation','supplier','shipper','country',
+			'criterionValue','hsCode','tax','quantityPerCarton','innerBoxQuantity',
+			'articlesQuantityPerInnerBox','netWeightPerBox','grossWeightPerBox','outerBoxLength',
+			'outerBoxWidth','outerBoxHeight','innerBoxLength','innerBoxWidth','innerBoxHeight',
+			'boxesPerPallets','piecesPerPallet','notes']
+		
 		def dateFormatter = {domain, value->
 			return value?.format("dd/MM/yyyy")
 		}
@@ -53,7 +65,7 @@ class ProductExportService implements MessageSourceAware{
 				formatters.put(field, booleanFormatter)
 			widths.add(getMaxWidth(products,field,label.length()))
 		}
-		Map parameters = [title: messageSource.getMessage("product.label",null,locale),'column.widths':widths]
+		Map parameters = [title: "Items",'column.widths':widths]
 		exportService.export(format,outputStream,products,fields,labels,formatters,parameters)
 	}
 }
