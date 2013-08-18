@@ -12,6 +12,8 @@ class ProductController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	def productImportService
+	
     def index() {
         redirect(action: "list", params: params)
     }
@@ -114,5 +116,21 @@ class ProductController {
 	
 	def subFamily(){
 		[family: Family.get(params.id)]
+	}
+	
+	def importForm(){
+		[:]
+	}
+	
+	def importProducts(){
+		
+		try{
+			productImportService.importProducts(params.importFile.getBytes())
+			flash.message = message(code:'default.importOk.message')
+		}catch(Exception e){
+			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
+		}
+		
+		redirect(action: "importForm", params: params)
 	}
 }

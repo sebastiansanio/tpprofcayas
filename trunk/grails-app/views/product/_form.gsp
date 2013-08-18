@@ -257,11 +257,11 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'atribute', 'error')} ">
-				<label for="atribute" class="control-label"><g:message code="product.atribute.label" default="Atribute" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'attribute', 'error')} ">
+				<label for="attribute" class="control-label"><g:message code="product.attribute.label" default="Attribute" /></label>
 				<div class="controls">
-					<g:textField name="atribute" value="${productInstance?.atribute}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'atribute', 'error')}</span>
+					<g:textField name="attribute" value="${productInstance?.attribute}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'attribute', 'error')}</span>
 				</div>
 			</div>
 
