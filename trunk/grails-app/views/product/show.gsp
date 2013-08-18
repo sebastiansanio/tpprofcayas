@@ -283,13 +283,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.innerDimensionUnit.label" default="Inner Dimension Unit" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "innerDimensionUnit")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.lastUpdated.label" default="Last Updated" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${productInstance?.lastUpdated}" /></td>
@@ -313,13 +306,6 @@
 				<td valign="top" class="name"><g:message code="product.notes.label" default="Notes" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "notes")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.outerDimensionUnit.label" default="Outer Dimension Unit" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "outerDimensionUnit")}</td>
 				
 			</tr>
 		

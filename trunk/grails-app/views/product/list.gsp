@@ -18,17 +18,12 @@
 			<tr>
 			
 				<g:sortableColumn property="descriptionSP" title="${message(code: 'product.descriptionSP.label', default: 'Description SP')}" />
-			
-				<g:sortableColumn property="descriptionEN" title="${message(code: 'product.descriptionEN.label', default: 'Description EN')}" />
-			
-				<th><g:message code="product.color.label" default="Color" /></th>
-			
-				<g:sortableColumn property="status" title="${message(code: 'product.status.label', default: 'Status')}" />
-			
-				<th><g:message code="product.unit.label" default="Unit" /></th>
-			
-				<th><g:message code="product.currency.label" default="Currency" /></th>
-			
+						
+				<th><g:message code="product.supplierCode.label" default="Supplier Code" /></th>
+
+				<th><g:message code="product.customerCode.label" default="Customer Code" /></th>
+
+				<th><g:message code="supplier.label" default="Supplier" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,15 +32,11 @@
 			
 				<td><g:link action="show" id="${productInstance.id}">${fieldValue(bean: productInstance, field: "descriptionSP")}</g:link></td>
 			
-				<td>${fieldValue(bean: productInstance, field: "descriptionEN")}</td>
+				<td>${fieldValue(bean: productInstance, field: "supplierCode")}</td>			
+
+				<td>${fieldValue(bean: productInstance, field: "customerCode")}</td>
 			
-				<td>${fieldValue(bean: productInstance, field: "color")}</td>
-			
-				<td>${fieldValue(bean: productInstance, field: "status")}</td>
-			
-				<td>${fieldValue(bean: productInstance, field: "unit")}</td>
-			
-				<td>${fieldValue(bean: productInstance, field: "currency")}</td>
+				<td>${fieldValue(bean: productInstance, field: "supplier")}</td>
 			
 			</tr>
 		</g:each>
