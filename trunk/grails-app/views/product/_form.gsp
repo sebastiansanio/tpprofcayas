@@ -1,5 +1,8 @@
 <%@ page import="product.Product" %>
 
+Hacer ventana flotante q pregunte si eliminar.
+Ver lo de la historia 
+
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'descriptionSP', 'error')} required">
 				<label for="descriptionSP" class="control-label"><g:message code="product.descriptionSP.label" default="Description SP" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -310,23 +313,6 @@
 				<div class="controls">
 					<g:field type="number" name="piecesPerPallet" min="0" value="${productInstance.piecesPerPallet}"/>
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'piecesPerPallet', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'loadsUnits', 'error')} ">
-				<label for="loadsUnits" class="control-label"><g:message code="loadsUnits.label" default="Loads Units" /></label>
-				<div class="controls">
-					
-					<ul class="one-to-many">
-						<g:each in="${productInstance?.loadsUnits?}" var="l">
-						    <li><g:link controller="loadUnit" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						<li class="add">
-							<g:link controller="loadUnit" action="create" params="['product.id': productInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'loadUnit.label', default: 'LoadUnit')])}</g:link>
-						</li>
-					</ul>
-
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'loadsUnits', 'error')}</span>
 				</div>
 			</div>
 			

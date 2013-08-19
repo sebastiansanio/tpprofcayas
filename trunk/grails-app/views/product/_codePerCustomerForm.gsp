@@ -16,17 +16,14 @@
 					<g:textField name="codePerCustomer[${i}].code" value="${codeCustomer.code}"/>
 				</td>
 				<td>
-					<g:link role="button" class="btn btn-primary" action="deleteCodePerCustomer" params="['productId': productInstance?.id, 'codePerCustomerId': codeCustomer.id ]"><i class='icon-trash'></i></g:link>
+					<g:link role="button" class="btn btn-primary" action="deleteCodePerCustomer" params="['productId': productInstance?.id, 'codePerCustomerId': codeCustomer.id ]" onclick="return confirm('${message( code: 'default.button.delete.confirm.message', default:'Are you sure?')}');"><i class='icon-trash'></i></g:link>
 				</td>
 			</tr>
 		</g:each>		
 	</tbody>
 </table>
 
-			
-
 <a role="button" class="btn btn-primary" id="addCustomerCode"> ${message(code: 'default.add.label', args: [message(code: 'codePerCustomer.label', default: 'Code Per Customer')])}</a>
-
 
 <script>
 
@@ -99,6 +96,6 @@ $("document").ready( function(){
 		
 		rows++;
 	});
-	
+
 });
 </script>

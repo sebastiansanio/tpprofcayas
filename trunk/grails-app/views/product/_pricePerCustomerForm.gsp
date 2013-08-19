@@ -17,7 +17,8 @@
 					
 				</td>
 				<td>
-					<g:link role="button" class="btn btn-primary" action="deletePricePerCustomer" params="['productId': productInstance?.id, 'pricePerCustomerId': priceCustomer.id ]"><i class='icon-trash'></i></g:link>
+					<g:link role="button" class="btn btn-primary" action="deletePricePerCustomer" params="['productId': productInstance?.id, 'pricePerCustomerId': priceCustomer.id ]" onclick="return confirm('${message(code:'default.button.delete.confirm.message', default:'Are you sure?') }');"><i class='icon-trash'></i></g:link>
+					
 				</td>
 			</tr>
 		</g:each>		
@@ -26,7 +27,7 @@
 
 			
 
-<a role="button" class="btn btn-primary" id="addCustomerPrice"> ${message(code: 'default.add.label', args: [message(code: 'pricePerCustomer.label', default: 'CodePerCustomer')])}</a>
+<a role="button" class="btn btn-primary" id="addCustomerPrice"> ${message(code: 'default.add.label', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer')])}</a>
 
 
 <script>
