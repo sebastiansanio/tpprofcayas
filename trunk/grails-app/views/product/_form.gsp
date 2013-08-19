@@ -68,6 +68,8 @@
 				</div>
 			</div>
 
+			<span id="pricePerCustomer"> </span> 
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'currency', 'error')} ">
 				<label for="currency" class="control-label"><g:message code="currency.label" default="Currency" /></label>
 				<div class="controls">
@@ -96,14 +98,7 @@
 				<label for="pricePerCustomer" class="control-label"><g:message code="product.pricePerCustomer.label" default="Price Per Customer" /></label>
 				<div class="controls">
 					
-					<ul class="one-to-many">
-						<g:each in="${productInstance?.pricePerCustomer?}" var="p">
-						    <li><g:link controller="pricePerCustomer" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-						</g:each>
-						<li class="add">
-							<g:link controller="pricePerCustomer" action="create" params="['product.id': productInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'pricePerCustomer.label', default: 'PricePerCustomer')])}</g:link>
-						</li>
-					</ul>
+					<g:render template="pricePerCustomerForm" model="['productInstance':productInstance]"/>
 
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')}</span>
 				</div>

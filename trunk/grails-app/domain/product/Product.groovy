@@ -1,5 +1,7 @@
 package product
 
+//sacar lo de valor por kg
+
 import java.util.Date;
 
 import stakeholder.Shipper

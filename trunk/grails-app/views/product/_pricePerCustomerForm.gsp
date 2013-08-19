@@ -3,20 +3,21 @@
 <table class="table table-condensed">
 	<thead>
 		<th> <g:message code="customer.label" default="Customer"/> </th>
-		<th> <g:message code="product.customerCode.label" default="Code"/> </th>
+		<th> <g:message code="product.pricePerUnit.label" default="Price Per Unit"/> </th>
 		<th> </th> 
 	</thead>
-	<tbody id="customerPerCodeTable">
-		<g:each var="codeCustomer" in="${productInstance?.codePerCustomer?}" status="i">
+	<tbody id="customerPerPriceTable">
+		<g:each var="priceCustomer" in="${productInstance?.pricePerCustomer?}" status="i">
 			<tr>
 				<td>
-					<g:select name="codePerCustomer[${i}].customer.id" from="${Customer.list()}" optionKey="id" value="${codeCustomer.customer?.id}" class="many-to-one"/>					
+					<g:select name="pricePerCustomer[${i}].customer.id" from="${Customer.list()}" optionKey="id" value="${priceCustomer.customer?.id}" class="many-to-one"/>					
 				</td>
 				<td>
-					<g:textField name="codePerCustomer[${i}].code" value="${codeCustomer.code}"/>
+					<g:field type="number" name="pricePerCustomer[${i}].price" step="0.0001" min="0.0000" value="${priceCustomer.price}"/>
+					
 				</td>
 				<td>
-					<g:link role="button" class="btn btn-primary" action="deleteCodePerCustomer" params="['productId': productInstance?.id, 'codePerCustomerId': codeCustomer.id ]"><i class='icon-trash'></i></g:link>
+					<g:link role="button" class="btn btn-primary" action="deletePricePerCustomer" params="['productId': productInstance?.id, 'pricePerCustomerId': priceCustomer.id ]"><i class='icon-trash'></i></g:link>
 				</td>
 			</tr>
 		</g:each>		
@@ -25,7 +26,7 @@
 
 			
 
-<a role="button" class="btn btn-primary" id="addCustomerCode"> ${message(code: 'default.add.label', args: [message(code: 'codePerCustomer.label', default: 'Code Per Customer')])}</a>
+<a role="button" class="btn btn-primary" id="addCustomerPrice"> ${message(code: 'default.add.label', args: [message(code: 'pricePerCustomer.label', default: 'CodePerCustomer')])}</a>
 
 
 <script>
@@ -35,7 +36,7 @@ var customers = new Array();
 $("document").ready( function(){
 
 	var customers = new Array();
-	var rows = ${productInstance?.codePerCustomer?.size()} + 0 ;
+	var rows = ${productInstance?.pricePerCustomer?.size()} + 0 ;
 	
 	//cargo los clientes
 	<%
@@ -51,11 +52,11 @@ $("document").ready( function(){
 	};
 
 	var nameSelectFunc = function(nro) {
-		return "codePerCustomer[" + nro + "].customer.id";
+		return "pricePerCustomer[" + nro + "].customer.id";
 	};
 
-	var nameTextFunc = function(nro) {
-		return "codePerCustomer[" + nro + "].code";
+	var nameNumericFunc = function(nro) {
+		return "pricePerCustomer[" + nro + "].price";
 	};
 
 	var delNode = function(objeto) 
@@ -72,26 +73,26 @@ $("document").ready( function(){
 			hermano = hermano.next();
 
 			hermano.find("select").attr("name", nameSelectFunc(i));
-			hermano.find("input").attr("name", nameTextFunc(i));
+			hermano.find("input").attr("name", nameNumericFunc(i));
 			hermano.find("a").attr("id", idBtnDelFunc(i));
 		}
 
 		nodo.remove();		
 	};
 	
-	$("#addCustomerCode").click( function() {
+	$("#addCustomerPrice").click( function() {
 
 		var idBtnDel = idBtnDelFunc(rows);
 		var selectNode = "<select name='"+ nameSelectFunc(rows) +"'>" + customers + "</select>";
-		var textNode = "<input type='text' name='"+ nameTextFunc(rows) +"'>"
+		var numericNode = "<input type='number' name='"+ nameNumericFunc(rows) +"' step='0.0001' min='0.0000' value='0.0000'>";
 		var deleteNode = "<a role='button' class='btn btn-primary' id='" +idBtnDel+ "'> <i class='icon-trash'></i> </a>"
-			
+
 		var newNode = "<tr>\
 			<td> " + selectNode + "	</td> \
-			<td> " + textNode + "</td> \
+			<td> " + numericNode + "</td> \
 			<td> " + deleteNode +"</td> \
 			</tr>"
-		$("#customerPerCodeTable").append(newNode);
+		$("#customerPerPriceTable").append(newNode);
 
 		$("#"+idBtnDel).click( function() {
 			delNode(this);
