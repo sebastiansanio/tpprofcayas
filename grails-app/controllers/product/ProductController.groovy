@@ -136,11 +136,22 @@ class ProductController {
 			flash.message = message(code:'default.importOk.message')
 		}catch(Exception e){
 			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
-		}
-		
+		}	
 		redirect(action: "importForm", params: params)
 	}
-	
+
+	def importPrices(){
+		
+		Supplier supplier = params.supplierId!='null'?Supplier.get(params.supplierId.toLong()):null
+		try{
+			productImportService.importPrices(supplier,params.importFile.getBytes())
+			flash.message = message(code:'default.importOk.message')
+		}catch(Exception e){
+			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
+		}	
+		redirect(action: "importForm", params: params)
+	}
+		
 	def query(){
 		[:]
 	}
@@ -154,7 +165,7 @@ class ProductController {
 			return
 		}else{
 			Supplier supplier = Supplier.get(params.supplierId.toLong())
-			response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.pl.label',default:'Products')} ${supplier.name}"+DATE_FORMAT.format(new Date())+".${params.extension}")
+			response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.pl.label',default:'Products')} ${supplier.name} "+DATE_FORMAT.format(new Date())+".${params.extension}")
 			productExportService.exportProductsBySupplier(supplier,params.format,response.outputStream,RequestContextUtils.getLocale(request))
 			return
 		}
