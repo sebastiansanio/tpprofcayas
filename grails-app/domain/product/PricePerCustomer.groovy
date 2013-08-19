@@ -18,4 +18,8 @@ class PricePerCustomer {
 	public String toString() {
 		return price;
 	}
+	
+	static constraints = {
+		price min:0.0000, scale:4, nullable:true
+	}
 }

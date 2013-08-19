@@ -151,7 +151,7 @@ class ProductController {
 		}	
 		redirect(action: "importForm", params: params)
 	}
-		
+	
 	def query(){
 		[:]
 	}
@@ -168,6 +168,60 @@ class ProductController {
 			response.setHeader("Content-disposition", "attachment;filename=${message(code:'product.pl.label',default:'Products')} ${supplier.name} "+DATE_FORMAT.format(new Date())+".${params.extension}")
 			productExportService.exportProductsBySupplier(supplier,params.format,response.outputStream,RequestContextUtils.getLocale(request))
 			return
+		}
+	}
+	
+	def deleteCodePerCustomer() {
+		
+		def productInstance = Product.get(params.productId)
+		def codePerCustomerInstance = CodePerCustomer.get(params.codePerCustomerId)
+		
+		if (!codePerCustomerInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'codePerCustomer.label', default: 'Code Per Customer'), params.codePerCustomerId])
+			redirect(action: "edit", id: params.productId)
+			return
+		}
+
+		try {
+			
+			productInstance.removeFromCodePerCustomer(codePerCustomerInstance)
+			codePerCustomerInstance.delete(flush:true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'codePerCustomer.label', default: 'Code Per Customer'), params.codePerCustomerId])
+			
+			def text = "/product/edit/" + params.productId + "#codePerCustomer"
+			redirect(uri: text)
+			
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'codePerCustomer.label', default: 'Code Per Customer'), params.codePerCustomerId])
+			redirect(action: "edit", id: params.productId)
+		}
+	}
+	
+	def deletePricePerCustomer() {
+		
+		def productInstance = Product.get(params.productId)
+		def pricePerCustomerInstance = PricePerCustomer.get(params.pricePerCustomerId)
+		
+		if (!pricePerCustomerInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
+			redirect(action: "edit", id: params.productId)
+			return
+		}
+
+		try {
+			
+			productInstance.removeFromPricePerCustomer(pricePerCustomerInstance)
+			pricePerCustomerInstance.delete(flush:true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
+			
+			def text = "/product/edit/" + params.productId + "#pricePerCustomer"
+			redirect(uri: text)
+			
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
+			redirect(action: "edit", id: params.productId)
 		}
 	}
 }
