@@ -51,6 +51,15 @@ class ProductImportService {
 			'AJ':'notes'
 		]
 	]
+	
+	Map configurationPrices = [
+		sheet:'Items',
+		startRow:1,
+		columnMap: [
+			'A':'id',
+			'B':'pricePerUnit'	
+		]
+	]
 
     def importProducts(byte[] fileContent) {
 		String filename = "import"+new Date().getTime().toString()+".tmp"
@@ -87,4 +96,31 @@ class ProductImportService {
 			file.delete()
 		}
     }
+	
+	def importPrices(Supplier supplier,byte[] fileContent) {
+		String filename = "import"+new Date().getTime().toString()+".tmp"
+		File file = new File(filename)
+		file.createNewFile()
+		FileOutputStream fos = new FileOutputStream(file)
+		fos.write(fileContent)
+		fos.close()
+		def path = file.getAbsolutePath()
+		try{
+			GenericExcelImporter genericExcelImporter = new GenericExcelImporter(path)
+			List productsData = genericExcelImporter.getObjects(configurationPrices)
+						
+			for(productData in productsData){				
+				Product product = Product.get(productData.id.toLong())
+				if(supplier!=null && supplier.id!=product.supplier?.id)
+					throw new RuntimeException("Product '${product}' doesn't belong to supplier '${supplier}'")			
+				product.properties['pricePerUnit'] = productData
+				product.save(failOnError:true)
+				
+			}
+		}catch(Exception e){
+			throw new RuntimeException(e.getMessage(),e)
+		}finally{
+			file.delete()
+		}
+	}
 }
