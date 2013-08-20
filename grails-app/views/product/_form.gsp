@@ -1,7 +1,5 @@
 <%@ page import="product.Product" %>
-
-Hacer ventana flotante q pregunte si eliminar.
-Ver lo de la historia 
+<%@ page import="stakeholder.Customer" %>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'descriptionSP', 'error')} required">
 				<label for="descriptionSP" class="control-label"><g:message code="product.descriptionSP.label" default="Description SP" /><span class="required-indicator">*</span></label>
@@ -323,34 +321,29 @@ Ver lo de la historia
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'notes', 'error')}</span>
 				</div>
 			</div>
-
+			
+			
 <script type="text/javascript">
 
-	$("document").ready( function() {
-
-		var padreSubFamily = $("#subFamily").closest(".controls").closest(".control-group");
-
-		padreSubFamily.hide();
+	/* para la familia */
+	var dirFamily = "${createLink(action:'subFamily')}/";
 		
-		$("#family").change( function()
+	/* cargar clientes */
+	var customers = new Array();
+	<%
+		Customer.findAll().each
 		{
-			if($("#family").val()=="null")
-			{
-				$(padreSubFamily).hide(500);
-				$("#subFamily").empty();
-			}
-			else
-			{
-				$("#subFamily").load("${createLink(action:'subFamily')}/"+$('#family').val(), function() {
-					if ( $("#subFamily :selected").length != 0 )
-						$(padreSubFamily).show(500);
-					else
-						$(padreSubFamily).hide(500);
-				});
+			def option = '<option value="'+ it.id +'"> ' + it + ' </option>'
+			out.println(""" customers.push('${option}'); """)
+		}	
+	%>
+	
+	/* para los precios por cliente*/
+	var rowsPrice = ${productInstance?.pricePerCustomer?.size()} + 0 ;
 
-			}
-		} );
-		
-	});
+	/* para manejar la carga de códigos por usuarios */
+	var rowsCode = ${productInstance?.codePerCustomer?.size()} + 0 ;
 
 </script>
+
+<script type="text/javascript" src="${resource(dir:'js', file:'productForm.js')}"> </script>	
