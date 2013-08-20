@@ -95,7 +95,7 @@ class ProductController {
         productInstance.properties = params
 
 		if ( previousPrices != null && productInstance.pricePerUnit != null && previousPrices != productInstance.pricePerUnit ) 
-			productInstance.addToPreviousPrices( new HistoricalPrice(price: previousPrices, dateFrom: new Date()))
+			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
 			
         if (!productInstance.save(flush: true)) {
             render(view: "edit", model: [productInstance: productInstance])
