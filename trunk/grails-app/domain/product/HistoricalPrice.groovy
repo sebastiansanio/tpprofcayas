@@ -1,15 +1,13 @@
-package product
 
+package product
 import org.hibernate.envers.Audited;
 
 @Audited
 class HistoricalPrice {
-
-	Date	dateCreated
-	Date	lastUpdated
 	
 	static belongsTo	= [product: Product]
     
+	Date		dateFrom
 	BigDecimal	price
 	
 	static constraints = {
