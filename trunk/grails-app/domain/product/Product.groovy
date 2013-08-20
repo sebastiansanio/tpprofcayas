@@ -119,4 +119,9 @@ class Product {
 	public String toString() {
 		return descriptionEN;
 	}
+	
+	BigDecimal getOuterBoxVolume() {
+		return outerBoxLength * outerBoxHeight * outerBoxWidth
+	}
+	
 }
