@@ -71,6 +71,7 @@
 								
 				<g:message code="product.codePerCustomer.label" default="Code Per Customer" />
 				
+				<g:if test="${productInstance.codePerCustomer.size() != 0}">
 					<table class="table">
 						<thead>
 							<th> <g:message code="customer.label" default="Customer"/> </th>
@@ -86,6 +87,7 @@
 							
 						</tbody>
 					</table>
+				</g:if>
 				</td>
 				
 			</tr>
@@ -135,6 +137,8 @@
 				
 					<g:message code="product.pricePerCustomer.label" default="Price Per Customer" />
 					
+					<g:if test="${productInstance.pricePerCustomer.size() != 0}">
+					
 					<table class="table">
 						<thead>
 							<th> <g:message code="customer.label" default="Customer"/> </th>
@@ -150,6 +154,8 @@
 							
 						</tbody>
 					</table>
+					</g:if>
+					
 				</td>
 				
 			</tr>
