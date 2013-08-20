@@ -16,7 +16,14 @@
 
 	<table class="table">
 		<tbody>
-		
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.codeCayas.label" default="Code CAYAS" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "id")}</td>
+				
+			</tr>
+					
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.descriptionSP.label" default="Description SP" /></td>
 				
@@ -39,12 +46,50 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.supplierCode.label" default="Supplier Code" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "supplierCode")}</td>
+				
+			</tr>
+						
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.customerCode.label" default="Customer Code" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "customerCode")}</td>
+				
+			</tr>
+			
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.status.label" default="Status" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "status")}</td>
 				
 			</tr>
 		
+			<tr class="prop">
+				<td valign="top" class="name" colspan="2" >
+								
+				<g:message code="product.codePerCustomer.label" default="Code Per Customer" />
+				
+					<table class="table">
+						<thead>
+							<th> <g:message code="customer.label" default="Customer"/> </th>
+							<th> <g:message code="product.customerCode.label" default="Code"/> </th>
+						</thead>
+						<tbody>
+							<g:each in="${productInstance.codePerCustomer}" var="c">
+								<tr>
+									<td> ${c.customer} </td>
+									<td> ${c.code} </td>
+								</tr>
+							</g:each>
+							
+						</tbody>
+					</table>
+				</td>
+				
+			</tr>
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.unit.label" default="Unit" /></td>
 				
@@ -53,70 +98,71 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.currency.label" default="Currency" /></td>
+				<td valign="top" class="name"><g:message code="currency.label" default="Currency" /></td>
 				
 				<td valign="top" class="value"><g:link controller="currency" action="show" id="${productInstance?.currency?.id}">${productInstance?.currency?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.family.label" default="Family" /></td>
-				
-				<td valign="top" class="value"><g:link controller="family" action="show" id="${productInstance?.family?.id}">${productInstance?.family?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.subFamily.label" default="Sub Family" /></td>
-				
-				<td valign="top" class="value"><g:link controller="subFamily" action="show" id="${productInstance?.subFamily?.id}">${productInstance?.subFamily?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.typeOfPresentation.label" default="Type Of Presentation" /></td>
-				
-				<td valign="top" class="value"><g:link controller="typeOfPresentation" action="show" id="${productInstance?.typeOfPresentation?.id}">${productInstance?.typeOfPresentation?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.supplier.label" default="Supplier" /></td>
-				
-				<td valign="top" class="value"><g:link controller="supplier" action="show" id="${productInstance?.supplier?.id}">${productInstance?.supplier?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.shipper.label" default="Shipper" /></td>
-				
-				<td valign="top" class="value"><g:link controller="shipper" action="show" id="${productInstance?.shipper?.id}">${productInstance?.shipper?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.tax.label" default="Tax" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "tax")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.priceCondition.label" default="Price Condition" /></td>
+				<td valign="top" class="name"><g:message code="priceCondition.label" default="Price Condition" /></td>
 				
 				<td valign="top" class="value"><g:link controller="priceCondition" action="show" id="${productInstance?.priceCondition?.id}">${productInstance?.priceCondition?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
-		
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.previousPrices.label" default="Previous Price" /></td>
+				
+				<td valign="top" class="value"> 
+					<ul>
+						<li> <g:link controller="priceCondition" action="show" id="${productInstance?.priceCondition?.id}">${productInstance?.priceCondition?.encodeAsHTML()}</g:link> </li>
+						<li> fallttaaa </li>
+					</ul> 
+				</td>
+				
+			</tr>
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "pricePerUnit")}</td>
 				
 			</tr>
-		
+
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.port.label" default="Port" /></td>
+				<td valign="top" class="name" colspan="2" >
+				
+					<g:message code="product.pricePerCustomer.label" default="Price Per Customer" />
+					
+					<table class="table">
+						<thead>
+							<th> <g:message code="customer.label" default="Customer"/> </th>
+							<th> <g:message code="product.customerCode.label" default="Code"/> </th>
+						</thead>
+						<tbody>
+								<g:each in="${productInstance.pricePerCustomer}" var="p">								
+								<tr>
+									<td> ${p.customer} </td>
+									<td> ${p.price} </td>
+								</tr>
+							</g:each>
+							
+						</tbody>
+					</table>
+				</td>
+				
+			</tr>
+					
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
+				
+				<td valign="top" class="value"> ALGO </td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="port.label" default="Port" /></td>
 				
 				<td valign="top" class="value"><g:link controller="port" action="show" id="${productInstance?.port?.id}">${productInstance?.port?.encodeAsHTML()}</g:link></td>
 				
@@ -128,11 +174,60 @@
 				<td valign="top" class="value"><g:link controller="port" action="show" id="${productInstance?.consolidationArea?.id}">${productInstance?.consolidationArea?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="family.label" default="Family" /></td>
+				
+				<td valign="top" class="value"><g:link controller="family" action="show" id="${productInstance?.family?.id}">${productInstance?.family?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.country.label" default="Country" /></td>
+				<td valign="top" class="name"><g:message code="subFamily.label" default="Sub Family" /></td>
+				
+				<td valign="top" class="value"><g:link controller="subFamily" action="show" id="${productInstance?.subFamily?.id}">${productInstance?.subFamily?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.attribute.label" default="Attribute" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "attribute")}</td>
+				
+			</tr>
+						
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="typeOfPresentation.label" default="Type Of Presentation" /></td>
+				
+				<td valign="top" class="value"><g:link controller="typeOfPresentation" action="show" id="${productInstance?.typeOfPresentation?.id}">${productInstance?.typeOfPresentation?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.label" default="Supplier" /></td>
+				
+				<td valign="top" class="value"><g:link controller="supplier" action="show" id="${productInstance?.supplier?.id}">${productInstance?.supplier?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.label" default="Shipper" /></td>
+				
+				<td valign="top" class="value"><g:link controller="shipper" action="show" id="${productInstance?.shipper?.id}">${productInstance?.shipper?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.country.label" default="Country Of Origin" /></td>
 				
 				<td valign="top" class="value"><g:link controller="country" action="show" id="${productInstance?.country?.id}">${productInstance?.country?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.countryProvenance.label" default="Country Of Provenance" /></td>
+				
+				<td valign="top" class="value"><g:link controller="country" action="show" id="${productInstance?.supplier?.country?.id}">${productInstance?.supplier?.country?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
 		
@@ -147,6 +242,20 @@
 				<td valign="top" class="name"><g:message code="product.valuePerKilo.label" default="Value Per Kilo" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "valuePerKilo")}</td>
+				
+			</tr>
+					
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.hsCode.label" default="Hs Code" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "hsCode")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.tax.label" default="Tax" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "tax")}</td>
 				
 			</tr>
 		
@@ -186,47 +295,40 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.outerBoxLength.label" default="Outer Box Length" /></td>
+				<td valign="top" class="name"><g:message code="product.outerBoxDimensions.label" default="Outer Box Dimensions" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "outerBoxLength")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.outerBoxWidth.label" default="Outer Box Width" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "outerBoxWidth")}</td>
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "outerBoxLength")} x ${fieldValue(bean: productInstance, field: "outerBoxWidth")} x ${fieldValue(bean: productInstance, field: "outerBoxHeight")}</td>
 				
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.outerBoxHeight.label" default="Outer Box Height" /></td>
+				<td valign="top" class="name"><g:message code="product.volumenPerBox.label" default="Volumen Per Box (m3)" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "outerBoxHeight")}</td>
+				<td valign="top" class="value">${productInstance?.getOuterBoxVolume()}</td>
 				
 			</tr>
-		
+			
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.innerBoxLength.label" default="Inner Box Length" /></td>
+				<td valign="top" class="name"><g:message code="product.innerBoxDimensions.label" default="Inner Box Dimensions" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "innerBoxLength")}</td>
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "innerBoxLength")} x ${fieldValue(bean: productInstance, field: "innerBoxWidth")} x ${fieldValue(bean: productInstance, field: "innerBoxHeight")}</td>
 				
 			</tr>
-		
+			
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.innerBoxWidth.label" default="Inner Box Width" /></td>
+				<td valign="top" class="name"><g:message code="product.unitsPerContainerWeight.label" default="Units Per Container(weight)" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "innerBoxWidth")}</td>
+				<td valign="top" class="value">Volumen</td>
 				
-			</tr>
-		
+			</tr>			
+			
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.innerBoxHeight.label" default="Inner Box Height" /></td>
+				<td valign="top" class="name"><g:message code="product.unitsPerContainerVolume.label" default="Units Per Container(volume)" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "innerBoxHeight")}</td>
+				<td valign="top" class="value">Volumen</td>
 				
-			</tr>
-		
+			</tr>	
+						
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.boxesPerPallets.label" default="Boxes Per Pallets" /></td>
 				
@@ -240,47 +342,20 @@
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "piecesPerPallet")}</td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.attribute.label" default="Attribute" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "attribute")}</td>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.notes.label" default="Notes" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "notes")}</td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.codePerCustomer.label" default="Code Per Customer" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${productInstance.codePerCustomer}" var="c">
-						<li><g:link controller="codePerCustomer" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.customerCode.label" default="Customer Code" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "customerCode")}</td>
-				
-			</tr>
-		
+											
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.dateCreated.label" default="Date Created" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${productInstance?.dateCreated}" /></td>
 				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.hsCode.label" default="Hs Code" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "hsCode")}</td>
-				
-			</tr>
+			</tr>			
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.lastUpdated.label" default="Last Updated" /></td>
@@ -288,60 +363,7 @@
 				<td valign="top" class="value"><g:formatDate date="${productInstance?.lastUpdated}" /></td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.loadsUnits.label" default="Loads Units" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${productInstance.loadsUnits}" var="l">
-						<li><g:link controller="loadUnit" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.notes.label" default="Notes" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "notes")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.previousPrices.label" default="Previous Prices" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${productInstance.previousPrices}" var="p">
-						<li><g:link controller="historicalPrice" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.pricePerCustomer.label" default="Price Per Customer" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${productInstance.pricePerCustomer}" var="p">
-						<li><g:link controller="pricePerCustomer" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.supplierCode.label" default="Supplier Code" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "supplierCode")}</td>
-				
-			</tr>
-		
+					
 		</tbody>
 	</table>
 </section>
