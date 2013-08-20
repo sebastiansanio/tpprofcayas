@@ -146,4 +146,13 @@ class Product {
 			
 		return UNITS_PER_CONTAINER_VOLUME / getOuterBoxVolume() * quantityPerCarton
 	}
+	
+	Boolean isThePriceDifferent() {
+		
+		if ( pricePerUnit == null || previousPrices.size() == 0)
+			return false
+			
+		return pricePerUnit != previousPrices.last().price
+		
+	}
 }

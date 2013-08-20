@@ -120,7 +120,13 @@
 					<ul>
 						<li> <g:link controller="priceCondition" action="show" id="${productInstance?.priceCondition?.id}">${productInstance?.priceCondition?.encodeAsHTML()}</g:link> </li>
 						<li> fallttaaa </li>
-					</ul> 
+						
+						<g:each var="df" in="${productInstance?.previousPrices}">
+							<li> ${df.price} - <g:formatDate date="${df.dateFrom}" />  </li>
+						</g:each>
+					</ul>
+					 
+					
 				</td>
 				
 			</tr>

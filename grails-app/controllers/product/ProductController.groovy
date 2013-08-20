@@ -37,6 +37,10 @@ class ProductController {
 
     def save() {
         def productInstance = new Product(params)
+		
+		if ( params.price != null )
+			productInstance.addToPreviousPrices( new HistoricalPrice(price: params.price, dateFrom: new Date()))
+		
         if (!productInstance.save(flush: true)) {
             render(view: "create", model: [productInstance: productInstance])
             return
@@ -70,6 +74,7 @@ class ProductController {
 
     def update() {
         def productInstance = Product.get(params.id)
+		
         if (!productInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'product.label', default: 'Product'), params.id])
             redirect(action: "list")
@@ -86,9 +91,12 @@ class ProductController {
                 return
             }
         }
-
+		def previousPrices = productInstance.pricePerUnit
         productInstance.properties = params
 
+		if ( previousPrices != null && productInstance.pricePerUnit != null && previousPrices != productInstance.pricePerUnit ) 
+			productInstance.addToPreviousPrices( new HistoricalPrice(price: previousPrices, dateFrom: new Date()))
+			
         if (!productInstance.save(flush: true)) {
             render(view: "edit", model: [productInstance: productInstance])
             return
