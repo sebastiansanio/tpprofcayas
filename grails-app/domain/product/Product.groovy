@@ -1,7 +1,5 @@
 package product
 
-//sacar lo de valor por kg
-
 import java.util.Date;
 
 import stakeholder.Shipper
@@ -55,7 +53,6 @@ class Product {
 	Shipper				shipper
 	Country				country
 	BigDecimal			criterionValue
-	BigDecimal			valuePerKilo
 	String				hsCode
 	BigDecimal			tax //serían los derechos
 	
@@ -99,7 +96,6 @@ class Product {
 		consolidationArea nullable:true
 		country nullable:true
 		criterionValue min:0.0000, scale:4, nullable:true
-		valuePerKilo min:0.0000, scale:4, nullable:true
 		quantityPerCarton min:0L, nullable:true
 		innerBoxQuantity min:0L, nullable:true
 		articlesQuantityPerInnerBox min:0L, nullable:true
@@ -113,15 +109,41 @@ class Product {
 		innerBoxHeight min:0.0000, scale:4, nullable:true
 		boxesPerPallets min:0L, nullable:true
 		piecesPerPallet min:0L, nullable:true
-
+		notes nullable:true, maxSize:512
     }
 	
 	public String toString() {
 		return descriptionEN;
 	}
 	
+	BigDecimal getValuePerKilo() {
+		
+		if ( netWeightPerBox == null || netWeightPerBox == 0.0 || pricePerUnit == null || quantityPerCarton == null )
+			return 0.0
+			
+		return 	quantityPerCarton * pricePerUnit / netWeightPerBox
+	}
+	
 	BigDecimal getOuterBoxVolume() {
+		
+		if ( outerBoxLength == null || outerBoxHeight == null || outerBoxWidth == null )
+			return 0.0
 		return outerBoxLength * outerBoxHeight * outerBoxWidth
 	}
 	
+	BigDecimal getUnitsPerContainerWeight() {
+		
+		if ( grossWeightPerBox == null || grossWeightPerBox == 0.0 || quantityPerCarton == null )
+			return 0.0;
+			
+		return UNITS_PER_CONTAINER_WEIGHT / grossWeightPerBox * quantityPerCarton
+	}
+	
+	BigDecimal getUnitsPerContainerVolume() {
+		
+		if ( getOuterBoxVolume() == 0.0 || quantityPerCarton == null )
+			return 0.0;
+			
+		return UNITS_PER_CONTAINER_VOLUME / getOuterBoxVolume() * quantityPerCarton
+	}
 }

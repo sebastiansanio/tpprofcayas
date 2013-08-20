@@ -53,7 +53,7 @@ class ProductController {
             redirect(action: "list")
             return
         }
-
+		
         [productInstance: productInstance]
     }
 

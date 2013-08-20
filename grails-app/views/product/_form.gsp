@@ -186,14 +186,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'valuePerKilo', 'error')} ">
-				<label for="valuePerKilo" class="control-label"><g:message code="product.valuePerKilo.label" default="Value Per Kilo (U\$s)" /></label>
-				<div class="controls">
-					<g:field type="number" name="valuePerKilo" step="0.0001" min="0.0000" value="${productInstance.valuePerKilo}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'valuePerKilo', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'hsCode', 'error')} ">
 				<label for="hsCode" class="control-label"><g:message code="product.hsCode.label" default="Hs Code" /></label>
 				<div class="controls">

@@ -126,7 +126,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "pricePerUnit")}</td>
+				<td valign="top" class="value">${productInstance.pricePerUnit}</td>
 				
 			</tr>
 
@@ -241,7 +241,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.valuePerKilo.label" default="Value Per Kilo" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "valuePerKilo")}</td>
+				<td valign="top" class="value">${productInstance?.getValuePerKilo()}</td>
 				
 			</tr>
 					
@@ -283,49 +283,49 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.netWeightPerBox.label" default="Net Weight Per Box" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "netWeightPerBox")}</td>
+				<td valign="top" class="value">${productInstance.netWeightPerBox}</td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.grossWeightPerBox.label" default="Gross Weight Per Box" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "grossWeightPerBox")}</td>
+				<td valign="top" class="value">${productInstance.grossWeightPerBox}</td>
 				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.outerBoxDimensions.label" default="Outer Box Dimensions" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "outerBoxLength")} x ${fieldValue(bean: productInstance, field: "outerBoxWidth")} x ${fieldValue(bean: productInstance, field: "outerBoxHeight")}</td>
+				<td valign="top" class="value">${productInstance.outerBoxLength} x ${productInstance.outerBoxWidth} x ${productInstance.outerBoxHeight}</td>
 				
 			</tr>
-		
+					
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.volumenPerBox.label" default="Volumen Per Box (m3)" /></td>
 				
-				<td valign="top" class="value">${productInstance?.getOuterBoxVolume()}</td>
+				<td valign="top" class="value">${productInstance.getOuterBoxVolume()}</td>
 				
 			</tr>
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.innerBoxDimensions.label" default="Inner Box Dimensions" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "innerBoxLength")} x ${fieldValue(bean: productInstance, field: "innerBoxWidth")} x ${fieldValue(bean: productInstance, field: "innerBoxHeight")}</td>
+				<td valign="top" class="value">${productInstance.innerBoxLength} x ${productInstance.innerBoxWidth} x ${productInstance.innerBoxHeight}</td>
 				
 			</tr>
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.unitsPerContainerWeight.label" default="Units Per Container(weight)" /></td>
 				
-				<td valign="top" class="value">Volumen</td>
+				<td valign="top" class="value">${productInstance?.getUnitsPerContainerWeight()}</td>
 				
 			</tr>			
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.unitsPerContainerVolume.label" default="Units Per Container(volume)" /></td>
 				
-				<td valign="top" class="value">Volumen</td>
+				<td valign="top" class="value">${productInstance?.getUnitsPerContainerVolume()}</td>
 				
 			</tr>	
 						
