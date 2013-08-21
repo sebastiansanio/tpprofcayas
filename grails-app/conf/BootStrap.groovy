@@ -152,7 +152,6 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Reportes de externos - Control total',permissionString:'stakeholderReport:*')
 				permission.save()
-				//Nuevo
 				permission = new Permission(description:'Cartas de garantía - Control total',permissionString:'letterOfGuarantee:*')
 				permission.save()
 
@@ -198,7 +197,6 @@ class BootStrap {
 				roleOperator.addToPermissions("courier:*")
 				roleOperator.addToPermissions("courierRecord:*")
 				roleOperator.addToPermissions("audit:*")
-				//Nuevo
 				roleOperator.addToPermissions("letterOfGuarantee:*")
 				roleOperator.save(flush:true)
 				
