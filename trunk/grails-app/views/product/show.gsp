@@ -117,16 +117,13 @@
 				<td valign="top" class="name"><g:message code="product.previousPrices.label" default="Previous Price" /></td>
 				
 				<td valign="top" class="value"> 
-					<ul>
-						<li> <g:link controller="priceCondition" action="show" id="${productInstance?.priceCondition?.id}">${productInstance?.priceCondition?.encodeAsHTML()}</g:link> </li>
-						<li> fallttaaa </li>
-						
-						<g:each var="df" in="${productInstance?.previousPrices}">
-							<li> ${df.price} - <g:formatDate date="${df.dateFrom}" />  </li>
-						</g:each>
-					</ul>
-					 
 					
+						<g:if test="${productInstance?.previousPrices?.size() > 2 }">
+							<g:link action="listHistoricalPrice"  id="${productInstance?.id}">
+							${productInstance?.previousPrices?.get( productInstance?.previousPrices?.size() -2 )}
+							</g:link>
+						</g:if>
+
 				</td>
 				
 			</tr>
@@ -169,7 +166,11 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
 				
-				<td valign="top" class="value"> ALGO </td>
+				<td valign="top" class="value">
+					<g:if test="${productInstance?.previousPrices?.size() > 2 }"> <!-- preguntarle a Sebastián -->
+						${productInstance?.previousPrices?.last()?.dateFrom}
+					</g:if> 
+				</td>
 				
 			</tr>
 
