@@ -5,12 +5,12 @@ import java.text.SimpleDateFormat
 
 import org.springframework.dao.DataIntegrityViolationException
 
-
 import org.springframework.transaction.annotation.Transactional
 import wish.LoadUnit
 
 import org.springframework.web.servlet.support.RequestContextUtils
 import stakeholder.Supplier
+import product.HistoricalPrice
 
 @Transactional
 class ProductController {
@@ -38,8 +38,8 @@ class ProductController {
     def save() {
         def productInstance = new Product(params)
 		
-		if ( params.price != null )
-			productInstance.addToPreviousPrices( new HistoricalPrice(price: params.price, dateFrom: new Date()))
+		if ( productInstance.pricePerUnit != null )
+			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
 		
         if (!productInstance.save(flush: true)) {
             render(view: "create", model: [productInstance: productInstance])
@@ -94,9 +94,9 @@ class ProductController {
 		def previousPrices = productInstance.pricePerUnit
         productInstance.properties = params
 
-		if ( previousPrices != null && productInstance.pricePerUnit != null && previousPrices != productInstance.pricePerUnit ) 
+		if ( productInstance.pricePerUnit != null && previousPrices != productInstance.pricePerUnit ) 
 			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
-			
+
         if (!productInstance.save(flush: true)) {
             render(view: "edit", model: [productInstance: productInstance])
             return
@@ -231,5 +231,16 @@ class ProductController {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
 			redirect(action: "edit", id: params.productId)
 		}
+	}
+	
+	def listHistoricalPrice() {
+		params.sort = params.sort?: 'dateFrom'
+		params.max = Math.min(params.max ? params.int('max') : 100, 200)
+		
+		def historicalPrice = HistoricalPrice.findAll {
+			product.id == params.id.toInteger()
+		}
+
+		[historicalPriceInstanceList: historicalPrice.asList(), historicalPriceInstanceTotal: historicalPrice.toList().size(), idProduct: params.id]
 	}
 }
