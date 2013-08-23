@@ -237,10 +237,34 @@ class ProductController {
 		params.sort = params.sort?: 'dateFrom'
 		params.max = Math.min(params.max ? params.int('max') : 100, 200)
 		
+		println params.id
 		def historicalPrice = HistoricalPrice.findAll {
 			product.id == params.id.toInteger()
 		}
 
 		[historicalPriceInstanceList: historicalPrice.asList(), historicalPriceInstanceTotal: historicalPrice.toList().size(), idProduct: params.id]
+	}
+	
+	def deleteHistoricalPrice() {
+		
+		def historicalPriceInstance = HistoricalPrice.get(params.idPrice)
+		
+		if (!historicalPriceInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
+			redirect(action: "listHistoricalPrice", id: params.idProduct)
+			return
+		}
+
+		try {
+			historicalPriceInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
+			
+			redirect(action: "listHistoricalPrice", id: params.idProduct)
+			
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
+			redirect(action: "listHistoricalPrice", id: params.idProduct)
+		}
 	}
 }

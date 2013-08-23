@@ -118,9 +118,9 @@
 				
 				<td valign="top" class="value"> 
 					
-						<g:if test="${productInstance?.previousPrices?.size() > 2 }">
+						<g:if test="${productInstance?.previousPrices?.size() > 1 }">
 							<g:link action="listHistoricalPrice"  id="${productInstance?.id}">
-							${productInstance?.previousPrices?.get( productInstance?.previousPrices?.size() -2 )}
+							${productInstance?.previousPrices?.get( productInstance?.previousPrices?.size() - 2 )}
 							</g:link>
 						</g:if>
 
@@ -167,7 +167,7 @@
 				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
 				
 				<td valign="top" class="value">
-					<g:if test="${productInstance?.previousPrices?.size() > 2 }"> <!-- preguntarle a Sebastián -->
+					<g:if test="${productInstance?.previousPrices?.size() > 1 }"> <!-- preguntarle a Sebastián -->
 						${productInstance?.previousPrices?.last()?.dateFrom}
 					</g:if> 
 				</td>
