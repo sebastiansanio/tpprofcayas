@@ -27,7 +27,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: alertTypeInstance, field: 'nameOfCompletionField', 'error')} required">
 				<label for="nameOfCompletionField" class="control-label"><g:message code="alertType.nameOfCompletionField.label" default="Name Of Completion Field" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select id="nameOfCompletionField" name="nameOfCompletionField" from="${new Wish().domainClass.properties.findAll{it.type == Date.class}}" value="${alertTypeInstance.nameOfCompletionField}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" />
+					<g:select id="nameOfCompletionField" name="nameOfCompletionField" from="${new Wish().domainClass.properties}" value="${alertTypeInstance.nameOfCompletionField}" optionKey="name" optionValue="${{message(code:'wish.'+it.name+'.label')}}" />
 				
 					<span class="help-inline">${hasErrors(bean: alertTypeInstance, field: 'nameOfCompletionField', 'error')}</span>
 				</div>

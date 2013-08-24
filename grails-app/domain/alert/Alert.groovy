@@ -40,7 +40,7 @@ class Alert {
 	
 	void check(){
 				
-		if(wish[alertType.nameOfCompletionField]!=null){
+		if(wish[alertType.nameOfCompletionField]){
 			finalize("activityFinished")
 		}else if(!wish.isActive()){
 			finalize("wishFinalized")

@@ -521,6 +521,8 @@
 			<div class="row-fluid">
 				<div class="span6">
 
+
+
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'hsCodeToBeWritten', 'error')} ">
 						<label for="hsCodeToBeWritten" class="control-label"><g:message code="wish.hsCodeToBeWritten.label" default="Hs Code To Be Written" /></label>
 						<div class="controls">
@@ -528,6 +530,7 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'hsCodeToBeWritten', 'error')}</span>
 						</div>
 					</div>
+					
 				
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'criterionValue', 'error')} ">
 						<label for="criterionValue" class="control-label"><g:message code="wish.criterionValue.label" default="Criterion Value" /></label>
@@ -554,6 +557,15 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'visaChargePaymentConcept', 'error')}</span>
 						</div>
 					</div>	
+					
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'visaSecondStage', 'error')} ">
+						<label for="visaSecondStage" class="control-label"><g:message code="wish.visaSecondStage.label" default="Visa second stage?" /></label>
+						<div class="controls">
+							<bs:checkBox name="visaSecondStage" value="${wishInstance?.visaSecondStage}" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'visaSecondStage', 'error')}</span>
+						</div>
+					</div>
+					
 
 				</div>
 			</div>		
@@ -736,6 +748,15 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'blNumber', 'error')}</span>
 						</div>
 					</div>
+					
+					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'blCopyReceived', 'error')} ">
+						<label for="blCopyReceived" class="control-label"><g:message code="wish.blCopyReceived.label" default="Bl copy received?" /></label>
+						<div class="controls">
+							<bs:checkBox name="blCopyReceived" value="${wishInstance?.blCopyReceived}" />
+							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'blCopyReceived', 'error')}</span>
+						</div>
+					</div>
+					
 					
 
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'freightQuote', 'error')} ">

@@ -60,7 +60,7 @@ class AlertTests {
 		alertType.alertTerm = 1
 		wish.checkAlerts()
 		assertFalse(alert.isActive())
-		assertEquals("attentionDateChanged",alert.finalizedReason)
+		assertEquals("attDateChanged",alert.finalizedReason)
 		
 	}
 	
