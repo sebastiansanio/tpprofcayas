@@ -19,9 +19,9 @@
 		<thead>
 			<tr>
 			
-				<g:sortableColumn property="price" title="${message(code: 'product.pricePerUnit.label', default: 'Price per unit')}" />
+				<th>${message(code: 'product.pricePerUnit.label', default: 'Price per unit')} </th>
 			
-				<g:sortableColumn property="dateFrom" title="${message(code: 'product..dateFrom.label', default: 'Date From')}" />
+				<th>${message(code: 'product.dateFrom.label', default: 'Date From')}</th>
 				
 				<th> </th>
 			</tr>
@@ -39,9 +39,7 @@
 		</g:each>
 		</tbody>
 	</table>
-	<div class="pagination">
-		<bs:paginate total="${historicalPriceInstanceTotal}" />
-	</div>
+
 </section>
 
 </body>
