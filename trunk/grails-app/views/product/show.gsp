@@ -131,7 +131,11 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
 				
-				<td valign="top" class="value">${productInstance.pricePerUnit}</td>
+				<td valign="top" class="value">
+					<g:if test="${productInstance?.previousPrices?.size() != 0 }">
+						${productInstance?.previousPrices?.last()}
+					</g:if>
+				</td>
 				
 			</tr>
 

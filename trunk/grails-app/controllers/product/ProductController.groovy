@@ -69,6 +69,11 @@ class ProductController {
             return
         }
 
+		if ( productInstance?.previousPrices?.size() == 0 )
+			productInstance.pricePerUnit = null
+		else
+			productInstance.pricePerUnit = productInstance?.previousPrices?.last().price
+		
         [productInstance: productInstance]
     }
 
@@ -234,15 +239,13 @@ class ProductController {
 	}
 	
 	def listHistoricalPrice() {
-		params.sort = params.sort?: 'dateFrom'
-		params.max = Math.min(params.max ? params.int('max') : 100, 200)
-		
-		println params.id
-		def historicalPrice = HistoricalPrice.findAll {
-			product.id == params.id.toInteger()
-		}
 
-		[historicalPriceInstanceList: historicalPrice.asList(), historicalPriceInstanceTotal: historicalPrice.toList().size(), idProduct: params.id]
+			def historicalPrice = HistoricalPrice.withCriteria {
+				eq("product.id", params.id.toLong())
+				order "dateFrom", "desc"
+			}.asList()
+		
+		[historicalPriceInstanceList: historicalPrice, idProduct: params.id]
 	}
 	
 	def deleteHistoricalPrice() {
