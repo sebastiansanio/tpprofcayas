@@ -309,7 +309,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'notes', 'error')} ">
 				<label for="notes" class="control-label"><g:message code="product.notes.label" default="Notes" /></label>
 				<div class="controls">
-					<textarea rows="4" name="notes" value="${productInstance?.notes}" style="width:80%;"></textarea>
+					<textarea class="span4" rows="4" name="notes">${productInstance?.notes}</textarea>
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'notes', 'error')}</span>
 				</div>
 			</div>
