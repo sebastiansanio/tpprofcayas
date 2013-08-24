@@ -89,6 +89,8 @@ class Wish {
 	Date finishDate
 	boolean hasFeeder
 	Date forwarderSelectedDate
+	boolean blCopyReceived
+	boolean visaSecondStage
 	
 	static constraints = {
 		opNumber unique:true,min:0L
@@ -215,8 +217,8 @@ class Wish {
 		
 		if(!isActive())
 			return
-		Date completionField = this[alertType.nameOfCompletionField]
-		if (completionField != null)
+		def completionField = this[alertType.nameOfCompletionField]
+		if (completionField)
 			return
 		Date estimatedDate = this[alertType.nameOfEstimatedDateField]
 		if (estimatedDate == null)

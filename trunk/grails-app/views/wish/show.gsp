@@ -393,12 +393,15 @@
 
 	<table class="table">
 		<tbody>
+
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.hsCodeToBeWritten.label" default="Hs Code To Be Written" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "hsCodeToBeWritten")}</td>
 				
 			</tr>
+			
+			
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.criterionValue.label" default="Criterion Value" /></td>
@@ -419,7 +422,15 @@
 				
 				<td valign="top" class="value"><g:link controller="visaChargePaymentConcept" action="show" id="${wishInstance?.visaChargePaymentConcept?.id}">${wishInstance?.visaChargePaymentConcept?.encodeAsHTML()}</g:link></td>
 				
-			</tr>	
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.visaSecondStage.label" default="Visa second stage?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.visaSecondStage}" /></td>
+				
+			</tr>
+				
 		</tbody>
 	</table>					
 
@@ -580,6 +591,16 @@
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "blNumber")}</td>
 				
 			</tr>
+			
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.blCopyReceived.label" default="Bl copy received?" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${wishInstance?.blCopyReceived}" /></td>
+				
+			</tr>
+			
+			
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.freightQuote.label" default="Freight Quote" /></td>
