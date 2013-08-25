@@ -16,7 +16,6 @@ import stakeholder.*
 import org.springframework.transaction.annotation.Transactional
 
 
-@Transactional
 class WishController {
 
 	
@@ -27,8 +26,7 @@ class WishController {
 	def alertManagerService
 	def opNumberGeneratorService
 	def wishImportService
-	def documentImportService
-	
+	def documentImportService	
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -53,8 +51,9 @@ class WishController {
 		}catch(Exception e){
 			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
 		}
-		redirect(action: "list", params: params)
+		redirect(action: "importForm", params: params)
 	}
+	
 	
 	def importWishes(){
 		
@@ -62,7 +61,7 @@ class WishController {
 			wishImportService.importWishes(params.importFile.getBytes())
 			alertManagerService.generateAllAlerts()
 			flash.message = message(code:'default.importOk.message')
-		}catch(Exception e){			
+		}catch(Exception e){
 			flash.error = message(code:'default.importError.message')+" - "+e.getMessage()
 		}
 		
@@ -142,6 +141,7 @@ class WishController {
 		
 	}
 
+	@Transactional
     def save() {
 		def keys = params.keySet().toArray()
 		keys.each{
@@ -194,6 +194,7 @@ class WishController {
         [wishInstance: wishInstance]
     }
 
+	@Transactional
     def update() {
 		def wishInstance = Wish.get(params.id)
 		if (!wishInstance) {
@@ -234,6 +235,7 @@ class WishController {
         redirect(action: "show", id: wishInstance.id)
     }
 
+	@Transactional
     def delete() {
         def wishInstance = Wish.get(params.id)
 		
@@ -262,9 +264,9 @@ class WishController {
 		return
 	}
 
+	@Transactional
 	def createBoxPicture(){
 		
-		// para obtener los archivos seleccionados
 		List<MultipartFile> files = request.multiFileMap.collect { it.value }.flatten()
 		def wishInstance = Wish.get(params.idWish)
 		def argPict = [:]
@@ -291,9 +293,9 @@ class WishController {
 		redirect(uri: text)
 	}
 
+	@Transactional
 	def createContainerPicture(){
 
-		// para obtener los archivos seleccionados
 		List<MultipartFile> files = request.multiFileMap.collect { it.value }.flatten()
 		def wishInstance = Wish.get(params.idWish)
 		def argPict = [:]	
@@ -320,6 +322,7 @@ class WishController {
 		redirect(uri: text)
 	}
 
+	@Transactional
     def deleteBoxPicture(){
         def wishInstance = Wish.get(params.idWish)
         def pictureInstance = wishInstance.picturesOfPrintingBoxes.find { it.id == params.id.toInteger() }
@@ -349,6 +352,7 @@ class WishController {
         }
     }
 	
+	@Transactional
 	def deleteContainerPicture(){
 		
 		def wishInstance = Wish.get(params.idWish)
@@ -379,6 +383,7 @@ class WishController {
 		}
 	}
 	
+	@Transactional
 	def editPicture() {	
 		def pictureInstance = Picture.get(params.id)
 		if (!pictureInstance) {
@@ -400,6 +405,7 @@ class WishController {
 		redirect(uri: text, params: [idPictureUpdate: params.id])
 	}
 
+	@Transactional
     def deleteDocumentFirstPhase(){		
 		def wishInstance = Wish.get(params.idWish)
 		def documentInstance = wishInstance.firstStageRequiredDocuments[params.nroDocumentDelete.toInteger()]
@@ -426,6 +432,7 @@ class WishController {
 		}		
     }
 
+	@Transactional
     def deleteDocumentSecondPhase(){
 		def wishInstance = Wish.get(params.idWish)
 		def documentInstance = wishInstance.secondStageRequiredDocuments[params.nroDocumentDelete.toInteger()]
@@ -471,6 +478,7 @@ class WishController {
 		return
 	}
 	
+	@Transactional
 	def deleteDraft(){
 		def wishInstance = Wish.get(params.idWish)
 		def drafttInstance = wishInstance.docDraftToBeApprovedBeforeDelivery[params.nroDraftDelete.toInteger()]
@@ -496,6 +504,7 @@ class WishController {
 		}
 	}
 	
+	@Transactional
 	def deleteUnit(){
 		def wishInstance = Wish.get(params.idWish)
 		def unitInstance = wishInstance.loadUnits[params.nroUnitDelete.toInteger()]
@@ -521,6 +530,7 @@ class WishController {
 		}
 	}
 	
+	@Transactional
 	def deleteNote(){
 		def wishInstance = Wish.get(params.noteWishId)
 		def noteInstance = Note.get(params.id)

@@ -38,6 +38,8 @@ class DocumentImportService {
 
 			objects.each{
 				def wish = Wish.findByOpNumber(it['opNumber'])
+				if(wish==null)
+					throw new RuntimeException("Order with Op Number ${it['opNumber']} doesn't exist")
 						
 				['opNumber','documentType.id','trackingNumber','courierRecord.id'].each{attribute ->
 					if(it[attribute] == null)
@@ -66,9 +68,7 @@ class DocumentImportService {
 				
 			}
 		}catch(Exception e){
-			e.printStackTrace()
-		
-			throw new RuntimeException("Importing failed",e)
+			throw new RuntimeException(e.message,e)
 		}finally{
 			file.delete()
 		}
