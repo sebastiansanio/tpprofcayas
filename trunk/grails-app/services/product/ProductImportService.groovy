@@ -88,7 +88,8 @@ class ProductImportService {
 				Product product = new Product(productData)
 				if (product.pricePerUnit != null )
 					product.addToPreviousPrices( new HistoricalPrice(price: product.pricePerUnit, dateFrom: new Date()))
-			
+				if (product.country == null && product.supplier != null )
+					product.country = product.supplier.country
 				product.save(failOnError:true)
 					
 				
