@@ -86,6 +86,9 @@ class ProductImportService {
 				}
 				
 				Product product = new Product(productData)
+				if (product.pricePerUnit != null )
+					product.addToPreviousPrices( new HistoricalPrice(price: product.pricePerUnit, dateFrom: new Date()))
+			
 				product.save(failOnError:true)
 					
 				
@@ -113,7 +116,13 @@ class ProductImportService {
 				Product product = Product.get(productData.id.toLong())
 				if(supplier!=null && supplier.id!=product.supplier?.id)
 					throw new RuntimeException("Product '${product}' doesn't belong to supplier '${supplier}'")			
+				
+				def previousPrice = product.pricePerUnit
 				product.properties['pricePerUnit'] = productData
+				product.validate()
+				if (product.pricePerUnit != null && previousPrice != product.pricePerUnit )
+					product.addToPreviousPrices( new HistoricalPrice(price: product.pricePerUnit, dateFrom: new Date()))
+	
 				product.save(failOnError:true)
 				
 			}
