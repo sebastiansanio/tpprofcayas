@@ -142,6 +142,16 @@
 			</tr>
 
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
+				
+				<td valign="top" class="value">
+					<g:if test="${productInstance?.previousPrices?.size() > 1 }"> 
+						<g:formatDate format="dd/MM/yyyy HH:mm" date="${productInstance?.previousPrices?.last()?.dateFrom}" />
+					</g:if> 
+				</td>
+			</tr>
+
+			<tr class="prop">
 				<td valign="top" class="name" colspan="2" >
 				
 					<g:message code="product.pricePerCustomer.label" default="Price Per Customer" />
@@ -171,16 +181,6 @@
 				
 			</tr>
 					
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
-				
-				<td valign="top" class="value">
-					<g:if test="${productInstance?.previousPrices?.size() > 1 }"> <!-- preguntarle a Sebastián -->
-						${productInstance?.previousPrices?.last()?.dateFrom}
-					</g:if> 
-				</td>
-				
-			</tr>
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="port.label" default="Port" /></td>

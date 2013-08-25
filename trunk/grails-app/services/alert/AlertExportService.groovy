@@ -108,7 +108,6 @@ class AlertExportService {
 			widths.add(getMaxWidth(alerts,field,labels[field].length()))
 		}
 		Map parameters = [title: messageSource.getMessage("alerts.label",null,locale),'column.widths':widths]
-		
 		exportService.export(format,outputStream,alerts,fields,labels,formatters,parameters)
 		return alertsQuantity
 	}
@@ -131,7 +130,7 @@ class AlertExportService {
 			return value?.format("dd/MM/yyyy")
 		}
 
-		List widths = new ArrayList()
+		
 		List fields = ["alertType.externalMessage","attentionDate","deadline"]
 		for (field in ["customer","supplier","supplierOrder","customerOpNumber","opNumber"]){
 			if(stakeholder?.defaultReport?.fields?.contains(field))
@@ -146,10 +145,10 @@ class AlertExportService {
 			"wish.customerOpNumber":messageSource.getMessage("wish.customerOpNumber.label",null,locale),
 			"wish.opNumber":messageSource.getMessage("wish.opNumber.label",null,locale)]
 		Map formatters = ["attentionDate":dateFormatter,"deadline":dateFormatter]
+		List widths = new ArrayList()
 		for (field in fields){
 			widths.add(getMaxWidth(alerts,field,labels[field].length()))	
 		}
-		
 		Map parameters = [title: messageSource.getMessage("alerts.label",null,locale),'column.widths':widths]
 		exportService.export(format,outputStream,alerts,fields,labels,formatters,parameters)
 		return alertsQuantity

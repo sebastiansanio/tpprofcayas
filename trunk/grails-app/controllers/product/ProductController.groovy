@@ -12,7 +12,6 @@ import org.springframework.web.servlet.support.RequestContextUtils
 import stakeholder.Supplier
 import product.HistoricalPrice
 
-@Transactional
 class ProductController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -35,6 +34,7 @@ class ProductController {
         [productInstance: new Product(params)]
     }
 
+	@Transactional
     def save() {
         def productInstance = new Product(params)
 		
@@ -77,6 +77,7 @@ class ProductController {
         [productInstance: productInstance]
     }
 
+	@Transactional
     def update() {
         def productInstance = Product.get(params.id)
 		
@@ -111,6 +112,7 @@ class ProductController {
         redirect(action: "show", id: productInstance.id)
     }
 
+	@Transactional
     def delete() {
         def productInstance = Product.get(params.id)
         if (!productInstance) {
@@ -154,7 +156,6 @@ class ProductController {
 	}
 
 	def importPrices(){
-		
 		Supplier supplier = params.supplierId!='null'?Supplier.get(params.supplierId.toLong()):null
 		try{
 			productImportService.importPrices(supplier,params.importFile.getBytes())
@@ -184,6 +185,7 @@ class ProductController {
 		}
 	}
 	
+	@Transactional
 	def deleteCodePerCustomer() {
 		
 		def productInstance = Product.get(params.productId)
@@ -211,6 +213,7 @@ class ProductController {
 		}
 	}
 	
+	@Transactional
 	def deletePricePerCustomer() {
 		
 		def productInstance = Product.get(params.productId)
@@ -248,6 +251,7 @@ class ProductController {
 		[historicalPriceInstanceList: historicalPrice, idProduct: params.id]
 	}
 	
+	@Transactional
 	def deleteHistoricalPrice() {
 		
 		def historicalPriceInstance = HistoricalPrice.get(params.idPrice)
