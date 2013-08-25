@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.servlet.support.RequestContextUtils
+import stakeholder.Stakeholder
 
 
 class AlertController {
@@ -65,6 +66,13 @@ class AlertController {
 		response.contentType=grailsApplication.config.grails.mime.types[params.format]
 		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alerts.label')} "+DATE_FORMAT.format(new Date())+".${params.extension}")
 		alertExportService.exportAlert(params.format,response.outputStream,RequestContextUtils.getLocale(request),fromDate,toDate,pendingOnly)
+	}
+	
+	def exportByStakeholder() {
+		Stakeholder stakeholder = Stakeholder.get(params.id)
+		response.contentType=grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'alerts.label')} ${stakeholder.name} "+DATE_FORMAT.format(new Date())+".${params.extension}")
+		alertExportService.exportAlertsByStakeholder(params.format,response.outputStream,stakeholder,RequestContextUtils.getLocale(request))
 	}
 	
 	def inspected(){
