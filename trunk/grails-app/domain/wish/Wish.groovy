@@ -420,5 +420,16 @@ class Wish {
 	Date getOriginalDjaiFinished(){
 		return djaiExtendedExpiration?:billDate
 	}
+	
+	boolean getFirstStageDocumentsOngoing(){
+		if(firstStageRequiredDocuments==null || firstStageRequiredDocuments.size() == 0)
+			return true
+		for(document in firstStageRequiredDocuments){
+			if(document.received==null && document.courierRecord==null)
+				return false
+		}
+		return true
+			
+	}
 
 }
