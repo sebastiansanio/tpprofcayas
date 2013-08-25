@@ -122,6 +122,8 @@ class WishImportService {
 				wishInstance.properties = it	
 				
 				def customer = Customer.get(it['customer.id'])	
+				if(customer==null)
+					throw new RuntimeException("Customer with id ${it['customer.id']} doesn't exist")
 				if(wishInstance.opNumber == null)
 					wishInstance.opNumber = opNumberGeneratorService.getNextOpNumber()
 				if(wishInstance.customerOpNumber == null)
