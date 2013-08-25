@@ -397,7 +397,9 @@ class BootStrap {
 				//Cambio
 				alertType = new AlertType(externalMessage:"Enviar BL",description:"Pedir Bl",nameOfEstimatedDateField:"requireBlDate",nameOfCompletionField:"blCopyReceived",alertTerm:0)
 				alertType.save(flush:true)
-				
+				//Nuevo
+				alertType = new AlertType(description:"Pedir documentación (etapa 1)",nameOfEstimatedDateField:"estimatedTimeOfArrival",nameOfCompletionField:"firstStageDocumentsOngoing",alertTerm:15,frequency:3)
+				alertType.save(flush:true)
 				
 				for(int i = 1;i<=5;i++){
 					Wish wish = new Wish(customsBroker:customsBroker,'customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
