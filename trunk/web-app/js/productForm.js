@@ -16,7 +16,6 @@ $("document").ready( function() {
 		else
 		{
 			$("#subFamily").load(dirFamily+$('#family').val(), function() {
-				//alert("tama: " + $("select#subFamily option").length);
 				if ( $("select#subFamily option").length < 2 )
 					$(padreSubFamily).hide(500);
 				else
