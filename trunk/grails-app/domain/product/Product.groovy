@@ -110,6 +110,43 @@ class Product {
 		boxesPerPallets min:0L, nullable:true
 		piecesPerPallet min:0L, nullable:true
 		notes nullable:true, maxSize:512
+		codePerCustomer(validator: { listCodePerCustomer, obj, errors ->
+			
+			if ( listCodePerCustomer != null && listCodePerCustomer.size() != 0 )
+			{
+				def customers = [] as Set
+	
+				listCodePerCustomer.each {
+					customers.add(it.customer)
+				}
+	
+				if ( listCodePerCustomer.size() != customers.size() )
+				{
+					errors.rejectValue("codePerCustomer", "product.codePerCustomer.customerrepeat" )
+					return false
+				}
+			}
+			return true
+		})
+		
+		pricePerCustomer(validator: { listPricePerCustomer, obj, errors ->
+			
+			if ( listPricePerCustomer != null && listPricePerCustomer.size() != 0 )
+			{
+				def customers = [] as Set
+	
+				listPricePerCustomer.each {
+					customers.add(it.customer)
+				}
+	
+				if ( listPricePerCustomer.size() != customers.size() )
+				{
+						errors.rejectValue("pricePerCustomer", "product.pricePerCustomer.customerrepeat" )
+						return false 
+				}
+			}
+			return true
+		})
     }
 	
 	public String toString() {
