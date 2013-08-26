@@ -12,13 +12,6 @@ import org.springframework.web.servlet.support.RequestContextUtils
 import stakeholder.Supplier
 import product.HistoricalPrice
 
-/*
- *	lo de cliente, precio y código? 
-	subfamilia
-	
- * */
-
-
 class ProductController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -50,7 +43,7 @@ class ProductController {
 		
 		if ( productInstance.country == null && productInstance.supplier != null )
 			productInstance.country = productInstance.supplier.country
-			
+					
         if (!productInstance.save(flush: true)) {
             render(view: "create", model: [productInstance: productInstance])
             return
