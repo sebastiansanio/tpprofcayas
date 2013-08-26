@@ -16,7 +16,12 @@
 					<g:textField name="codePerCustomer[${i}].code" value="${codeCustomer.code}"/>
 				</td>
 				<td>
-					<g:link role="button" class="btn btn-primary" action="deleteCodePerCustomer" params="['productId': productInstance?.id, 'codePerCustomerId': codeCustomer.id ]" onclick="return confirm('${message( code: 'default.button.delete.confirm.message', default:'Are you sure?')}');"><i class='icon-trash'></i></g:link>
+					<g:if test="${!codeCustomer.id}">
+						<a role="button" id="codeBtnDelTempNode-${i}" class="btn btn-primary deleteTempCode"><i class='icon-trash'></i></a>
+					</g:if>
+					<g:else>
+						<g:link role="button" class="btn btn-primary" action="deleteCodePerCustomer" params="['productId': productInstance?.id, 'codePerCustomerId': codeCustomer.id ]" onclick="return confirm('${message( code: 'default.button.delete.confirm.message', default:'Are you sure?')}');"><i class='icon-trash'></i></g:link>
+					</g:else>
 				</td>
 			</tr>
 		</g:each>		

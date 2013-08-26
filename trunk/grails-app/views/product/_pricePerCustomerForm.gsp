@@ -17,8 +17,12 @@
 					
 				</td>
 				<td>
-					<g:link role="button" class="btn btn-primary" action="deletePricePerCustomer" params="['productId': productInstance?.id, 'pricePerCustomerId': priceCustomer.id ]" onclick="return confirm('${message(code:'default.button.delete.confirm.message', default:'Are you sure?') }');"><i class='icon-trash'></i></g:link>
-					
+					<g:if test="${!priceCustomer.id}">
+						<a role="button" id="priceBtnDelTempNode-${i}" class="btn btn-primary deleteTempPrice"><i class='icon-trash'></i></a>
+					</g:if>
+					<g:else>
+						<g:link role="button" class="btn btn-primary" action="deletePricePerCustomer" params="['productId': productInstance?.id, 'pricePerCustomerId': priceCustomer.id ]" onclick="return confirm('${message(code:'default.button.delete.confirm.message', default:'Are you sure?') }');"><i class='icon-trash'></i></g:link>
+					</g:else>
 				</td>
 			</tr>
 		</g:each>		

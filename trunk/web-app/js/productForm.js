@@ -28,7 +28,7 @@ $("document").ready( function() {
 	/* para los precios por cliente*/
 
 	var priceIdBtnDelFunc = function(nro) {
-		return "btnDelTempNode-"+ nro;
+		return "priceBtnDelTempNode-"+ nro;
 	};
 
 	var priceNameSelectFunc = function(nro) {
@@ -59,6 +59,10 @@ $("document").ready( function() {
 		nodo.remove();		
 	};
 	
+	$(".deleteTempPrice").click ( function() {
+		priceDelNode(this);
+	});
+	
 	$("#addCustomerPrice").click( function() {
 
 		var idBtnDel = priceIdBtnDelFunc(rowsPrice);
@@ -84,7 +88,7 @@ $("document").ready( function() {
 	/* para manejar la carga de códigos por usuarios */
 	
 	var codeIdBtnDelFunc = function(nro) {
-		return "btnDelTempNode-"+ nro;
+		return "codeBtnDelTempNode-"+ nro;
 	};
 
 	var codeNameSelectFunc = function(nro) {
@@ -115,6 +119,10 @@ $("document").ready( function() {
 
 		nodo.remove();		
 	};
+	
+	$(".deleteTempCode").click ( function() {
+		codeDelNode(this);
+	});
 	
 	$("#addCustomerCode").click( function() {
 
