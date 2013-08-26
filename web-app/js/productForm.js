@@ -2,7 +2,8 @@ $("document").ready( function() {
 
 	/* para elegir la familia */
 	var padreSubFamily = $("#subFamily").closest(".controls").closest(".control-group");
-	padreSubFamily.hide();
+	if ( $("select#subFamily option").length < 2 )
+		padreSubFamily.hide();
 
 	/* ocultar y mostrar el select de la subfamilia*/
 	$("#family").change( function()
@@ -15,10 +16,11 @@ $("document").ready( function() {
 		else
 		{
 			$("#subFamily").load(dirFamily+$('#family').val(), function() {
-				if ( $("#subFamily :selected").length != 0 )
-					$(padreSubFamily).show(500);
-				else
+				//alert("tama: " + $("select#subFamily option").length);
+				if ( $("select#subFamily option").length < 2 )
 					$(padreSubFamily).hide(500);
+				else
+					$(padreSubFamily).show(500);
 			});
 
 		}

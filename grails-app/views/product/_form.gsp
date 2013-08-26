@@ -132,8 +132,9 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'subFamily', 'error')} ">
 				<label for="subFamily" class="control-label"><g:message code="subFamily.label" default="Sub Family" /></label>
 				<div class="controls">
-					<select id="subFamily" name="subFamily.id" value="${productInstance?.subFamily?.id}" class="many-to-one" noSelection="['null': '']">
-					</select>
+		
+					<g:select id="subFamily" name="subFamily.id" from="${productInstance?.family?.subFamily}" optionKey="id" required="" value="${productInstance?.subFamily?.id}" class="many-to-one" noSelection="['null': '']"/>
+				
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'subFamily', 'error')}</span>
 				</div>
 			</div>
@@ -334,7 +335,7 @@
 	var rowsPrice = ${productInstance?.pricePerCustomer?.size()} + 0 ;
 
 	/* para manejar la carga de códigos por usuarios */
-	var rowsCode = ${productInstance?.codePerCustomer?.size()} + 0 ;
+	var rowsCode = ${productInstance?.codePerCustomer?.size()} + 0 ;	
 
 </script>
 
