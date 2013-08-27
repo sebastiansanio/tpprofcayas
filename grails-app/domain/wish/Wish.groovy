@@ -423,7 +423,7 @@ class Wish {
 	
 	boolean getFirstStageDocumentsOngoing(){
 		if(firstStageRequiredDocuments==null || firstStageRequiredDocuments.size() == 0)
-			return true
+			return false
 		for(document in firstStageRequiredDocuments){
 			if(document.received==null && document.courierRecord==null)
 				return false
