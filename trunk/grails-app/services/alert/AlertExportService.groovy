@@ -18,10 +18,10 @@ class AlertExportService {
 	Map fieldsByStakeholder = ["customsBroker":["alertType.externalMessage","attentionDate","deadline",
 		"wish.customsBrokerRefNumber","wish.supplierOrder","wish.customer","wish.djaiNumber","wish.djaiFormalizationDate",
 		"wish.djaiExpirationDate","wish.djaiExtendedExpiration"],
-		"forwarder":["alertType.externalMessage","wish.forwarderRefNumber","attentionDate","deadline","wish.customer",
+		"forwarder":["alertType.externalMessage","wish.forwarderRefNumber","attentionDate","deadline","wish.customer","wish.shipper",
 			"wish.supplierOrder"],
 		"supplier":["alertType.externalMessage","attentionDate","deadline","wish.customer","wish.shipper",
-			"wish.supplierOrder","wish.opNumber"],
+			"wish.supplierOrder"],
 		"customer":["alertType.externalMessage","attentionDate","deadline","wish.customer","wish.shipper",
 			"wish.supplierOrder","wish.customerOpNumber"]
 		
