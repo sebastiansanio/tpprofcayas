@@ -154,7 +154,11 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Cartas de garantía - Control total',permissionString:'letterOfGuarantee:*')
 				permission.save()
-
+				permission = new Permission(description:'Tipo de presentación - Control total',permissionString:'typeOfPresentation:*')
+				permission.save()
+				permission = new Permission(description:'Unidad de venta - Control total',permissionString:'itemUnit:*')
+				permission.save()
+				
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
 				roleExternal.addToPermissions("alertExternal:*")
@@ -211,7 +215,6 @@ class BootStrap {
 				roleManager.addToPermissions("*:show")
 				roleManager.addToPermissions("reportSendConfiguration:*")
 				roleManager.addToPermissions("otherStakeholder:*")
-				//Nuevo
 				roleManager.addToPermissions("typeOfPresentation:*")
 				roleManager.addToPermissions("itemUnit:*")
 				roleManager.save(flush:true)
@@ -385,7 +388,6 @@ class BootStrap {
 				alertType.save(flush:true)
 				alertType = new AlertType(externalMessage:"Gestionar visado (etapa 1)",description:"Solicitar al proveedor la gestión del visado (primera etapa)",nameOfEstimatedDateField:"requireVisaFirstStageDate",nameOfCompletionField:"visaFirstStageReceivedDate",alertTerm:20)
 				alertType.save(flush:true)
-				//Cambio
 				alertType = new AlertType(externalMessage:"Gestionar visado (etapa 2)",description:"Solicitar al proveedor la gestión del visado (segunda etapa)",nameOfEstimatedDateField:"requireVisaSecondStageDate",nameOfCompletionField:"visaSecondStage",alertTerm:0)
 				alertType.save(flush:true)
 				alertType = new AlertType(externalMessage:"Enviar fotos de las cajas",description:"Pedir fotos de las cajas",nameOfEstimatedDateField:"deliveryDate",nameOfCompletionField:"picturesOfPrintingBoxesAndLoadFinished",alertTerm:10)
@@ -394,10 +396,8 @@ class BootStrap {
 				alertType.save(flush:true)
 				alertType = new AlertType(externalMessage:"Enviar fotos del container",description:"Pedir fotos del container",nameOfEstimatedDateField:"dateToRequirePicturesOfLoadingContainer",nameOfCompletionField:"picturesOfLoadingContainerFinished",alertTerm:0)
 				alertType.save(flush:true)
-				//Cambio
 				alertType = new AlertType(externalMessage:"Enviar BL",description:"Pedir Bl",nameOfEstimatedDateField:"requireBlDate",nameOfCompletionField:"blCopyReceived",alertTerm:0)
 				alertType.save(flush:true)
-				//Nuevo
 				alertType = new AlertType(description:"Pedir documentación (etapa 1)",nameOfEstimatedDateField:"estimatedTimeOfArrival",nameOfCompletionField:"firstStageDocumentsOngoing",alertTerm:15,frequency:3)
 				alertType.save(flush:true)
 				
