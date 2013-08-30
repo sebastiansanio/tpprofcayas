@@ -72,7 +72,7 @@ class WishMailService  implements MessageSourceAware{
 						if(alertsQuantity>0)
 							attach(messageSource.getMessage("wish.alertsByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStreamAlerts.bytes)
 						if(hasSignature) 
-							inline('signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file)
+							inline('signature','image/jpg',grailsApplication.mainContext.getResource('/images/logo3.jpg').file)
 					}
 					configuration.lastSentDate = new Date()
 				}

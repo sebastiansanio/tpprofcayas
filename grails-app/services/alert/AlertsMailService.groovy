@@ -51,7 +51,7 @@ class AlertsMailService {
 							html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(message.message.encodeAsHTML(),alert).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
 							text transformText(message.message,alert)
 							if(hasSignature) 
-								inline('signature','image/png',grailsApplication.mainContext.getResource('/images/logo2.png').file)
+								inline('signature','image/jpg',grailsApplication.mainContext.getResource('/images/logo3.jpg').file)
 						}
 						alert.sentDate = new Date()	
 					}
