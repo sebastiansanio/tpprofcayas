@@ -65,8 +65,7 @@ class WishMailService  implements MessageSourceAware{
 						multipart true
 						to mails.toArray()
 						subject transformText(configuration.subject)
-						html '<p style="font-family:Arial,Tahoma,sans-serif;font-size: 12px;">'+transformText(configuration.body.encodeAsHTML()).replace("\n", "<br/>").replace("[signature]","<img src='cid:signature' />")+'</p>'
-						text transformText(configuration.body)
+						html transformText(configuration.body).replace("[signature]","<img src='cid:signature' />")
 						if(configuration.sendReport)
 							attach(messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes)
 						if(alertsQuantity>0)

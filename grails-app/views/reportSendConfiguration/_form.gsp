@@ -1,14 +1,21 @@
 <%@ page import="report.ReportSendConfiguration" %>
 
+<g:javascript src="tinymce.min.js" />
 <script>
-
 function reportStakeholderChanged(){
 	if($('#stakeholder').val()=='')
 		$('#contacts').empty();
 	else
 		$('#contacts').load("${createLink(action:'contactsByStakeholder')}/"+$('#stakeholder').val());
 }
-
+tinymce.init({
+	menubar:false,
+    selector: "#body",
+    statusbar: false,
+    plugins: ["textcolor","link","paste"],
+    toolbar: "styleselect fontselect fontsizeselect | undo redo | bold italic  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link forecolor backcolor hr"
+    
+});
 
 </script>
 
@@ -62,7 +69,7 @@ function reportStakeholderChanged(){
 				<label for="body" class="control-label"><g:message code="reportSendConfiguration.body.label" default="Body" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 					<span class="help-inline">${hasErrors(bean: reportSendConfigurationInstance, field: 'body', 'error')}</span>
-					<g:textArea class="span12" name="body" cols="60" rows="7" maxlength="1000" required="" value="${reportSendConfigurationInstance?.body}"/>
+					<g:textArea class="span12" name="body" cols="60" rows="7" maxlength="1000" value="${reportSendConfigurationInstance?.body}"/>
 				</div>
 			</div>
 
