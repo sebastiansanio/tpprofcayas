@@ -6,7 +6,7 @@
 				<small> ${message(code:'version.label')} ${meta(name:'app.version')}</small>
 			</a>
 
-       		<div class="nav-collapse">
+       		<div>
 
 	  			<div class="pull-right">
 					<g:render template="/_menu/language"/>														

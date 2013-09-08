@@ -8,15 +8,14 @@
 </g:elseif>
 
 
-<!-- position of menu: LTR (left-to-right, European) or RTL (right-to-left, Oriental) -->
 <g:if test="${session.menuposition == 'right' && session.layout == 'grid'}">
 	<g:set var="menuposition" value="pull-right" />
 </g:if>
 <g:elseif test="${session.menuposition == 'right' && session.layout == 'fluid'}">
-	<g:set var="menuposition" value="tabbable tabs-right" /> <!-- pull-right -->
+	<g:set var="menuposition" value="tabbable tabs-right" />
 </g:elseif>
 <g:elseif test="${session.layout == 'fluid'}">
-	<g:set var="menuposition" value="tabbable tabs-left" /> <!-- pull-left -->
+	<g:set var="menuposition" value="tabbable tabs-left" />
 </g:elseif>
 <g:else>
 	<g:set var="menuposition" value="" />
