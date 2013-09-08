@@ -267,7 +267,7 @@ class BootStrap {
 					def country = new Country(name:countryName)
 					country.save(flush:true)
 					
-					for(int i = 0;i<5;i++){
+					for(int i = 1;i<6;i++){
 						def port = new Port(country:country,name:"Puerto "+country.toString()+" "+i)
 						port.save(flush:true)
 					}	
