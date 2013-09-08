@@ -93,7 +93,7 @@ $(document).ready(function()
 		
 		elementName = $("<td> <input type='text' id='" + idName(cantContact)+ "' name='" + nameName(cantContact) + "' required=''/> </td>");
 		
-		elementEmail = $("<td> <input type='text' id='" + idEmail(cantContact) + "' name='" + nameEmail(cantContact) + "'/> </td>");
+		elementEmail = $("<td> <input type='email' id='" + idEmail(cantContact) + "' name='" + nameEmail(cantContact) + "'/> </td>");
 
 		elementPosition = $("<td> <input type='text' id='" + idPosition(cantContact) + "' name='" + namePosition(cantContact) + "'/> </td>");
 		
