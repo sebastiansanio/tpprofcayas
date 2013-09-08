@@ -1,6 +1,5 @@
 <g:set var="lang" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE' ?: org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).toString().substring(0,2)}"/>
 <g:set var="currentURL" value="${request.forwardURI}"/>
-
 <ul class="nav secondary-nav language-dropdown pull-right">
 	<li class="dropdown js-language-dropdown">
 		<a href="javascript:;" class="dropdown-toggle">
