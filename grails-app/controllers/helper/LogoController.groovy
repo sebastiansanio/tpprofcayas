@@ -25,6 +25,9 @@ class LogoController {
 
     def save() {
         def logoInstance = new Logo(params)
+		
+		logoInstance.mimeType = params.image.contentType
+		
         if (!logoInstance.save(flush: true)) {
             render(view: "create", model: [logoInstance: logoInstance])
             return
