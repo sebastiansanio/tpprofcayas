@@ -1,9 +1,9 @@
 <div id="Header">
-	<div class="row-fluid">
+	<div class="row-fluid" style="text-align:center;">
+		
 		
 		<br/>
-		<img class="offset5 span2" src="${resource(dir:'images',file:'logo2.png')}" alt="${meta(name:'app.name')}" />					
-		<br/>
+		<img style="height:40px;" src="${resource(dir:'images',file:'logo2.png')}" alt="Cayas Online" />					
 		<br/>
 		<br/>
 	</div>
