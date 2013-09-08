@@ -23,15 +23,6 @@
 					</a></li>
 				</ul>
 			</li>
-
 		</ul>
 	</li>
 </ul>
-
-<noscript>
-<ul class="nav pull-right">
-	<li class="">
-		<g:link controller="user" action="config"><g:message code="user.config.label" default="Config"/></g:link>
-	</li>
-</ul>
-</noscript>
