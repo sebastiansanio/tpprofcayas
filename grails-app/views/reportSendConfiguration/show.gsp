@@ -68,7 +68,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="reportSendConfiguration.body.label" default="Body" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: reportSendConfigurationInstance, field: "body")}</td>
+				<td valign="top" class="value">${reportSendConfigurationInstance.body}</td>
 				
 			</tr>
 		

@@ -21,6 +21,7 @@ import product.*
 
 class BootStrap {
 	def alertManagerService
+	def opNumberGeneratorService
 	
     def init = { servletContext ->
 		
@@ -231,6 +232,9 @@ class BootStrap {
 				def user = new User(username:"cayas", passwordHash: new Sha256Hash("cayas").toHex())
 				user.addToRoles(roleOperator)
 				user.save(flush:true)
+				user = new User(username:"operador", passwordHash: new Sha256Hash("operador").toHex())
+				user.addToRoles(roleOperator)
+				user.save(flush:true)
 				
 				def manager = new User(username:"manager", passwordHash: new Sha256Hash("manager").toHex())
 				manager.addToRoles(roleManager)
@@ -254,74 +258,72 @@ class BootStrap {
 				documentType.save(flush:true)
 				
 				
-				def ship = new Ship (name:'Ship')
-				ship.save(flush:true)
+				for(shipName in ['Abbadia','Abbey','Nairobi','Celis','Dinorah','Honou']){
+					def ship = new Ship (name:shipName)
+					ship.save(flush:true)
+				}
+
+				for(countryName in ['China','Brasil','Argentina','Japón']){
+					def country = new Country(name:countryName)
+					country.save(flush:true)
+					
+					for(int i = 0;i<5;i++){
+						def port = new Port(country:country,name:"Puerto "+country.toString()+" "+i)
+						port.save(flush:true)
+					}	
+				}
 				
-				def country = new Country(name:"CHINA")
-				country.save(flush:true)
-										
-				def customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"PLACASUR",country:country,address:".",cuit:"30-34948484-4")
-				customer.save(flush:true)
-				def userCustomer = new User(stakeholder:customer,username:"placasur", passwordHash: new Sha256Hash("placasur").toHex())
-				userCustomer.addToRoles(roleExternal)
-				userCustomer.save(flush:true)
+				for(customerName in ["PSUR","DTA","RZZE","REH","LLI"]){
+					def customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
+					customer.save(flush:true)
+					def userCustomer = new User(stakeholder:customer,username:customerName, passwordHash: new Sha256Hash(customerName).toHex())
+					userCustomer.addToRoles(roleExternal)
+					userCustomer.save(flush:true)
+				}
 				
-				customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"DELTA",country:country,address:".",cuit:"30-34948484-4")
-				customer.save(flush:true)
-				customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:"RICCHEZZE",country:country,address:".",cuit:"30-34948484-4")
-				customer.save(flush:true)
+				for(supplierName in ["HHUI","TMPH","TBRL","EXN","CLW"]){
+					def supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:supplierName,country:Country.findByName("China"),address:".",taxRegistryNumber:"2312232")
+					supplier.save(flush:true)
+					def userSupplier = new User(stakeholder:supplier,username:supplierName, passwordHash: new Sha256Hash(supplierName).toHex())
+					userSupplier.addToRoles(roleExternal)
+					userSupplier.save(flush:true)
+				}
 				
+				for(shipperName in ["GHUAN","SHI","DEP"]){
+					def shipper = new Shipper(defaultReport:customerReport,defaultLocale:localeEs,name:shipperName,country:Country.findByName("China"))
+					shipper.save(failOnError:true)
+				}
 				
+				for(customerBrokerName in ["CBR","DDA"]){
+					def customsBroker = new CustomsBroker(defaultReport:customsBrokerReport,defaultLocale:localeEs,name:customerBrokerName,country:Country.findByName("Argentina"))
+					customsBroker.save(flush:true)
+				}
 				
-				def supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"HAI HUI",country:country,address:".",taxRegistryNumber:"2312232")
-				supplier.save(flush:true)
-				supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"Triumph",country:country,address:".",taxRegistryNumber:"2312232")
-				supplier.save(flush:true)
-				def userSupplier = new User(stakeholder:supplier,username:"triumph", passwordHash: new Sha256Hash("triumph").toHex())
-				userSupplier.addToRoles(roleExternal)
-				userSupplier.save(flush:true)
-				supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"TECBRIL",country:country,address:".",taxRegistryNumber:"2312232")
-				supplier.save(flush:true)
+				for(forwarderName in ["Air Sea Land","GAC","FWD","KRIN","MCE"]){
+					def forwarder = new Forwarder(defaultReport:customerReport,defaultLocale:localeEs,name:forwarderName,country:Country.findByName("China"))
+					forwarder.save(failOnError:true)
+					
+				}
 				
-				
-				def shipper = new Shipper(defaultReport:customerReport,defaultLocale:localeEs,name:"GUANGZHOU ANIMAL",country:country)
-				shipper.save(failOnError:true)
-				
-				def customsBroker = new CustomsBroker(defaultReport:customsBrokerReport,defaultLocale:localeEs,name:"LEWKOWICK",country:country)
-				customsBroker.save(flush:true)
-				
-				def forwarder = new Forwarder(defaultReport:customerReport,defaultLocale:localeEs,name:"AirSeaLand",country:country)
-				forwarder.save(failOnError:true)
-				
-				def agent = new Agent(defaultReport:customerReport,defaultLocale:localeEn,name:"SUNSHOW",country:country)
-				agent.save(flush:true)
-				
-				def port = new Port(country:country,name:"GUANGZHOU")
-				port.save(flush:true)
-				
+				for(agentName in ["AAG","BAC"]){
+					def agent = new Agent(defaultReport:customerReport,defaultLocale:localeEn,name:agentName,country:Country.findByName("China"))
+					agent.save(flush:true)
+				}
+
 				def priceCondition = new PriceCondition(name:"FOB",description:"FOB")
 				priceCondition.save(flush:true)
-				
-				def color = new Color(description:"BLANCO")
-				color.save(flush:true)
-				
-				color = new Color(description:"NEGRO")
-				color.save(flush:true)
-				
-				def product = new Product(descriptionSP:"Artículo 1",descriptionEN:'Product 1',color:color, status:"Sock")
-				product.save(flush:true)
-				
-				def product2 = new Product(descriptionSP:"Artículo 2",descriptionEN:'Product 2',color:color, status:"Sock")
-				product2.save(flush:true)
-				
-				
+
+				for(colorName in ['BLANCO','NEGTO','GRIS']){
+					def color = new Color(description:colorName)
+					color.save(flush:true)
+				}
+
 				def paymentTerm = new PaymentTerm(name:"100 TT 15 días ETA",percentPaymentAfterDelivery:100,paymentDaysAfterTimeOfArrival:15)
 				paymentTerm.save(flush:true)
 				paymentTerm = new PaymentTerm(name:"30 TT / 70 CAD",percentPaymentAfterDelivery:70,paymentDaysAfterTimeOfArrival:0)
 				paymentTerm.save(flush:true)
 				paymentTerm = new PaymentTerm(name:"100 CAD",percentPaymentAfterDelivery:100,paymentDaysAfterTimeOfArrival:0)
 				paymentTerm.save(flush:true)
-				
 				
 				def paymentStatus = new PaymentStatus(name:"A la espera del 100%")
 				paymentStatus.save(flush:true)
@@ -331,8 +333,7 @@ class BootStrap {
 				def wishStatus2 = new WishStatus(name:"Traveling")
 				wishStatus2.save(flush:true)
 				def wishStatus3 = new WishStatus(name:"Arrived")
-				wishStatus3.save(flush:true)
-				
+				wishStatus3.save(flush:true)				
 				
 				def currency = new Currency(name:"PESO")
 				currency.save(flush:true)
@@ -376,10 +377,7 @@ class BootStrap {
 				alertType.save(flush:true)
 				alertType = new AlertType(externalMessage:"Informar fecha de delivery",description:"Consultar fecha de delivery",nameOfEstimatedDateField:"dateToConfirmDeliveryDate",nameOfCompletionField:"deliveryDate",alertTerm:0)
 				alertType.addToStakeholders('supplier')
-				alertType.save(flush:true)
-				AlertMessage alertMessage = new AlertMessage(language:localeEn,alertType:alertType,subject:'Fecha de delivery',message:'Hello...\n [supplier]:[supplierOrder] [customerOpNumber] \n Bye')
-				alertMessage.save()
-				
+				alertType.save(flush:true)				
 				alertType = new AlertType(externalMessage:"Enviar swift",description:"Reclamar swift al cliente",nameOfEstimatedDateField:"dateToDemandSwiftToClient",nameOfCompletionField:"swiftReceivedDate",alertTerm:0)
 				alertType.save(flush:true)
 				alertType = new AlertType(externalMessage:"Se recibirá el swift",description:"Enviar swift al proveedor",nameOfEstimatedDateField:"swiftReceivedDate",nameOfCompletionField:"swiftSentToSupplierDate",alertTerm:0)
@@ -402,22 +400,22 @@ class BootStrap {
 				alertType.save(flush:true)
 				
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(customsBroker:customsBroker,'customer.id':1,'supplier.id':5,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
+					Wish wish = new Wish(estimatedTimeOfArrival: new Date().clearTime().plus(30),customsBroker:CustomsBroker.first(),'customer.id':1,'supplier.id':6,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus1,forwarder:forwarder,shipper:shipper,'customer.id':2,finishDate:new Date().clearTime(),'supplier.id':5,opNumber:(i+10),customerOpNumber:i,wishDate:new Date().clearTime())
+					Wish wish = new Wish(estimatedTimeOfArrival: new Date().clearTime().plus(30),djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus1,forwarder:Forwarder.first(),shipper:Shipper.first(),'customer.id':2,finishDate:new Date().clearTime(),'supplier.id':6,opNumber:(i+10),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus2,agent:agent,'paymentTerm.id':1,'customer.id':3,billDate:new Date().clearTime(),'supplier.id':5,opNumber:(i+20),customerOpNumber:i,wishDate:new Date().clearTime())
+					Wish wish = new Wish(estimatedTimeOfArrival: new Date().clearTime().plus(30),djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus2,agent:Agent.first(),'paymentTerm.id':1,'customer.id':3,billDate:new Date().clearTime(),'supplier.id':6,opNumber:(i+20),customerOpNumber:i,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
 				for(int i = 1;i<=5;i++){
-					Wish wish = new Wish(djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus3,agent:agent,'paymentTerm.id':1,'customer.id':3,'supplier.id':5,opNumber:(i+30),customerOpNumber:i+15,wishDate:new Date().clearTime())
+					Wish wish = new Wish(estimatedTimeOfArrival: new Date().clearTime().plus(30),djaiFormalizationDate:new Date().clearTime(),wishStatus:wishStatus3,agent:Agent.first(),'paymentTerm.id':1,'customer.id':3,'supplier.id':6,opNumber:(i+30),customerOpNumber:i+15,wishDate:new Date().clearTime())
 					wish.save(failOnError:true)
 				}
 
@@ -435,9 +433,9 @@ class BootStrap {
 				cr.save(failOnError:true)
 				cr = new DocumentsCourierRecord(courier:courier,trackingNumber:"4")
 				cr.save(failOnError:true)
-				SpecialCourierRecord scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"1",issuer:customer,requiresVisa:true)
+				SpecialCourierRecord scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"1",issuer:Customer.first(),requiresVisa:true)
 				scr.save()
-				scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"2",issuer:customer,requiresVisa:false)
+				scr = new SpecialCourierRecord(courier:courier2,trackingNumber:"2",issuer:Customer.first(),requiresVisa:false)
 				scr.save()
 				
 				alertManagerService.checkAllAlerts()

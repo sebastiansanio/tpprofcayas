@@ -348,7 +348,7 @@ class Wish {
 		if(paymentTerm?.percentPaymentAfterDelivery==100 && paymentTerm?.paymentDaysAfterTimeOfArrival > 0)
 			return estimatedTimeOfArrival?.plus(paymentTerm?.paymentDaysAfterTimeOfArrival)
 		if(paymentTerm?.percentPaymentAfterDelivery>0)
-			return getBlReceivedDate()
+			return estimatedTimeOfDeparture?.plus(5)
 		return null
 	}
 	
