@@ -1,4 +1,5 @@
 <%@ page import="report.ReportSendConfiguration" %>
+<%@ page import="helper.Logo" %>
 
 <g:javascript src="tinymce.min.js" />
 <script>
@@ -121,6 +122,9 @@ tinymce.init({
 	<p>	<g:message code="transformText.variable.week.message" default="[week] = Number of week in year" /></p>
 	<p>	<g:message code="transformText.variable.signature.message" default="[signature] = Signature (.png)" /></p>
 	
+	<g:each var="logoInstance" in="${Logo.list()}">
+		<p>${"[image="+logoInstance.name+"]"} <img style="height:40px;" src="${createLink(controller:'logo',action:'viewLogo',id:logoInstance.id)}" /></p> 	
+	</g:each>
 
 </div>
 </div>
