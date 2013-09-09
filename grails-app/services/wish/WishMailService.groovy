@@ -1,10 +1,13 @@
 package wish
 
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream
+import helper.Logo
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat
 import java.util.Locale;
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -40,10 +43,25 @@ class WishMailService  implements MessageSourceAware{
 		return returnText
 	}
 
+	
+	List retrieveImages(String text){
+		List images = new ArrayList()
+		Pattern pattern = Pattern.compile("\\[image=(.*?)\\]")
+		Matcher matcher = pattern.matcher(text)
+		while(matcher.find()){
+			Logo logo = Logo.findByName(matcher.group(1))
+			if(logo!=null){
+				images.add(logo)	
+			}
+			
+		}
+		return images
+		
+	}
+	
 	def sendReport(ReportSendConfiguration configuration){
 		
 		try{
-			
 			List mails = new ArrayList()
 			mails.addAll(configuration.contacts*.email)
 			mails.removeAll(Collections.singleton(null))
@@ -59,18 +77,27 @@ class WishMailService  implements MessageSourceAware{
 				if(quantity > 0 && (configuration.sendReport || alertsQuantity>0)){
 					
 					boolean hasSignature = configuration.body.contains("[signature]")
+					List images = retrieveImages(configuration.body)
+										
+					String body = transformText(configuration.body).replace("[signature]","<img src='cid:signature' />")
+					for(image in images){
+						body = body.replace("[image="+image.name+"]", "<img src='cid:image"+image.name.replace(" ", "-")+"' />")
+					}		
 
 					mailService.sendMail {
 						multipart true
 						to mails.toArray()
 						subject transformText(configuration.subject)
-						html transformText(configuration.body).replace("[signature]","<img src='cid:signature' />")
+						html body
 						if(configuration.sendReport)
 							attach(messageSource.getMessage("wish.reportByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStream.bytes)
 						if(alertsQuantity>0)
 							attach(messageSource.getMessage("wish.alertsByStakeholder.label",[configuration.stakeholder.toString(),DATE_FORMAT.format(new Date())].toArray(),configuration.stakeholder.defaultLocale.locale)+".xls",'application/vnd.ms-excel',outputStreamAlerts.bytes)
 						if(hasSignature) 
 							inline('signature','image/jpeg',grailsApplication.mainContext.getResource('/images/logo3.jpg').file)
+						for(image in images){
+							inline('image'+image.name.replace(" ", "-"),image.mimeType,image.image)
+						}
 					}
 					configuration.lastSentDate = new Date()
 				}
