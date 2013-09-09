@@ -120,10 +120,10 @@ tinymce.init({
 
 	<p>	<g:message code="transformText.header.message" default="In subject and body you can use the following variables:" /></p>
 	<p>	<g:message code="transformText.variable.week.message" default="[week] = Number of week in year" /></p>
-	<p>	<g:message code="transformText.variable.signature.message" default="[signature] = Signature (.png)" /></p>
+	<p>	[signature] = <g:img style="height:40px;" dir="images" file="logo3.jpg"/></p>
 	
 	<g:each var="logoInstance" in="${Logo.list()}">
-		<p>${"[image="+logoInstance.name+"]"} <img style="height:40px;" src="${createLink(controller:'logo',action:'viewLogo',id:logoInstance.id)}" /></p> 	
+		<p>${"[image="+logoInstance.name+"]"} = <img style="height:40px;" src="${createLink(controller:'logo',action:'viewLogo',id:logoInstance.id)}" /></p> 	
 	</g:each>
 
 </div>
