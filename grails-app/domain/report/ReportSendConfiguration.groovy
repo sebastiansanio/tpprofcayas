@@ -36,7 +36,7 @@ class ReportSendConfiguration {
 		frequencyInDays nullable:true
 		stakeholder nullable:false
 		subject nullable:false,blank:false
-		body nullable:false,blank:false,maxSize: 1000
+		body nullable:false,blank:false,maxSize: 3000
 		report nullable:false
 		hour nullable:false,blank:false,matches: "^([0-1]?[0-9]|2[0-3]):([0-5][0-9])\$"
 		lastSentDate nullable:true
