@@ -72,7 +72,8 @@ class WishImportService {
 			'BE': 'bill',
 			'BF': 'billDate',
 			'BG': 'hasFeeder',
-			'BH': 'cartonPrintingInfoSentDate'
+			'BH': 'cartonPrintingInfoSentDate',
+			'BI': 'deliveryDate'
 		]
 	]
 
@@ -103,7 +104,7 @@ class WishImportService {
 				['wishDate','estimatedTimeOfDeparture','estimatedTimeOfArrival','djaiFormalizationDate','finishDate',
 					'dateOfMoneyInAdvanceTransfer','djaiExtendedRequested','djaiExtendedExpiration','taxRegistryNumberAndCuitVerification',
 					'swiftReceivedDate','swiftSentToSupplierDate','dateOfBalancePayment','picturesOfPrintingBoxesAndLoadReceived',
-					'picturesOfLoadingContainerReceived','docDraftApproved','billDate','cartonPrintingInfoSentDate'].each{attribute ->
+					'picturesOfLoadingContainerReceived','docDraftApproved','billDate','cartonPrintingInfoSentDate','deliveryDate'].each{attribute ->
 					if(it[attribute] == null)
 						it.remove(attribute)
 					else if(it[attribute] == 'OK')
@@ -119,7 +120,7 @@ class WishImportService {
 				if(wishInstance == null){
 					wishInstance = new Wish()
 				}
-				wishInstance.properties = it	
+				wishInstance.properties = it
 				
 				def customer = Customer.get(it['customer.id'])	
 				if(customer==null)
@@ -131,10 +132,10 @@ class WishImportService {
 
 				customer.addToWishes(wishInstance)
 				customer.save(failOnError:true)
-				
 			}
 
 		}catch(Exception e){
+			log.error(e)
 			throw new RuntimeException(e.getMessage(),e)
 		}finally{
 			file.delete()
