@@ -98,7 +98,7 @@ class Wish {
 		customer nullable:false
 		supplier nullable:false
 		shipper nullable:true
-		productDescription nullable:true,blank:true
+		productDescription nullable:true,blank:true,maxSize:2048
 		supplierOrder nullable:true,blank:true
 		priceCondition nullable:true
 		currency nullable:true
