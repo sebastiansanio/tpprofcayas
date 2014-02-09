@@ -37,6 +37,33 @@
 					
 				</td>
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="ship.billedWishes.label" default="Billed Orders" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${shipInstance.wishes.findAll{it.billDate!=null && it.finishDate==null}.sort{it.opNumber}}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
+					</g:each>
+					</ul>
+					
+					
+				</td>
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="ship.finishedWishes.label" default="Finished Orders" /></td>
+				
+				<td valign="top" style="text-align: left;" class="value">
+					<ul>
+					<g:each in="${shipInstance.wishes.findAll{it.finishDate!=null}.sort{it.opNumber}}" var="w">
+						<li><g:link controller="wish" action="show" id="${w.id}">${w.opNumber + ' - '+w.supplier + ' > '+ w.customer +(w.supplierOrder!=null?' ('+w.supplierOrder+')':'')}</g:link></li>
+					</g:each>
+					</ul>
+					
+				</td>
+			</tr>
 		
 		</tbody>
 	</table>
