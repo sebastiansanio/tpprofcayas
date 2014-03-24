@@ -13,11 +13,16 @@ class User {
 	Date	lastUpdated
 	Stakeholder stakeholder
 	
+	String name
+	int loginAttempts
+	boolean blocked
+	
     static hasMany = [ roles: Role, permissions: String ]
 
     static constraints = {
         username nullable: false, blank: false, unique: true
 		stakeholder nullable:true
+		name nullable:true,blank:true
 		
     }
 	

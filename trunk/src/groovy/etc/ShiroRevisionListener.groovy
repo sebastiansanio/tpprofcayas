@@ -15,8 +15,10 @@ class ShiroRevisionListener implements EntityTrackingRevisionListener{
 	public void newRevision(Object entity){
 		RevisionInformation revisionEntity = (RevisionInformation) entity
 		try{
-			User user = User.findByUsername(SecurityUtils.getSubject().getPrincipal())
-			revisionEntity.currentUser = user
+			if(SecurityUtils.getSubject()?.getPrincipal()!=null){
+				User user = User.findByUsername(SecurityUtils.getSubject().getPrincipal())
+				revisionEntity.currentUser = user
+			}
 		}catch(UnavailableSecurityManagerException ex){
 			
 		}

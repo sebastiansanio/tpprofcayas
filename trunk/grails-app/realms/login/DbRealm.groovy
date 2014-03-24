@@ -11,8 +11,11 @@ class DbRealm {
 
     def credentialMatcher
     def shiroPermissionResolver
+	def grailsApplication
 
     def authenticate(authToken) {
+		int maxLoginAttempts = grailsApplication.config.login.attempts.max
+		
         log.info "Attempting to authenticate ${authToken.username} in DB realm..."
         def username = authToken.username
 
@@ -28,6 +31,10 @@ class DbRealm {
         if (!user) {
             throw new UnknownAccountException("No account found for user [${username}]")
         }
+		
+		if(user.blocked){
+			throw new AccountException("User blocked: "+user.toString())
+		}
 
         log.info "Found user '${user.username}' in DB"
 
@@ -36,8 +43,23 @@ class DbRealm {
         def account = new SimpleAccount(username, user.passwordHash, "DbRealm")
         if (!credentialMatcher.doCredentialsMatch(authToken, account)) {
             log.info "Invalid password (DB realm)"
+			User.withTransaction{			
+				user.loginAttempts = user.loginAttempts + 1
+				if(user.loginAttempts>=maxLoginAttempts){
+					user.loginAttempts = 0
+					user.blocked = true
+				}
+				user.save(flush:true)
+            }
             throw new IncorrectCredentialsException("Invalid password for user '${username}'")
         }
+		
+		if(user.loginAttempts!=0){
+			User.withTransaction{			
+				user.loginAttempts = 0
+				user.save(flush:true)
+            }
+		}
 
         return account
     }

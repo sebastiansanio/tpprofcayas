@@ -26,6 +26,8 @@
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'user.lastUpdated.label', default: 'Last Updated')}" />
 			
+				<g:sortableColumn property="name" title="${message(code: 'user.name.label', default: 'Name')}" />
+
 			
 			</tr>
 		</thead>
@@ -40,8 +42,9 @@
 				<td><g:formatDate date="${userInstance.dateCreated}" /></td>
 			
 				<td><g:formatDate date="${userInstance.lastUpdated}" /></td>
-			
-			
+				
+				<td>${userInstance.name}</td>
+						
 			</tr>
 		</g:each>
 		</tbody>
