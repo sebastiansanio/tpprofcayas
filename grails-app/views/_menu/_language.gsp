@@ -3,17 +3,17 @@
 <ul class="nav secondary-nav language-dropdown pull-right">
 	<li class="dropdown js-language-dropdown">
 		<a href="javascript:;" class="dropdown-toggle">
-			<img class="" src="${resource(plugin: 'kickstart-with-bootstrap', dir: 'images/flags',file: lang.toString()+'.png')}" />
+			<img class="" src="${resource(dir: 'images/flags',file: lang.toString()+'.png')}" />
 		</a>
 		<ul class="dropdown-menu dropdown-menu-dark">
 
 			<li><a class="js-language-link" title="Español" data-lang-code="es" href="${currentURL+'?lang=es'}">
-				<img class="" src="${resource(plugin: 'kickstart-with-bootstrap', dir: 'images/flags',file: 'es.png')}"/>
+				<img class="" src="${resource(dir: 'images/flags',file: 'es.png')}"/>
 				<g:message code="language.es" default="es"/> ${currentlURL }
 			</a></li>
 
 			<li><a class="js-language-link" title="English" data-lang-code="en" href="${currentURL+'?lang=en'}">
-				<img class="" src="${resource(plugin: 'kickstart-with-bootstrap', dir: 'images/flags',file: 'en.png')}"/>
+				<img class="" src="${resource(dir: 'images/flags',file: 'en.png')}"/>
 				<g:message code="language.en" default="en"/> ${currentlURL }
 			</a></li>
 		</ul>

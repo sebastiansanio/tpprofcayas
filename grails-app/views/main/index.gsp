@@ -7,10 +7,9 @@
 
 <body>
 
-<div class="span5">
+<h4><g:message code="welcome.message" args="[user.name?:'']" /></h4>
 
 
-</div>
 
 </body>
 

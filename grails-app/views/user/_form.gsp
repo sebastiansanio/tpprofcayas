@@ -35,3 +35,18 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: userInstance, field: 'name', 'error')} required">
+				<label for="username" class="control-label"><g:message code="user.name.label" default="Name" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:textField name="name" value="${userInstance?.name}"/>
+					<span class="help-inline">${hasErrors(bean: userInstance, field: 'name', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: userInstance, field: 'blocked', 'error')} ">
+				<label for="blocked" class="control-label"><g:message code="user.blocked.label" /></label>
+				<div class="controls">
+					<bs:checkBox name="blocked" value="${userInstance?.blocked}" />
+					<span class="help-inline">${hasErrors(bean: userInstance, field: 'blocked', 'error')}</span>
+				</div>
+			</div>

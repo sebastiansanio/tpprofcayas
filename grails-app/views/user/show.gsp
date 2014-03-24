@@ -45,6 +45,25 @@
 				
 			</tr>
 
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="user.name.label" /></td>
+				
+				<td valign="top" class="value">${userInstance?.name}</td>
+				
+			</tr>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="user.loginAttempts.label" /></td>
+				
+				<td valign="top" class="value">${userInstance?.loginAttempts}</td>
+				
+			</tr>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="user.blocked.label" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${userInstance?.blocked}" /></td>
+				
+			</tr>
+
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="user.roles.label" default="Roles" /></td>

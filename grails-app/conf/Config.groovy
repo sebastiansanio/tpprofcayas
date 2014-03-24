@@ -88,6 +88,8 @@ log4j = {
     
 }
 
+login.attempts.max = 3 
+
 grails.mail.host = "smtp.gmail.com"
 grails.mail.port = 465
 grails.mail.username = "onlinecayas@gmail.com"
