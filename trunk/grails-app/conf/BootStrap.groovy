@@ -402,6 +402,9 @@ class BootStrap {
 				alertType.save(flush:true)
 				alertType = new AlertType(description:"Pedir documentación (etapa 1)",nameOfEstimatedDateField:"estimatedTimeOfArrival",nameOfCompletionField:"firstStageDocumentsOngoing",alertTerm:15,frequency:3)
 				alertType.save(flush:true)
+				alertType = new AlertType(description:"Visado de documentos de etapa 2",nameOfEstimatedDateField:"dateToReceiveSecondStageDocuments",nameOfCompletionField:"visaSecondStageReceivedDate",alertTerm:0,frequency:3)
+				alertType.save(flush:true)
+
 				
 				for(int i = 1;i<=5;i++){
 					Wish wish = new Wish(estimatedTimeOfArrival: new Date().clearTime().plus(30),customsBroker:CustomsBroker.first(),'customer.id':1,'supplier.id':6,opNumber:i,customerOpNumber:i,wishDate:new Date().clearTime())

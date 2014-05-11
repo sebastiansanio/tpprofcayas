@@ -431,5 +431,17 @@ class Wish {
 		return true
 			
 	}
+	
+	Date getDateToReceiveSecondStageDocuments(){
+		if(secondStageRequiredDocuments){
+			for(document in secondStageRequiredDocuments){
+				if(document.requiresVisa()){
+					return estimatedTimeOfArrival?.plus(60)
+				}
+			}
+		}
+		return null
+	}
+	
 
 }
