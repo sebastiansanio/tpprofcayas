@@ -1,18 +1,7 @@
-// locations to search for config files that get merged into the main config;
-// config files can be ConfigSlurper scripts, Java properties files, or classes
-// in the classpath in ConfigSlurper format
+grails.config.locations = [ "classpath:mail-config.properties" ]
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
-
-// if (System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
-
-grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
-grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
+grails.project.groupId = appName 
+grails.mime.file.extensions = true 
 grails.mime.use.accept.header = false
 grails.mime.types = [
     all:           '*/*',
@@ -56,10 +45,8 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
-// request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
-// configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
 environments {
@@ -68,11 +55,9 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
 
-// log4j configuration
 log4j = {
     
 
@@ -92,9 +77,6 @@ login.attempts.max = 3
 
 grails.mail.host = "smtp.gmail.com"
 grails.mail.port = 465
-grails.mail.username = "onlinecayas@gmail.com"
-grails.mail.default.from = "Cayas Online <cayasonline@cayas.com.ar>"
-grails.mail.password = "temamaspapa"
 grails.mail.props = ["mail.transport.protocol":"smtps",
 			 "mail.smtps.host":"smtp.gmail.com",
 			 "mail.smtps.port":"465",
