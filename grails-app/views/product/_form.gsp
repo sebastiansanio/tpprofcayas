@@ -47,7 +47,7 @@
 				<label for="codePerCustomer" class="control-label"><g:message code="product.codePerCustomer.label" default="Code Per Customer" /></label>
 				<div class="controls">
 					
-					<g:render template="codePerCustomerForm" model="['productInstance':productInstance]"/>
+					<g:render template="/_abstractProduct/codePerCustomerForm" model="['productInstance':productInstance]"/>
 
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'codePerCustomer', 'error')}</span>
 				</div>

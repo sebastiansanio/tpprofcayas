@@ -1,0 +1,9 @@
+.picture img {
+	display: block;
+	margin: 10px auto;
+}
+
+.picture a,.picture input {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
