@@ -190,6 +190,7 @@ class BootStrap {
 				def roleOperator = new Role(name:"Operador")
 				roleOperator.addToPermissions("alert:*")
 				roleOperator.addToPermissions("product:*")
+				roleOperator.addToPermissions("aluminum:*")
 				roleOperator.addToPermissions("wish:*")
 				roleOperator.addToPermissions("customer:*")
 				roleOperator.addToPermissions("supplier:*")
