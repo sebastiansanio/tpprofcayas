@@ -27,15 +27,9 @@ class Product extends AbstractProduct {
 	
 	String				status
 		
-	Currency			currency
-	PriceCondition		priceCondition
 	List				previousPrices	
-	BigDecimal			pricePerUnit
 	List				pricePerCustomer
 	
-	Port				port
-	Port				consolidationArea
-
 	Family				family
 	SubFamily			subFamily
 	String				attribute
@@ -59,26 +53,15 @@ class Product extends AbstractProduct {
 	
 	Long				boxesPerPallets
 	Long				piecesPerPallet
-	
-	String				notes
-	
-    static mapping = {
-
-	}
-    
+	    
 	static constraints = {
 		color nullable:true
 		status inList: ["Stock", "Discontinuado"]
-		currency nullable:true
 		family nullable:false
 		subFamily nullable:true
 		typeOfPresentation nullable:true
 		shipper nullable:true
 		tax min:0.00, max:100.00, scale:2, nullable:true
-		priceCondition nullable:true
-		pricePerUnit min:0.0000, scale:4, nullable:true
-		port nullable:true
-		consolidationArea nullable:true
 		country nullable:true
 		criterionValue min:0.0000, scale:4, nullable:true
 		quantityPerCarton min:0L, nullable:true
@@ -92,7 +75,6 @@ class Product extends AbstractProduct {
 		innerBoxHeight min:0.0000, scale:4, nullable:true
 		boxesPerPallets min:0L, nullable:true
 		piecesPerPallet min:0L, nullable:true
-		notes nullable:true, maxSize:512
 	
 		pricePerCustomer(validator: { listPricePerCustomer, obj, errors ->
 			

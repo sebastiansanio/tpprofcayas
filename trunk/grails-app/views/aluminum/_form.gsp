@@ -105,6 +105,38 @@
 					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'unit', 'error')}</span>
 				</div>
 			</div>			
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'currency', 'error')} ">
+				<label for="currency" class="control-label"><g:message code="currency.label" default="Currency" /></label>
+				<div class="controls">
+					<g:select id="currency" name="currency.id" from="${modal.Currency.list()}" optionKey="id" value="${aluminumInstance?.currency?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'currency', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'priceCondition', 'error')} ">
+				<label for="priceCondition" class="control-label"><g:message code="priceCondition.label" default="Price Condition" /></label>
+				<div class="controls">
+					<g:select id="priceCondition" name="priceCondition.id" from="${modal.PriceCondition.list()}" optionKey="id" value="${aluminumInstance?.priceCondition?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'priceCondition', 'error')}</span>
+				</div>
+			</div>
+	
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'port', 'error')} ">
+				<label for="port" class="control-label"><g:message code="port.label" default="Port" /></label>
+				<div class="controls">
+					<g:select id="port" name="port.id" from="${modal.Port.list()}" optionKey="id" value="${aluminumInstance?.port?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'port', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'consolidationArea', 'error')} ">
+				<label for="consolidationArea" class="control-label"><g:message code="product.consolidationArea.label" default="Consolidation Area" /></label>
+				<div class="controls">
+					<g:select id="consolidationArea" name="consolidationArea.id" from="${modal.Port.list()}" optionKey="id" value="${aluminumInstance?.consolidationArea?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'consolidationArea', 'error')}</span>
+				</div>
+			</div>
 		
 			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'externalProfileL', 'error')} ">
 				<label for="externalProfile" class="control-label"><g:message code="aluminum.externalProfileDimension.label" default="External Profile Dimension" /></label>
@@ -210,7 +242,7 @@
 	%>
 
 	/* para manejar la carga de códigos por usuarios */
-	var rowsCode = ${productInstance?.codePerCustomer?.size()} + 0 ;
+	var rowsCode = ${aluminumInstance?.codePerCustomer?.size()} + 0 ;
 
 
 	$(document).ready( function() {

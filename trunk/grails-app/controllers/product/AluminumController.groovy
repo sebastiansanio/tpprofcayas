@@ -25,7 +25,7 @@ class AluminumController {
 
     def save() {
         def aluminumInstance = new Aluminum(params)
-		
+
 		aluminumInstance.moldRemoveElements()
 		aluminumInstance.originalPlaneRemoveElements()
 		
