@@ -36,8 +36,6 @@ class Aluminum extends AbstractProduct {
 	
 	BigDecimal			volumenPerBox
 
-
-	//notes 
     static constraints = {
         cayasCode blank:false, unique:true
         originalPlane nullable:true, inList:[1,2]
@@ -69,6 +67,9 @@ class Aluminum extends AbstractProduct {
 		if ( mold == 2 )
 			return
 		
+		if ( !moldCustomer )
+			return
+		
 		while ( moldCustomer.size() > 0 ) {
 			removeFromMoldCustomer( moldCustomer[0] )
 		}
@@ -76,6 +77,9 @@ class Aluminum extends AbstractProduct {
 	
 	def originalPlaneRemoveElements() {
 		if ( originalPlane == 2 )
+			return
+		
+		if ( !originalPlaneSupplier )
 			return
 		
 		while ( originalPlaneSupplier.size() > 0 ) {

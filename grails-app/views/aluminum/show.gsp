@@ -9,7 +9,6 @@
 	<g:set var="entityName" value="${message(code: 'aluminum.label', default: 'Aluminum')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'aluminum.css')}" />
-
 </head>
 
 <body>
@@ -97,11 +96,11 @@
 						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						    <h3 id="myModalLabel"><g:message code="aluminum.plane.label" default="Plane" /></h3>
 						  </div>
-						  <div class="modal-body">
+						  <div class="modal-body picture">
 								<img src="${createLink(action: 'showPicture', id: aluminumInstance?.plane?.id)}" width="300" height="300"/>
 						  </div>
 						  <div class="modal-footer">
-						    <a href="#showPlane" class="btn" data-dismiss="modal">Close</a>
+						    <a href="#showPlane" class="btn" data-dismiss="modal"><g:message code="default.close.label" default="Close"/></a>
 						  </div>
 						</div>
 					
@@ -149,7 +148,6 @@
 					<g:if test="${aluminumInstance.originalPlane}">
 						<g:message code="aluminum.originalPlane.${aluminumInstance.originalPlane}" default="${aluminumInstance.originalPlane.toString()}"/>
 					</g:if>
-				
 					<ul>
 					<g:each in="${aluminumInstance.originalPlaneSupplier}" var="o">
 						<li><g:link controller="supplier" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></li>

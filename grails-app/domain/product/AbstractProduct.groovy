@@ -1,6 +1,11 @@
 package product
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import modal.Currency;
+import modal.Port;
+import modal.PriceCondition;
 
 import org.hibernate.envers.Audited;
 
@@ -12,7 +17,7 @@ class AbstractProduct {
 	Date	dateCreated
 	Date	lastUpdated
 	
-	static hasMany		= [codePerCustomer: CodePerCustomer] 
+	static hasMany		= [ codePerCustomer: CodePerCustomer ] 
 	
 	String 				descriptionSP
 	String 				descriptionEN
@@ -21,6 +26,13 @@ class AbstractProduct {
 	String				supplierCode
 
 	ItemUnit			unit
+	
+	Currency			currency
+	PriceCondition		priceCondition
+	BigDecimal			pricePerUnit
+	
+	Port				port
+	Port				consolidationArea
 	
 	BigDecimal 			netWeightPerBox
 	BigDecimal 			grossWeightPerBox
@@ -36,6 +48,11 @@ class AbstractProduct {
 		descriptionEN blank:false
 		supplier nullable:true
 		unit  nullable:true
+		currency nullable:true
+		priceCondition nullable:true
+		pricePerUnit min:0.0000, scale:4, nullable:true
+		port nullable:true
+		consolidationArea nullable:true
 		netWeightPerBox min:0.0000, scale:4, nullable:true
 		grossWeightPerBox min:0.0000, scale:4, nullable:true
 		codePerCustomer(validator: { listCodePerCustomer, obj, errors ->
