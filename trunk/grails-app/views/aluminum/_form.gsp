@@ -98,6 +98,14 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'pricePerUnit', 'error')} ">
+				<label for="pricePerUnit" class="control-label"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></label>
+				<div class="controls">
+					<g:field type="number" name="pricePerUnit" step="0.0001" min="0.0000" value="${aluminumInstance.pricePerUnit}"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'pricePerUnit', 'error')}</span>
+				</div>
+			</div>
+			
 			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'unit', 'error')} ">
 				<label for="unit" class="control-label"><g:message code="product.unit.label" default="Unit Of Sale" /></label>
 				<div class="controls">
@@ -135,6 +143,38 @@
 				<div class="controls">
 					<g:select id="consolidationArea" name="consolidationArea.id" from="${modal.Port.list()}" optionKey="id" value="${aluminumInstance?.consolidationArea?.id}" class="many-to-one" noSelection="['null': '']"/>
 					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'consolidationArea', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'shipper', 'error')} ">
+				<label for="shipper" class="control-label"><g:message code="shipper.label" default="Shipper" /></label>
+				<div class="controls">
+					<g:select id="shipper" name="shipper.id" from="${stakeholder.Shipper.list()}" optionKey="id" value="${aluminumInstance?.shipper?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'shipper', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'country', 'error')} ">
+				<label for="country" class="control-label"><g:message code="product.country.label" default="Country" /></label>
+				<div class="controls">
+					<g:select id="country" name="country.id" from="${modal.Country.list()}" optionKey="id" value="${aluminumInstance?.country?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'country', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'criterionValue', 'error')} ">
+				<label for="criterionValue" class="control-label"><g:message code="product.criterionValue.label" default="Criterion Value" /></label>
+				<div class="controls">
+					<g:field type="number" name="criterionValue" step="0.0001" min="0.0000" value="${aluminumInstance.criterionValue}"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'criterionValue', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'tax', 'error')} ">
+				<label for="tax" class="control-label"><g:message code="product.tax.label" default="Tax" /></label>
+				<div class="controls">
+					<g:field type="number" name="tax" step="0.01" min="0.00" max="100.00" value="${aluminumInstance.tax}"/>
+					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'tax', 'error')}</span>
 				</div>
 			</div>
 		

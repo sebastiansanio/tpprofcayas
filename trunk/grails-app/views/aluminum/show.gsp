@@ -171,6 +171,8 @@
 				
 			</tr>
 
+			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': aluminumInstance]"/>
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.unit.label" default="Unit" /></td>
 				
@@ -179,10 +181,73 @@
 			</tr>
 
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="currency.label" default="Currency" /></td>
+				
+				<td valign="top" class="value"><g:link controller="currency" action="show" id="${aluminumInstance?.currency?.id}">${aluminumInstance?.currency?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="priceCondition.label" default="Price Condition" /></td>
+				
+				<td valign="top" class="value"><g:link controller="priceCondition" action="show" id="${aluminumInstance?.priceCondition?.id}">${aluminumInstance?.priceCondition?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="port.label" default="Port" /></td>
+				
+				<td valign="top" class="value"><g:link controller="port" action="show" id="${aluminumInstance?.port?.id}">${aluminumInstance?.port?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.consolidationArea.label" default="Consolidation Area" /></td>
+				
+				<td valign="top" class="value"><g:link controller="port" action="show" id="${aluminumInstance?.consolidationArea?.id}">${aluminumInstance?.consolidationArea?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="shipper.label" default="Shipper" /></td>
+				
+				<td valign="top" class="value"><g:link controller="shipper" action="show" id="${aluminumInstance?.shipper?.id}">${aluminumInstance?.shipper?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.country.label" default="Country Of Origin" /></td>
+				
+				<td valign="top" class="value"><g:link controller="country" action="show" id="${aluminumInstance?.country?.id}">${aluminumInstance?.country?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.countryProvenance.label" default="Country Of Provenance" /></td>
+				
+				<td valign="top" class="value"><g:link controller="country" action="show" id="${aluminumInstance?.supplier?.country?.id}">${aluminumInstance?.supplier?.country?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.criterionValue.label" default="Criterion Value" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: aluminumInstance, field: "criterionValue")}</td>
+				
+			</tr>
+				
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.tax.label" default="Tax" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: aluminumInstance, field: "tax")}</td>
+				
+			</tr>
+						
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="aluminum.externalProfileDimension.label" default="External Profile Dimension" /></td>
 				
 				<td valign="top" class="value">
-					<g:if test="${aluminumInstance.externalProfileL == null || aluminumInstance.externalProfileL == externalProfileW }">
+					<g:if test="${aluminumInstance.externalProfileL == null || aluminumInstance.externalProfileW == null }">
 						${fieldValue(bean: aluminumInstance, field: "externalProfileL")} ${fieldValue(bean: aluminumInstance, field: "externalProfileW")}
 					</g:if>
 					<g:else>
