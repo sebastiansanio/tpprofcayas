@@ -89,31 +89,7 @@
 				
 			</tr>
 			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.previousPrices.label" default="Previous Price" /></td>
-				
-				<td valign="top" class="value"> 
-					
-						<g:if test="${productInstance?.previousPrices?.size() > 1 }">
-							<g:link action="listHistoricalPrice"  id="${productInstance?.id}">
-							${productInstance?.previousPrices?.get( productInstance?.previousPrices?.size() - 2 )}
-							</g:link>
-						</g:if>
-
-				</td>
-				
-			</tr>
-			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
-				
-				<td valign="top" class="value">
-					<g:if test="${productInstance?.previousPrices?.size() != 0 }">
-						${productInstance?.previousPrices?.last()}
-					</g:if>
-				</td>
-				
-			</tr>
+			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': productInstance]"/>
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
@@ -337,14 +313,7 @@
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "piecesPerPallet")}</td>
 				
 			</tr>
-				
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="product.notes.label" default="Notes" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "notes")}</td>
-				
-			</tr>
-											
+									
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.dateCreated.label" default="Date Created" /></td>
 				

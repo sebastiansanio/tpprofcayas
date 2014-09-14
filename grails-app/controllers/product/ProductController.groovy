@@ -19,6 +19,7 @@ class ProductController {
 	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	def productImportService
 	def productExportService
+	def abstractProductService
 	
     def index() {
         redirect(action: "list", params: params)
@@ -38,11 +39,7 @@ class ProductController {
     def save() {
         def productInstance = new Product(params)
 		
-		if ( productInstance.pricePerUnit != null )
-			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
-		
-		if ( productInstance.country == null && productInstance.supplier != null )
-			productInstance.country = productInstance.supplier.country
+		productInstance.addHistoricalPriceNewInstance()
 					
         if (!productInstance.save(flush: true)) {
             render(view: "create", model: [productInstance: productInstance])
@@ -71,11 +68,8 @@ class ProductController {
             redirect(action: "list")
             return
         }
-
-		if ( productInstance?.previousPrices?.size() == 0 )
-			productInstance.pricePerUnit = null
-		else
-			productInstance.pricePerUnit = productInstance?.previousPrices?.last().price
+				
+		productInstance.pricePerUnit = productInstance.getPreviousPrice()
 		
         [productInstance: productInstance]
     }
@@ -103,11 +97,7 @@ class ProductController {
 		def previousPrices = productInstance.pricePerUnit
         productInstance.properties = params
 
-		if ( productInstance.pricePerUnit != null && previousPrices != productInstance.pricePerUnit ) 
-			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
-
-		if ( productInstance.country == null && productInstance.supplier != null )
-			productInstance.country = productInstance.supplier.country
+		productInstance.addHistoricalPrice(previousPrices)
 			
         if (!productInstance.save(flush: true)) {
             render(view: "edit", model: [productInstance: productInstance])
@@ -195,7 +185,7 @@ class ProductController {
 	@Transactional
 	def deleteCodePerCustomer() {
 		
-		def productInstance = Product.get(params.productId)
+		def productInstance = AbstractProduct.get(params.productId)
 		def codePerCustomerInstance = CodePerCustomer.get(params.codePerCustomerId)
 		
 		if (!codePerCustomerInstance) {
@@ -249,13 +239,7 @@ class ProductController {
 	}
 	
 	def listHistoricalPrice() {
-
-			def historicalPrice = HistoricalPrice.withCriteria {
-				eq("product.id", params.id.toLong())
-				order "dateFrom", "desc"
-			}.asList()
-		
-		[historicalPriceInstanceList: historicalPrice, idProduct: params.id]
+		render ( view:"/_abstractProduct/listHistoricalPrice", model:[historicalPriceInstanceList: abstractProductService.getHistoricalPriceList(params.id.toLong()), idProduct: params.id])
 	}
 	
 	@Transactional

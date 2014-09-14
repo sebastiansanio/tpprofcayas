@@ -86,4 +86,15 @@ class Aluminum extends AbstractProduct {
 			removeFromOriginalPlaneSupplier( originalPlaneSupplier[0] )
 		}
 	}
+	
+	def beforeInsert() {
+		moldRemoveElements()
+		originalPlaneRemoveElements()
+		addHistoricalPriceNewInstance()
+	}
+	
+	def beforeUpdate() {
+		moldRemoveElements()
+		originalPlaneRemoveElements()
+	}
 }

@@ -19,7 +19,7 @@ class Product extends AbstractProduct {
 	static final Integer UNITS_PER_CONTAINER_WEIGHT = 25500
 	static final Integer UNITS_PER_CONTAINER_VOLUME = 27
 		
-	static hasMany		= [loadsUnits: LoadUnit, pricePerCustomer: PricePerCustomer, previousPrices: HistoricalPrice]
+	static hasMany		= [loadsUnits: LoadUnit, pricePerCustomer: PricePerCustomer]
 	
 	Color 				color
 		
@@ -27,18 +27,13 @@ class Product extends AbstractProduct {
 	
 	String				status
 		
-	List				previousPrices	
 	List				pricePerCustomer
 	
 	Family				family
 	SubFamily			subFamily
 	String				attribute
 	TypeOfPresentation	typeOfPresentation
-	Shipper				shipper
-	Country				country
-	BigDecimal			criterionValue
 	String				hsCode
-	BigDecimal			tax //serían los derechos
 	
 	Long				quantityPerCarton
 	Long				innerBoxQuantity
@@ -60,10 +55,6 @@ class Product extends AbstractProduct {
 		family nullable:false
 		subFamily nullable:true
 		typeOfPresentation nullable:true
-		shipper nullable:true
-		tax min:0.00, max:100.00, scale:2, nullable:true
-		country nullable:true
-		criterionValue min:0.0000, scale:4, nullable:true
 		quantityPerCarton min:0L, nullable:true
 		innerBoxQuantity min:0L, nullable:true
 		articlesQuantityPerInnerBox min:0L, nullable:true
