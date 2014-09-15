@@ -1,4 +1,5 @@
-<%@ page import="wish.Wish" %>
+<h4> <g:message code="notes.label" default="Notes"/> </h4>
+
 <div class="row-fluid">
 
 <div class="span11">

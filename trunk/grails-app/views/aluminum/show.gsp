@@ -9,6 +9,8 @@
 	<g:set var="entityName" value="${message(code: 'aluminum.label', default: 'Aluminum')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'aluminum.css')}" />
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'noteStyle.css')}" />
+
 </head>
 
 <body>
@@ -333,7 +335,15 @@
 				<td valign="top" class="value">${fieldValue(bean: aluminumInstance, field: "volumenPerBox")}</td>
 				
 			</tr>
-						
+		
+		</tbody>
+	</table>
+
+	<g:render template="/_note/noteShow" model="['notes':aluminumInstance?.notes]"/>
+
+	<table class="table">
+		<tbody>
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="aluminum.dateCreated.label" default="Date Created" /></td>
 				
@@ -346,7 +356,7 @@
 				
 				<td valign="top" class="value"><g:formatDate date="${aluminumInstance?.lastUpdated}" /></td>
 				
-			</tr>			
+			</tr>	
 		
 		</tbody>
 	</table>
