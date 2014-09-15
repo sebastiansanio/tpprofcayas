@@ -1,5 +1,4 @@
 package product
-import wish.Note;
 
 class AbstractProductService {
 

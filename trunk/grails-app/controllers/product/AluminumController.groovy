@@ -28,9 +28,6 @@ class AluminumController {
     def save() {
         def aluminumInstance = new Aluminum(params)
 
-        println "notas: ${params.notes?.size()}"
-        println "notas: ${aluminumInstance?.notes?.size()}"
-
         if (!aluminumInstance.save(flush: true)) {
             render(view: "create", model: [aluminumInstance: aluminumInstance])
             return
@@ -87,9 +84,6 @@ class AluminumController {
         aluminumInstance.properties = params
 		
 		aluminumInstance.addHistoricalPrice(previousPrices)
-		
-		println "${aluminumInstance.originalPlane}"
-		println "${aluminumInstance.mold}"
 
         if (!aluminumInstance.save(flush: true)) {
             render(view: "edit", model: [aluminumInstance: aluminumInstance])
