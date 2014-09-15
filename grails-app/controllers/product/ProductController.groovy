@@ -265,4 +265,28 @@ class ProductController {
 			redirect(action: "listHistoricalPrice", id: params.idProduct)
 		}
 	}
+	
+	@Transactional
+	def deleteNote(){
+		def noteInstance = ProductNote.get(params.id)
+		
+		if (!noteInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.containerId)
+			return
+		}
+
+		try {
+			noteInstance.product.removeFromNotes( noteInstance )
+			noteInstance.delete(flush:true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			
+			def text = "/product/edit/" + params.containerId + "#notesChildList"
+			redirect(uri: text)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.containerId)
+		}
+	}
 }

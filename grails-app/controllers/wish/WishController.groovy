@@ -532,12 +532,12 @@ class WishController {
 	
 	@Transactional
 	def deleteNote(){
-		def wishInstance = Wish.get(params.noteWishId)
+		def wishInstance = Wish.get(params.containerId)
 		def noteInstance = Note.get(params.id)
 		
 		if (!noteInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'note.label', default: 'Note'), params.id])
-			redirect(action: "edit", id: params.noteWishId)
+			redirect(action: "edit", id: params.containerId)
 			return
 		}
 
@@ -547,12 +547,12 @@ class WishController {
 			noteInstance.delete(flush:true)
 			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
 			
-			def text = "/wish/edit/" + params.noteWishId + "#notesChildList"
+			def text = "/wish/edit/" + params.containerId + "#notesChildList"
 			redirect(uri: text)
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
-			redirect(action: "edit", id: params.noteWishId)
+			redirect(action: "edit", id: params.containerId)
 		}
 	}
 }

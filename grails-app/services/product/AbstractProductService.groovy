@@ -1,4 +1,5 @@
 package product
+import wish.Note;
 
 class AbstractProductService {
 
@@ -11,6 +12,5 @@ class AbstractProductService {
 			order "dateFrom", "desc"
 		}.asList()
 	}
-	
-	
+		
 }

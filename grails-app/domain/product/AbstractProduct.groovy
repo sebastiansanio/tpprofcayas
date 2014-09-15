@@ -18,7 +18,7 @@ class AbstractProduct {
 	Date	dateCreated
 	Date	lastUpdated
 	
-	static hasMany		= [ codePerCustomer: CodePerCustomer, previousPrices: HistoricalPrice ] 
+	static hasMany		= [ codePerCustomer: CodePerCustomer, previousPrices: HistoricalPrice, notes: ProductNote ] 
 	
 	String 				descriptionSP
 	String 				descriptionEN
@@ -45,6 +45,8 @@ class AbstractProduct {
 	BigDecimal 			grossWeightPerBox
 
 	List				codePerCustomer
+	
+	List 				notes
 	
     static mapping = {
     	tablePerHierarchy false    	

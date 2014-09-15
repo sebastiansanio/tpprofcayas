@@ -659,11 +659,7 @@
 		</tbody>
 	</table>
 			
-	<h4> <g:message code="wish.notes.label" default="Notes"/> </h4>
-
-
-	<g:render template="notesShow" model="['notes':wishInstance.notes]"/>
-
+	<g:render template="/_note/noteShow" model="['notes':wishInstance?.notes]"/>
 	
 	<h4> <g:message code=" " default=" "/> </h4>
 											

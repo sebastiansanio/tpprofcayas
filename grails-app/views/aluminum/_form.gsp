@@ -269,6 +269,8 @@
 				</div>
 			</div>
 
+			<g:render template="/_note/noteForm" model="['notes': aluminumInstance?.notes, 'notesCount': aluminumInstance?.notes?.size(), 'id': aluminumInstance?.id]"/>
+
 <script type="text/javascript">
 		
 	/* cargar clientes */

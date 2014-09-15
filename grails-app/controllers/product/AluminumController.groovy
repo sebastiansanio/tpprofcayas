@@ -28,6 +28,9 @@ class AluminumController {
     def save() {
         def aluminumInstance = new Aluminum(params)
 
+        println "notas: ${params.notes?.size()}"
+        println "notas: ${aluminumInstance?.notes?.size()}"
+
         if (!aluminumInstance.save(flush: true)) {
             render(view: "create", model: [aluminumInstance: aluminumInstance])
             return
@@ -85,6 +88,9 @@ class AluminumController {
 		
 		aluminumInstance.addHistoricalPrice(previousPrices)
 		
+		println "${aluminumInstance.originalPlane}"
+		println "${aluminumInstance.mold}"
+
         if (!aluminumInstance.save(flush: true)) {
             render(view: "edit", model: [aluminumInstance: aluminumInstance])
             return
@@ -239,6 +245,30 @@ class AluminumController {
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'codePerCustomer.label', default: 'Code Per Customer'), params.codePerCustomerId])
 			redirect(action: "edit", id: params.productId)
+		}
+	}
+	
+	@Transactional
+	def deleteNote(){
+		def noteInstance = ProductNote.get(params.id)
+		
+		if (!noteInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.containerId)
+			return
+		}
+
+		try {
+			noteInstance.product.removeFromNotes( noteInstance )
+			noteInstance.delete(flush:true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			
+			def text = "/aluminum/edit/" + params.containerId + "#notesChildList"
+			redirect(uri: text)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
+			redirect(action: "edit", id: params.containerId)
 		}
 	}
 }

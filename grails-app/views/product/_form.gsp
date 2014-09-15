@@ -307,7 +307,8 @@
 				</div>
 			</div>
 						
-			
+			<g:render template="/_note/noteForm" model="['notes': productInstance?.notes, 'notesCount': productInstance?.notes?.size(), 'id': productInstance?.id]"/>
+						
 <script type="text/javascript">
 
 	/* para la familia */
