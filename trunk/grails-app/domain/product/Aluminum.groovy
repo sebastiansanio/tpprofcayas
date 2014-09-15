@@ -1,8 +1,6 @@
 package product
 
-import org.hibernate.envers.Audited;
-import org.springframework.aop.aspectj.RuntimeTestWalker.ThisInstanceOfResidueTestVisitor;
-
+import org.hibernate.envers.Audited
 import stakeholder.*
 
 @Audited
@@ -66,12 +64,9 @@ class Aluminum extends AbstractProduct {
 	def moldRemoveElements() {
 		if ( mold == 2 )
 			return
-		
-		if ( !moldCustomer )
-			return
-		
-		while ( moldCustomer.size() > 0 ) {
-			removeFromMoldCustomer( moldCustomer[0] )
+			
+		while ( moldCustomer?.size() > 0 ) {
+			removeFromMoldCustomer( moldCustomer.first() )
 		}
 	}
 	
@@ -79,11 +74,8 @@ class Aluminum extends AbstractProduct {
 		if ( originalPlane == 2 )
 			return
 		
-		if ( !originalPlaneSupplier )
-			return
-		
-		while ( originalPlaneSupplier.size() > 0 ) {
-			removeFromOriginalPlaneSupplier( originalPlaneSupplier[0] )
+		while ( originalPlaneSupplier?.size() > 0 ) {
+			removeFromOriginalPlaneSupplier( originalPlaneSupplier.first() )
 		}
 	}
 	
