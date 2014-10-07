@@ -290,7 +290,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="aluminum.weightPC.label" default="Weight x PC" /></td>
 				
-				<td valign="top" class="value">${aluminumInstance.weightPCS()}</td>
+				<td valign="top" class="value">${aluminumInstance.weightPCS}</td>
 				
 			</tr>
 					

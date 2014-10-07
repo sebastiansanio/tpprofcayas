@@ -56,6 +56,7 @@ class AbstractProduct {
 		descriptionSP blank:false
 		descriptionEN blank:false
 		supplier nullable:true
+		supplierCode blank:true, nullable:true 
 		unit  nullable:true
 		currency nullable:true
 		priceCondition nullable:true

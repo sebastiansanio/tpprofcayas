@@ -49,17 +49,25 @@ class Aluminum extends AbstractProduct {
 		length min:0.0000, scale:4, nullable:true
 		theoricalWeight min:0.0000, scale:4, nullable:true
 		realWeight min:0.0000, scale:4, nullable:true
-		pcsBundle min: 0, nullable:true
+		pcsBundle min:1
 		articlesPerContainer min:0, nullable:true
 		volumenPerBox min:0.0000, scale:4, nullable:true
     }
     
-    def weightPCS() {
+    def getWeightPCS() {
 		if ( !length || !theoricalWeight ) 
 			return null
 			
         return length * theoricalWeight
     }
+	
+	def getCBMPerBundle() {
+		return sectionalW/1000 * sectionalL/1000 * length
+	}
+	
+	def getTheoreticalWeightOfPerBundle() {
+		return weightPCS * pcsBundle
+	}
 	
 	def moldRemoveElements() {
 		if ( mold == 2 )
