@@ -17,17 +17,12 @@
 		<thead>
 			<tr>
 			
+				<g:sortableColumn property="cayasCode" title="${message(code: 'aluminum.cayasCode.label', default: 'Cayas Code')}" />
+			
 				<g:sortableColumn property="descriptionSP" title="${message(code: 'aluminum.descriptionSP.label', default: 'Description SP')}" />
-			
-				<g:sortableColumn property="descriptionEN" title="${message(code: 'aluminum.descriptionEN.label', default: 'Description EN')}" />
-			
+						
 				<th><g:message code="aluminum.supplier.label" default="Supplier" /></th>
 			
-				<g:sortableColumn property="netWeightPerBox" title="${message(code: 'aluminum.netWeightPerBox.label', default: 'Net Weight Per Box')}" />
-			
-				<g:sortableColumn property="grossWeightPerBox" title="${message(code: 'aluminum.grossWeightPerBox.label', default: 'Gross Weight Per Box')}" />
-			
-				<g:sortableColumn property="cayasCode" title="${message(code: 'aluminum.cayasCode.label', default: 'Cayas Code')}" />
 			
 			</tr>
 		</thead>
@@ -35,18 +30,12 @@
 		<g:each in="${aluminumInstanceList}" status="i" var="aluminumInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${aluminumInstance.id}">${fieldValue(bean: aluminumInstance, field: "descriptionSP")}</g:link></td>
-			
-				<td>${fieldValue(bean: aluminumInstance, field: "descriptionEN")}</td>
-			
-				<td>${fieldValue(bean: aluminumInstance, field: "supplier")}</td>
-			
-				<td>${fieldValue(bean: aluminumInstance, field: "netWeightPerBox")}</td>
-			
-				<td>${fieldValue(bean: aluminumInstance, field: "grossWeightPerBox")}</td>
-			
 				<td>${fieldValue(bean: aluminumInstance, field: "cayasCode")}</td>
 			
+				<td><g:link action="show" id="${aluminumInstance.id}">${fieldValue(bean: aluminumInstance, field: "descriptionSP")}</g:link></td>
+					
+				<td>${fieldValue(bean: aluminumInstance, field: "supplier")}</td>
+						
 			</tr>
 		</g:each>
 		</tbody>

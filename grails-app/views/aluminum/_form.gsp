@@ -189,10 +189,10 @@
 				</div>
 			</div>
 					
-			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'pcsBundle', 'error')} ">
-				<label for="pcsBundle" class="control-label"><g:message code="aluminum.pcsBundle.label" default="Pcs Bundle" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'pcsBundle', 'error')} required">
+				<label for="pcsBundle" class="control-label"><g:message code="aluminum.pcsBundle.label" default="Pcs Bundle" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:field type="number" name="pcsBundle" min="0" value="${aluminumInstance.pcsBundle}"/>
+					<g:field type="number" name="pcsBundle" required="" min="0" value="${aluminumInstance.pcsBundle}"/>
 					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'pcsBundle', 'error')}</span>
 				</div>
 			</div>
