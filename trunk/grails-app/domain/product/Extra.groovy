@@ -15,9 +15,8 @@ class Extra {
     }
 	
 	def getTotal(Aluminum aluminum) {
-		/* en el caso de hacer referencia a una propiedad del aluminio
-		agrego el texto 'aluminum' para obtener el valor correspondiente
-		del objeto recibido por parámetro*/
+		/* busco una referencia a una propiedad del aluminio para
+		obtener el valor correspondiente del objeto recibido por parámetro*/
 		def equationAdapt = this.equation?.replaceAll(/([^\$]*)\$\{([^\}]+)\}/) {
             def property = aluminum."${it[2]}"
             "${it[1]}${property}"

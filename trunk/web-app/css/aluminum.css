@@ -7,3 +7,21 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.subtotalResult {
+	font-weight: bolder;
+	font-size: 16px;
+	border: 2px grey solid;	
+}
+table.extras {
+	width: 100%;
+}
+table.extras tr td:nth-child(1) {
+	width: 85%;
+}
+table.extras tr td:nth-child(2) {
+	width: 15%;
+}
+.text-right {
+	text-align: right !important;
+}
