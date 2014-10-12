@@ -8,6 +8,8 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'aluminumWish.label', default: 'AluminumWish')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'aluminum.css')}" />
+	
 </head>
 
 <body>
