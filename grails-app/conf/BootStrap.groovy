@@ -191,6 +191,11 @@ class BootStrap {
 				roleOperator.addToPermissions("alert:*")
 				roleOperator.addToPermissions("product:*")
 				roleOperator.addToPermissions("aluminum:*")
+				
+				roleOperator.addToPermissions("extra:*")
+				roleOperator.addToPermissions("aluminumSubWish:*")
+				roleOperator.addToPermissions("aluminumWish:*")
+				
 				roleOperator.addToPermissions("wish:*")
 				roleOperator.addToPermissions("customer:*")
 				roleOperator.addToPermissions("supplier:*")
@@ -449,6 +454,29 @@ class BootStrap {
 				alertManagerService.checkAllAlerts()
 				alertManagerService.generateAllAlerts()
 				
+				
+				/* extras del perfil de aluminio */
+				def extra = new Extra( description: "Fabrication Fee (by Net weight) // MAT SILVER ANODIZED 10 MICRONS // 6063-T5 // including estándar packing material", equation: "900")
+				extra.save()
+									
+				//FOB fee USD 40 (1x40) / USD 70 (1x20) (10-12 tn)	
+				//Precise cutting fee (less than 3.5mtl / more than 2mtl // U$S 200 / Precision of +/-5mm
+				 	
+				//Precise cutting fee with Precision of +/-1mm = U$S 0,163 por corte	
+				//
+				extra = new Extra( description: "Rack marks cut off at one end of profiles due to upright anodized proccess", equation: "150")
+				extra.save()
+				
+				extra = new Extra ( description: "Weight Less than 0.20kg/m", equation: "if (\${theoricalWeight} < 0.20) \n 150 \n else \n 0 " )
+				extra.save()
+				
+				extra = new Extra( description: "TAP - plastic film // stick plastic film on exposed surface", equation: "150")	
+				extra.save(flush:true)
+				
+				def aluminum = new Aluminum( descriptionSP: "PERFIL INFERIOR - 1 version de conjunto", descriptionEN: "PERFIL INFERIOR - 1 version de conjunto", cayasCode: "CY-019", pcsBundle:3)
+				aluminum.save()
+				aluminum = new Aluminum( descriptionSP: "Tapa canto liviano / fino", descriptionEN: "Tapa canto liviano / fino", cayasCode: "CY-029", pcsBundle:3)
+				aluminum.save(flush:true)
 			}
 		}
 	}
