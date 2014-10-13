@@ -22,7 +22,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="aluminumWish.lintongx.label" default="Lintongx" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: aluminumWishInstance, field: "lintongx")}</td>
+				<td valign="top" class="text-right">${fieldValue(bean: aluminumWishInstance, field: "lintongx")}</td>
 				
 			</tr>
 		
