@@ -27,14 +27,20 @@ class AluminumWishController {
 	
 		def aluminumWishInstance = new AluminumWish(params)
 
-		def subwishNumber = 0	
+		def subwishNumber = 0
 		aluminumWishInstance.subWish.each { subwish ->
 			def extras = params.list('subWish[' + subwishNumber + '].extras.id') as List
-			
+			def subtotalExtras = params.list('subWish[' + subwishNumber + '].subtotalExtras.id') as List
+
 			extras.each { idExtra ->
 				def extra = product.Extra.get( idExtra.toLong() )
 				subwish.addToExtras( extra )
 			}
+
+            subtotalExtras.each { idExtra ->
+                def extra = SubtotalExtra.get( idExtra.toLong() )
+                subwish.addToSubtotalExtras( extra )
+            }
 			
 			subwishNumber++
 		}
@@ -96,14 +102,21 @@ class AluminumWishController {
 		def subwishNumber = 0
 		aluminumWishInstance.subWish.each { subwish ->
 			def extras = params.list('subWish[' + subwishNumber + '].extras.id') as List
-			
-			subwish.extras.clear()
-			
-			extras.each { idExtra ->
-				def extra = product.Extra.get( idExtra.toLong() )
-				subwish.addToExtras( extra )
-			}
-			
+            def subtotalExtras = params.list('subWish[' + subwishNumber + '].subtotalExtras.id') as List
+            
+            subwish.extras.clear()
+            subwish.subtotalExtras.clear()
+            
+            extras.each { idExtra ->
+                def extra = product.Extra.get( idExtra.toLong() )
+                subwish.addToExtras( extra )
+            }
+            
+            subtotalExtras.each { idExtra ->
+                def extra = SubtotalExtra.get( idExtra.toLong() )
+                subwish.addToSubtotalExtras( extra )
+            }
+
 			subwishNumber++
 		}
 		

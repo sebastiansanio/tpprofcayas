@@ -11,7 +11,12 @@
 .subtotalResult {
 	font-weight: bolder;
 	font-size: 16px;
-	border: 2px grey solid;	
+	border: 1.5px rgba(128, 128, 128, 0.18) solid;	
+}
+.totalResult {
+	font-weight: bolder;
+	font-size: 18px;
+	border: 1.5px rgba(128, 128, 128, 0.18) solid;	
 }
 table.extras {
 	width: 100%;

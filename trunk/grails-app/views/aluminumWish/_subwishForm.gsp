@@ -41,5 +41,13 @@
 					<span class="help-inline">${hasErrors(bean: subWish, field: 'extras', 'error')}</span>
 				</div>
 			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: subWish, field: 'subtotalExtras', 'error')} ">
+				<label for="subtotalExtras" class="control-label"><g:message code="aluminumSubWish.subtotalExtra.label" default="Subtotal Extra" /></label>
+				<div class="controls">
+					<g:select name="subWish[${number}].subtotalExtras.id" from="${wish.SubtotalExtra.list()}" multiple="multiple" optionKey="id" size="5" value="${subWish?.subtotalExtras*.id}" class="many-to-many subwishElement"/>	
+					<span class="help-inline">${hasErrors(bean: subWish, field: 'subtotalExtras', 'error')}</span>
+				</div>
+			</div>			
 		</div>
 	</div>

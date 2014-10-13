@@ -193,7 +193,6 @@ class BootStrap {
 				roleOperator.addToPermissions("aluminum:*")
 				
 				roleOperator.addToPermissions("extra:*")
-				roleOperator.addToPermissions("aluminumSubWish:*")
 				roleOperator.addToPermissions("aluminumWish:*")
 				
 				roleOperator.addToPermissions("wish:*")
@@ -472,6 +471,10 @@ class BootStrap {
 				
 				extra = new Extra( description: "TAP - plastic film // stick plastic film on exposed surface", equation: "150")	
 				extra.save(flush:true)
+				
+				/* extras sobre el subtotal del pedido de un perfil de aluminio */
+				def extraSobreSubtotal = new SubtotalExtra( description: "5,5%  chargue for export cost", equation: '(${subtotal}/0.945)-${subtotal}')
+				extraSobreSubtotal.save(flush:true)
 				
 				def aluminum = new Aluminum( descriptionSP: "PERFIL INFERIOR - 1 version de conjunto", descriptionEN: "PERFIL INFERIOR - 1 version de conjunto", cayasCode: "CY-019", pcsBundle:3)
 				aluminum.save()
