@@ -191,10 +191,7 @@ class BootStrap {
 				roleOperator.addToPermissions("alert:*")
 				roleOperator.addToPermissions("product:*")
 				roleOperator.addToPermissions("aluminum:*")
-				
-				roleOperator.addToPermissions("extra:*")
-				roleOperator.addToPermissions("aluminumWish:*")
-				
+				roleOperator.addToPermissions("aluminumWish:*")				
 				roleOperator.addToPermissions("wish:*")
 				roleOperator.addToPermissions("customer:*")
 				roleOperator.addToPermissions("supplier:*")
@@ -227,6 +224,8 @@ class BootStrap {
 				roleManager.addToPermissions("typeOfPresentation:*")
 				roleManager.addToPermissions("itemUnit:*")
 				roleManager.addToPermissions("logo:*")
+				roleManager.addToPermissions("extra:*")
+				roleManager.addToPermissions("subtotalExtra:*")				
 				roleManager.save(flush:true)
 				
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
