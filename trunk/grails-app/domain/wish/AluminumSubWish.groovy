@@ -9,7 +9,7 @@ import product.Aluminum;
 class AluminumSubWish {
 
 	static belongsTo	= [ wish: AluminumWish ]
-	static hasMany		= [ extras: Extra, subtotalExtras: SubtotalExtra ]
+	static hasMany		= [ extras: Extra ]
 
 	Aluminum		aluminum
 	Long			quantityPCS
@@ -68,7 +68,7 @@ class AluminumSubWish {
 		
 		def total = getSubtotal()
 		
-		subtotalExtras.each {
+		wish.subtotalExtras.each {
 			total += it.getTotal( this )
 		}
 		
