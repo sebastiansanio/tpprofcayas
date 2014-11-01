@@ -38,12 +38,7 @@
 			<td> Subtotal </td>
 			<td class="text-right"> <g:formatNumber number="${aluminumSubWishInstance.getSubtotal()}" type="number" maxFractionDigits="2" />  </td>
 		</tr>
-		<g:each in="${aluminumSubWishInstance.subtotalExtras}" var="extra">
-		<tr>
-			<td> <g:link controller="subtotalExtra" action="show" id="${extra.id}">${extra?.encodeAsHTML()}</g:link> </td>
-			<td class="text-right"> <g:formatNumber number="${extra.getTotal(aluminumSubWishInstance)}" type="number" maxFractionDigits="2" /> </td>
-		</tr>
-		</g:each>
+
 		<tr class="totalResult">
 			<td> <g:message code="aluminumSubWish.totalFob.label" default="Total U\$S FOB x KG including packing material"/>   </td>
 			<td class="text-right"> <g:formatNumber number="${aluminumSubWishInstance.getTotal()/1000}" type="number" maxFractionDigits="4" />  </td>

@@ -130,8 +130,7 @@ class AluminumController {
 		def f = request.getFile('pictureFile')
 		if (f.empty) {
 			flash.message = message(code:"aluminum.picture.empty", default:'File cannot be empty') 
-			redirect(action: "show", id: params.idAluminum)
-			
+			redirect(action: "show", id: params.idAluminum)	
 			return
 		}
 				
@@ -146,6 +145,7 @@ class AluminumController {
 
 		aluminum.picture = new AluminumPicture()
 		aluminum.picture.image = f.bytes
+		aluminum.picture.fileName = f.originalFilename
 
 		if (!aluminum.picture.save()) {
 		  redirect()(view:'show', model:[aluminumInstance: aluminum] )

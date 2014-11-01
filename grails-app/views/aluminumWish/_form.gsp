@@ -1,6 +1,22 @@
 <%@ page import="wish.AluminumWish" %>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumWishInstance, field: 'code', 'error')} required">
+				<label for="code" class="control-label"><g:message code="aluminumWish.code.label" default="Code" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:field type="text" name="code" required="" value="${aluminumWishInstance.code}"/>
+					<span class="help-inline">${hasErrors(bean: aluminumWishInstance, field: 'code', 'error')}</span>
+				</div>
+			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumWishInstance, field: 'customer', 'error')} required">
+				<label for="customer" class="control-label"><g:message code="aluminumWish.customer.label" default="Customer" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+
+					<g:select id="customer" name="customer.id" from="${stakeholder.Customer.list()}" optionKey="id" value="${aluminumInstance?.customer?.id}" class="many-to-one" />
+
+					<span class="help-inline">${hasErrors(bean: aluminumWishInstance, field: 'customer', 'error')}</span>
+				</div>
+			</div>
 			<div class="control-group fieldcontain ${hasErrors(bean: aluminumWishInstance, field: 'lintongx', 'error')} required">
 				<label for="lintongx" class="control-label"><g:message code="aluminumWish.lintongx.label" default="Lintongx" /><span class="required-indicator">*</span></label>
 				<div class="controls">
@@ -8,6 +24,16 @@
 					<span class="help-inline">${hasErrors(bean: aluminumWishInstance, field: 'lintongx', 'error')}</span>
 				</div>
 			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumWishInstance, field: 'subtotalExtras', 'error')} ">
+				<label for="subtotalExtras" class="control-label"><g:message code="aluminumWishInstance.subtotalExtra.label" default="Subtotal Extra" /></label>
+				<div class="controls">
+					
+					<g:select name="subtotalExtras" from="${wish.SubtotalExtra.list()}" multiple="multiple" optionKey="id" size="5" value="${aluminumWishInstance?.subtotalExtras*.id}" class="many-to-many"/>	
+					<span class="help-inline">${hasErrors(bean: aluminumWishInstance, field: 'subtotalExtras', 'error')}</span>
+				</div>
+			</div>			
+
 
 			<h4><g:message code="aluminumWish.subWish.label" default="Sub Wish" /></h4>
 		
