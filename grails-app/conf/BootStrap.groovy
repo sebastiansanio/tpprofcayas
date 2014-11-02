@@ -475,9 +475,9 @@ class BootStrap {
 				def extraSobreSubtotal = new SubtotalExtra( description: "5,5%  chargue for export cost", equation: '(${subtotal}/0.945)-${subtotal}')
 				extraSobreSubtotal.save(flush:true)
 				
-				def aluminum = new Aluminum( descriptionSP: "PERFIL INFERIOR - 1 version de conjunto", descriptionEN: "PERFIL INFERIOR - 1 version de conjunto", cayasCode: "CY-019", pcsBundle:3)
+				def aluminum = new Aluminum( descriptionSP: "PERFIL INFERIOR - 1 version de conjunto", descriptionEN: "PERFIL INFERIOR - 1 version de conjunto", cayasCode: "CY-019", pcsBundle:3, theoricalWeight: 0.083, length: 2.90)
 				aluminum.save()
-				aluminum = new Aluminum( descriptionSP: "Tapa canto liviano / fino", descriptionEN: "Tapa canto liviano / fino", cayasCode: "CY-029", pcsBundle:3)
+				aluminum = new Aluminum( descriptionSP: "Tapa canto liviano / fino", descriptionEN: "Tapa canto liviano / fino", cayasCode: "CY-029", pcsBundle:3, theoricalWeight: 0.5, length: 5.20)
 				aluminum.save(flush:true)
 			}
 		}
