@@ -57,19 +57,10 @@
 				</td>
 			</tr>
 
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="aluminumWish.total.label" default="Total" /></td>
-				<td> ${aluminumWishInstance.amount}</td>
+			<tr class="finalTotal">
+				<td> <g:message code="aluminumSubWish.Amount.label" default="Amount -U\$S"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.amount}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
-
-
-			<!-- hg : each in="$ {aluminumSubWishInstance.subtotalExtras}" var="extra">
-			<tr>
-				<td> < hg : link controller="subtotalExtra" action="show" id="$ {extra.id}">$ {extra?.encodeAsHTML()}< / hg : link> </td>
-				<td class="text-right"> < hg :formatNumber number="$ { extra .getTotal(aluminumSubWishInstance)}" type="number" maxFractionDigits="2" /> </td>
-			</tr>
-			< / hg : each -->
-
 		
 		</tbody>
 	</table>
