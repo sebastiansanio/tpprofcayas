@@ -47,7 +47,7 @@
 				<label for="codePerCustomer" class="control-label"><g:message code="product.codePerCustomer.label" default="Code Per Customer" /></label>
 				<div class="controls">
 					
-					<g:render template="/_abstractProduct/codePerCustomerForm" model="['productInstance':productInstance]"/>
+					<g:render template="codePerCustomerForm" model="['productInstance':productInstance]"/>
 
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'codePerCustomer', 'error')}</span>
 				</div>
@@ -306,9 +306,16 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'piecesPerPallet', 'error')}</span>
 				</div>
 			</div>
-						
-			<g:render template="/_note/noteForm" model="['notes': productInstance?.notes, 'notesCount': productInstance?.notes?.size(), 'id': productInstance?.id]"/>
-						
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'notes', 'error')} ">
+				<label for="notes" class="control-label"><g:message code="product.notes.label" default="Notes" /></label>
+				<div class="controls">
+					<textarea class="span4" rows="4" name="notes">${productInstance?.notes}</textarea>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'notes', 'error')}</span>
+				</div>
+			</div>
+			
+			
 <script type="text/javascript">
 
 	/* para la familia */

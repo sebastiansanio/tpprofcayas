@@ -853,7 +853,7 @@
 	</div>
 	<div id="collapseNotes" class="accordion-body collapse in">
 		<div class="accordion-inner">
-			<g:render template="/_note/noteForm" model="['notes': wishInstance?.notes, 'notesCount': wishInstance?.notes?.size(), 'id': wishInstance?.id]"/>´
+	 		<g:render template="notes" model="['wishInstance':wishInstance]"/>	 
 	    </div>
 	</div>
 </div>

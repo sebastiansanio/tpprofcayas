@@ -10,12 +10,13 @@ class CodePerCustomer {
 	Date		dateCreated
 	Date		lastUpdated
 	
-	static belongsTo	= [product: AbstractProduct]
+	static belongsTo	= [product: Product]
 
 	Customer	customer
 	String		code
    
 	static constraints = {
+		
 		customer nullable:false
 		code blank:false
     }

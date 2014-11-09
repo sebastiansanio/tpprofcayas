@@ -1,15 +1,11 @@
+<%@ page import="wish.Wish" %>
+<%@ page import="wish.Note" %>
 <%@ page import="login.User" %>
 <%@ page import="org.apache.shiro.SecurityUtils" %>
 
-<!-- notes: conjunto de notas.
-	 notesCount: cantidad de notas que ya tiene
-	 id: id del objeto que contiene la nota
-	 -->
-	
-
 <script type="text/javascript">
 
-	var notesCount = ${notesCount} + 0;
+	var notesCount = ${wishInstance?.notes?.size()} + 0;
 
 	function addNote(){
 		var htmlId = "note" + notesCount;
@@ -31,6 +27,7 @@
 		
 		$("#notesChildList").append(templateHtml);			
 		notesCount++;
+				
 	}
 
 	
@@ -39,7 +36,8 @@
 
 <div id="notesChildList">
 	
-	<g:each var="noteInstance" in="${notes}" status="i">
+	<g:each var="noteInstance" in="${wishInstance?.notes}" status="i">
+	
 	
 	<g:if test="{noteInstance.user.id == User.findByUsername(SecurityUtils.subject.principal).id}">
 	<div class="row">
@@ -55,7 +53,7 @@
 					<g:textArea maxlength="512" class='input-xxlarge' rows='3' name="notes[${i}].text" >${noteInstance?.text}</g:textArea>
 					<span class="help-inline">${hasErrors(bean: noteInstance, field: 'text', 'error')}</span>
 					
-					<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" class="btn btn-primary" action="deleteNote" id="${noteInstance.id}" params="[containerId: id]"><i class="icon-trash"></i></g:link>
+					<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" class="btn btn-primary" action="deleteNote" id="${noteInstance.id}" params="[noteWishId: wishInstance.id]"><i class="icon-trash"></i></g:link>
 				
 				</div>
 				
@@ -72,4 +70,7 @@
 </div>
 
 
-<input type="button" class="btn btn-primary" value="${message(code:'notes.add', default:'Add note')}" onClick="addNote();" />
+			
+
+
+<input type="button" class="btn btn-primary" value="${message(code:'wish.notes.add', default:'Add note')}" onClick="addNote();" />

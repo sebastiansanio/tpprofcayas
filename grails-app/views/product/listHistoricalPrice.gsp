@@ -13,7 +13,7 @@
 	
 <section id="list-historicalPrice" class="first">
 
-	<p class="center" style="margin:10px;"> <g:link role="button" class="btn btn-primary" action="show" id="${idProduct}"> <g:message code="default.back.label" default="Return back"/> </g:link> </p>
+	<p> <g:link role="button" class="btn btn-primary" action="show" id="${idProduct}"> <g:message code="default.back.label" default="Return back"/> </g:link> </p>
 	
 	<table class="table table-bordered">
 		<thead>

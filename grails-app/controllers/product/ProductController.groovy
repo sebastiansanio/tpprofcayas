@@ -19,7 +19,6 @@ class ProductController {
 	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
 	def productImportService
 	def productExportService
-	def abstractProductService
 	
     def index() {
         redirect(action: "list", params: params)
@@ -39,7 +38,11 @@ class ProductController {
     def save() {
         def productInstance = new Product(params)
 		
-		productInstance.addHistoricalPriceNewInstance()
+		if ( productInstance.pricePerUnit != null )
+			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
+		
+		if ( productInstance.country == null && productInstance.supplier != null )
+			productInstance.country = productInstance.supplier.country
 					
         if (!productInstance.save(flush: true)) {
             render(view: "create", model: [productInstance: productInstance])
@@ -68,8 +71,11 @@ class ProductController {
             redirect(action: "list")
             return
         }
-				
-		productInstance.pricePerUnit = productInstance.getPreviousPrice()
+
+		if ( productInstance?.previousPrices?.size() == 0 )
+			productInstance.pricePerUnit = null
+		else
+			productInstance.pricePerUnit = productInstance?.previousPrices?.last().price
 		
         [productInstance: productInstance]
     }
@@ -97,7 +103,11 @@ class ProductController {
 		def previousPrices = productInstance.pricePerUnit
         productInstance.properties = params
 
-		productInstance.addHistoricalPrice(previousPrices)
+		if ( productInstance.pricePerUnit != null && previousPrices != productInstance.pricePerUnit ) 
+			productInstance.addToPreviousPrices( new HistoricalPrice(price: productInstance.pricePerUnit, dateFrom: new Date()))
+
+		if ( productInstance.country == null && productInstance.supplier != null )
+			productInstance.country = productInstance.supplier.country
 			
         if (!productInstance.save(flush: true)) {
             render(view: "edit", model: [productInstance: productInstance])
@@ -185,7 +195,7 @@ class ProductController {
 	@Transactional
 	def deleteCodePerCustomer() {
 		
-		def productInstance = AbstractProduct.get(params.productId)
+		def productInstance = Product.get(params.productId)
 		def codePerCustomerInstance = CodePerCustomer.get(params.codePerCustomerId)
 		
 		if (!codePerCustomerInstance) {
@@ -239,7 +249,13 @@ class ProductController {
 	}
 	
 	def listHistoricalPrice() {
-		render ( view:"/_abstractProduct/listHistoricalPrice", model:[historicalPriceInstanceList: abstractProductService.getHistoricalPriceList(params.id.toLong()), idProduct: params.id])
+
+			def historicalPrice = HistoricalPrice.withCriteria {
+				eq("product.id", params.id.toLong())
+				order "dateFrom", "desc"
+			}.asList()
+		
+		[historicalPriceInstanceList: historicalPrice, idProduct: params.id]
 	}
 	
 	@Transactional
@@ -263,30 +279,6 @@ class ProductController {
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
 			redirect(action: "listHistoricalPrice", id: params.idProduct)
-		}
-	}
-	
-	@Transactional
-	def deleteNote(){
-		def noteInstance = ProductNote.get(params.id)
-		
-		if (!noteInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'note.label', default: 'Note'), params.id])
-			redirect(action: "edit", id: params.containerId)
-			return
-		}
-
-		try {
-			noteInstance.product.removeFromNotes( noteInstance )
-			noteInstance.delete(flush:true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
-			
-			def text = "/product/edit/" + params.containerId + "#notesChildList"
-			redirect(uri: text)
-		}
-		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'note.label', default: 'Note'), params.id])
-			redirect(action: "edit", id: params.containerId)
 		}
 	}
 }

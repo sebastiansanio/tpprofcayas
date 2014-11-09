@@ -8,8 +8,6 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
-	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'noteStyle.css')}" />
-
 </head>
 
 <body>
@@ -68,7 +66,33 @@
 				
 			</tr>
 		
-			<g:render template="/_abstractProduct/codePerCustomerShow" model="['productInstance': productInstance]" />
+			<tr class="prop">
+				<td valign="top" class="name" colspan="2" >
+								
+				<g:message code="product.codePerCustomer.label" default="Code Per Customer" />
+				
+				<g:if test="${productInstance.codePerCustomer.size() != 0}">
+					<table class="table">
+						<thead>
+							<tr>
+								<th> <g:message code="customer.label" default="Customer"/> </th>
+								<th> <g:message code="product.customerCode.label" default="Code"/> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<g:each in="${productInstance.codePerCustomer}" var="c">
+								<tr>
+									<td> ${c.customer} </td>
+									<td> ${c.code} </td>
+								</tr>
+							</g:each>
+							
+						</tbody>
+					</table>
+				</g:if>
+				</td>
+				
+			</tr>
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.unit.label" default="Unit" /></td>
@@ -91,7 +115,31 @@
 				
 			</tr>
 			
-			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': productInstance]"/>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.previousPrices.label" default="Previous Price" /></td>
+				
+				<td valign="top" class="value"> 
+					
+						<g:if test="${productInstance?.previousPrices?.size() > 1 }">
+							<g:link action="listHistoricalPrice"  id="${productInstance?.id}">
+							${productInstance?.previousPrices?.get( productInstance?.previousPrices?.size() - 2 )}
+							</g:link>
+						</g:if>
+
+				</td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
+				
+				<td valign="top" class="value">
+					<g:if test="${productInstance?.previousPrices?.size() != 0 }">
+						${productInstance?.previousPrices?.last()}
+					</g:if>
+				</td>
+				
+			</tr>
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
@@ -315,15 +363,14 @@
 				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "piecesPerPallet")}</td>
 				
 			</tr>
-					
-		</tbody>
-	</table>
-
-	<g:render template="/_note/noteShow" model="['notes':productInstance?.notes]"/>
-
-	<table class="table">
-		<tbody>
-		
+				
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.notes.label" default="Notes" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "notes")}</td>
+				
+			</tr>
+											
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.dateCreated.label" default="Date Created" /></td>
 				
@@ -337,7 +384,7 @@
 				<td valign="top" class="value"><g:formatDate date="${productInstance?.lastUpdated}" /></td>
 				
 			</tr>
-		
+					
 		</tbody>
 	</table>
 </section>
