@@ -19,6 +19,14 @@ class AuditController {
 		[revisionInformationInstanceList: RevisionInformation.list(params), revisionInformationInstanceTotal: RevisionInformation.count()]
 	}
 	
+	def listLogins(){
+		params.sort = params.sort?:'id'
+		params.order = params.order?:'desc'
+		
+		params.max = Math.min(params.max ? params.int('max') : 100, 200)
+		[loginLogInstanceList: LoginLog.list(params), loginLogInstanceTotal: LoginLog.count()]
+	}
+	
 	def show(){
 		
 		def revisionInformationInstance = RevisionInformation.get(params.id)

@@ -13,6 +13,8 @@
 
 <body>
 	
+<g:link class="btn" controller="audit" action="listLogins"><g:message code="listLogins.label" /></g:link>
+	
 <section id="list-revisionInformation" class="first">
 
 	<table class="table table-bordered table-condensed cabeceraFija">

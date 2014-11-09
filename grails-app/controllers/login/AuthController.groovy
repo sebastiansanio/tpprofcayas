@@ -1,11 +1,12 @@
 package login
 
+import org.apache.shiro.grails.ConfigUtils
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.web.util.SavedRequest
 import org.apache.shiro.web.util.WebUtils
-import org.apache.shiro.grails.ConfigUtils
+import audit.LoginLog
 
 class AuthController {
     def shiroSecurityManager
@@ -45,28 +46,18 @@ class AuthController {
             // will be thrown if the username is unrecognised or the
             // password is incorrect.
             SecurityUtils.subject.login(authToken)
-
+			LoginLog loginLog = new LoginLog(user: User.findByUsername(authToken.username)).save(flush:true)
+			
             log.info "Redirecting to '${targetUri}'."
             redirect(uri: targetUri)
         }
         catch (AuthenticationException ex){
-            // Authentication failed, so display the appropriate message
-            // on the login page.
             log.info "Authentication failure for user '${params.username}'."
             flash.message = message(code: "login.failed")
-
-            // Keep the username and "remember me" setting so that the
-            // user doesn't have to enter them again.
             def m = [ username: params.username ]
-            if (params.rememberMe) {
-                m["rememberMe"] = true
-            }
-
-            // Remember the target URI too.
             if (params.targetUri) {
                 m["targetUri"] = params.targetUri
             }
-
             // Now redirect back to the login page.
             redirect(action: "login", params: m)
         }
