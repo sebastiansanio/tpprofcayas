@@ -25,11 +25,18 @@
 					<span class="help-inline">${hasErrors(bean: paymentTermInstance, field: 'paymentDaysAfterTimeOfArrival', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: paymentTermInstance, field: 'requiresAdvancePayment', 'error')} ">
+				<label for="requiresVisa" class="control-label"><g:message code="paymentTerm.requiresAdvancePayment.label" /></label>
+				<div class="controls">
+					<bs:checkBox name="requiresAdvancePayment" value="${paymentTermInstance?.requiresAdvancePayment}" />
+					<span class="help-inline">${hasErrors(bean: paymentTermInstance, field: 'requiresAdvancePayment', 'error')}</span>
+				</div>
+			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: paymentTermInstance, field: 'wishes', 'error')} ">
 				<label for="wishes" class="control-label"><g:message code="paymentTerm.wishes.label" default="Wishes" /></label>
 				<div class="controls">
-					
 <ul class="one-to-many">
 <g:each in="${paymentTermInstance?.wishes?}" var="w">
     <li><g:link controller="wish" action="show" id="${w.id}">${w?.encodeAsHTML()}</g:link></li>
@@ -38,7 +45,6 @@
 <g:link controller="wish" action="create" params="['paymentTerm.id': paymentTermInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'wish.label', default: 'Wish')])}</g:link>
 </li>
 </ul>
-
 					<span class="help-inline">${hasErrors(bean: paymentTermInstance, field: 'wishes', 'error')}</span>
 				</div>
 			</div>

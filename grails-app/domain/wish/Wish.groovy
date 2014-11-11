@@ -262,7 +262,7 @@ class Wish {
 	
 	//Alert 3
 	Date getDateToDemandSwiftToClient(){
-		if(paymentTerm?.percentPaymentBeforeDelivery==30){
+		if(paymentTerm?.requiresAdvancePayment){
 			Date date = wishDate
 			int i = 0
 			while (i<4){

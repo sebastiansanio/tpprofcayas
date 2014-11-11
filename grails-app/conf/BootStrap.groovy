@@ -324,7 +324,7 @@ class BootStrap {
 
 				def paymentTerm = new PaymentTerm(name:"100 TT 15 días ETA",percentPaymentAfterDelivery:100,paymentDaysAfterTimeOfArrival:15)
 				paymentTerm.save(flush:true)
-				paymentTerm = new PaymentTerm(name:"30 TT / 70 CAD",percentPaymentAfterDelivery:70,paymentDaysAfterTimeOfArrival:0)
+				paymentTerm = new PaymentTerm(name:"30 TT / 70 CAD",percentPaymentAfterDelivery:70,requiresAdvancePayment: true, paymentDaysAfterTimeOfArrival:0)
 				paymentTerm.save(flush:true)
 				paymentTerm = new PaymentTerm(name:"100 CAD",percentPaymentAfterDelivery:100,paymentDaysAfterTimeOfArrival:0)
 				paymentTerm.save(flush:true)
