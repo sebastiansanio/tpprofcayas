@@ -37,6 +37,14 @@
 				<td valign="top" class="value">${fieldValue(bean: paymentTermInstance, field: "paymentDaysAfterTimeOfArrival")}</td>
 				
 			</tr>
+			
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="paymentTerm.requiresAdvancePayment.label" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${paymentTermInstance.requiresAdvancePayment}" /></td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="paymentTerm.wishes.label" default="Wishes" /></td>

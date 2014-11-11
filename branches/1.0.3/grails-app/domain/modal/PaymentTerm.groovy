@@ -9,6 +9,7 @@ class PaymentTerm {
 	String name
 	Integer percentPaymentAfterDelivery
 	Integer paymentDaysAfterTimeOfArrival
+	boolean requiresAdvancePayment
 	
 	static hasMany = [wishes: Wish]	
 	
