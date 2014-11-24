@@ -3,12 +3,13 @@ package wish
 import org.apache.jasper.compiler.Node.ParamsAction;
 import org.springframework.dao.DataIntegrityViolationException
 
+import stakeholder.Supplier
 import product.Aluminum;
 import product.Extra;
 
 class AluminumWishController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", getAluminum:"GET"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -154,4 +155,19 @@ class AluminumWishController {
 			redirect(action: "edit", id: idWish)
 		}
 	}
+
+    /**
+    * Retorna un html con todos los perfiles de aluminio correspondientes al proveedor cuyo identificador se recibe
+    */
+    def getAluminum() {
+        def supplier = Supplier.get( params.id.toLong() )
+
+        /* si no encuentra el proveedor, mensaje de proveedor no encontrado*/
+        if ( !supplier ) {
+            render message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), params.id])
+            return
+        }
+
+        render (template: "subwishForm", model:[ supplier: supplier, number: params.number ])
+    }
 }

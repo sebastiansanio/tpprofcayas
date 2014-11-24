@@ -161,3 +161,43 @@
 </div>
 
 <g:render template="/_stakeholder/form" model="['stakeholderInstance':supplierInstance]"/>
+
+<h5><g:message code="supplier.aluminum.extras.label" default="Aluminum Extras" /></h5>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'aluminumSupplier', 'error')}">
+			<label for="aluminumSupplier" class="control-label"><g:message code="supplier.aluminumSupplier.label" default="Aluminum Supplier" /> </label>
+			<div class="controls">
+				<g:checkBox name="aluminumSupplier" value="${supplierInstance?.aluminumSupplier}" />
+				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'aluminumSupplier', 'error')}</span>
+			</div>
+		</div>	
+		<div id="aluminumExtra" class="control-group fieldcontain ${hasErrors(bean: supplierInstance, field: 'extrasDefault', 'error')}">
+			<label for="extrasDefault" class="control-label"><g:message code="supplier.extrasDefault.label" default="Aluminum Extras" /> </label>
+			<div class="controls">
+				<g:select id="extrasDefault" name="extrasDefault.id" from="${product.Extra.list()}" optionKey="id" value="${supplierInstance?.extrasDefault?.id}" class="many-to-many" multiple="true"/>
+				<span class="help-inline">${hasErrors(bean: supplierInstance, field: 'extrasDefault', 'error')}</span>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+		function updateView() {
+			if ( $("#aluminumSupplier").is(":checked") ) {
+				$("#aluminumExtra").show();
+				$("#extrasDefault").attr('name', 'extrasDefault.id');
+			}
+			else {
+				$("#aluminumExtra").hide();
+				$("#extrasDefault").removeAttr('name');
+			}
+			
+		}
+
+		updateView();
+
+		$("#aluminumSupplier").on("change", updateView);
+	});
+</script>

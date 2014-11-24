@@ -29,9 +29,6 @@
 		</div>
 	</g:form>
 	
-	<div id="subwishForm" class="hidden subWish">
-		<g:render template="subwishForm" model="['number': aluminumWishInstance?.subWish?.size()]"/>
-	</div>
 </section>
 		
 </body>

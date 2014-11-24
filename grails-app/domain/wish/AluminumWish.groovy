@@ -1,6 +1,7 @@
 package wish
 
 import stakeholder.Customer
+import stakeholder.Supplier
 
 import org.hibernate.envers.Audited;
 
@@ -10,7 +11,8 @@ class AluminumWish {
 	static hasMany		= [ subWish: AluminumSubWish, subtotalExtras: SubtotalExtra ] 
 	
 	BigDecimal			lintongx
-	
+
+	Supplier			supplier	
 	Customer			customer 
 	String				code
 

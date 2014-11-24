@@ -26,6 +26,12 @@
 				
 			</tr>
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="aluminumWish.supplier.label" default="Supplier" /> </td>
+				
+				<td valign="top" class="text-right"><g:link controller="supplier" action="show" id="${aluminumWishInstance.supplier.id}">${fieldValue(bean: aluminumWishInstance, field: "supplier")}</g:link></td>
+				
+			</tr>			
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="aluminumWish.customer.label" default="Customer" /> </td>
 				
 				<td valign="top" class="text-right"><g:link controller="customer" action="show" id="${aluminumWishInstance.customer.id}">${fieldValue(bean: aluminumWishInstance, field: "customer")}</g:link></td>

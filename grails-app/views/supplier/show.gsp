@@ -125,6 +125,15 @@
 						<td valign="top" class="name"><g:message code="stakeholder.owner.label" default="Owner" /></td>
 						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "owner")}</td>
 					</tr>
+
+					<g:if test="${supplierInstance.extrasDefault}">
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="supplier.extrasDefault.label" default="Aluminum Extras" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
+						
+					</tr>					
+					</g:if>
 					
 					<tr class="prop">
 						<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
@@ -132,7 +141,21 @@
 						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "notes")}</td>
 						
 					</tr>
-								
+						
+					<g:if test="{supplierInstance.aluminumSupplier}">
+						<tr class="prop">
+							<td valign="top" class="name"><g:message code="supplier.extrasDefault.label" default="Aluminum Extra" /></td>
+							
+							<td valign="top" class="value">
+								<ul>
+								<g:each in="${supplierInstance.extrasDefault}" var="extra">
+									<li> ${extra} </li>
+								</g:each>
+								</ul>
+							</td>							
+						</tr>
+					</g:if>
+
 					<tr class="prop">
 						<td valign="top" class="name"><g:message code="supplier.dateCreated.label" default="Date Created" /></td>
 						

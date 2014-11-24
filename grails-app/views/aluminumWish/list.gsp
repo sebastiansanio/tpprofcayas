@@ -19,6 +19,8 @@
 
 				<g:sortableColumn property="code" title="${message(code: 'aluminumWish.code.label', default: 'Code')}" />
 
+				<th> <g:message code="aluminumWish.supplier.label"default='Supplier'/>	</th>
+
 				<th> <g:message code="aluminumWish.customer.label"default='Customer'/>	</th>
 
 				<g:sortableColumn property="lintongx" title="${message(code: 'aluminumWish.lintongx.label', default: 'Lintongx')}" />
@@ -30,6 +32,8 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
 				<td><g:link action="show" id="${aluminumWishInstance.id}">${fieldValue(bean: aluminumWishInstance, field: "code")}</g:link></td>
+
+				<td><g:link controller="supplier" action="show" id="${aluminumWishInstance.supplier.id}">${fieldValue(bean: aluminumWishInstance, field: "supplier")}</g:link></td>				
 
 				<td><g:link controller="customer" action="show" id="${aluminumWishInstance.customer.id}">${fieldValue(bean: aluminumWishInstance, field: "customer")}</g:link></td>				
 			

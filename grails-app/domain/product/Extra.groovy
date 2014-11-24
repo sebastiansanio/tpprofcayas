@@ -2,13 +2,18 @@ package product
 
 import org.hibernate.envers.Audited;
 import wish.AluminumSubWish;
+import stakeholder.Supplier
 
 @Audited
 class Extra {
 		
+	static belongsTo = Supplier
+	static hasMany = [ suppliers: Supplier ]
+
 	String 			description
 	String 			equation
-		
+
+
 	static constraints = {
 		description blank:false, nullable: false
 		equation blank:false, nullable: false

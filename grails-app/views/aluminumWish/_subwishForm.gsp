@@ -1,5 +1,7 @@
 <%@ page import="wish.AluminumSubWish" %>
+<%@ page import="product.Aluminum" %>
 
+<div id="subwishForm" class="subWish">
 	<div style="text-align:right;padding-bottom:20px;" >
 		<g:if test="${subWish == null}">
 			<a role="button" class="btn btn-primary deleteSubWish"> <g:message code="default.button.delete.label" defualt="Delete"/> </a>
@@ -13,7 +15,13 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: subWish, field: 'aluminum', 'error')} required">
 				<label for="aluminum" class="control-label"><g:message code="aluminumSubWish.aluminum.label" default="Aluminum" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:select name="subWish[${number}].aluminum.id" from="${product.Aluminum.list()}" optionKey="id" required="" value="${subWish?.aluminum?.id}" class="many-to-one subwishElement"/>
+
+					<g:if test="${subWish == null}">
+						<g:select name="subWish[${number}].aluminum.id" from="${Aluminum.findAllBySupplier( supplier )}" optionKey="id" required="" value="${subWish?.aluminum?.id}" class="many-to-one subwishElement"/>
+					</g:if>
+					<g:else>
+						<g:select name="subWish[${number}].aluminum.id" from="${Aluminum.findAllBySupplier(subWish?.aluminum?.supplier )}" optionKey="id" required="" value="${subWish?.aluminum?.id}" class="many-to-one subwishElement"/>
+					</g:else>
 					<span class="help-inline">${hasErrors(bean: subWish, field: 'aluminum', 'error')}</span>
 				</div>
 			</div>
@@ -37,10 +45,16 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: subWish, field: 'extras', 'error')} ">
 				<label for="extras" class="control-label"><g:message code="aluminumSubWish.extra.label" default="Extra" /></label>
 				<div class="controls">
-					<g:select name="subWish[${number}].extras.id" from="${product.Extra.list()}" multiple="multiple" optionKey="id" size="5" value="${subWish?.extras*.id}" class="many-to-many subwishElement"/>	
+					<g:if test="${subWish == null}">
+						<g:select name="subWish[${number}].extras.id" from="${product.Extra.list()}" multiple="multiple" optionKey="id" size="5" value="${supplier?.extrasDefault*.id}" class="many-to-many subwishElement"/>			
+					</g:if>
+					<g:else>
+						<g:select name="subWish[${number}].extras.id" from="${product.Extra.list()}" multiple="multiple" optionKey="id" size="5" value="${subWish?.extras*.id}" class="many-to-many subwishElement"/>			
+					</g:else>	
 					<span class="help-inline">${hasErrors(bean: subWish, field: 'extras', 'error')}</span>
 				</div>
 			</div>
 
 		</div>
 	</div>
+</div>	
