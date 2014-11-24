@@ -1,10 +1,9 @@
 package stakeholder
 
 import org.springframework.dao.DataIntegrityViolationException
-
-
 import org.springframework.transaction.annotation.Transactional
 
+import product.Extra
 
 @Transactional
 class SupplierController {
@@ -27,6 +26,13 @@ class SupplierController {
 
     def save() {
         def supplierInstance = new Supplier(params)
+        /* para agregar los extras de alumino al proveedor*/
+        supplierInstance.extrasDefault.clear()
+        params.list("extrasDefault.id").each { extra ->
+            supplierInstance.addToExtrasDefault( Extra.get( extra.toInteger() ))
+
+        }
+        
         if (!supplierInstance.save(flush: true)) {
             render(view: "create", model: [supplierInstance: supplierInstance])
             return
@@ -78,6 +84,13 @@ class SupplierController {
         }
 
         supplierInstance.properties = params
+
+        /* para agregar los extras de alumino al proveedor*/
+        supplierInstance.extrasDefault.clear()
+        params.list("extrasDefault.id").each { extra ->
+            supplierInstance.addToExtrasDefault( Extra.get( extra.toInteger() ))
+
+        }
 
         if (!supplierInstance.save(flush: true)) {
             render(view: "edit", model: [supplierInstance: supplierInstance])
