@@ -10,10 +10,17 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: subtotalExtraInstance, field: 'equation', 'error')} required">
+			<div class="control-group fieldcontain ${hasErrors(bean: extraInstance, field: 'equation', 'error')} required">
+				<p>${message(code:"extra.ecuation.description", default:"")}</p>
+
+				<div class="atributos">
+					<span class="badge badge-info" data-name="subtotal">${message(code: 'aluminumSubwish.subtotal.label', default: 'Subtotal')}</span>
+
+				</div>
+
 				<label for="equation" class="control-label"><g:message code="subtotalExtra.equation.label" default="Equation" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:textField name="equation" required="" value="${subtotalExtraInstance?.equation}"/>
+					<g:textArea name="equation" required="" value="${subtotalExtraInstance?.equation}"/>
 					<span class="help-inline">${hasErrors(bean: subtotalExtraInstance, field: 'equation', 'error')}</span>
 				</div>
 			</div>
