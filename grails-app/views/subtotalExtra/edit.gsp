@@ -7,6 +7,8 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'subtotalExtra.label', default: 'SubtotalExtra')}" />
 	<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'aluminum.css')}" />
+	<g:javascript src="extras.js" />	
 </head>
 
 <body>
