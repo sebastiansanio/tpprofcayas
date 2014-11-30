@@ -12,7 +12,7 @@
 				<label for="supplier" class="control-label"><g:message code="aluminumWish.supplier.label" default="Supplier" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 
-					<g:select id="supplier" name="supplier.id" from="${stakeholder.Supplier.list()}" optionKey="id" value="${aluminumInstance?.supplier?.id}" class="many-to-one" />
+					<g:select id="supplier" name="supplier.id" from="${stakeholder.Supplier.list()}" optionKey="id" value="${aluminumWishInstance?.supplier?.id}" class="many-to-one" />
 
 					<span class="help-inline">${hasErrors(bean: aluminumWishInstance, field: 'supplier', 'error')}</span>
 				</div>
@@ -22,7 +22,7 @@
 				<label for="customer" class="control-label"><g:message code="aluminumWish.customer.label" default="Customer" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 
-					<g:select id="customer" name="customer.id" from="${stakeholder.Customer.list()}" optionKey="id" value="${aluminumInstance?.customer?.id}" class="many-to-one" />
+					<g:select id="customer" name="customer.id" from="${stakeholder.Customer.list()}" optionKey="id" value="${aluminumWishInstance?.customer?.id}" class="many-to-one" />
 
 					<span class="help-inline">${hasErrors(bean: aluminumWishInstance, field: 'customer', 'error')}</span>
 				</div>

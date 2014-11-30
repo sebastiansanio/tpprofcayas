@@ -20,7 +20,7 @@
 
 				<label for="equation" class="control-label"><g:message code="subtotalExtra.equation.label" default="Equation" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:textArea name="equation" required="" value="${subtotalExtraInstance?.equation}"/>
+					<g:textArea name="equation" required="" row="5" value="${subtotalExtraInstance?.equation}"/>
 					<span class="help-inline">${hasErrors(bean: subtotalExtraInstance, field: 'equation', 'error')}</span>
 				</div>
 			</div>
