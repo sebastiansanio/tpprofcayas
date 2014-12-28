@@ -2,6 +2,8 @@ package product
 
 import org.hibernate.envers.Audited
 import stakeholder.*
+import stakeholder.Customer
+import stakeholder.Supplier
 
 @Audited
 class Aluminum extends AbstractProduct {
@@ -46,8 +48,8 @@ class Aluminum extends AbstractProduct {
 		sectionalW min:0.0000, scale:4, nullable:true
 		externalProfileL min:0.0000, scale:4, nullable:true
 		externalProfileW min:0.0000, scale:4, nullable:true
-		length min:0.0000, scale:4, nullable:true
-		theoricalWeight min:0.0000, scale:4, nullable:true
+		length min:0.0000, scale:4
+		theoricalWeight min:0.0000, scale:4
 		realWeight min:0.0000, scale:4, nullable:true
 		pcsBundle min:1
 		articlesPerContainer min:0, nullable:true
@@ -55,9 +57,6 @@ class Aluminum extends AbstractProduct {
     }
     
     def getWeightPCS() {
-		if ( !length || !theoricalWeight ) 
-			return null
-			
         return length * theoricalWeight
     }
 	

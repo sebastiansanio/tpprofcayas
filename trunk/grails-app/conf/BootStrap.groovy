@@ -1,8 +1,11 @@
 import report.Report
-import stakeholder.Customer;
-import stakeholder.CustomsBroker;
-import stakeholder.Supplier;
-import grails.util.Environment;
+import stakeholder.Agent
+import stakeholder.Forwarder
+import stakeholder.Shipper
+import stakeholder.Customer
+import stakeholder.CustomsBroker
+import stakeholder.Supplier
+import grails.util.Environment
 
 import org.apache.shiro.crypto.hash.Sha256Hash
 import org.quartz.Scheduler
@@ -14,10 +17,33 @@ import courier.Courier
 import courier.DocumentsCourierRecord
 import courier.SpecialCourierRecord
 import login.*
+import login.Role
+import login.User
+import login.Permission
 import modal.*
+import modal.AvailableLocale
+import modal.WishStatus
+import modal.PaymentTerm
+import modal.PriceCondition
+import modal.Currency
+import modal.Ship
+import modal.Country
+import modal.Port
+import modal.PaymentStatus
+import modal.DocumentType
 import wish.*
+import wish.AluminumSubWish
+import wish.AluminumWish
+import wish.Wish
+import wish.SubtotalExtra
 import stakeholder.*
 import product.*
+import product.SubFamily
+import product.ItemUnit
+import product.Aluminum
+import product.Family
+import product.Color
+import product.TypeOfPresentation
 
 class BootStrap {
 	def alertManagerService
@@ -451,34 +477,104 @@ class BootStrap {
 				
 				alertManagerService.checkAllAlerts()
 				alertManagerService.generateAllAlerts()
+
+				/* proveedor de aluminio*/				
+				def supplierAluminum = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"aluminum supplier",country:Country.findByName("China"),address:".",taxRegistryNumber:"66465489")
+				supplierAluminum.save(flush:true)
 				
-				
+				/* pedido ejemplo */
+				def aluminumWish = new AluminumWish( lintongx: 2058.52, supplier: supplierAluminum, 'customer.id':1, code: "ejemplo" )
+
 				/* extras del perfil de aluminio */
+				def extras = []
 				def extra = new Extra( description: "Fabrication Fee (by Net weight) // MAT SILVER ANODIZED 10 MICRONS // 6063-T5 // including estándar packing material", equation: "900")
+				extras.add( extra )
 				extra.save()
-									
-				//FOB fee USD 40 (1x40) / USD 70 (1x20) (10-12 tn)	
-				//Precise cutting fee (less than 3.5mtl / more than 2mtl // U$S 200 / Precision of +/-5mm
-				 	
-				//Precise cutting fee with Precision of +/-1mm = U$S 0,163 por corte	
-				//
+				supplierAluminum.addToExtrasDefault( extra )
+
+				extra = new Extra( description: "FOB fee", equation: "40")
+				extras.add( extra )				
+				extra.save()
+				supplierAluminum.addToExtrasDefault( extra )
+
 				extra = new Extra( description: "Rack marks cut off at one end of profiles due to upright anodized proccess", equation: "150")
+				extras.add( extra )				
 				extra.save()
-				
+				supplierAluminum.addToExtrasDefault( extra )
+
 				extra = new Extra ( description: "Weight Less than 0.20kg/m", equation: "if (\${theoricalWeight} < 0.20) \n 150 \n else \n 0 " )
+				extras.add( extra )				
 				extra.save()
-				
+				supplierAluminum.addToExtrasDefault( extra )
+
 				extra = new Extra( description: "TAP - plastic film // stick plastic film on exposed surface", equation: "150")	
-				extra.save(flush:true)
+				extras.add( extra )				
+				extra.save()
+				supplierAluminum.addToExtrasDefault( extra )
+
+				def extraShortProfile = new Extra( description: "Short profile", equation: "200")
+				extraShortProfile.save(flush:true)
 				
+				if ( !supplierAluminum.save( flush:true ) ) 
+					println supplierAluminum.errors
+
 				/* extras sobre el subtotal del pedido de un perfil de aluminio */
-				def extraSobreSubtotal = new SubtotalExtra( description: "5,5%  chargue for export cost", equation: '(${subtotal}/0.945)-${subtotal}')
+				def extraSobreSubtotal = new SubtotalExtra( code:"PAC", description: "5,5%  packing", number: 0.945 )
+				aluminumWish.addToSubtotalExtras(extraSobreSubtotal)
 				extraSobreSubtotal.save(flush:true)
-				
+
+				extraSobreSubtotal = new SubtotalExtra( code:"E2", description: "E2", number: 1.1 )
+				aluminumWish.addToSubtotalExtras(extraSobreSubtotal)
+				extraSobreSubtotal.save(flush:true)
+
+				extraSobreSubtotal = new SubtotalExtra( code:"MOL", description: "Costo del molde", number: 0 )
+				aluminumWish.addToSubtotalExtras(extraSobreSubtotal)
+				extraSobreSubtotal.save(flush:true)
+
 				def aluminum = new Aluminum( descriptionSP: "PERFIL INFERIOR - 1 version de conjunto", descriptionEN: "PERFIL INFERIOR - 1 version de conjunto", cayasCode: "CY-019", pcsBundle:3, theoricalWeight: 0.083, length: 2.90)
-				aluminum.save()
-				aluminum = new Aluminum( descriptionSP: "Tapa canto liviano / fino", descriptionEN: "Tapa canto liviano / fino", cayasCode: "CY-029", pcsBundle:3, theoricalWeight: 0.5, length: 5.20)
-				aluminum.save(flush:true)
+				if ( !aluminum.save() ) println aluminum.errors
+				aluminum = new Aluminum( descriptionSP: "Tapa canto liviano / fino", descriptionEN: "Tapa canto liviano / fino", cayasCode: "CY-239", pcsBundle:3, theoricalWeight: 0.5, length: 5.20)
+				if ( !aluminum.save(flush:true) ) println aluminum.errors
+
+				def aluminum1 = new Aluminum ( descriptionSP: "CKAR0039", descriptionEN:"CKAR0039", cayasCode: "CY-029", pcsBundle: 3, theoricalWeight: 0.083, length: 2.90, supplier: supplierAluminum )
+				if ( !aluminum1.save() ) println aluminum1.errors
+				def aluminum2 = new Aluminum ( descriptionSP: "CKAR0043", descriptionEN:"CKAR0043", cayasCode: "CY-032", pcsBundle: 3, theoricalWeight: 0.083, length: 2.90, supplier: supplierAluminum )
+				if ( !aluminum2.save() ) println aluminum2.errors
+				def aluminum3 = new Aluminum ( descriptionSP: "CKAR0063", descriptionEN:"CKAR0063", cayasCode: "CY-091", pcsBundle: 3, theoricalWeight: 0.430, length: 5.20, supplier: supplierAluminum )
+				if ( !aluminum3.save() ) println aluminum3.errors
+				def aluminum4 = new Aluminum ( descriptionSP: "CKAR0062", descriptionEN:"CKAR0062", cayasCode: "CY-090", pcsBundle: 3, theoricalWeight: 0.471, length: 5.90, supplier: supplierAluminum )
+				if ( !aluminum4.save() ) println aluminum4.errors
+				def aluminum5 = new Aluminum ( descriptionSP: "CKAR0064", descriptionEN:"CKAR0064", cayasCode: "CY-092", pcsBundle: 3, theoricalWeight: 0.214, length: 5.90, supplier: supplierAluminum )
+				if ( !aluminum5.save() ) println aluminum5.errors
+				def aluminum6 = new Aluminum ( descriptionSP: "CKAR0048", descriptionEN:"CKAR0048", cayasCode: "CY-042", pcsBundle: 3, theoricalWeight: 0.608, length: 5.90, supplier: supplierAluminum )
+				if ( !aluminum6.save() ) println aluminum6.errors
+				def aluminum7 = new Aluminum ( descriptionSP: "JM103210", descriptionEN:"JM103210", cayasCode: "CY-047 ", pcsBundle: 3, theoricalWeight: 0.079, length: 5.90, supplier: supplierAluminum )
+				if ( !aluminum7.save() ) println aluminum7.errors
+				def aluminum8 = new Aluminum ( descriptionSP: "CKAR0052", descriptionEN:"CKAR0052", cayasCode: "CY-053", pcsBundle: 3, theoricalWeight: 0.346, length: 5.90, supplier: supplierAluminum )
+				if ( !aluminum8.save() ) println aluminum8.errors
+				def aluminum9 = new Aluminum ( descriptionSP: "CKAR0058", descriptionEN:"CKAR0058", cayasCode: "CY-054", pcsBundle: 3, theoricalWeight: 0.488, length: 5.90, supplier: supplierAluminum )
+				if ( !aluminum9.save() ) println aluminum9.errors
+				def aluminum10 = new Aluminum ( descriptionSP: "CKAR0049", descriptionEN:"CKAR0049", cayasCode: "CY-081", pcsBundle: 3, theoricalWeight: 0.462, length: 2.90, supplier: supplierAluminum )
+				if ( !aluminum10.save() ) println aluminum10.errors
+
+				
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum1, quantityPCS: 1700).addToExtras( extraShortProfile ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum2, quantityPCS: 6800 ).addToExtras( extraShortProfile ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum3, quantityPCS: 2000 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum4, quantityPCS: 500 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum5, quantityPCS: 500 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum6, quantityPCS: 1700 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum7, quantityPCS: 400 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum8, quantityPCS: 1300 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum9, quantityPCS: 1700 ) )
+				aluminumWish.addToSubWish( new AluminumSubWish( aluminum: aluminum10, quantityPCS: 1300 ).addToExtras( extraShortProfile ) )
+
+				for ( i in extras ) {
+					aluminumWish.subWish*.addToExtras( i )
+				}
+
+				if ( !aluminumWish.save( flush:true ) ) 
+					println aluminumWish.errors
 			}
 		}
 	}

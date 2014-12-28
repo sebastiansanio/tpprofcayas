@@ -19,7 +19,7 @@
 			
 				<g:sortableColumn property="description" title="${message(code: 'subtotalExtra.description.label', default: 'Description')}" />
 			
-				<g:sortableColumn property="equation" title="${message(code: 'subtotalExtra.equation.label', default: 'Equation')}" />
+				<g:sortableColumn property="number" title="${message(code: 'subtotalExtra.number.label', default: 'Number')}" />
 			
 			</tr>
 		</thead>
@@ -29,7 +29,7 @@
 			
 				<td><g:link action="show" id="${subtotalExtraInstance.id}">${fieldValue(bean: subtotalExtraInstance, field: "description")}</g:link></td>
 			
-				<td>${fieldValue(bean: subtotalExtraInstance, field: "equation")}</td>
+				<td>${fieldValue(bean: subtotalExtraInstance, field: "number")}</td>
 			
 			</tr>
 		</g:each>

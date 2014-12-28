@@ -1,30 +1,20 @@
 package wish
 
-import org.hibernate.envers.Audited;
+import org.hibernate.envers.Audited
 
 @Audited
 class SubtotalExtra {
 
+	String 			code
 	String 			description
-	String 			equation
+	BigDecimal   	number
 		
 	static constraints = {
+		code size:1..3
 		description blank:false, nullable: false
-		equation blank:false, nullable: false
+		number min:0.0000, scale:4
     }
-	
-	def getTotal(AluminumSubWish wish) {
-		/* busco una referencia a una propiedad del pedido (por
-		 * ahora solo puede ser el subtotal)*/
-		def equationAdapt = this.equation?.replaceAll(/([^\$]*)\$\{([^\}]+)\}/) {
-            def property = wish."${it[2]}"
-            "${it[1]}${property}"
-        }
-		def shell = new GroovyShell()
-		BigDecimal number = shell.evaluate( equationAdapt )
-		return number
-	}
-	
+
 	@Override 
 	public String toString() {
 		return "${description}"
