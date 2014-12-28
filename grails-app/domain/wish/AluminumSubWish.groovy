@@ -1,9 +1,9 @@
 package wish
 
-import org.hibernate.envers.Audited;
+import org.hibernate.envers.Audited
 
-import product.Extra;
-import product.Aluminum;
+import product.Extra
+import product.Aluminum
 
 @Audited
 class AluminumSubWish {
@@ -39,13 +39,6 @@ class AluminumSubWish {
 		return aluminum.sectionalL/1000 * aluminum.sectionalW/1000 * quantityPCS/ aluminum.pcsBundle
 	}
 	
-	def getTotalTheoricalWeight() {
-		if ( !aluminum.weightPCS )
-			return 0
-
-		return quantityPCS * aluminum.weightPCS
-	}
-	
 	def getEstimatedGW() {
 		if ( !aluminum.weightPCS )
 			return 0
@@ -53,38 +46,48 @@ class AluminumSubWish {
 		return factorEstimated * totalTheoricalWeight
 	}
 	
+	def getTotalTheoricalWeight() { //net weight
+		return quantityPCS * aluminum.weightPCS
+	}
+	
 	def getSubtotal() {
-		
 		def subtotal = wish.lintongx
 		
 		extras.each {
 			subtotal += it.getTotal( aluminum )	
 		}
 		
-		return subtotal
+		return subtotal/1000
 	}
 	
-	def getTotal() {
-		
-		def total = getSubtotal()
-		
-		wish.subtotalExtras.each {
-			total += it.getTotal( this )
-		}
-		
-		return total // U$S FOB x Tonelada*/
-	}
-	
-	def getFobxPiece() {
-		if ( !aluminum.weightPCS )
-			return 0
-			
-		/*getTotal()/1000 = U$S FOB x KG*/
-		return getTotal()/1000 * aluminum.weightPCS
-	}
-	
-	def getAmount() {
-		return getFobxPiece() * quantityPCS
+	def getPacking() { //5,5% packing
+		def extraPacking = SubtotalExtra.findByCode( "PAC" )
+
+		if ( !extraPacking ) return 0
+		return (subtotal/extraPacking.number) - subtotal
 	}
 
+	def getTotal() {
+		return getSubtotal() + getPacking() // U$S FOB x Tonelada*/
+	}
+	
+	def getTotalAmountWithoutPacking() {
+		return totalTheoricalWeight * subtotal
+	}
+	
+	def getTotalAmountWithPacking() {
+		return totalTheoricalWeight * total
+	}
+
+	def getE2() {
+		def extraE2 = SubtotalExtra.findByCode( "E2" )
+
+		if ( !extraE2 ) return 0
+		return extraE2.number * totalAmountWithoutPacking
+	}
+
+	def getPriceXpiece() {
+		return e2 / quantityPCS
+	}
+	
 }

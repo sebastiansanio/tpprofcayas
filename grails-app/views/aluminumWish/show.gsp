@@ -64,10 +64,35 @@
 			</tr>
 
 			<tr class="finalTotal">
-				<td> <g:message code="aluminumSubWish.Amount.label" default="Amount -U\$S"/> </td>
-				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.amount}" type="number" maxFractionDigits="2" />  </td>
+				<td> <g:message code="aluminumWish.fob.without.packing.label" default="FOB SHENZHEN WITHOUT packing"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.fobShenzhenWithoutPacking}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
-		
+			<tr class="finalTotal">
+				<td> <g:message code="aluminumWish.fob.with.packing.label" default="FOB SHENZHEN with packing"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.fobShenzhenWithPacking}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.differentBetweenWithAndWithoutPacking}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr>
+				<td> <g:message code="aluminumWish.amount.chinesse.label" default="Amount to be declare at Chinesse custom"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.amountToBeDeclareAtChinesseCustom}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr>
+				<td> <g:message code="aluminumWish.diffent.label" default="Different"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.different}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr>
+				<td> <g:message code="aluminumWish.discount.label" default="Discount 10%"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.discountXextras}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr class="finalTotal">
+				<td> <g:message code="aluminumWish.diffentFinal.label" default="Different Gross"/> </td>
+				<td class="text-right"> <g:formatNumber number="${aluminumWishInstance.netFinalDifference}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+
+
 		</tbody>
 	</table>
 </section>

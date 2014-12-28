@@ -212,17 +212,17 @@
 					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'sectionalW', 'error')}</span>
 				</div>
 			</div>
-													
-			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'length', 'error')} ">
-				<label for="length" class="control-label"><g:message code="aluminum.length.label" default="Length" /></label>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'length', 'error')} required">
+				<label for="length" class="control-label"><g:message code="aluminum.length.label" default="Length (m)" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 					<g:field type="number" name="length" step="0.0001" min="0.0000" value="${aluminumInstance.length}"/>
 					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'length', 'error')}</span>
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'theoricalWeight', 'error')} ">
-				<label for="theoricalWeight" class="control-label"><g:message code="aluminum.theoricalWeight.label" default="Theorical Weight" /></label>
+			<div class="control-group fieldcontain ${hasErrors(bean: aluminumInstance, field: 'theoricalWeight', 'error')} required ">
+				<label for="theoricalWeight" class="control-label"><g:message code="aluminum.theoricalWeight.label" default="Theorical Weight (kg/m)" /><span class="required-indicator">*</span></label>
 				<div class="controls">
 					<g:field type="number" name="theoricalWeight" step="0.0001" min="0.0000" value="${aluminumInstance.theoricalWeight}"/>
 					<span class="help-inline">${hasErrors(bean: aluminumInstance, field: 'theoricalWeight', 'error')}</span>

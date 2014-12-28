@@ -25,9 +25,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="subtotalExtra.equation.label" default="Equation" /></td>
+				<td valign="top" class="name"><g:message code="subtotalExtra.number.label" default="Number" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: subtotalExtraInstance, field: "equation")}</td>
+				<td valign="top" class="value">${fieldValue(bean: subtotalExtraInstance, field: "number")}</td>
 				
 			</tr>
 		

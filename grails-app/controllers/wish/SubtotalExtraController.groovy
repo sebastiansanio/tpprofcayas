@@ -19,21 +19,6 @@ class SubtotalExtraController {
         [subtotalExtraInstanceList: SubtotalExtra.list(params), subtotalExtraInstanceTotal: SubtotalExtra.count()]
     }
 
-    def create() {
-        [subtotalExtraInstance: new SubtotalExtra(params)]
-    }
-
-    def save() {
-        def subtotalExtraInstance = new SubtotalExtra(params)
-        if (!subtotalExtraInstance.save(flush: true)) {
-            render(view: "create", model: [subtotalExtraInstance: subtotalExtraInstance])
-            return
-        }
-
-		flash.message = message(code: 'default.created.message', args: [message(code: 'subtotalExtra.label', default: 'SubtotalExtra'), subtotalExtraInstance.id])
-        redirect(action: "show", id: subtotalExtraInstance.id)
-    }
-
     def show() {
         def subtotalExtraInstance = SubtotalExtra.get(params.id)
         if (!subtotalExtraInstance) {
