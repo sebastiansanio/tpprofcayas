@@ -1,11 +1,13 @@
 package wish
 
-import org.apache.jasper.compiler.Node.ParamsAction;
+import login.User
+import org.apache.jasper.compiler.Node.ParamsAction
+import org.apache.shiro.SecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 
 import stakeholder.Supplier
-import product.Aluminum;
-import product.Extra;
+import product.Aluminum
+import product.Extra
 
 class AluminumWishController {
 
@@ -59,6 +61,16 @@ class AluminumWishController {
             return
         }
 
+        if ( User.findByUsername( SecurityUtils.subject.principal ).permissions.find{ it == "aluminumWish:showDetail"  } ) {
+            redirect( action:"showDetail", params:[id: aluminumWishInstance.id])
+            return
+        }
+        
+        [aluminumWishInstance: aluminumWishInstance]
+    }
+
+    def showDetail() {
+        def aluminumWishInstance = AluminumWish.get(params.id)
         [aluminumWishInstance: aluminumWishInstance]
     }
 

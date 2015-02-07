@@ -11,6 +11,9 @@ class AluminumSubWish {
 	static belongsTo	= [ wish: AluminumWish ]
 	static hasMany		= [ extras: Extra ]
 
+    static transients = ['subtotal']
+    def 			subtotal = 0
+
 	Aluminum		aluminum
 	Long			quantityPCS
 	    
@@ -51,20 +54,25 @@ class AluminumSubWish {
 	}
 	
 	def getSubtotal() {
-		def subtotal = wish.lintongx
-		
+
+		if ( subtotal != 0 )
+			return subtotal
+
+		subtotal = wish.lintongx	
 		extras.each {
 			subtotal += it.getTotal( aluminum )	
 		}
 		
-		return subtotal/1000
+		subtotal = subtotal/1000
+
+		return subtotal
 	}
 	
 	def getPacking() { //5,5% packing
 		def extraPacking = SubtotalExtra.findByCode( "PAC" )
 
 		if ( !extraPacking ) return 0
-		return (subtotal/extraPacking.number) - subtotal
+		return (getSubtotal()/extraPacking.number) - getSubtotal()
 	}
 
 	def getTotal() {
@@ -72,7 +80,7 @@ class AluminumSubWish {
 	}
 	
 	def getTotalAmountWithoutPacking() {
-		return totalTheoricalWeight * subtotal
+		return totalTheoricalWeight * getSubtotal()
 	}
 	
 	def getTotalAmountWithPacking() {

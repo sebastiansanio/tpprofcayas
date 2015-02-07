@@ -36,6 +36,15 @@
 			<td class="text-right"> <g:formatNumber number="${extra.getTotal(aluminumSubWishInstance?.aluminum)}" type="number" maxFractionDigits="2" /> </td>
 		</tr>
 		</g:each>
+		<tr class="subtotalResult">
+			<td> Subtotal </td>
+			<td class="text-right"> <g:formatNumber number="${aluminumSubWishInstance.subtotal}" type="number" maxFractionDigits="2" />  </td>
+		</tr>
+		<tr class="subtotalResult">
+			<td> Packing </td>
+			<td class="text-right"> <g:formatNumber number="${aluminumSubWishInstance.packing}" type="number" maxFractionDigits="2" />  </td>
+		</tr>
+
 		<tr class="totalResult">
 			<td> <g:message code="aluminumSubWish.totalFob.label" default="Total U\$S x Kg including packing"/>   </td>
 			<td class="text-right"> <g:formatNumber number="${aluminumSubWishInstance.total}" type="number" maxFractionDigits="4" />  </td>
