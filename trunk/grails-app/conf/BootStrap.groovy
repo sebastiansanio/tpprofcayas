@@ -187,8 +187,11 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Logos - Control total',permissionString:'logo:*')
 				permission.save()
-				
-				
+				permission = new Permission(description:'Pedido de Aluminio',permissionString:'aluminumWish:*')
+				permission.save()				
+				permission = new Permission(description:'Pedido de Aluminio - Ver detalle',permissionString:'aluminumWish:showDetail')
+				permission.save()
+
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
 				roleExternal.addToPermissions("alertExternal:*")
@@ -217,7 +220,7 @@ class BootStrap {
 				roleOperator.addToPermissions("alert:*")
 				roleOperator.addToPermissions("product:*")
 				roleOperator.addToPermissions("aluminum:*")
-				roleOperator.addToPermissions("aluminumWish:*")				
+				roleOperator.addToPermissions("aluminumWish:index,list,create,save,edit,update,delete,deleteSubWish,getAluminum")				
 				roleOperator.addToPermissions("wish:*")
 				roleOperator.addToPermissions("customer:*")
 				roleOperator.addToPermissions("supplier:*")
@@ -265,7 +268,9 @@ class BootStrap {
 				
 				def user = new User(username:"cayas", passwordHash: new Sha256Hash("cayas").toHex())
 				user.addToRoles(roleOperator)
+				user.addToPermissions("aluminumWish:showDetail")
 				user.save(flush:true)
+
 				user = new User(username:"operador", passwordHash: new Sha256Hash("operador").toHex())
 				user.addToRoles(roleOperator)
 				user.save(flush:true)

@@ -1,6 +1,7 @@
 
 <%@ page import="wish.AluminumWish" %>
 <%@ page import="aluminum.AluminumCalculator" %>
+
 <!doctype html>
 <html>
 
@@ -60,24 +61,39 @@
 
 			<tr class="prop">
 				<td colspan="2">
-					<g:render template="subwishShow" collection="${aluminumWishInstance.subWish}" var="aluminumSubWishInstance"/>
+					<g:render template="subwishShowDetail" collection="${aluminumWishInstance.subWish}" var="aluminumSubWishInstance"/>
 				</td>
 			</tr>
 
 			<tr class="finalTotal">
 				<td> <g:message code="aluminumWish.fob.without.packing.label" default="FOB SHENZHEN WITHOUT packing"/> </td>
-				<td class="text-right"> 
-					<g:formatNumber number="${calculator.fobShenzhenWithoutPacking}" type="number" maxFractionDigits="2" />  
-				</td>
+				<td class="text-right"> <g:formatNumber number="${calculator.fobShenzhenWithoutPacking}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
 			<tr class="finalTotal">
 				<td> <g:message code="aluminumWish.fob.with.packing.label" default="FOB SHENZHEN with packing"/> </td>
 				<td class="text-right"> <g:formatNumber number="${calculator.fobShenzhenWithPacking}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
 			<tr>
+				<td></td>
+				<td class="text-right"> <g:formatNumber number="${calculator.getDifferentBetweenWithAndWithoutPacking()}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr>
 				<td> <g:message code="aluminumWish.amount.chinesse.label" default="Amount to be declare at Chinesse custom"/> </td>
 				<td class="text-right"> <g:formatNumber number="${calculator.getAmountToBeDeclareAtChinesseCustom()}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
+			<tr>
+				<td> <g:message code="aluminumWish.diffent.label" default="Different"/> </td>
+				<td class="text-right"> <g:formatNumber number="${calculator.different}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr>
+				<td> <g:message code="aluminumWish.discount.label" default="Discount 10%"/> </td>
+				<td class="text-right"> <g:formatNumber number="${calculator.getDiscountXextras()}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+			<tr class="finalTotal">
+				<td> <g:message code="aluminumWish.diffentFinal.label" default="Different Gross"/> </td>
+				<td class="text-right"> <g:formatNumber number="${calculator.getNetFinalDifference()}" type="number" maxFractionDigits="2" />  </td>
+			</tr>
+
 
 		</tbody>
 	</table>
