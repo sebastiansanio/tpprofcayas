@@ -62,7 +62,7 @@ class AluminumWishController {
         }
 
         if ( User.findByUsername( SecurityUtils.subject.principal ).permissions.find{ it == "aluminumWish:showDetail"  } ) {
-            redirect( action:"showDetail", params:[id: aluminumWishInstance.id])
+            render view:'showDetail', model:[ aluminumWishInstance: aluminumWishInstance]
             return
         }
         
