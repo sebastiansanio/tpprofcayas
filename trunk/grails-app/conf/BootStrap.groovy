@@ -517,7 +517,7 @@ class BootStrap {
 				extra.save()
 				supplierAluminum.addToExtrasDefault( extra )
 
-				def extraShortProfile = new Extra( description: "Short profile", equation: "200")
+				def extraShortProfile = new Extra( description: "Short profile", equation: "if (\${length} < 3.5) \n 200 \n else \n 0 ")
 				extraShortProfile.save(flush:true)
 				
 				if ( !supplierAluminum.save( flush:true ) ) 
