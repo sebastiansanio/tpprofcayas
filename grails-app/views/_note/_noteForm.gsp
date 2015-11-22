@@ -58,18 +58,14 @@
 					<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" class="btn btn-primary" action="deleteNote" id="${noteInstance.id}" params="[containerId: id]"><i class="icon-trash"></i></g:link>
 				
 				</div>
-				
-				
 			</div>
 
 			<g:hiddenField id="notes[${i}].user" name="notes[${i}].user.id" value="${noteInstance?.user?.id}"/>
-
 	</div>
 	</g:if>
 	</g:each>
 	
 	
 </div>
-
 
 <input type="button" class="btn btn-primary" value="${message(code:'notes.add', default:'Add note')}" onClick="addNote();" />

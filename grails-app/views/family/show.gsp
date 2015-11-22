@@ -19,9 +19,12 @@
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="family.description.label" default="Description" /></td>
-				
 				<td valign="top" class="value">${fieldValue(bean: familyInstance, field: "description")}</td>
-				
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="family.margin.label" default="Margin" /></td>
+				<td valign="top" class="value">${fieldValue(bean: familyInstance, field: "margin")}</td>
 			</tr>
 
 			<tr class="prop">

@@ -17,6 +17,8 @@
 		<thead>
 			<tr>
 				<g:sortableColumn property="description" title="${message(code: 'family.description.label', default: 'Description')}" />
+				<g:sortableColumn property="margin" title="${message(code: 'family.margin.label', default: 'Description')}" />
+
 			</tr>
 		</thead>
 		<tbody>
@@ -24,6 +26,7 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
 				<td><g:link action="show" id="${familyInstance.id}">${fieldValue(bean: familyInstance, field: "description")}</g:link></td>
+				<td>${fieldValue(bean: familyInstance, field: "margin")}</td>
 			
 			</tr>
 		</g:each>

@@ -5,8 +5,16 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: familyInstance, field: 'description', 'error')} ">
 				<label for="description" class="control-label"><g:message code="family.description.label" default="Description" /></label>
 				<div class="controls">
-					<g:textField name="description" value="${familyInstance?.description}"/>
+					<g:textField name="description" value="${familyInstance?.description}" required=""/>
 					<span class="help-inline">${hasErrors(bean: familyInstance, field: 'description', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: familyInstance, field: 'margin', 'error')} ">
+				<label for="margin" class="control-label"><g:message code="family.margin.label" default="Margin" /></label>
+				<div class="controls">
+					<g:field type="number" name="margin" step="any" value="${familyInstance.margin}" required=""/>
+					<span class="help-inline">${hasErrors(bean: familyInstance, field: 'margin', 'error')}</span>
 				</div>
 			</div>
 

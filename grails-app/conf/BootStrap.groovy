@@ -191,6 +191,8 @@ class BootStrap {
 				permission.save()				
 				permission = new Permission(description:'Pedido de Aluminio - Ver detalle',permissionString:'aluminumWish:showDetail')
 				permission.save()
+				permission = new Permission(description:'Márgenes - Control total',permissionString:'customerFamilyMargin:*')
+				permission.save()
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -254,7 +256,8 @@ class BootStrap {
 				roleManager.addToPermissions("itemUnit:*")
 				roleManager.addToPermissions("logo:*")
 				roleManager.addToPermissions("extra:*")
-				roleManager.addToPermissions("subtotalExtra:*")				
+				roleManager.addToPermissions("subtotalExtra:*")		
+				roleManager.addToPermissions("customerFamilyMargin:*")
 				roleManager.save(flush:true)
 				
 				def localeEs = new AvailableLocale(language:'es',country:'ES')

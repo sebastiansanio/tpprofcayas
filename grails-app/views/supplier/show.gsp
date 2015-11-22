@@ -125,14 +125,14 @@
 						<td valign="top" class="name"><g:message code="stakeholder.owner.label" default="Owner" /></td>
 						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "owner")}</td>
 					</tr>
-
+					
 					<g:if test="${supplierInstance.extrasDefault}">
-					<tr class="prop">
-						<td valign="top" class="name"><g:message code="supplier.extrasDefault.label" default="Aluminum Extras" /></td>
-						
-						<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
-						
-					</tr>					
+						<tr class="prop">
+							<td valign="top" class="name"><g:message code="supplier.extrasDefault.label" default="Aluminum Extras" /></td>
+							
+							<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "email")}</td>
+							
+						</tr>					
 					</g:if>
 					
 					<tr class="prop">
