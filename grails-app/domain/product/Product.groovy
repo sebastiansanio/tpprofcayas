@@ -1,17 +1,10 @@
 package product
 
-import java.util.Date;
-import java.util.List;
-
-import stakeholder.Shipper
-import stakeholder.Supplier
-import modal.Country;
-import modal.Port
-import modal.PriceCondition
-import modal.Currency
-import wish.LoadUnit
-
+import java.math.MathContext
+import java.math.RoundingMode
 import org.hibernate.envers.Audited
+import stakeholder.Customer
+import wish.LoadUnit
 
 @Audited
 class Product extends AbstractProduct {
@@ -22,11 +15,8 @@ class Product extends AbstractProduct {
 	static hasMany		= [loadsUnits: LoadUnit, pricePerCustomer: PricePerCustomer]
 	
 	Color 				color
-		
 	String				customerCode
-	
 	String				status
-		
 	List				pricePerCustomer
 	
 	Family				family
@@ -137,4 +127,8 @@ class Product extends AbstractProduct {
 		return UNITS_PER_CONTAINER_VOLUME / getOuterBoxVolume() * quantityPerCarton
 	}
 	
+	BigDecimal calculateCustomerPrice(Customer customer) {
+		return pricePerUnit?.divide(BigDecimal.valueOf(1).minus(family.margin.divide(100, MathContext.DECIMAL128).plus(customer.getMargin(family).divide(100, MathContext.DECIMAL128))), MathContext.DECIMAL128 )?.setScale(4, RoundingMode.HALF_EVEN)
+		
+	}
 }

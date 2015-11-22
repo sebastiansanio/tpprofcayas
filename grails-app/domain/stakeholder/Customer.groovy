@@ -29,7 +29,7 @@ class Customer extends Stakeholder{
     }
 	
 	BigDecimal getMargin(Family family){
-		return margins.find{it.family.id == family.id}.margin?:defaultMargin
+		return margins.find{it.family.id == family.id}?.margin?:defaultMargin
 	}
 	
 	def beforeValidate(){

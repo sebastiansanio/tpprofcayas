@@ -50,6 +50,43 @@
 				<td valign="top" class="value"><g:link controller="subFamily" action="show" id="${productInstance?.subFamily?.id}">${productInstance?.subFamily?.encodeAsHTML()}</g:link></td>
 			</tr>
 			
+			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': productInstance]"/>
+		
+			<tr class="prop">
+				<td valign="top" class="name" colspan="2" >
+				
+					<g:message code="product.pricePerCustomer.label" default="Price Per Customer" />
+					
+					<g:if test="${productInstance.pricePerCustomer.size() != 0}">
+					
+					<table class="table">
+						<thead>
+							<tr>
+								<th> <g:message code="customer.label" default="Customer"/> </th>
+								<th> <g:message code="product.pricePerUnit.label" default="Price"/> </th>
+								<th> <g:message code="product.calculatedPrice.label"/> </th>
+								<th> </th>
+							</tr>
+						</thead>
+						<tbody>
+								<g:each in="${productInstance.pricePerCustomer}" var="p">								
+								<tr>
+									<td>${p.customer}</td>
+									<td>${p.price}</td>
+									<td>${productInstance.calculateCustomerPrice(p.customer)}</td>
+									<td><g:if test="${!p.price.equals(productInstance.calculateCustomerPrice(p.customer))}" ><g:form action="refreshPrice" id="${p.id }"> <g:submitButton class="btn btn-primary btn-small" name="${message(code:'product.refreshPrice.button')}" value="${message(code:'product.refreshPrice.button')}" /> </g:form></g:if></td>
+									
+								</tr>
+							</g:each>
+							
+						</tbody>
+					</table>
+					</g:if>
+					
+				</td>
+				
+			</tr>
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.color.label" default="Color" /></td>
 				<td valign="top" class="value"><g:link controller="color" action="show" id="${productInstance?.color?.id}">${productInstance?.color?.encodeAsHTML()}</g:link></td>
@@ -81,7 +118,6 @@
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="currency.label" default="Currency" /></td>
-				
 				<td valign="top" class="value"><g:link controller="currency" action="show" id="${productInstance?.currency?.id}">${productInstance?.currency?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
@@ -91,48 +127,14 @@
 				<td valign="top" class="value"><g:link controller="priceCondition" action="show" id="${productInstance?.priceCondition?.id}">${productInstance?.priceCondition?.encodeAsHTML()}</g:link></td>
 			</tr>
 			
-			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': productInstance]"/>
-
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
-				
 				<td valign="top" class="value">
 					<g:if test="${productInstance?.previousPrices?.size() > 1 }"> 
 						<g:formatDate format="dd/MM/yyyy HH:mm" date="${productInstance?.previousPrices?.last()?.dateFrom}" />
 					</g:if> 
 				</td>
 			</tr>
-
-			<tr class="prop">
-				<td valign="top" class="name" colspan="2" >
-				
-					<g:message code="product.pricePerCustomer.label" default="Price Per Customer" />
-					
-					<g:if test="${productInstance.pricePerCustomer.size() != 0}">
-					
-					<table class="table">
-						<thead>
-							<tr>
-								<th> <g:message code="customer.label" default="Customer"/> </th>
-								<th> <g:message code="product.pricePerUnit.label" default="Price"/> </th>
-							</tr>
-						</thead>
-						<tbody>
-								<g:each in="${productInstance.pricePerCustomer}" var="p">								
-								<tr>
-									<td> ${p.customer} </td>
-									<td> ${p.price} </td>
-								</tr>
-							</g:each>
-							
-						</tbody>
-					</table>
-					</g:if>
-					
-				</td>
-				
-			</tr>
-					
 
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="port.label" default="Port" /></td>

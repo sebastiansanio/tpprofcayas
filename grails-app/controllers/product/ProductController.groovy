@@ -289,4 +289,19 @@ class ProductController {
 			redirect(action: "edit", id: params.containerId)
 		}
 	}
+	
+	@Transactional
+	def refreshPrice(){
+		PricePerCustomer customerPriceInstance = PricePerCustomer.get(params.id)
+		
+		if (!customerPriceInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'pricePerCustomer.label'), params.id])
+			redirect(action: "list")
+			return
+		}
+		
+		customerPriceInstance.price = customerPriceInstance.product.calculateCustomerPrice(customerPriceInstance.customer)
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'pricePerCustomer.label'), customerPriceInstance.id])
+		redirect(action: "show", id: customerPriceInstance.product.id)
+	}
 }

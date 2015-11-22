@@ -316,7 +316,7 @@ class BootStrap {
 				}
 				
 				for(customerName in ["PSUR","DTA","RZZE","REH","LLI"]){
-					def customer = new Customer(defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
+					def customer = new Customer(defaultMargin: new BigDecimal(5),defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
 					customer.save(flush:true)
 					def userCustomer = new User(stakeholder:customer,username:customerName, passwordHash: new Sha256Hash(customerName).toHex())
 					userCustomer.addToRoles(roleExternal)
@@ -396,7 +396,7 @@ class BootStrap {
 				presentationType = new TypeOfPresentation(description: "SIN ARMAR")
 				presentationType.save(flush:true)
 				
-				Family family = new Family(description:"BACHAS")
+				Family family = new Family(description:"BACHAS", margin: new BigDecimal(2))
 				family.save(flush:true)
 				
 				SubFamily subfamily = new SubFamily(description:"Ø26mm", family: family)
@@ -404,11 +404,11 @@ class BootStrap {
 				subfamily = new SubFamily(description:"Ø35mm", family: family)
 				subfamily.save(flush:true)
 				
-				family = new Family(description:"BISAGRAS")
+				family = new Family(description:"BISAGRAS", margin: new BigDecimal(3))
 				family.save(flush:true)
-				family = new Family(description:"CERRADURAS")
+				family = new Family(description:"CERRADURAS", margin: new BigDecimal(4))
 				family.save(flush:true)
-				family = new Family(description:"PASACABLE")
+				family = new Family(description:"PASACABLE", margin: new BigDecimal(5))
 				family.save(flush:true)
 				
 				
