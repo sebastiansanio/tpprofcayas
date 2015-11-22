@@ -16,6 +16,30 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'descriptionEN', 'error')}</span>
 				</div>
 			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'hsCode', 'error')} required">
+				<label for="hsCode" class="control-label"><g:message code="product.hsCode.label" default="Hs Code" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:textField pattern="^[0-9]{4}\\.[0-9]{2}\\..*" name="hsCode" value="${productInstance?.hsCode}" required=""/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'hsCode', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'family', 'error')} required">
+				<label for="family" class="control-label"><g:message code="family.label" default="Family" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:select required="" id="family" noSelection="['null': '']" name="family.id" from="${product.Family.list()}" optionKey="id" required="" value="${productInstance?.family?.id}" class="many-to-one"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'family', 'error')}</span>
+				</div>
+			</div>
+			
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'subFamily', 'error')} ">
+				<label for="subFamily" class="control-label"><g:message code="subFamily.label" default="Sub Family" /></label>
+				<div class="controls">
+					<g:select id="subFamily" name="subFamily.id" from="${productInstance?.family?.subFamily}" optionKey="id" required="" value="${productInstance?.subFamily?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'subFamily', 'error')}</span>
+				</div>
+			</div>
 
 			<span id="codePerCustomer"></span> 
 
@@ -120,24 +144,6 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'consolidationArea', 'error')}</span>
 				</div>
 			</div>
-			
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'family', 'error')} required">
-				<label for="family" class="control-label"><g:message code="family.label" default="Family" /><span class="required-indicator">*</span></label>
-				<div class="controls">
-					<g:select id="family" noSelection="['null': '']" name="family.id" from="${product.Family.list()}" optionKey="id" required="" value="${productInstance?.family?.id}" class="many-to-one"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'family', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'subFamily', 'error')} ">
-				<label for="subFamily" class="control-label"><g:message code="subFamily.label" default="Sub Family" /></label>
-				<div class="controls">
-		
-					<g:select id="subFamily" name="subFamily.id" from="${productInstance?.family?.subFamily}" optionKey="id" required="" value="${productInstance?.subFamily?.id}" class="many-to-one" noSelection="['null': '']"/>
-				
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'subFamily', 'error')}</span>
-				</div>
-			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'attribute', 'error')} ">
 				<label for="attribute" class="control-label"><g:message code="product.attribute.label" default="Attribute" /></label>
@@ -184,14 +190,6 @@
 				<div class="controls">
 					<g:field type="number" name="criterionValue" step="0.0001" min="0.0000" value="${productInstance.criterionValue}"/>
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'criterionValue', 'error')}</span>
-				</div>
-			</div>
-
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'hsCode', 'error')} ">
-				<label for="hsCode" class="control-label"><g:message code="product.hsCode.label" default="Hs Code" /></label>
-				<div class="controls">
-					<g:textField name="hsCode" value="${productInstance?.hsCode}"/>
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'hsCode', 'error')}</span>
 				</div>
 			</div>
 

@@ -15,8 +15,12 @@
 
 <section id="show-wish" class="first">
 
-	<h4> <g:message code="wish.title.generalData.label" default="General Data"/> </h4>
+	<g:if test="${wishInstance.notes}">
+		<g:render template="/_note/noteShow" model="['notes':wishInstance?.notes]"/>
+	</g:if>
 
+	<h4> <g:message code="wish.title.generalData.label" default="General Data"/> </h4>
+	
 	<table class="table">
 		<tbody>
 			<tr class="prop">
@@ -656,15 +660,6 @@
 				<td valign="top" class="value"><g:formatDate date="${wishInstance?.finishDate}" /></td>
 				
 			</tr>
-		</tbody>
-	</table>
-			
-	<g:render template="/_note/noteShow" model="['notes':wishInstance?.notes]"/>
-	
-	<h4> <g:message code=" " default=" "/> </h4>
-											
-	<table class="table">
-		<tbody>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.dateCreated.label" default="Date Created" /></td>

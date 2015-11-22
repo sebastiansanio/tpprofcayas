@@ -48,6 +48,10 @@ class Product extends AbstractProduct {
 	
 	Long				boxesPerPallets
 	Long				piecesPerPallet
+	
+	String hsFamily
+	int hsInternalNumber
+	String companyCode
 	    
 	static constraints = {
 		color nullable:true
@@ -66,6 +70,8 @@ class Product extends AbstractProduct {
 		innerBoxHeight min:0.0000, scale:4, nullable:true
 		boxesPerPallets min:0L, nullable:true
 		piecesPerPallet min:0L, nullable:true
+		hsCode matches: "^[0-9]{4}\\.[0-9]{2}\\..*", nullable: false, blank: false
+		companyCode unique: true
 	
 		pricePerCustomer(validator: { listPricePerCustomer, obj, errors ->
 			
@@ -87,6 +93,19 @@ class Product extends AbstractProduct {
 		})
     }
 		
+	def beforeValidate() {
+		if(!hsFamily || !hsFamily.equals(hsCode.substring(0,7))){
+			hsFamily = hsCode.substring(0,7)
+			hsInternalNumber = (Product.createCriteria().get {
+				projections {
+					max "hsInternalNumber"
+				}
+				eq("hsFamily", hsFamily)
+			}?:0)+1
+			companyCode = hsFamily + "." + String.format("%05d",hsInternalNumber)
+		}
+	}
+	
 	BigDecimal getValuePerKilo() {
 		
 		if ( netWeightPerBox == null || netWeightPerBox == 0.0 || pricePerUnit == null || quantityPerCarton == null )
@@ -117,4 +136,5 @@ class Product extends AbstractProduct {
 			
 		return UNITS_PER_CONTAINER_VOLUME / getOuterBoxVolume() * quantityPerCarton
 	}
+	
 }
