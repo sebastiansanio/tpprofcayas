@@ -8,6 +8,9 @@ import org.hibernate.envers.Audited
 @Audited
 class AluminumWish {
 
+	Date dateCreated
+	Date lastUpdated
+	
 	static hasMany		= [ subWish: AluminumSubWish, subtotalExtras: SubtotalExtra ] 
 	
 	BigDecimal			lintongx

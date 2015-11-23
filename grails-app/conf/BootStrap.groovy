@@ -222,7 +222,7 @@ class BootStrap {
 				roleOperator.addToPermissions("alert:*")
 				roleOperator.addToPermissions("product:*")
 				roleOperator.addToPermissions("aluminum:*")
-				roleOperator.addToPermissions("aluminumWish:index,list,create,save,edit,update,delete,deleteSubWish,getAluminum")				
+				roleOperator.addToPermissions("aluminumWish:*")				
 				roleOperator.addToPermissions("wish:*")
 				roleOperator.addToPermissions("customer:*")
 				roleOperator.addToPermissions("supplier:*")
@@ -487,7 +487,7 @@ class BootStrap {
 				alertManagerService.generateAllAlerts()
 
 				/* proveedor de aluminio*/				
-				def supplierAluminum = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"aluminum supplier",country:Country.findByName("China"),address:".",taxRegistryNumber:"66465489")
+				def supplierAluminum = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:"Proveedor de aluminio",country:Country.findByName("China"),address:".",taxRegistryNumber:"66465489")
 				supplierAluminum.save(flush:true)
 				
 				/* pedido ejemplo */
@@ -495,7 +495,7 @@ class BootStrap {
 
 				/* extras del perfil de aluminio */
 				def extras = []
-				def extra = new Extra( description: "Fabrication Fee (by Net weight) // MAT SILVER ANODIZED 10 MICRONS // 6063-T5 // including estándar packing material", equation: "900")
+				def extra = new Extra( description: "Fabrication Fee (by Net weight)", equation: "900")
 				extras.add( extra )
 				extra.save()
 				supplierAluminum.addToExtrasDefault( extra )
@@ -505,17 +505,17 @@ class BootStrap {
 				extra.save()
 				supplierAluminum.addToExtrasDefault( extra )
 
-				extra = new Extra( description: "Rack marks cut off at one end of profiles due to upright anodized proccess", equation: "150")
+				extra = new Extra( description: "Cut rackmark", equation: "150")
 				extras.add( extra )				
 				extra.save()
 				supplierAluminum.addToExtrasDefault( extra )
 
-				extra = new Extra ( description: "Weight Less than 0.20kg/m", equation: "if (\${theoricalWeight} < 0.20) \n 150 \n else \n 0 " )
+				extra = new Extra ( description: "Less than 0.20kg/m", equation: "if (\${theoricalWeight} < 0.20) \n 150 \n else \n 0 " )
 				extras.add( extra )				
 				extra.save()
 				supplierAluminum.addToExtrasDefault( extra )
 
-				extra = new Extra( description: "TAP - plastic film // stick plastic film on exposed surface", equation: "150")	
+				extra = new Extra( description: "TAP - plastic film", equation: "150")	
 				extras.add( extra )				
 				extra.save()
 				supplierAluminum.addToExtrasDefault( extra )

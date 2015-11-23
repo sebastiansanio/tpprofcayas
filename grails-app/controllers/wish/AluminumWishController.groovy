@@ -1,6 +1,8 @@
 package wish
 
 import login.User
+import org.springframework.transaction.annotation.Transactional
+
 import org.apache.jasper.compiler.Node.ParamsAction
 import org.apache.shiro.SecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
@@ -9,13 +11,31 @@ import stakeholder.Supplier
 import product.Aluminum
 import product.Extra
 
+
 class AluminumWishController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", getAluminum:"GET"]
 
+	def aluminumWishExportService
+	
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def downloadFile() {
+		
+		def aluminumWishInstance = AluminumWish.get(params.id)
+		if (!aluminumWishInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'aluminumWish.label', default: 'AluminumWish'), params.id])
+			redirect(action: "list")
+			return
+		}
+		
+		response.setHeader("Content-disposition", "attachment;filename=Cotizacion_${aluminumWishInstance.code}.xlsx")
+		aluminumWishExportService.exportXlsx(aluminumWishInstance,response.outputStream)
+		response.outputStream.flush()
+		
+	}
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
@@ -25,7 +45,7 @@ class AluminumWishController {
     def create() {
         [aluminumWishInstance: new AluminumWish(params)]
     }
-
+	@Transactional
     def save() {
 	
 		def aluminumWishInstance = new AluminumWish(params)
@@ -84,7 +104,7 @@ class AluminumWishController {
 
         [aluminumWishInstance: aluminumWishInstance]
     }
-
+	@Transactional
     def update() {
         def aluminumWishInstance = AluminumWish.get(params.id)
         if (!aluminumWishInstance) {
@@ -128,7 +148,7 @@ class AluminumWishController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'aluminumWish.label', default: 'AluminumWish'), aluminumWishInstance.id])
         redirect(action: "show", id: aluminumWishInstance.id)
     }
-
+	@Transactional
     def delete() {
         def aluminumWishInstance = AluminumWish.get(params.id)
         if (!aluminumWishInstance) {

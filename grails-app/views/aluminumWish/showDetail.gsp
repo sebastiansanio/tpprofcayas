@@ -74,7 +74,7 @@
 				<td class="text-right"> <g:formatNumber number="${calculator.fobShenzhenWithPacking}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
 			<tr>
-				<td></td>
+				<td>E1</td>
 				<td class="text-right"> <g:formatNumber number="${calculator.getDifferentBetweenWithAndWithoutPacking()}" type="number" maxFractionDigits="2" />  </td>
 			</tr>
 			<tr>

@@ -24,6 +24,8 @@
 				<th> <g:message code="aluminumWish.customer.label"default='Customer'/>	</th>
 
 				<g:sortableColumn property="lintongx" title="${message(code: 'aluminumWish.lintongx.label', default: 'Lintongx')}" />
+
+				<th> <g:message code="aluminumWish.downloadFile.label"/>	</th>
 			
 			</tr>
 		</thead>
@@ -38,6 +40,8 @@
 				<td><g:link controller="customer" action="show" id="${aluminumWishInstance.customer.id}">${fieldValue(bean: aluminumWishInstance, field: "customer")}</g:link></td>				
 			
 				<td>${fieldValue(bean: aluminumWishInstance, field: "lintongx")}</td>
+
+				<td><g:link action="downloadFile" id="${aluminumWishInstance.id}" ><i class="icon-download-alt"></i></g:link></td>
 			
 			</tr>
 		</g:each>

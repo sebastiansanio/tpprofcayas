@@ -15,7 +15,7 @@ class Extra {
 
 
 	static constraints = {
-		description blank:false, nullable: false
+		description blank:false, nullable: false, unique: true
 		equation blank:false, nullable: false
     }
 	
@@ -29,6 +29,27 @@ class Extra {
 		def shell = new GroovyShell()
 		BigDecimal number = shell.evaluate( equationAdapt )
 		return number
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Extra other = (Extra) obj;
+		if (!this.description.equals(other.description)) {
+			return false;
+		}
+		return true;
+	}
+	 
+	@Override
+	public int hashCode() {
+		
+		return description.hashCode();
 	}
 	
 	@Override 

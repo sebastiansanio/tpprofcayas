@@ -98,4 +98,12 @@ class AluminumSubWish {
 		return e2 / quantityPCS
 	}
 	
+	def calculateExtraValue(Extra extra){
+		if(extras.contains(extra)){
+			return extra.getTotal(aluminum)
+		} else {
+			return 0
+		}
+	}
+	
 }
