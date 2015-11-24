@@ -19,9 +19,12 @@ class ProductWishItem {
 	static belongsTo	= [wish: ProductWish]	
 	
 	static constraints = {
-		quantity nullable:true,min:0.0001,scale:4
-		unitPrice nullable:true,min:0.0001,scale:4
+		quantity nullable:false,min:0.0001,scale:4
+		unitPrice nullable:false,min:0.0001,scale:4
     }
 	
+	BigDecimal getTotal(){
+		return quantity.multiply(unitPrice).setScale(2)
+	}
 
 }
