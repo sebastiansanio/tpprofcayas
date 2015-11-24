@@ -193,6 +193,8 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Márgenes - Control total',permissionString:'customerFamilyMargin:*')
 				permission.save()
+				permission = new Permission(description:'Pedido de productos - Control total',permissionString:'productWish:*')
+				permission.save()
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -239,6 +241,7 @@ class BootStrap {
 				roleOperator.addToPermissions("courierRecord:*")
 				roleOperator.addToPermissions("audit:*")
 				roleOperator.addToPermissions("letterOfGuarantee:*")
+				roleOperator.addToPermissions("productWish:*")
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
