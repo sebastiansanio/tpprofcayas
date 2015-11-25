@@ -195,6 +195,8 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Pedido de productos - Control total',permissionString:'productWish:*')
 				permission.save()
+				permission = new Permission(description:'Reportes de pedidos de artículos - Control total',permissionString:'productWishReport:*')
+				permission.save()
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -235,6 +237,7 @@ class BootStrap {
 				roleOperator.addToPermissions("port:*")
 				roleOperator.addToPermissions("ship:*")
 				roleOperator.addToPermissions("report:*")
+				roleOperator.addToPermissions("productWishReport:*")
 				roleOperator.addToPermissions("contact:*")
 				roleOperator.addToPermissions("*:show")
 				roleOperator.addToPermissions("courier:*")
@@ -319,7 +322,7 @@ class BootStrap {
 				}
 				
 				for(customerName in ["PSUR","DTA","RZZE","REH","LLI"]){
-					def customer = new Customer(defaultMargin: new BigDecimal(5),defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
+					def customer = new Customer(prefix: customerName.substring(0,2) ,defaultMargin: new BigDecimal(5),defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
 					customer.save(flush:true)
 					def userCustomer = new User(stakeholder:customer,username:customerName, passwordHash: new Sha256Hash(customerName).toHex())
 					userCustomer.addToRoles(roleExternal)

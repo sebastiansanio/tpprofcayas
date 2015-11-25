@@ -129,6 +129,14 @@ class Product extends AbstractProduct {
 	
 	BigDecimal calculateCustomerPrice(Customer customer) {
 		return pricePerUnit?.divide(BigDecimal.valueOf(1).minus(family.margin.divide(100, MathContext.DECIMAL128).plus(customer.getMargin(family).divide(100, MathContext.DECIMAL128))), MathContext.DECIMAL128 )?.setScale(4, RoundingMode.HALF_EVEN)
-		
 	}
+	
+	String retrieveCodeByCustomer(Customer customer) {
+		return codePerCustomer?.find{it.customer.id == customer.id}?.code?:customerCode
+	}
+	
+	BigDecimal retrievePriceByCustomer(Customer customer) {
+		return pricePerCustomer?.find{it.customer.id == customer.id}?.price
+	}
+
 }

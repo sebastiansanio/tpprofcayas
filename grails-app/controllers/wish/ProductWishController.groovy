@@ -24,7 +24,7 @@ class ProductWishController {
 	@Transactional
     def save() {
         def productWishInstance = new ProductWish(params)
-		productWishInstance.items.removeAll { it.product.id == null }
+		productWishInstance?.items?.removeAll { it.product.id == null }
         if (!productWishInstance.save(flush: true)) {
             render(view: "create", model: [productWishInstance: productWishInstance])
             return
@@ -87,7 +87,7 @@ class ProductWishController {
         }
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'productWish.label', default: 'ProductWish'), productWishInstance.id])
-        redirect(action: "show", id: productWishInstance.id)
+        redirect(action: "edit", id: productWishInstance.id)
     }
 	@Transactional
     def delete() {

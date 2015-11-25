@@ -36,6 +36,13 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'prefix', 'error')} ">
+				<label for="prefix" class="control-label"><g:message code="customer.prefix.label" /></label>
+				<div class="controls">
+					<g:textField name="prefix" value="${customerInstance?.prefix}"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'prefix', 'error')}</span>
+				</div>
+			</div>
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'address', 'error')} ">
 				<label for="address" class="control-label"><g:message code="customer.address.label" default="Address" /></label>
 				<div class="controls">
@@ -43,6 +50,7 @@
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'address', 'error')}</span>
 				</div>
 			</div>
+			
 
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'cuit', 'error')} ">
 				<label for="cuit" class="control-label"><g:message code="customer.cuit.label" default="Cuit" /></label>

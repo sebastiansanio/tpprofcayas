@@ -34,6 +34,13 @@
 						<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "name")}</td>
 						
 					</tr>
+					
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="customer.prefix.label" /></td>
+						
+						<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "prefix")}</td>
+						
+					</tr>
 				
 					<tr class="prop">
 						<td valign="top" class="name"><g:message code="customer.country.label" default="Country" /></td>

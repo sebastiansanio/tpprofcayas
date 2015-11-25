@@ -23,6 +23,8 @@
 				<g:sortableColumn property="dateCreated" title="${message(code: 'productWish.dateCreated.label', default: 'Date Created')}" />
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'productWish.lastUpdated.label', default: 'Last Updated')}" />
+	
+				<th><g:message code="productWish.amount.label" /></th>
 			
 			</tr>
 		</thead>
@@ -36,6 +38,8 @@
 				<td><g:formatDate date="${productWishInstance.dateCreated}" /></td>
 			
 				<td><g:formatDate date="${productWishInstance.lastUpdated}" /></td>
+				
+				<td>${productWishInstance.total}</td>
 			
 			</tr>
 		</g:each>

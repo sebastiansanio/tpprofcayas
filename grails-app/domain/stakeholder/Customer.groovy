@@ -16,6 +16,7 @@ class Customer extends Stakeholder{
 	
 	String address
 	String cuit
+	String prefix
 
 	BigDecimal defaultMargin
 	
@@ -26,6 +27,7 @@ class Customer extends Stakeholder{
     
 	static constraints = {
 		defaultMargin min:0.0000, scale:4, nullable:false
+		prefix nullable: false, blank:false, unique: true
     }
 	
 	BigDecimal getMargin(Family family){
