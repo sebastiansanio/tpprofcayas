@@ -225,16 +225,16 @@ function refreshTotal(idx){
 	var productId = $('#product-'+idx).val();
 	
 	var total = safeParseFloat($('#quantity-'+idx).val()) * safeParseFloat($('#unitPrice-'+idx).val());
-	$('#total-'+idx).val(total);
+	$('#total-'+idx).val(total.toFixed(2));
 
 	var quantityOfCartons = safeParseFloat($('#quantity-'+idx).val()) / productsQuantityPerCartonMap[productId];
-	$('#quantityOfCartons-'+idx).val(quantityOfCartons);
+	$('#quantityOfCartons-'+idx).val(quantityOfCartons.toFixed(2));
 	
 	var totalGrossKilograms = quantityOfCartons  * safeParseFloat(productsGrossWeightPerBoxMap[productId]) ;
-	$('#totalGrossKilograms-'+idx).val(totalGrossKilograms);
+	$('#totalGrossKilograms-'+idx).val(totalGrossKilograms.toFixed(2));
 
 	var totalVolume = quantityOfCartons * safeParseFloat(productsOuterBoxVolumeMap[productId]);
-	$('#totalVolume-'+idx).val(totalVolume);
+	$('#totalVolume-'+idx).val(totalVolume.toFixed(2));
 
 	
 	refreshTotals();
@@ -245,25 +245,25 @@ function refreshTotals(){
 	$(".field-total" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-total').text(total);
+	$('#total-total').text(total.toFixed(2));
 
 	var totalGrossKilograms = 0;
 	$(".field-totalGrossKilograms" ).each(function( index ) {
 		totalGrossKilograms = totalGrossKilograms + safeParseFloat($(this ).val());
 	});
-	$('#total-totalGrossKilograms').text(totalGrossKilograms);
+	$('#total-totalGrossKilograms').text(totalGrossKilograms.toFixed(2));
 
 	var totalVolume = 0;
 	$(".field-totalVolume" ).each(function( index ) {
 		totalVolume = totalVolume + safeParseFloat($(this ).val());
 	});
-	$('#total-totalVolume').text(totalVolume);
+	$('#total-totalVolume').text(totalVolume.toFixed(2));
 
 	var quantityOfCartons = 0;
 	$(".field-quantityOfCartons" ).each(function( index ) {
 		quantityOfCartons = quantityOfCartons + safeParseFloat($(this ).val());
 	});
-	$('#total-quantityOfCartons').text(quantityOfCartons);
+	$('#total-quantityOfCartons').text(quantityOfCartons.toFixed(2));
 }
 
 function safeParseFloat(inputString){
