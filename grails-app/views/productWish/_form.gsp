@@ -109,20 +109,39 @@
 				<th>${message(code: 'productWishItem.unitPrice.label')}</th>
 				<th>${message(code: 'productWishItem.quantity.label')}</th>
 				<th>${message(code: 'productWishItem.total.label')}</th>
+				<th>${message(code: 'productWishItem.totalGrossKilograms.label')}</th>
+				<th>${message(code: 'productWishItem.totalVolume.label')}</th>
+				<th>${message(code: 'productWishItem.totalQuantityOfCartons.label')}</th>
 				<th>${message(code: 'productWishItem.customerPrice.label')}</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody id="items-table">
 			<g:each var="productWishItem" in="${productWishInstance?.items}" status="i">
 				<tr class="form-inline" id="items-${i}">
-					<td class="td-intableform"><g:select onchange="productChanged('${i}');" class="input-medium form-control" id="product-${i}" name="items[${i}].product.id" from="${products}" optionKey="id" required="" value="${productWishItem.product.id}"/></td>
-					<td class="td-intableform"><g:field onchange="refreshRow('${i}');" type="text" class="input-medium form-control numberinput field-unitPrice" id="unitPrice-${i}" name="items[${i}].unitPrice" value="${productWishItem.unitPrice}" required=""/></td>
-					<td class="td-intableform"><g:field onchange="refreshRow('${i}');" type="text" class="input-medium form-control numberinput field-quantity" id="quantity-${i}" name="items[${i}].quantity" value="${productWishItem.quantity}" required=""/></td>
-					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-medium form-control field-total" id="total-${i}" name="items[${i}].total" value="${productWishItem.total}" /></td>
-					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-medium form-control field-calculatedPrice" id="calculatedPrice-${i}" name="items[${i}].calculatedPrice" value="${productWishItem.product.calculateCustomerPrice(productWishInstance?.customer)}" /></td>
+					<td class="td-intableform"><g:select onchange="productChanged('${i}');" class="input-small form-control" id="product-${i}" name="items[${i}].product.id" from="${products}" optionKey="id" required="" value="${productWishItem.product.id}"/></td>
+					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-small form-control numberinput field-unitPrice" id="unitPrice-${i}" name="items[${i}].unitPrice" value="${productWishItem.unitPrice}" required=""/></td>
+					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-small form-control numberinput field-quantity" id="quantity-${i}" name="items[${i}].quantity" value="${productWishItem.quantity}" required=""/></td>
+					
+					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-small form-control field-total" id="total-${i}" name="items[${i}].total" value="" /></td>
+					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-small form-control field-totalGrossKilograms" id="totalGrossKilograms-${i}" name="items[${i}].totalGrossKilograms" value="" /></td>
+					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-small form-control field-totalVolume" id="totalVolume-${i}" name="items[${i}].totalVolume" value="" /></td>
+					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-small form-control field-quantityOfCartons" id="quantityOfCartons-${i}" name="items[${i}].quantityOfCartons" value="" /></td>
+					
+					<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-small form-control field-currentPrice" id="currentPrice-${i}" name="items[${i}].currentPrice" value="${productWishItem.product.retrievePriceByCustomer(productWishInstance?.customer)}" /></td>
 					<td><button type="button" class="btn btn-danger deleteButton" onclick="$('#items-${i}').remove();"><i class="icon-trash"></i></button></td>
 				</tr>
 			</g:each>
+		</tbody>
+		<tbody>
+			<tr>
+				<td colspan="3">${message(code:'default.totals.label')}</td>
+				<td class="right-aligned" id="total-total"></td>
+				<td class="right-aligned" id="total-totalGrossKilograms"></td>
+				<td class="right-aligned" id="total-totalVolume"></td>
+				<td class="right-aligned" id="total-quantityOfCartons"></td>
+				<td colspan="2"></td>
+			</tr>
 		</tbody>
 	</table>
 	
@@ -134,11 +153,17 @@
 
 <table>
 	<tr class="form-inline" id="item-model">
-		<td class="td-intableform"><g:select disabled="disabled" class="input-medium form-control" id="product-xyz" name="items[xyz].product.id" from="${products}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-medium form-control numberinput field-unitPrice" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-medium form-control numberinput field-quantity" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-medium form-control numberinput field-total disabled" id="total-xyz" name="items[xyz].total" value="" /></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-medium form-control numberinput field-calculatedPrice disabled" id="calculatedPrice-xyz" name="items[xyz].calculatedPrice" value="" /></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-small form-control product-input" id="product-xyz" name="items[xyz].product.id" from="${products}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput field-unitPrice" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput field-quantity" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
+		
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput disabled field-total" id="total-xyz" name="items[xyz].total" value="" /></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput disabled field-totalGrossKilograms" id="totalGrossKilograms-xyz" name="items[xyz].totalGrossKilograms" value="" /></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput disabled field-totalVolume" id="totalVolume-xyz" name="items[xyz].totalVolume" value="" /></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput disabled field-quantityOfCartons" id="quantityOfCartons-xyz" name="items[xyz].quantityOfCartons" value="" /></td>
+			
+		
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-small form-control numberinput field-currentPrice disabled" id="currentPrice-xyz" name="items[xyz].currentPrice" value="" /></td>
 		<td><button type="button" class="btn btn-danger deleteButton" ><i class="icon-trash"></i></button></td>
 	</tr>
 </table>
@@ -151,9 +176,16 @@
 <script>
 var productsCustomerPriceMap = new Array();
 var productsCalculatedPriceMap = new Array();
+var productsQuantityPerCartonMap = new Array();
+var productsGrossWeightPerBoxMap = new Array();
+var productsOuterBoxVolumeMap = new Array();
 <%
 	products.each{
+		out.println(""" productsCustomerPriceMap[${it.id}] = ${it.retrievePriceByCustomer(productWishInstance?.customer)} ;""")
 		out.println(""" productsCalculatedPriceMap[${it.id}] = ${it.calculateCustomerPrice(productWishInstance?.customer)} ;""")
+		out.println(""" productsQuantityPerCartonMap[${it.id}] = ${it.quantityPerCarton} ;""")
+		out.println(""" productsGrossWeightPerBoxMap[${it.id}] = ${it.grossWeightPerBox} ;""")
+		out.println(""" productsOuterBoxVolumeMap[${it.id}] = ${it.outerBoxVolume} ;""")
 	}	
 %>
 
@@ -168,29 +200,70 @@ function addItem(){
 		$(this).attr('id',$(this).attr('id').replace('xyz',itemsQuantity));
 		$(this).prop("disabled", false);
 	});
-	
+
 	var currentItemQuantity = itemsQuantity;
+
+	$(".product-input", $tmc).change(function() {
+		productChanged(currentItemQuantity);
+	});
+
 	$(".numberinput", $tmc).change(function() {
 		refreshTotal(currentItemQuantity);
 	});
 	$(".deleteButton", $tmc).click(function() {
 		$('#items-'+currentItemQuantity).remove();
 	});
-
 	
 	$tmc.appendTo("#items-table");
-	itemsQuantity = itemsQuantity + 1;
 	$(".disabled").prop("disabled", true);
+	productChanged(itemsQuantity);
+	itemsQuantity = itemsQuantity + 1;
 }
 
 function refreshTotal(idx){
-	var total = safeParseFloat($('#amount-'+idx).val())+ safeParseFloat($('#iva-'+idx).val()) + safeParseFloat($('#iibb-'+idx).val()) + safeParseFloat($('#otherPerceptions-'+idx).val());
+
+	var productId = $('#product-'+idx).val();
+	
+	var total = safeParseFloat($('#quantity-'+idx).val()) * safeParseFloat($('#unitPrice-'+idx).val());
 	$('#total-'+idx).val(total);
+
+	var quantityOfCartons = safeParseFloat($('#quantity-'+idx).val()) / productsQuantityPerCartonMap[productId];
+	$('#quantityOfCartons-'+idx).val(quantityOfCartons);
+	
+	var totalGrossKilograms = quantityOfCartons  * safeParseFloat(productsGrossWeightPerBoxMap[productId]) ;
+	$('#totalGrossKilograms-'+idx).val(totalGrossKilograms);
+
+	var totalVolume = quantityOfCartons * safeParseFloat(productsOuterBoxVolumeMap[productId]);
+	$('#totalVolume-'+idx).val(totalVolume);
+
+	
 	refreshTotals();
 }
 
 function refreshTotals(){
-	var amount = 0;
+	var total = 0;
+	$(".field-total" ).each(function( index ) {
+		total = total + safeParseFloat($(this ).val());
+	});
+	$('#total-total').text(total);
+
+	var totalGrossKilograms = 0;
+	$(".field-totalGrossKilograms" ).each(function( index ) {
+		totalGrossKilograms = totalGrossKilograms + safeParseFloat($(this ).val());
+	});
+	$('#total-totalGrossKilograms').text(totalGrossKilograms);
+
+	var totalVolume = 0;
+	$(".field-totalVolume" ).each(function( index ) {
+		totalVolume = totalVolume + safeParseFloat($(this ).val());
+	});
+	$('#total-totalVolume').text(totalVolume);
+
+	var quantityOfCartons = 0;
+	$(".field-quantityOfCartons" ).each(function( index ) {
+		quantityOfCartons = quantityOfCartons + safeParseFloat($(this ).val());
+	});
+	$('#total-quantityOfCartons').text(quantityOfCartons);
 }
 
 function safeParseFloat(inputString){
@@ -201,7 +274,19 @@ function safeParseFloat(inputString){
 	return result;
 }
 
+function productChanged(index){
+	var productId = $('#product-'+index).val();
+	
+	$('#unitPrice-'+index).val(productsCalculatedPriceMap[productId]);
+	$('#currentPrice-'+index).val(productsCustomerPriceMap[productId]);
+	refreshTotal(index);
+	
+}
+
 $(function() {
+	for (i = 0; i < itemsQuantity; i++) { 
+		refreshTotal(i);
+	}
 	refreshTotals();
 
 });
