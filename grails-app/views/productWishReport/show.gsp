@@ -19,30 +19,33 @@
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="productWishReport.name.label" default="Name" /></td>
-				
 				<td valign="top" class="value">${fieldValue(bean: productWishReportInstance, field: "name")}</td>
-				
 			</tr>
 		
+		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="report.fields.label" /></td>
+				
+				<td valign="top" class="value">
+				
+				<g:each in="${productWishReportInstance.fields}" var="s">
+					<li>${message(code:"productWishItem."+s+".label")}</li>
+				</g:each>
+				
+				</td>
+			</tr>
+			
+			
+			
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="productWishReport.dateCreated.label" default="Date Created" /></td>
-				
 				<td valign="top" class="value"><g:formatDate date="${productWishReportInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="productWishReport.fields.label" default="Fields" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: productWishReportInstance, field: "fields")}</td>
-				
 			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="productWishReport.lastUpdated.label" default="Last Updated" /></td>
-				
 				<td valign="top" class="value"><g:formatDate date="${productWishReportInstance?.lastUpdated}" /></td>
-				
 			</tr>
 		
 		</tbody>

@@ -1,13 +1,20 @@
 package wish
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+import login.User
 import org.springframework.dao.DataIntegrityViolationException
-
 import org.springframework.transaction.annotation.Transactional
+import org.apache.shiro.SecurityUtils
+import org.springframework.web.servlet.support.RequestContextUtils
+import report.ProductWishReport
 
 class ProductWishController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd")
+	def productWishExportService
+	
     def index() {
         redirect(action: "list", params: params)
     }
@@ -108,4 +115,13 @@ class ProductWishController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def export() {
+		ProductWishReport report = ProductWishReport.get(params.reportId.toLong())
+		ProductWish order = ProductWish.get(params.id.toLong())
+		response.contentType=grailsApplication.config.grails.mime.types["xlsx"]
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'productWish.label')} "+DATE_FORMAT.format(new Date())+".xlsx")
+		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
+		productWishExportService.exportWish(response.outputStream,RequestContextUtils.getLocale(request),report,order)
+	}
 }

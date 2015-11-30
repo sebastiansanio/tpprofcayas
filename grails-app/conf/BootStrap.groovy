@@ -1,3 +1,4 @@
+import report.ProductWishReport
 import report.Report
 import stakeholder.Agent
 import stakeholder.Forwarder
@@ -17,33 +18,10 @@ import courier.Courier
 import courier.DocumentsCourierRecord
 import courier.SpecialCourierRecord
 import login.*
-import login.Role
-import login.User
-import login.Permission
 import modal.*
-import modal.AvailableLocale
-import modal.WishStatus
-import modal.PaymentTerm
-import modal.PriceCondition
-import modal.Currency
-import modal.Ship
-import modal.Country
-import modal.Port
-import modal.PaymentStatus
-import modal.DocumentType
 import wish.*
-import wish.AluminumSubWish
-import wish.AluminumWish
-import wish.Wish
-import wish.SubtotalExtra
 import stakeholder.*
 import product.*
-import product.SubFamily
-import product.ItemUnit
-import product.Aluminum
-import product.Family
-import product.Color
-import product.TypeOfPresentation
 
 class BootStrap {
 	def alertManagerService
@@ -52,7 +30,16 @@ class BootStrap {
     def init = { servletContext ->
 		
 		if(Environment.current != Environment.PRODUCTION) {
-			User.withTransaction{		
+			User.withTransaction{
+				List productWishReportFields = ["descriptionSP", "descriptionEN", "color", "customerCode", 
+					"itemUnit", "currency", "priceCondition", "unitPrice", "countryOfOrigin", 
+					"countryOfProcedence", "criterionValue", "valuePerKilo", "hsCode", "tax", 
+					"quantityPerCarton", "netWeightPerBox", "grossWeightPerBox", "volumePerBox", 
+					"totalNetKilograms", "totalGrossKilograms", "totalVolume", "quantity", 
+					"quantityOfCartons", "totalVacr", "total"]
+				def productWishReport = new ProductWishReport(name: 'DJAI',fields: productWishReportFields)
+				productWishReport.save(flush:true)
+					
 				List supplierReportFields = ["opNumber","customer","supplier","shipper","supplierOrder","currencyFob","currency","deliveryDate","estimatedTimeOfDeparture","timeOfDeparture","estimatedTimeOfArrival","timeOfArrival",
 					"wishDate","dateOfMoneyInAdvanceTransfer","paymentTerm","wishStatus","visaChargePayment","visaChargePaymentConcept","shippingMark","customerLogoPunch","hsCodeToBeWritten",
 					"amountOfMoneyInAdvanceTransferred","moneyBalance","dateOfBalancePayment","picturesOfPrintingBoxesAndLoadReceived","picturesOfLoadingContainerReceived","sourceCountry","port",
@@ -217,6 +204,7 @@ class BootStrap {
 				roleAdmin.addToPermissions("wishStatus:*")
 				roleAdmin.addToPermissions("availableLocale:*")
 				roleAdmin.addToPermissions("report:*")
+				roleAdmin.addToPermissions("productWishReport:*")
 				roleAdmin.addToPermissions("*:show")
 				roleAdmin.addToPermissions("permission:*")
 				roleAdmin.addToPermissions("role:*")

@@ -26,6 +26,7 @@
 				
 			</tr>
 		
+		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="report.fields.label" default="Fields" /></td>
 				
@@ -38,7 +39,6 @@
 				</td>
 				
 			</tr>
-		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="report.dateCreated.label" default="Date Created" /></td>
 				

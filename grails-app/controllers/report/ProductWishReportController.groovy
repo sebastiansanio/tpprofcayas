@@ -1,11 +1,15 @@
 package report
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat
+import login.User
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.transaction.annotation.Transactional
+import org.apache.shiro.SecurityUtils
+import org.springframework.web.servlet.support.RequestContextUtils
+import wish.ProductWish
 
-/**
- * ProductWishReportController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
+@Transactional
 class ProductWishReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,7 +19,8 @@ class ProductWishReportController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.sort = params.sort?: 'name'
+		params.max = Math.min(params.max ? params.int('max') : 100, 200)
         [productWishReportInstanceList: ProductWishReport.list(params), productWishReportInstanceTotal: ProductWishReport.count()]
     }
 
@@ -104,4 +109,6 @@ class ProductWishReportController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+
 }

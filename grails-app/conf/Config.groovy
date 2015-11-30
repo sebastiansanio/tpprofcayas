@@ -5,6 +5,7 @@ grails.mime.file.extensions = true
 grails.mime.use.accept.header = false
 grails.mime.types = [
     all:           '*/*',
+	xlsx:		   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     atom:          'application/atom+xml',
     css:           'text/css',
     csv:           'text/csv',

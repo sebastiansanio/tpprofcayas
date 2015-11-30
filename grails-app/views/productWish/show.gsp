@@ -16,12 +16,16 @@
 
 	<table class="table">
 		<tbody>
-		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="productWish.code.label" /></td>
+				
+				<td valign="top" class="value">${productWishInstance.code}</td>
+			</tr>
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="productWish.customer.label" default="Customer" /></td>
 				
 				<td valign="top" class="value"><g:link controller="customer" action="show" id="${productWishInstance?.customer?.id}">${productWishInstance?.customer?.encodeAsHTML()}</g:link></td>
-				
 			</tr>
 		
 			<tr class="prop">
