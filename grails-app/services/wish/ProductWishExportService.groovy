@@ -29,6 +29,16 @@ class ProductWishExportService implements MessageSourceAware {
 	def exportService
 	MessageSource messageSource
 	
+	private static final List NUMBER_FIELDS = ["unitPrice", "criterionValue", "valuePerKilo",  
+					"quantityPerCarton", "netWeightPerBox", "grossWeightPerBox", "volumePerBox", 
+					"totalNetKilograms", "totalGrossKilograms", "totalVolume", "quantity", 
+					"quantityOfCartons", "totalVacr", "total"]
+	private static final List TOTAL_FIELDS = ["totalNetKilograms", "totalGrossKilograms", "totalVolume",
+					"quantity", "quantityOfCartons", "totalVacr", "total"]
+	private static final Map CONTAINER_FIELDS = ["totalGrossKilograms":"containersByWeight", 
+		"totalVolume":"containersByVolume"	]
+	
+	
 	def exportWish(OutputStream out,Locale locale,ProductWishReport report, ProductWish order) {
 		Workbook wb = new XSSFWorkbook()
 		
@@ -63,7 +73,7 @@ class ProductWishExportService implements MessageSourceAware {
 		for(int i = 0; i < report.fields.size(); i++){
 			cell = row.createCell(i)
 			cell.setCellValue(messageSource.getMessage("productWishItem."+report.fields[i]+".label",null,locale))
-			cell.setCellStyle(styles["defaultBordered"])
+			cell.setCellStyle(styles["defaultBorderedBold"])
 		}
 		
 		int rowIndex = 16
@@ -72,10 +82,67 @@ class ProductWishExportService implements MessageSourceAware {
 			row = sheet.createRow(rowIndex)
 			for(int i = 0; i < report.fields.size(); i++){
 				cell = row.createCell(i)
-				cell.setCellValue(item[report.fields[i]].toString())
-				cell.setCellStyle(styles["defaultBordered"])
+				
+				if(report.fields[i] in NUMBER_FIELDS){
+					cell.setCellValue(item[report.fields[i]].setScale(2,java.math.RoundingMode.HALF_UP))
+					cell.setCellStyle(styles["defaultNumberBordered"])
+				}else{
+					cell.setCellValue(item[report.fields[i]].toString())
+					cell.setCellStyle(styles["defaultBordered"])
+				}
 			}
 			rowIndex += 1
+		}
+		
+		boolean titleTotals = false
+		row = sheet.createRow(rowIndex)
+		for(int i = 0; i < report.fields.size(); i++){
+			if(report.fields[i] in TOTAL_FIELDS){
+				if(!titleTotals){
+					cell = row.createCell(i-1)
+					cell.setCellValue("Totales")
+					cell.setCellStyle(styles["defaultBorderedBold"])
+					titleTotals = true
+				}
+				
+				cell = row.createCell(i)
+				cell.setCellValue(order[report.fields[i]].setScale(2,java.math.RoundingMode.HALF_UP))
+				cell.setCellStyle(styles["defaultNumberBordered"])
+			}
+		}
+		rowIndex += 1
+		
+		boolean titleContainers = false
+		row = sheet.createRow(rowIndex)
+		for(int i = 0; i < report.fields.size(); i++){
+			if(report.fields[i] in CONTAINER_FIELDS.keySet()){
+				if(!titleContainers){
+					cell = row.createCell(i-1)
+					cell.setCellValue("Contenedores")
+					cell.setCellStyle(styles["defaultBorderedBold"])
+					titleContainers = true
+				}
+				
+				cell = row.createCell(i)
+				cell.setCellValue(order[CONTAINER_FIELDS[report.fields[i]]].setScale(2,java.math.RoundingMode.HALF_UP))
+				cell.setCellStyle(styles["defaultNumberBordered"])
+			}
+		}
+		rowIndex += 1
+		
+		if(order.notes){
+			row = sheet.createRow(rowIndex)
+			cell = row.createCell(0)
+			cell.setCellValue("Notas")
+			cell.setCellStyle(styles["defaultBorderedBold"])
+			cell = row.createCell(1)
+			cell.setCellValue(order.notes)
+			cell.setCellStyle(styles["defaultBordered"])
+		}
+		
+		
+		for(int i = 0; i < report.fields.size(); i++){
+			sheet.autoSizeColumn(i)
 		}
 		
 		wb.write(out)
@@ -102,7 +169,6 @@ class ProductWishExportService implements MessageSourceAware {
 	
 	private static Map<String, CellStyle> createStyles(Workbook wb){
 		Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
-		
 		Font defaultFont = wb.createFont();
 		defaultFont.setFontHeightInPoints((short)10);
 		defaultFont.setFontName("Arial");
@@ -143,7 +209,16 @@ class ProductWishExportService implements MessageSourceAware {
 		style.setFont(defaultFont);
 		style.setAlignment(CellStyle.ALIGN_LEFT);
 		styles.put("defaultDate", style);
-
+		
+		style = wb.createCellStyle();
+		style.setFont(defaultFont);
+		style.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+		style.setBorderRight(XSSFCellStyle.BORDER_THIN);
+		style.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		style.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+		style.setAlignment(CellStyle.ALIGN_RIGHT);
+		styles.put("defaultNumberBordered", style);
+		
 		return styles;
 	}
 

@@ -124,11 +124,11 @@ class ProductWish {
 	}
 	
 	BigDecimal getContainersByWeight(){
-		return getTotalGrossKilograms().divide(new BigDecimal(25500))
+		return getTotalGrossKilograms() / 25500
 	}
 
 	BigDecimal getContainersByVolume(){
-		return getTotalVolume().divide(new BigDecimal(27))
+		return getTotalVolume() / 27
 	}
 	
 }

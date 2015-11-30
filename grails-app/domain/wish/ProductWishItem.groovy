@@ -82,7 +82,7 @@ class ProductWishItem {
 		return product.tax
 	}
 	BigDecimal getQuantityPerCarton(){
-		return quantityPerCarton
+		return product.quantityPerCarton
 	}
 	BigDecimal getNetWeightPerBox(){
 		return product.netWeightPerBox
@@ -94,16 +94,16 @@ class ProductWishItem {
 		return product.outerBoxVolume
 	}
 	BigDecimal getTotalNetKilograms(){
-		return quantity.multiply(product.netWeightPerBox).divide(quantityPerCarton).setScale(2)
+		return quantity * product.netWeightPerBox / quantityPerCarton
 	}
 	BigDecimal getTotalGrossKilograms(){
-		return quantity.multiply(product.grossWeightPerBox).divide(quantityPerCarton).setScale(2)
+		return quantity * product.grossWeightPerBox / quantityPerCarton
 	}
 	BigDecimal getTotalVolume(){
-		return quantity.multiply(product.outerBoxVolume).divide(quantityPerCarton).setScale(2)
+		return quantity * product.outerBoxVolume / quantityPerCarton
 	}
 	BigDecimal getQuantityOfCartons(){
-		return quantity.divide(quantityPerCarton)
+		return quantity / quantityPerCarton
 	}
 	BigDecimal getTotalVacr(){
 		return getTotalNetKilograms()*product.tax
