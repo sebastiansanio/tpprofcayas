@@ -31,6 +31,7 @@ class BootStrap {
 		
 		if(Environment.current != Environment.PRODUCTION) {
 			User.withTransaction{
+				
 				List productWishReportFields = ["descriptionSP", "descriptionEN", "color", "customerCode", 
 					"itemUnit", "currency", "priceCondition", "unitPrice", "countryOfOrigin", 
 					"countryOfProcedence", "criterionValue", "valuePerKilo", "hsCode", "tax", 
@@ -225,7 +226,6 @@ class BootStrap {
 				roleOperator.addToPermissions("port:*")
 				roleOperator.addToPermissions("ship:*")
 				roleOperator.addToPermissions("report:*")
-				roleOperator.addToPermissions("productWishReport:*")
 				roleOperator.addToPermissions("contact:*")
 				roleOperator.addToPermissions("*:show")
 				roleOperator.addToPermissions("courier:*")
@@ -575,8 +575,12 @@ class BootStrap {
 					aluminumWish.subWish*.addToExtras( i )
 				}
 
-				if ( !aluminumWish.save( flush:true ) ) 
+				if ( !aluminumWish.save( flush:true ) ) {
 					println aluminumWish.errors
+				}
+				
+				Product product = new Product(["priceCondition.id":1, piecesPerPallet:5000, "unit.id":1, articlesQuantityPerInnerBox:5, "country.id":1, innerBoxQuantity:100, "shipper.id":11, innerBoxWidth:3, "color.id":1, "typeOfPresentation.id":1, netWeightPerBox:50, customerCode:"EAC", "currency.id":1, outerBoxWidth:5, descriptionEN:"A", status:"Stock", hsCode:"0101.01.", supplierCode:"321", quantityPerCarton:500, pricePerUnit:500, "consolidationArea.id":15, innerBoxLength:4, innerBoxHeight:2, outerBoxHeight:3, "supplier.id":6, criterionValue:50, tax:12, "port.id":1, descriptionSP:"A", boxesPerPallets:50, "family.id":2, grossWeightPerBox:70, outerBoxLength:7])
+				product.save(flush: true)
 			}
 		}
 	}

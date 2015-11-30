@@ -120,7 +120,7 @@ class ProductWishController {
 		ProductWishReport report = ProductWishReport.get(params.reportId.toLong())
 		ProductWish order = ProductWish.get(params.id.toLong())
 		response.contentType=grailsApplication.config.grails.mime.types["xlsx"]
-		response.setHeader("Content-disposition", "attachment;filename=${message(code:'productWish.label')} "+DATE_FORMAT.format(new Date())+".xlsx")
+		response.setHeader("Content-disposition", "attachment;filename=${message(code:'wish.label')}_"+order.code +"_"+DATE_FORMAT.format(new Date())+".xlsx")
 		def user = User.findByUsername(SecurityUtils.subject.getPrincipal())
 		productWishExportService.exportWish(response.outputStream,RequestContextUtils.getLocale(request),report,order)
 	}

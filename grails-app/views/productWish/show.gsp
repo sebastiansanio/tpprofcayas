@@ -44,6 +44,19 @@
 		
 		</tbody>
 	</table>
+
+<div class="span2">
+	<h4><g:message code="export.label"  /></h4>
+	<g:form action="export" method="POST">
+		<g:select name="reportId" optionKey="id" value="${reportInstance?.id}" from="${report.ProductWishReport.list()}"/>
+		<g:hiddenField name="id" value="${productWishInstance?.id}" />
+		
+		<button type="submit">
+		<img src="${resource(dir: 'images/skin',file: 'excel.png')}"/> EXCEL
+		</button>
+	</g:form>
+</div>
+	
 </section>
 
 </body>

@@ -253,9 +253,9 @@
 					
 		</tbody>
 	</table>
-
+	<g:if test="${productInstance.notes}">
 	<g:render template="/_note/noteShow" model="['notes':productInstance?.notes]"/>
-
+	</g:if>
 	<table class="table">
 		<tbody>
 		

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import modal.Country;
 import modal.PriceCondition
-
+import modal.Currency;
 import org.hibernate.envers.Audited
 
 import product.Color
@@ -48,7 +48,7 @@ class ProductWishItem {
 	}
 	
 	ItemUnit getItemUnit(){
-		return product.ItemUnit
+		return product.unit
 	}
 	
 	Currency getCurrency(){
@@ -71,7 +71,7 @@ class ProductWishItem {
 	}
 	
 	BigDecimal getValuePerKilo(){
-		return unitPrice.multiply(product.quantityPerCarton).divide(product.netWeightPerBox).setScale(2)
+		return unitPrice * product.quantityPerCarton / product.netWeightPerBox
 	}
 	
 	String getHsCode(){
