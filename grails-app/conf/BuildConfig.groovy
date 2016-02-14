@@ -20,7 +20,7 @@ grails.project.dependency.resolution = {
 
         mavenLocal()
         mavenCentral()
-
+		mavenRepo 'https://repo.grails.org/grails/plugins'
 		mavenRepo "http://people.apache.org/repo/m2-snapshot-repository/"
 		mavenRepo "http://repository.jboss.org/nexus/content/groups/public/"
     }
