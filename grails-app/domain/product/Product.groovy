@@ -12,7 +12,7 @@ class Product extends AbstractProduct {
 	static final Integer UNITS_PER_CONTAINER_WEIGHT = 25500
 	static final Integer UNITS_PER_CONTAINER_VOLUME = 27
 		
-	static hasMany		= [loadsUnits: LoadUnit, pricePerCustomer: PricePerCustomer]
+	static hasMany		= [loadsUnits: LoadUnit, pricePerCustomer: PricePerCustomer, productPrice: ProductPrice]
 	
 	Color 				color
 	String				customerCode

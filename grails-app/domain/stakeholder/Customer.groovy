@@ -8,6 +8,7 @@ import wish.Wish
 import org.hibernate.envers.Audited
 
 import product.Family;
+import product.PriceList
 
 @Audited
 class Customer extends Stakeholder{
@@ -20,7 +21,7 @@ class Customer extends Stakeholder{
 
 	BigDecimal defaultMargin
 	
-	static hasMany		= [wishes: Wish, margins: CustomerFamilyMargin]
+	static hasMany		= [wishes: Wish, margins: CustomerFamilyMargin, priceLists: PriceList]
 	
     static mapping = {
     }
