@@ -18,6 +18,7 @@
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab1" data-toggle="tab"> <g:message code="stakeholder.generalData.label" default="General data" /> </a></li>
 		<li class=""><a href="#tab3" data-toggle="tab"> <g:message code="stakeholder.contacts.label" default="Contacts" /> </a></li>
+		<li class=""><a href="#priceList" data-toggle="tab"> <g:message code="supplier.priceList.label" default="Price List" /> </a></li>		
 		<li class=""><a href="#tab2" data-toggle="tab"> <g:message code="stakeholder.pendingWishes.label" default="Pending Orders" /> </a> </li>
 		<li class=""><a href="#tab4" data-toggle="tab"> <g:message code="stakeholder.billedWishes.label" default="Billed Orders" /> </a></li>
 		<li class=""><a href="#tab5" data-toggle="tab"> <g:message code="stakeholder.finishedWishes.label" default="Finished Orders" /> </a></li>
@@ -195,6 +196,9 @@
 			<g:render template="/_stakeholder/exportWishes" model="['stakeholderInstance':supplierInstance]"/>			
 		</div>
 		
+		<div class="tab-pane" id="priceList">
+			<g:render template="priceListShow" model="['priceLists': supplierInstance?.priceLists]"/>
+		</div>
 	</div>
 	</div>
 </section>

@@ -160,8 +160,13 @@
 	</div>
 </div>
 
+<!-- Contactas -->
 <g:render template="/_stakeholder/form" model="['stakeholderInstance':supplierInstance]"/>
 
+<!-- Price List -->
+<g:render template="/priceList/form" model="['supplierInstance': supplierInstance]" />
+
+<!-- Aluminum -->
 <h5><g:message code="supplier.aluminum.extras.label" default="Aluminum Extras" /></h5>
 
 <div class="row-fluid">
@@ -182,8 +187,46 @@
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
 	$(document).ready( function() {
+		var numberOfLists = $("#container-price-list").find('.list-name').length;
+
+		$("#container-price-list").on('click', '.btn-modal-delete-list', function(event) {
+			var listId = $(this).data("index");
+			$("#nroPriceListDelete").val(listId);
+		});
+
+		$("#container-price-list").on('click', '.btnDel-priceList', function(event) {
+			event.preventDefault();
+			var container = $(this).parent('.input-button');
+			var index = parseInt(container.children('input').data('index'));
+			var regExp = /[\d]+/i;
+			container.nextAll().each(function(i, el) {
+				var input = $(el).children('input');
+				var oldName = input.attr('name');
+				input.attr('name', oldName.replace(regExp,index));
+				input.data('index', index);
+				index++;
+			});
+
+			container.remove();
+			numberOfLists--;
+		});
+
+		$("#addPriceList").on('click', function(event) {
+			event.preventDefault();
+
+			var divContainer = $("<div class='input-button' />");
+			var input = "<input type='text' class='list-name' name='priceLists[" + numberOfLists + "].name' required data-index='"+ numberOfLists +"'/>";
+			var deleteBoton = "<a role='button' class='btn btn-small btn-primary btnDel-priceList'> <i class='icon-trash'></i> </a>";
+
+			$("#container-price-list").append(divContainer);
+			$(divContainer).append(input);
+			$(divContainer).append(deleteBoton);
+
+			numberOfLists++;
+		});
 		function updateView() {
 			if ( $("#aluminumSupplier").is(":checked") ) {
 				$("#aluminumExtra").show();

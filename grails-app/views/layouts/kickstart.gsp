@@ -7,6 +7,7 @@
     <meta name="description"	content="Cayas Online">
     <meta name="author"			content="Amalia y Sebastian">
 	<link rel="shortcut icon"		href="${resource(dir:'images',file:'logo.jpg')}" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'util.css')}" />
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'menuesFijo.css')}" />
 	<r:require modules="jquery"/>
 	<r:require modules="${session.skin ? session.skin            : 'bootstrap'}"/>

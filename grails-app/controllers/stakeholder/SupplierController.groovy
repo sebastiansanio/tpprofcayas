@@ -4,11 +4,12 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
 
 import product.Extra
+import product.PriceList
 
 @Transactional
 class SupplierController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", deletePriceList: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -26,11 +27,11 @@ class SupplierController {
 
     def save() {
         def supplierInstance = new Supplier(params)
+        
         /* para agregar los extras de alumino al proveedor*/
-        supplierInstance.extrasDefault.clear()
+        supplierInstance.extrasDefault?.clear()
         params.list("extrasDefault.id").each { extra ->
             supplierInstance.addToExtrasDefault( Extra.get( extra.toInteger() ))
-
         }
         
         if (!supplierInstance.save(flush: true)) {
@@ -148,4 +149,36 @@ class SupplierController {
 			redirect(action: "edit", id: params.idStakeholder)
 		}
 	}
+
+    def deletePriceList() {
+        def supplierInstance = Supplier.get(params.long('idSupplier'))
+        def listInstance
+
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), params.idSupplier])
+            redirect(action: "list")
+            return
+        }
+
+        if (!params.nroPriceListDelete) {
+            flash.message = message(code: 'supplier.not.priceList.id', default: 'You have to give id price list number')
+            redirect(action: "edit", params:[id: params.idSupplier])
+            return
+        }
+
+        listInstance = PriceList.get(params.long('nroPriceListDelete'))
+
+        if ( !listInstance ) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'priceList.label', default: 'Price List')])
+            redirect(action: "edit", params:[id: params.idSupplier])
+            return
+        }
+
+        supplierInstance.removeFromPriceLists( listInstance )
+        listInstance.delete()
+        supplierInstance.save(flush:true)
+
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'priceList.label', default: 'Price List'), params.nroPriceListDelete])
+        redirect(action: "edit", params:[id: params.idSupplier])
+    }
 }
