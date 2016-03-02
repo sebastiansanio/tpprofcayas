@@ -30,6 +30,7 @@
 	</g:form>
 
 	<g:render template="/_stakeholder/contactDeleteModal" model="['stakeholderInstance':supplierInstance]"></g:render>	
+	<g:render template="../priceList/priceListDeleteModal" model="['stackeholder':supplierInstance]"></g:render>	
 </section>
 		
 </body>

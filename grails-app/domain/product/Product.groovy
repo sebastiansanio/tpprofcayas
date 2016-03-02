@@ -12,12 +12,11 @@ class Product extends AbstractProduct {
 	static final Integer UNITS_PER_CONTAINER_WEIGHT = 25500
 	static final Integer UNITS_PER_CONTAINER_VOLUME = 27
 		
-	static hasMany		= [loadsUnits: LoadUnit, pricePerCustomer: PricePerCustomer, productPrice: ProductPrice]
+	static hasMany		= [loadsUnits: LoadUnit, productPrice: ProductPrice]
 	
 	Color 				color
 	String				customerCode
 	String				status
-	List				pricePerCustomer
 	
 	Family				family
 	SubFamily			subFamily
@@ -63,7 +62,7 @@ class Product extends AbstractProduct {
 		hsCode matches: "^[0-9]{4}\\.[0-9]{2}\\..*", nullable: false, blank: false
 		companyCode unique: true
 	
-		pricePerCustomer(validator: { listPricePerCustomer, obj, errors ->
+		/*pricePerCustomer(validator: { listPricePerCustomer, obj, errors ->
 			
 			if ( listPricePerCustomer != null && listPricePerCustomer.size() != 0 )
 			{
@@ -80,7 +79,7 @@ class Product extends AbstractProduct {
 				}
 			}
 			return true
-		})
+		})*/
     }
 		
 	def beforeValidate() {
@@ -126,17 +125,13 @@ class Product extends AbstractProduct {
 			
 		return UNITS_PER_CONTAINER_VOLUME / getOuterBoxVolume() * quantityPerCarton
 	}
-	
-	BigDecimal calculateCustomerPrice(Customer customer) {
-		return pricePerUnit?.divide(BigDecimal.valueOf(1).minus(family.margin.divide(100, MathContext.DECIMAL128).plus(customer.getMargin(family).divide(100, MathContext.DECIMAL128))), MathContext.DECIMAL128 )?.setScale(4, RoundingMode.HALF_EVEN)
-	}
-	
+		
 	String retrieveCodeByCustomer(Customer customer) {
 		return codePerCustomer?.find{it.customer.id == customer.id}?.code?:customerCode
 	}
 	
 	BigDecimal retrievePriceByCustomer(Customer customer) {
-		return pricePerCustomer?.find{it.customer.id == customer.id}?.price
+		return 0 /*pricePerCustomer?.find{it.customer.id == customer.id}?.price*/
 	}
 
 }

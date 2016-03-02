@@ -24,67 +24,7 @@ $("document").ready( function() {
 
 		}
 	});
-
-	/* para los precios por cliente*/
-
-	var priceIdBtnDelFunc = function(nro) {
-		return "priceBtnDelTempNode-"+ nro;
-	};
-
-	var priceNameSelectFunc = function(nro) {
-		return "pricePerCustomer[" + nro + "].customer.id";
-	};
-
-	var priceNameNumericFunc = function(nro) {
-		return "pricePerCustomer[" + nro + "].price";
-	};
-
-	var priceDelNode = function(objeto) 
-	{
-		var nroRef = parseInt(objeto.id.split("-")[1]); 
-		var nodo = $(objeto).closest("tr");
-		rowsPrice--;
-		
-		var hermano = nodo;
-
-		for (var i = nroRef; i < rowsPrice; i++)
-		{
-			hermano = hermano.next();
-
-			hermano.find("select").attr("name", priceNameSelectFunc(i));
-			hermano.find("input").attr("name", priceNameNumericFunc(i));
-			hermano.find("a").attr("id", priceIdBtnDelFunc(i));
-		}
-
-		nodo.remove();		
-	};
 	
-	$(".deleteTempPrice").click ( function() {
-		priceDelNode(this);
-	});
-	
-	$("#addCustomerPrice").click( function() {
-
-		var idBtnDel = priceIdBtnDelFunc(rowsPrice);
-		var selectNode = "<select name='"+ priceNameSelectFunc(rowsPrice) +"'>" + customers + "</select>";
-		var numericNode = "<input type='number' name='"+ priceNameNumericFunc(rowsPrice) +"' step='0.0001' min='0.0000' value='0.0000'>";
-		var deleteNode = "<a role='button' class='btn btn-primary' id='" +idBtnDel+ "'> <i class='icon-trash'></i> </a>"
-
-		var newNode = "<tr>\
-			<td> " + selectNode + "	</td> \
-			<td> " + numericNode + "</td> \
-			<td> " + deleteNode +"</td> \
-			</tr>"
-		$("#customerPerPriceTable").append(newNode);
-
-			
-		$("#"+idBtnDel).click( function() {
-			priceDelNode(this);
-		} );
-		
-		rowsPrice++;
-	});
-
 	/* para manejar la carga de códigos por usuarios */
 	
 	var codeIdBtnDelFunc = function(nro) {

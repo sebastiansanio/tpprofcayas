@@ -92,8 +92,6 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'unit', 'error')}</span>
 				</div>
 			</div>
-
-			<span id="pricePerCustomer"> </span> 
 			
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'currency', 'error')} ">
 				<label for="currency" class="control-label"><g:message code="currency.label" default="Currency" /></label>
@@ -119,16 +117,6 @@
 				</div>
 			</div>
 
-			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')} ">
-				<label for="pricePerCustomer" class="control-label"><g:message code="product.pricePerCustomer.label" default="Price Per Customer" /></label>
-				<div class="controls">
-					
-					<g:render template="pricePerCustomerForm" model="['productInstance':productInstance]"/>
-
-					<span class="help-inline">${hasErrors(bean: productInstance, field: 'pricePerCustomer', 'error')}</span>
-				</div>
-			</div>
-						
 			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'port', 'error')} ">
 				<label for="port" class="control-label"><g:message code="port.label" default="Port" /></label>
 				<div class="controls">
@@ -321,9 +309,6 @@
 			out.println(""" customers.push('${option}'); """)
 		}	
 	%>
-	
-	/* para los precios por cliente*/
-	var rowsPrice = ${productInstance?.pricePerCustomer?.size()} + 0 ;
 
 	/* para manejar la carga de códigos por usuarios */
 	var rowsCode = ${productInstance?.codePerCustomer?.size()} + 0 ;	

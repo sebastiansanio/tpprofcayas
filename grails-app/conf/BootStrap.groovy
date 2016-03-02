@@ -185,6 +185,8 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Reportes de pedidos de artículos - Control total',permissionString:'productWishReport:*')
 				permission.save()
+				permission = new Permission(description:'Lista de Precios',permissionString:'priceList:*')
+				permission.save()
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -233,6 +235,7 @@ class BootStrap {
 				roleOperator.addToPermissions("audit:*")
 				roleOperator.addToPermissions("letterOfGuarantee:*")
 				roleOperator.addToPermissions("productWish:*")
+				roleOperator.addToPermissions("priceList:*")
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
@@ -321,6 +324,8 @@ class BootStrap {
 					def supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:supplierName,country:Country.findByName("China"),address:".",taxRegistryNumber:"2312232")
 					supplier.save(flush:true)
 					def userSupplier = new User(stakeholder:supplier,username:supplierName, passwordHash: new Sha256Hash(supplierName).toHex())
+					supplier.addToPriceLists( new PriceList(name: 'List A') )
+					supplier.addToPriceLists( new PriceList(name: 'List B') )
 					userSupplier.addToRoles(roleExternal)
 					userSupplier.save(flush:true)
 				}
@@ -580,13 +585,9 @@ class BootStrap {
 				}
 				
 				Product product = new Product([attribute: "PRUEBA" ,"priceCondition.id":1, piecesPerPallet:5000, "unit.id":1, articlesQuantityPerInnerBox:5, "country.id":1, innerBoxQuantity:100, "shipper.id":11, innerBoxWidth:3, "color.id":1, "typeOfPresentation.id":1, netWeightPerBox:50, customerCode:"EAC", "currency.id":1, outerBoxWidth:5, descriptionEN:"A", status:"Stock", hsCode:"0101.01.", supplierCode:"321", quantityPerCarton:500, pricePerUnit: new BigDecimal(500), "consolidationArea.id":15, innerBoxLength:4, innerBoxHeight:2, outerBoxHeight:3, "supplier.id":6, criterionValue:50, tax:12, "port.id":1, descriptionSP:"A", boxesPerPallets:50, "family.id":2, grossWeightPerBox:70, outerBoxLength:7])
-				product.addToPricePerCustomer(new PricePerCustomer([product: product, customer: Customer.get(1), price: new BigDecimal(520)]))
-				product.addToPricePerCustomer(new PricePerCustomer([product: product, customer: Customer.get(2), price: new BigDecimal(540)]))
 				product.save(flush: true)
 				
 				product = new Product([attribute: "PRUEBA 2" ,"priceCondition.id":1, piecesPerPallet:6000, "unit.id":1, articlesQuantityPerInnerBox:5, "country.id":1, innerBoxQuantity:100, "shipper.id":11, innerBoxWidth:5, "color.id":1, "typeOfPresentation.id":1, netWeightPerBox:70, customerCode:"BBB", "currency.id":1, outerBoxWidth:7, descriptionEN:"B", status:"Stock", hsCode:"0101.01.", supplierCode:"322", quantityPerCarton:600, pricePerUnit: new BigDecimal(600), "consolidationArea.id":15, innerBoxLength:7, innerBoxHeight:5, outerBoxHeight:2, "supplier.id":6, criterionValue:50, tax:12, "port.id":1, descriptionSP:"B", boxesPerPallets:70, "family.id":2, grossWeightPerBox:90, outerBoxLength:10])
-				product.addToPricePerCustomer(new PricePerCustomer([product: product, customer: Customer.get(1), price: new BigDecimal(700)]))
-				product.addToPricePerCustomer(new PricePerCustomer([product: product, customer: Customer.get(2), price: new BigDecimal(720)]))
 				product.save(flush: true)
 			}
 		}

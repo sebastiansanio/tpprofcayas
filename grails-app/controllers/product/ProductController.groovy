@@ -209,35 +209,7 @@ class ProductController {
 			redirect(action: "edit", id: params.productId)
 		}
 	}
-	
-	@Transactional
-	def deletePricePerCustomer() {
-		
-		def productInstance = Product.get(params.productId)
-		def pricePerCustomerInstance = PricePerCustomer.get(params.pricePerCustomerId)
-		
-		if (!pricePerCustomerInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
-			redirect(action: "edit", id: params.productId)
-			return
-		}
 
-		try {
-			
-			productInstance.removeFromPricePerCustomer(pricePerCustomerInstance)
-			pricePerCustomerInstance.delete(flush:true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
-			
-			def text = "/product/edit/" + params.productId + "#pricePerCustomer"
-			redirect(uri: text)
-			
-		}
-		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'pricePerCustomer.label', default: 'Price Per Customer'), params.pricePerCustomerId])
-			redirect(action: "edit", id: params.productId)
-		}
-	}
-	
 	def listHistoricalPrice() {
 		render ( view:"/_abstractProduct/listHistoricalPrice", model:[historicalPriceInstanceList: abstractProductService.getHistoricalPriceList(params.id.toLong()), idProduct: params.id])
 	}
@@ -289,19 +261,5 @@ class ProductController {
 			redirect(action: "edit", id: params.containerId)
 		}
 	}
-	
-	@Transactional
-	def refreshPrice(){
-		PricePerCustomer customerPriceInstance = PricePerCustomer.get(params.id)
-		
-		if (!customerPriceInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'pricePerCustomer.label'), params.id])
-			redirect(action: "list")
-			return
-		}
-		
-		customerPriceInstance.price = customerPriceInstance.product.calculateCustomerPrice(customerPriceInstance.customer)
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'pricePerCustomer.label'), customerPriceInstance.id])
-		redirect(action: "show", id: customerPriceInstance.product.id)
-	}
+
 }

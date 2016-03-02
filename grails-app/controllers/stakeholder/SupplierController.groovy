@@ -151,18 +151,18 @@ class SupplierController {
 	}
 
     def deletePriceList() {
-        def supplierInstance = Supplier.get(params.long('idSupplier'))
+        def supplierInstance = Supplier.get(params.long('idStackeholder'))
         def listInstance
 
         if (!supplierInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), params.idSupplier])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), params.idStackeholder])
             redirect(action: "list")
             return
         }
 
         if (!params.nroPriceListDelete) {
             flash.message = message(code: 'supplier.not.priceList.id', default: 'You have to give id price list number')
-            redirect(action: "edit", params:[id: params.idSupplier])
+            redirect(action: "edit", params:[id: params.idStackeholder])
             return
         }
 
@@ -170,15 +170,19 @@ class SupplierController {
 
         if ( !listInstance ) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'priceList.label', default: 'Price List')])
-            redirect(action: "edit", params:[id: params.idSupplier])
-            return
+            redirect(action: "edit", params:[id: params.idStackeholder])
         }
 
-        supplierInstance.removeFromPriceLists( listInstance )
-        listInstance.delete()
-        supplierInstance.save(flush:true)
-
-        flash.message = message(code: 'default.deleted.message', args: [message(code: 'priceList.label', default: 'Price List'), params.nroPriceListDelete])
-        redirect(action: "edit", params:[id: params.idSupplier])
+        try {
+            supplierInstance.removeFromPriceLists( listInstance )
+            listInstance.delete()
+            supplierInstance.save(flush:true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'priceList.label', default: 'Price List'), params.nroPriceListDelete])
+            redirect(action: "edit", params:[id: params.idStackeholder])
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'priceList.label', default: 'Price List'), params.nroPriceListDelete])
+            redirect(action: "edit", params:[id: params.idStackeholder])
+        }
     }
 }

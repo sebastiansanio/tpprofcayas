@@ -24,4 +24,4 @@
 	</div>
 </div>
 
-<a id="addPriceList" role="button" class="btn btn-small btn-primary" id="btnAdd-contact"> ${message(code: 'supplier.add.priceList.label', default: 'Add price list')}</a>
+<a id="addPriceList" role="button" class="btn btn-small btn-primary"> ${message(code: 'supplier.add.priceList.label', default: 'Add price list')}</a>
