@@ -37,9 +37,9 @@
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'prefix', 'error')} ">
-				<label for="prefix" class="control-label"><g:message code="customer.prefix.label" /></label>
+				<label for="prefix" class="control-label"><g:message code="customer.prefix.label" /><span class="required-indicator">*</span></label>
 				<div class="controls">
-					<g:textField name="prefix" value="${customerInstance?.prefix}"/>
+					<g:textField name="prefix" value="${customerInstance?.prefix}" required=""/>
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'prefix', 'error')}</span>
 				</div>
 			</div>
@@ -103,7 +103,7 @@
 			</div>
 			
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultMargin', 'error')} ">
-			<label for="defaultMargin" class="control-label"><g:message code="customer.defaultMargin.label" default="Default margin" /></label>
+			<label for="defaultMargin" class="control-label"><g:message code="customer.defaultMargin.label" default="Default margin" /><span class="required-indicator">*</span></label>
 			<div class="controls">
 				<g:field type="number" name="defaultMargin" step="any" value="${customerInstance.defaultMargin}" required=""/>
 				<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultMargin', 'error')}</span>
@@ -128,3 +128,6 @@
 </div>
 
 <g:render template="/_stakeholder/form" model="['stakeholderInstance':customerInstance]"/>
+
+<!-- Price list -->
+<g:render template="/priceList/formListCustomer" model="['stakeholderInstance':customerInstance]"/>

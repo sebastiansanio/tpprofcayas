@@ -18,11 +18,12 @@
 <div class="tabbable">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab1" data-toggle="tab"> <g:message code="stakeholder.generalData.label" default="General data" /> </a></li>		
-		<li class=""><a href="#tab3" data-toggle="tab"> <g:message code="stakeholder.contacts.label" default="Contacts" /> </a></li>
+		<li class=""><a href="#tab3" data-toggle="tab"> <g:message code="stakeholder.contacts.label" default="Contacts" /> </a></li>		
 		<li class=""><a href="#tab2" data-toggle="tab"> <g:message code="stakeholder.pendingWishes.label" default="Pending Orders" /> </a> </li>
 		<li class=""><a href="#tab4" data-toggle="tab"> <g:message code="stakeholder.billedWishes.label" default="Billed Orders" /> </a></li>
 		<li class=""><a href="#tab5" data-toggle="tab"> <g:message code="stakeholder.finishedWishes.label" default="Finished Orders" /> </a></li>
 		<li class=""><a href="#tab6" data-toggle="tab"> <g:message code="stakeholder.exportWishes.label" default="Export Orders" /> </a></li>
+		<li class=""><a href="#priceList" data-toggle="tab"> <g:message code="supplier.priceList.label" default="Price List" /> </a></li>		
 	</ul>
 	<div class="tab-content" >
 		<div class="tab-pane active" id="tab1">
@@ -145,7 +146,11 @@
 		<div class="tab-pane" id="tab6">
 			<g:render template="/_stakeholder/exportWishes" model="['stakeholderInstance':customerInstance]"/>			
 		</div>
-		
+
+		<div class="tab-pane" id="priceList">
+			<g:render template="priceListShow" model="['priceLists': customerInstance?.priceLists]"/>
+		</div>
+				
 	</div>
 </div>
 

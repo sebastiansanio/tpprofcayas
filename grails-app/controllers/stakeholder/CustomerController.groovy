@@ -1,15 +1,14 @@
 package stakeholder
 
 import org.springframework.dao.DataIntegrityViolationException
-
-
 import org.springframework.transaction.annotation.Transactional
 
+import product.PriceList
 
 @Transactional
 class CustomerController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", deletePriceList: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -27,12 +26,11 @@ class CustomerController {
 
     def save() {
         def customerInstance = new Customer(params)
-				
+
         if (!customerInstance.save(flush: true)) {
             render(view: "create", model: [customerInstance: customerInstance])
             return
         }
-
 		flash.message = message(code: 'default.created.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance.id])
         redirect(action: "show", id: customerInstance.id)
     }
@@ -86,6 +84,7 @@ class CustomerController {
             render(view: "edit", model: [customerInstance: customerInstance])
             return
         }
+        println "errores: ${customerInstance.errors}"
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance.id])
         redirect(action: "show", id: customerInstance.id)
@@ -139,4 +138,35 @@ class CustomerController {
 			redirect(action: "edit", id: params.idStakeholder)
 		}
 	}
+
+    def deletePriceList() {
+        def customerInstance = Customer.get(params.long('idStackeholder'))
+        def listInstance
+
+        if (!customerInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'customer.label', default: 'Customer'), params.idStackeholder])
+            redirect(action: "list")
+            return
+        }
+
+        if (!params.nroPriceListDelete) {
+            flash.message = message(code: 'supplier.not.priceList.id', default: 'You have to give id price list number')
+            redirect(action: "edit", params:[id: params.idStackeholder])
+            return
+        }
+
+        listInstance = PriceList.get(params.long('nroPriceListDelete'))
+
+        if ( !listInstance ) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'priceList.label', default: 'Price List')])
+            redirect(action: "edit", params:[id: params.idStackeholder])
+            return
+        }
+
+        customerInstance.removeFromPriceLists( listInstance )
+        customerInstance.save(flush:true)
+
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'priceList.label', default: 'Price List'), params.nroPriceListDelete])
+        redirect(action: "edit", params:[id: params.idStackeholder])        
+    }
 }

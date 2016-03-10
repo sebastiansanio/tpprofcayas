@@ -34,6 +34,7 @@
 
 	<g:render template="/_stakeholder/contactDeleteModal" model="['stakeholderInstance':customerInstance]"></g:render>
 
+	<g:render template="/priceList/priceListDeleteModal" model="['stackeholder':customerInstance]"></g:render>
 </section>
 			
 </body>

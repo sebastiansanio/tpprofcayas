@@ -29,6 +29,16 @@ class Customer extends Stakeholder{
 	static constraints = {
 		defaultMargin min:0.0000, scale:4, nullable:false
 		prefix nullable: false, blank:false, unique: true
+		priceLists validator: { val, obj ->
+			if ( !val ) return true
+
+			/*verifico que los valores nuevos no tengan proveedores repetidos*/
+			def suppliers = val.supplier 
+			if ( suppliers.unique().size() != val.size() ) {
+				return ['matchSupplier']
+			}
+            return true
+        }		
     }
 	
 	BigDecimal getMargin(Family family){

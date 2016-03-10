@@ -17,7 +17,7 @@
       <g:each in="${stakeholderInstance?.priceLists?.sort{ it.supplier?.toString()}}" var="priceListInstance" status="i">
         <tr class="list-name">
           <td>
-            <g:select class="supplier" name="supplier.id" from="${Supplier.list()}" optionKey="id" required="" value="${priceListInstance?.supplier?.id}" class="supplier"/>
+            <g:select class="supplier" name="supplier.id" from="${Supplier.list().sort{it.name}}" optionKey="id" required="" value="${priceListInstance?.supplier?.id}" class="supplier"/>
             <span class="help-inline">${hasErrors(bean: priceListInstance, field: 'name', 'error')}</span>
           </td>
     
@@ -101,7 +101,7 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         
         var supplierSelect = "<select class='supplier' required></select>";
-        var priceListSelect = "<select class='priceList' name='priceLists[" + priceList + "].id' required></select>";
+        var priceListSelect = "<select class='priceList' name='priceLists' required></select>";
         var enlace =  '<a role="button" class="btn btn-small btn-primary btnDel-priceList" data-index="' + priceList + '"><i class="icon-trash"></i></a>';
         var row = "<tr class='list-name'> \
                     <td> " + supplierSelect + " </td>\

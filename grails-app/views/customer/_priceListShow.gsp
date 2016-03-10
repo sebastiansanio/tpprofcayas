@@ -12,4 +12,4 @@
             </tr>
         </g:each>
     </tbody>
-</table>${priceLists}
+</table>
