@@ -84,7 +84,6 @@ class CustomerController {
             render(view: "edit", model: [customerInstance: customerInstance])
             return
         }
-        println "errores: ${customerInstance.errors}"
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance.id])
         redirect(action: "show", id: customerInstance.id)
@@ -162,7 +161,7 @@ class CustomerController {
             redirect(action: "edit", params:[id: params.idStackeholder])
             return
         }
-
+        println "por eliminar la lista de precios: ${listInstance}"
         customerInstance.removeFromPriceLists( listInstance )
         customerInstance.save(flush:true)
 

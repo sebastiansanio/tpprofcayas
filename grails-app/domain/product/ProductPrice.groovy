@@ -10,15 +10,13 @@ class ProductPrice {
     BigDecimal      price
 	Date	        dateCreated
 	Date	        lastUpdated
-	
-    static mapping = {
-    }
-    
+
 	static constraints = {
+        price min:0.0000, scale:4
     }
 	
-	@Override	// Override toString for a nicer / more descriptive UI 
+	@Override
 	public String toString() {
-		return "${price}";
+		return "${price}"
 	}
 }
