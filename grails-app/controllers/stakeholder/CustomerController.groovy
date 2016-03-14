@@ -161,7 +161,7 @@ class CustomerController {
             redirect(action: "edit", params:[id: params.idStackeholder])
             return
         }
-        println "por eliminar la lista de precios: ${listInstance}"
+
         customerInstance.removeFromPriceLists( listInstance )
         customerInstance.save(flush:true)
 

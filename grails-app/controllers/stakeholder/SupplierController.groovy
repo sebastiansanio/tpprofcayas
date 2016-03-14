@@ -175,8 +175,7 @@ class SupplierController {
 
         try {
             supplierInstance.removeFromPriceLists( listInstance )
-            listInstance.delete()
-            supplierInstance.save(flush:true)
+            listInstance.delete(flush:true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'priceList.label', default: 'Price List'), params.nroPriceListDelete])
             redirect(action: "edit", params:[id: params.idStackeholder])
         }

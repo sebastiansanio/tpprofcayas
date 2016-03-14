@@ -5,10 +5,12 @@ import stakeholder.Supplier
 
 import grails.converters.JSON
 
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 class PriceListController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = []
 
     def index() {
         redirect(action: "list", params: params)
@@ -17,21 +19,6 @@ class PriceListController {
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [priceListInstanceList: PriceList.list(params), priceListInstanceTotal: PriceList.count()]
-    }
-
-    def create() {
-        [priceListInstance: new PriceList(params)]
-    }
-
-    def save() {
-        def priceListInstance = new PriceList(params)
-        if (!priceListInstance.save(flush: true)) {
-            render(view: "create", model: [priceListInstance: priceListInstance])
-            return
-        }
-
-		flash.message = message(code: 'default.created.message', args: [message(code: 'priceList.label', default: 'PriceList'), priceListInstance.id])
-        redirect(action: "show", id: priceListInstance.id)
     }
 
     def show() {
@@ -43,66 +30,6 @@ class PriceListController {
         }
 
         [priceListInstance: priceListInstance]
-    }
-
-    def edit() {
-        def priceListInstance = PriceList.get(params.id)
-        if (!priceListInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'priceList.label', default: 'PriceList'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [priceListInstance: priceListInstance]
-    }
-
-    def update() {
-        def priceListInstance = PriceList.get(params.id)
-        if (!priceListInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'priceList.label', default: 'PriceList'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        if (params.version) {
-            def version = params.version.toLong()
-            if (priceListInstance.version > version) {
-                priceListInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'priceList.label', default: 'PriceList')] as Object[],
-                          "Another user has updated this PriceList while you were editing")
-                render(view: "edit", model: [priceListInstance: priceListInstance])
-                return
-            }
-        }
-
-        priceListInstance.properties = params
-
-        if (!priceListInstance.save(flush: true)) {
-            render(view: "edit", model: [priceListInstance: priceListInstance])
-            return
-        }
-
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'priceList.label', default: 'PriceList'), priceListInstance.id])
-        redirect(action: "show", id: priceListInstance.id)
-    }
-
-    def delete() {
-        def priceListInstance = PriceList.get(params.id)
-        if (!priceListInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'priceList.label', default: 'PriceList'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            priceListInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'priceList.label', default: 'PriceList'), params.id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'priceList.label', default: 'PriceList'), params.id])
-            redirect(action: "show", id: params.id)
-        }
     }
 
     def getAllSuppliers() {
@@ -128,4 +55,11 @@ class PriceListController {
         result['pricesList'] = priceListArray
         render result as JSON        
     }
+
+    def showHistorical() {
+        def product = Product.get(params.productId)
+        def historicalInstanceList = HistoricalPrice.findAllByProduct(product) //?.sort{ it?.dateFrom }
+
+        render view:'showHistorical', model:[historicalInstanceList: historicalInstanceList, product: product, priceList: PriceList.get(params.listId) ]
+    }    
 }
