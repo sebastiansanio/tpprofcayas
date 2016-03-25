@@ -29,16 +29,21 @@ class Customer extends Stakeholder{
 	static constraints = {
 		defaultMargin min:0.0000, scale:4, nullable:false
 		prefix nullable: false, blank:false, unique: true
-		priceLists validator: { val, obj ->
-			if ( !val ) return true
+		priceLists validator: { val, obj, errors ->
+            if ( val != null && val.size() != 0 ) {
+                def lists = [] as Set
+    
+                val.each { lists.add( it.supplier ) }
+    
+                if ( val.size() != lists.size() ) {
+                    errors.rejectValue("priceLists", "product.priceLists.supplier.repeat" )
+                    return false 
+                }
+            }
 
-			/*verifico que los valores nuevos no tengan proveedores repetidos*/
-			def suppliers = val.supplier 
-			if ( suppliers.unique().size() != val.size() ) {
-				return ['matchSupplier']
-			}
             return true
-        }		
+        }
+
     }
 	
 	BigDecimal getMargin(Family family){

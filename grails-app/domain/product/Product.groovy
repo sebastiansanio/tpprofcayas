@@ -61,25 +61,6 @@ class Product extends AbstractProduct {
 		piecesPerPallet min:0L, nullable:true
 		hsCode matches: "^[0-9]{4}\\.[0-9]{2}\\..*", nullable: false, blank: false
 		companyCode unique: true
-	
-		/*pricePerCustomer(validator: { listPricePerCustomer, obj, errors ->
-			
-			if ( listPricePerCustomer != null && listPricePerCustomer.size() != 0 )
-			{
-				def customers = [] as Set
-	
-				listPricePerCustomer.each {
-					customers.add(it.customer)
-				}
-	
-				if ( listPricePerCustomer.size() != customers.size() )
-				{
-						errors.rejectValue("pricePerCustomer", "product.pricePerCustomer.customerrepeat" )
-						return false 
-				}
-			}
-			return true
-		})*/
     }
 		
 	def beforeValidate() {

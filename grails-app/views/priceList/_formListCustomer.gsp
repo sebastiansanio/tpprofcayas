@@ -22,7 +22,7 @@
           </td>
     
           <td> 
-            <g:select class='priceList' name="priceLists[${i}].id" from="${priceListInstance?.supplier?.priceLists}.sort{it.name}" optionKey="id" required="" value="${priceListInstance?.id}"/>
+            <g:select class='priceList' name="priceLists" from="${priceListInstance?.supplier?.priceLists}.sort{it.name}" optionKey="id" required="" value="${priceListInstance?.id}"/>
           </td>
           
           <td> 
@@ -99,7 +99,7 @@ jQuery(document).ready(function($) {
 
     $('body').on('click', '#addPriceList', function(event) {
         event.preventDefault();
-        
+        var numberList = $('.priceList').length;
         var supplierSelect = "<select class='supplier' required></select>";
         var priceListSelect = "<select class='priceList' name='priceLists' required></select>";
         var enlace =  '<a role="button" class="btn btn-small btn-primary btnDel-priceList" data-index="' + priceList + '"><i class="icon-trash"></i></a>';
