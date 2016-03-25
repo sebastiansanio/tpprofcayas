@@ -89,7 +89,6 @@ class Aluminum extends AbstractProduct {
 	def beforeInsert() {
 		moldRemoveElements()
 		originalPlaneRemoveElements()
-		addHistoricalPriceNewInstance()
 	}
 	
 	def beforeUpdate() {

@@ -10,7 +10,6 @@ import wish.LoadUnit
 
 import org.springframework.web.servlet.support.RequestContextUtils
 import stakeholder.Supplier
-import product.HistoricalPrice
 
 class ProductController {
 
@@ -38,9 +37,7 @@ class ProductController {
 	@Transactional
     def save() {
         def productInstance = new Product(params)
-		
-		productInstance.addHistoricalPriceNewInstance()
-					
+							
         if (!productInstance.save(flush: true)) {
             render(view: "create", model: [productInstance: productInstance])
             return
@@ -68,8 +65,6 @@ class ProductController {
             redirect(action: "list")
             return
         }
-				
-		productInstance.pricePerUnit = productInstance.getPreviousPrice()
 		
         [productInstance: productInstance]
     }
@@ -94,10 +89,9 @@ class ProductController {
                 return
             }
         }
-		def previousPrices = productInstance.pricePerUnit
+        
         productInstance.properties = params
 
-		productInstance.addHistoricalPrice(previousPrices)
 			
         if (!productInstance.save(flush: true)) {
             render(view: "edit", model: [productInstance: productInstance])
@@ -209,34 +203,6 @@ class ProductController {
 			redirect(action: "edit", id: params.productId)
 		}
 	}
-
-	def listHistoricalPrice() {
-		render ( view:"/_abstractProduct/listHistoricalPrice", model:[historicalPriceInstanceList: abstractProductService.getHistoricalPriceList(params.id.toLong()), idProduct: params.id])
-	}
-	
-	@Transactional
-	def deleteHistoricalPrice() {
-		
-		def historicalPriceInstance = HistoricalPrice.get(params.idPrice)
-		
-		if (!historicalPriceInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
-			redirect(action: "listHistoricalPrice", id: params.idProduct)
-			return
-		}
-
-		try {
-			historicalPriceInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
-			
-			redirect(action: "listHistoricalPrice", id: params.idProduct)
-			
-		}
-		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
-			redirect(action: "listHistoricalPrice", id: params.idProduct)
-		}
-	}
 	
 	@Transactional
 	def deleteNote(){
@@ -262,4 +228,10 @@ class ProductController {
 		}
 	}
 
+    def showPrices() {
+        def product = Product.get(params.id)
+        def productPrices = ProductPrice.findAllByProduct(product)
+        
+        render view:"showPrices", model:[ product: product, productPrices: productPrices ]
+    }
 }

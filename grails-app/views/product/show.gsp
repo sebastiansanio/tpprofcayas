@@ -50,7 +50,11 @@
 				<td valign="top" class="value"><g:link controller="subFamily" action="show" id="${productInstance?.subFamily?.id}">${productInstance?.subFamily?.encodeAsHTML()}</g:link></td>
 			</tr>
 			
-			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': productInstance]"/>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
+				
+				<td valign="top" class="value"> <g:link action="showPrices" id="${productInstance?.id}"><g:message code="show.prices" default="Show prices"/></g:link> </td>
+			</tr>
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.color.label" default="Color" /></td>
@@ -95,9 +99,8 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.datePreviousPrice.label" default="Date Of The Last Price" /></td>
 				<td valign="top" class="value">
-					<g:if test="${productInstance?.previousPrices?.size() > 1 }"> 
-						<g:formatDate format="dd/MM/yyyy HH:mm" date="${productInstance?.previousPrices?.last()?.dateFrom}" />
-					</g:if> 
+					
+					
 				</td>
 			</tr>
 

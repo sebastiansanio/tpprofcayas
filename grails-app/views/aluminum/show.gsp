@@ -173,7 +173,12 @@
 				
 			</tr>
 
-			<g:render template="/_abstractProduct/previousPriceShow" model="['productInstance': aluminumInstance]"/>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.pricePerUnit.label" default="Price Per Unit" /></td>
+				
+				<td valign="top" class="value"> ${aluminumInstance.pricePerUnit}</td>
+				
+			</tr>
 			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.unit.label" default="Unit" /></td>

@@ -591,9 +591,21 @@ class BootStrap {
 				Product product2 = new Product([attribute: "PRUEBA 2" ,"priceCondition.id":1, piecesPerPallet:6000, "unit.id":1, articlesQuantityPerInnerBox:5, "country.id":1, innerBoxQuantity:100, "shipper.id":11, innerBoxWidth:5, "color.id":1, "typeOfPresentation.id":1, netWeightPerBox:70, customerCode:"BBB", "currency.id":1, outerBoxWidth:7, descriptionEN:"B", status:"Stock", hsCode:"0101.01.", supplierCode:"322", quantityPerCarton:600, pricePerUnit: new BigDecimal(600), "consolidationArea.id":15, innerBoxLength:7, innerBoxHeight:5, outerBoxHeight:2, "supplier.id":6, criterionValue:50, tax:12, "port.id":1, descriptionSP:"B", boxesPerPallets:70, "family.id":2, grossWeightPerBox:90, outerBoxLength:10])
 				product2.save(flush: true)
 
-				PriceList.get(3).addToProductsPrice( new ProductPrice( product: product1,price:new BigDecimal(12) ) ).addToProductsPrice( new ProductPrice(product: product2,price:new BigDecimal(5)) ).save(flush:true)
+				def productPrice = new ProductPrice( product: product1,price:new BigDecimal(12) )
 
-
+				PriceList.get(3).addToProductsPrice( productPrice ).addToProductsPrice( new ProductPrice(product: product2,price:new BigDecimal(5)) ).save(flush:true)
+				
+				/* cambio precios para ver si guarda el precio histórico*/
+				if ( productPrice ) {
+					println "por cambiar el precio"
+					productPrice.price = new BigDecimal(11)
+					println "precio cambiado "
+					productPrice.save(flush:true)
+					productPrice.price = new BigDecimal(11)
+					productPrice.save(flush:true)
+					productPrice.price = new BigDecimal(16)
+					productPrice.save(flush:true)
+				}
 			}
 		}
 	}

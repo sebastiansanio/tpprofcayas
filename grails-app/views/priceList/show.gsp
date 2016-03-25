@@ -18,7 +18,7 @@
 		<tbody>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="priceList.supplier.label" default="Supplier" /></td>
+				<td valign="top" class="name"><g:message code="supplier.label" default="Supplier" /></td>
 				
 				<td valign="top" class="value"><g:link controller="supplier" action="show" id="${priceListInstance?.supplier?.id}">${priceListInstance?.supplier?.encodeAsHTML()}</g:link></td>
 				

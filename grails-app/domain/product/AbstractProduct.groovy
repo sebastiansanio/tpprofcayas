@@ -18,7 +18,7 @@ class AbstractProduct {
 	Date	dateCreated
 	Date	lastUpdated
 	
-	static hasMany		= [ codePerCustomer: CodePerCustomer, previousPrices: HistoricalPrice, notes: ProductNote ] 
+	static hasMany		= [ codePerCustomer: CodePerCustomer, notes: ProductNote ] 
 	
 	String 				descriptionSP
 	String 				descriptionEN
@@ -31,7 +31,6 @@ class AbstractProduct {
 	Currency			currency
 	PriceCondition		priceCondition
 	BigDecimal			pricePerUnit
-	List				previousPrices
 	
 	Port				port
 	Port				consolidationArea
@@ -92,25 +91,7 @@ class AbstractProduct {
 	public String toString() {
 		return descriptionEN;
 	}
-	
-	def addHistoricalPriceNewInstance() {
-		if ( pricePerUnit != null )
-			addToPreviousPrices( new HistoricalPrice(price: pricePerUnit, dateFrom: new Date()))
-	}
-	
-	def getPreviousPrice() {
-		if ( previousPrices?.size() == 0 )
-			return null
-		else
-			return previousPrices?.last().price
-	}
-	
-	def addHistoricalPrice( previousPrices ) {
-		if ( pricePerUnit != null && previousPrices != pricePerUnit )
-			addToPreviousPrices( new HistoricalPrice(price: pricePerUnit, dateFrom: new Date()))
-
-	}	
-	
+		
 	def setCountry() {
 		if ( country == null && supplier != null )
 			country = supplier.country

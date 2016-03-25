@@ -5,7 +5,7 @@ import org.hibernate.envers.Audited;
 @Audited
 class HistoricalPrice {
 	
-	static belongsTo	= [product: AbstractProduct]
+	static belongsTo	= [productPrice: ProductPrice]
     
 	Date		dateFrom
 	BigDecimal	price

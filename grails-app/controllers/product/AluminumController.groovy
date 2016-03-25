@@ -55,8 +55,6 @@ class AluminumController {
             redirect(action: "list")
             return
         }
-
-		aluminumInstance.pricePerUnit = aluminumInstance.getPreviousPrice()
 		
         [aluminumInstance: aluminumInstance]
     }
@@ -80,11 +78,8 @@ class AluminumController {
             }
         }
 
-		def previousPrices = aluminumInstance.pricePerUnit
         aluminumInstance.properties = params
 		
-		aluminumInstance.addHistoricalPrice(previousPrices)
-
         if (!aluminumInstance.save(flush: true)) {
             render(view: "edit", model: [aluminumInstance: aluminumInstance])
             return
@@ -185,36 +180,8 @@ class AluminumController {
 		flash.message = message(code:"aluminum.plane.loaded", default:"Plane loaded")
 		redirect(action: "show", id: params.idAluminum)
 	}
-	
-	def listHistoricalPrice() {
-		render ( view:"/_abstractProduct/listHistoricalPrice", model:[historicalPriceInstanceList: abstractProductService.getHistoricalPriceList(params.id.toLong()), idProduct: params.id])
-	}
-	
+
 	@Transactional
-	def deleteHistoricalPrice() {
-		
-		def historicalPriceInstance = HistoricalPrice.get(params.idPrice)
-		
-		if (!historicalPriceInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
-			redirect(action: "listHistoricalPrice", id: params.idProduct)
-			return
-		}
-
-		try {
-			historicalPriceInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
-			
-			redirect(action: "listHistoricalPrice", id: params.idProduct)
-			
-		}
-		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'product.previousPrices.label', default: 'Historical price'), params.idPrice])
-			redirect(action: "listHistoricalPrice", id: params.idProduct)
-		}
-	}
-
-		@Transactional
 	def deleteCodePerCustomer() {
 		
 		def productInstance = AbstractProduct.get(params.productId)

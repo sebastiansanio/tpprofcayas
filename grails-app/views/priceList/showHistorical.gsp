@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    
+
 <section id="list-historical" class="first">
 
     <h4><g:message code="historicalPrice.description.label" default="Description"/></h4> 
@@ -54,7 +54,7 @@
             
                 <td>${hp.price}</td>
 
-                <td>${hp.dateFrom}</td>
+                <td><g:formatDate format="yyyy-MM-dd" date="${hp.dateFrom}"/> </td>
                             
             </tr>
         </g:each>

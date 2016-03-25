@@ -58,8 +58,12 @@ class PriceListController {
 
     def showHistorical() {
         def product = Product.get(params.productId)
-        def historicalInstanceList = HistoricalPrice.findAllByProduct(product) //?.sort{ it?.dateFrom }
+        def list = PriceList.get(params.listId)
 
-        render view:'showHistorical', model:[historicalInstanceList: historicalInstanceList, product: product, priceList: PriceList.get(params.listId) ]
-    }    
+        def productPrice = ProductPrice.findByListAndProduct(list, product)
+
+        def historicalInstanceList = HistoricalPrice.findAllByProductPrice(productPrice)?.sort{ it?.dateFrom }.reverse()
+
+        render view:'/priceList/showHistorical', model:[historicalInstanceList: historicalInstanceList, product: product, priceList: PriceList.get(params.listId) ]
+    } 
 }
