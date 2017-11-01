@@ -325,8 +325,8 @@ class BootStrap {
 					supplier.save(flush:true)
 					def userSupplier = new User(stakeholder:supplier,username:supplierName, passwordHash: new Sha256Hash(supplierName).toHex())
 
-					supplier.addToPriceLists( new PriceList(name: 'List A') )
-					supplier.addToPriceLists( new PriceList(name: 'List B') )
+					supplier.addToPriceLists( new PriceList(name: 'List A - ' +supplier.name) )
+					supplier.addToPriceLists( new PriceList(name: 'List B - ' + supplier.name) )
 					userSupplier.addToRoles(roleExternal)
 					userSupplier.save(flush:true)
 				}

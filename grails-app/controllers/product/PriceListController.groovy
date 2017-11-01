@@ -56,6 +56,12 @@ class PriceListController {
         render result as JSON        
     }
 
+	def importForm() {
+		
+		[:]
+		
+	}
+	
     def showHistorical() {
         def product = Product.get(params.productId)
         def list = PriceList.get(params.listId)

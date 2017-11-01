@@ -15,9 +15,10 @@ class PriceList {
 	Date	lastUpdated
 	    
 	static constraints = {
+		name unique: true
     }
 	
-	@Override	// Override toString for a nicer / more descriptive UI 
+	@Override
 	public String toString() {
 		return "${name}";
 	}
