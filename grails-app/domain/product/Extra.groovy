@@ -13,7 +13,7 @@ class Extra {
 	String 			description
 	String 			equation
 
-
+	
 	static constraints = {
 		description blank:false, nullable: false, unique: true
 		equation blank:false, nullable: false
@@ -54,6 +54,6 @@ class Extra {
 	
 	@Override 
 	public String toString() {
-		return "${description}";
+		return description
 	}
 }

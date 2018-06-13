@@ -9,6 +9,7 @@
 	<tbody id="customerPerCodeTable">
 		<g:each var="codeCustomer" in="${productInstance?.codePerCustomer?}" status="i">
 			<tr>
+			
 				<td>
 					<g:select name="codePerCustomer[${i}].customer.id" from="${Customer.list()}" optionKey="id" value="${codeCustomer.customer?.id}" class="many-to-one"/>					
 				</td>

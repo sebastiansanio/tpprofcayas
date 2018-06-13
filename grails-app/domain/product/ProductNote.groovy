@@ -8,6 +8,8 @@ import login.User;
 
 @Audited
 class ProductNote {
+	
+	private static final String FORMAT = "dd/MM/yyyy"
 
 	Date	dateCreated	
 	String 	text
@@ -20,6 +22,6 @@ class ProductNote {
     }
 	
 	public String toString() {
-		return user.username +": "+ text + " (" + dateCreated.format("dd/MM/yyyy") + ")"
+		return user.username +": "+ text + " (" + dateCreated.format(FORMAT) + ")"
 	}
 }
