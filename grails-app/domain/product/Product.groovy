@@ -12,7 +12,7 @@ class Product extends AbstractProduct {
 	static final Integer UNITS_PER_CONTAINER_WEIGHT = 25500
 	static final Integer UNITS_PER_CONTAINER_VOLUME = 27
 		
-	static hasMany		= [loadsUnits: LoadUnit, productPrice: ProductPrice]
+	static hasMany		= [loadsUnits: LoadUnit]
 	
 	Color 				color
 	String				customerCode
@@ -111,8 +111,5 @@ class Product extends AbstractProduct {
 		return codePerCustomer?.find{it.customer.id == customer.id}?.code?:customerCode
 	}
 	
-	BigDecimal retrievePriceByCustomer(Customer customer) {
-		return 0 /*pricePerCustomer?.find{it.customer.id == customer.id}?.price*/
-	}
 
 }

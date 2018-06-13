@@ -49,6 +49,13 @@
 						<td valign="top" class="value"><g:link controller="country" action="show" id="${customerInstance?.country?.id}">${customerInstance?.country?.encodeAsHTML()}</g:link></td>
 						
 					</tr>
+
+					<tr class="prop">
+						<td valign="top" class="name"><g:message code="customer.group.label"  /></td>
+						
+						<td valign="top" class="value"><g:link controller="customerGroup" action="show" id="${customerInstance?.group?.id}">${customerInstance?.group?.encodeAsHTML()}</g:link></td>
+						
+					</tr>
 		
 					<tr class="prop">
 						<td valign="top" class="name"><g:message code="customer.province.label" default="Province" /></td>
@@ -100,10 +107,6 @@
 						<td valign="top" class="value"><g:link controller="report" action="show" id="${customerInstance?.defaultReport?.id}">${customerInstance?.defaultReport?.encodeAsHTML()}</g:link></td>
 					</tr>
 				
-					<tr class="prop">
-						<td valign="top" class="name"><g:message code="customer.defaultMargin.label" /></td>
-						<td valign="top" class="value">${fieldValue(bean: customerInstance, field: "defaultMargin")}</td>
-					</tr>
 					
 					<tr class="prop">
 						<td valign="top" class="name"><g:message code="stakeholder.notes.label" default="Notes" /></td>
@@ -145,10 +148,6 @@
 		
 		<div class="tab-pane" id="tab6">
 			<g:render template="/_stakeholder/exportWishes" model="['stakeholderInstance':customerInstance]"/>			
-		</div>
-
-		<div class="tab-pane" id="priceList">
-			<g:render template="priceListShow" model="['priceLists': customerInstance?.priceLists]"/>
 		</div>
 				
 	</div>

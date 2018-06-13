@@ -3,7 +3,6 @@ package stakeholder
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
 
-import product.PriceList
 
 @Transactional
 class CustomerController {

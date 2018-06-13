@@ -85,6 +85,14 @@
 					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'country', 'error')}</span>
 				</div>
 			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'group', 'error')} required">
+				<label for="group" class="control-label"><g:message code="customer.group.label" /><span class="required-indicator">*</span></label>
+				<div class="controls">
+					<g:select id="group" name="group.id" from="${prices.CustomerGroup.list()}" optionKey="id" required="" value="${customerInstance?.group?.id}" class="many-to-one"/>
+					<span class="help-inline">${hasErrors(bean: customerInstance, field: 'group', 'error')}</span>
+				</div>
+			</div>
 			
 			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'province', 'error')}">
 				<label for="province" class="control-label"><g:message code="customer.province.label" default="Province" /></label>
@@ -102,13 +110,7 @@
 				</div>
 			</div>
 			
-			<div class="control-group fieldcontain ${hasErrors(bean: customerInstance, field: 'defaultMargin', 'error')} ">
-			<label for="defaultMargin" class="control-label"><g:message code="customer.defaultMargin.label" default="Default margin" /><span class="required-indicator">*</span></label>
-			<div class="controls">
-				<g:field type="number" name="defaultMargin" step="any" value="${customerInstance.defaultMargin}" required=""/>
-				<span class="help-inline">${hasErrors(bean: customerInstance, field: 'defaultMargin', 'error')}</span>
-			</div>
-		</div>
+
 
 	</div>
 </div>
@@ -129,5 +131,3 @@
 
 <g:render template="/_stakeholder/form" model="['stakeholderInstance':customerInstance]"/>
 
-<!-- Price list -->
-<g:render template="/priceList/formListCustomer" model="['stakeholderInstance':customerInstance]"/>

@@ -24,6 +24,8 @@
 				<g:sortableColumn property="telephone" title="${message(code: 'customer.telephone.label', default: 'Telephone')}" />
 			
 				<g:sortableColumn property="email" title="${message(code: 'customer.email.label', default: 'Email')}" />
+
+				<th><g:message code="customer.group.label" default="Default Report" /></th>
 			
 				<th><g:message code="stakeholder.defaultReport.label" default="Default Report" /></th>
 			
@@ -42,6 +44,8 @@
 				<td>${fieldValue(bean: customerInstance, field: "telephone")}</td>
 			
 				<td>${fieldValue(bean: customerInstance, field: "email")}</td>
+
+				<td>${fieldValue(bean: customerInstance, field: "group")}</td>
 			
 				<td>${fieldValue(bean: customerInstance, field: "defaultReport")}</td>
 			

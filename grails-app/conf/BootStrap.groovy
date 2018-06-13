@@ -23,6 +23,8 @@ import wish.*
 import stakeholder.*
 import product.*
 
+import prices.*
+
 class BootStrap {
 	def alertManagerService
 	def opNumberGeneratorService
@@ -185,8 +187,6 @@ class BootStrap {
 				permission.save()
 				permission = new Permission(description:'Reportes de pedidos de artículos - Control total',permissionString:'productWishReport:*')
 				permission.save()
-				permission = new Permission(description:'Lista de Precios',permissionString:'priceList:*')
-				permission.save()
 
 				def roleExternal = new Role(name:"Externo")
 				roleExternal.addToPermissions("wishExternal:*")
@@ -211,6 +211,12 @@ class BootStrap {
 				roleAdmin.addToPermissions("*:show")
 				roleAdmin.addToPermissions("permission:*")
 				roleAdmin.addToPermissions("role:*")
+				roleAdmin.addToPermissions("customerGroup:*")
+				roleAdmin.addToPermissions("customerPriceCriteria:*")
+				roleAdmin.addToPermissions("exchangeRate:*")
+				roleAdmin.addToPermissions("priceVariable:*")
+				roleAdmin.addToPermissions("priceVariableDate:*")
+				roleAdmin.addToPermissions("supplierPriceCriteria:*")
 				roleAdmin.save(flush:true)
 			
 				def roleOperator = new Role(name:"Operador")
@@ -235,7 +241,6 @@ class BootStrap {
 				roleOperator.addToPermissions("audit:*")
 				roleOperator.addToPermissions("letterOfGuarantee:*")
 				roleOperator.addToPermissions("productWish:*")
-				roleOperator.addToPermissions("priceList:*")
 				roleOperator.save(flush:true)
 				
 				def roleManager = new Role(name:"Manager")
@@ -256,7 +261,16 @@ class BootStrap {
 				roleManager.addToPermissions("subtotalExtra:*")		
 				roleManager.addToPermissions("customerFamilyMargin:*")
 				roleManager.save(flush:true)
+
+				def rolePrices = new Role(name: "Prices")
+				rolePrices.addToPermissions("customerGroup:*")
+				rolePrices.addToPermissions("customerPriceCriteria:*")
+				rolePrices.addToPermissions("exchangeRate:*")
+				rolePrices.addToPermissions("priceVariable:*")
+				rolePrices.addToPermissions("priceVariableDate:*")
+				rolePrices.addToPermissions("supplierPriceCriteria:*")
 				
+
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
 				localeEs.save(flush:true)
 				def localeEn = new AvailableLocale(language:'en',country:'EN')
@@ -265,6 +279,10 @@ class BootStrap {
 				def admin = new User(username:"admin", passwordHash: new Sha256Hash("admin").toHex())
 				admin.addToRoles(roleAdmin)
 				admin.save(flush:true)
+
+				def adminPrices = new User(username:"precios", passwordHash: new Sha256Hash("precios").toHex())
+				adminPrices.addToRoles(rolePrices)
+				adminPrices.save(flush:true)
 				
 				def user = new User(username:"cayas", passwordHash: new Sha256Hash("cayas").toHex())
 				user.addToRoles(roleOperator)
@@ -312,23 +330,30 @@ class BootStrap {
 					}	
 				}
 				
+				CustomerGroup customerGroup1 = new CustomerGroup([name: 'Grupo 1'])
+				customerGroup1.save(flush: true,failOnError:true)
+				CustomerGroup customerGroup2 = new CustomerGroup([name: 'Grupo 2'])
+				customerGroup2.save(flush: true,failOnError:true)
+				CustomerGroup customerGroup3 = new CustomerGroup([name: 'Grupo 3'])
+				customerGroup3.save(flush: true,failOnError:true)
+
 				for(customerName in ["PSUR","DTA","RZZE","REH","LLI"]){
-					def customer = new Customer(prefix: customerName.substring(0,2) ,defaultMargin: new BigDecimal(5),defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
-					customer.save(flush:true)
+					def customer = new Customer(group: customerGroup1 ,prefix: customerName.substring(0,2) ,defaultMargin: new BigDecimal(5),defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
+					customer.save(flush:true,failOnError:true)
 					def userCustomer = new User(stakeholder:customer,username:customerName, passwordHash: new Sha256Hash(customerName).toHex())
 					userCustomer.addToRoles(roleExternal)
-					userCustomer.save(flush:true)
+					userCustomer.save(flush:true,failOnError:true)
 				}
+
+
 				
 				for(supplierName in ["HHUI","TMPH","TBRL","EXN","CLW"]){
 					def supplier = new Supplier(defaultReport:supplierReport,defaultLocale:localeEn,name:supplierName,country:Country.findByName("China"),address:".",taxRegistryNumber:"2312232")
-					supplier.save(flush:true)
+					supplier.save(flush:true,failOnError:true)
 					def userSupplier = new User(stakeholder:supplier,username:supplierName, passwordHash: new Sha256Hash(supplierName).toHex())
 
-					supplier.addToPriceLists( new PriceList(name: 'List A - ' +supplier.name) )
-					supplier.addToPriceLists( new PriceList(name: 'List B - ' + supplier.name) )
 					userSupplier.addToRoles(roleExternal)
-					userSupplier.save(flush:true)
+					userSupplier.save(flush:true,failOnError:true)
 				}
 				
 				for(shipperName in ["GHUAN","SHI","DEP"]){
@@ -377,12 +402,12 @@ class BootStrap {
 				def wishStatus3 = new WishStatus(name:"Arrived")
 				wishStatus3.save(flush:true)				
 				
-				def currency = new Currency(name:"PESO")
-				currency.save(flush:true)
-				currency = new Currency(name:"DOLAR")
-				currency.save(flush:true)
-				currency = new Currency(name:"YUAN")
-				currency.save(flush:true)
+				def currency1 = new Currency(name:"PESO")
+				currency1.save(flush:true)
+				def currency2 = new Currency(name:"DOLAR")
+				currency2.save(flush:true)
+				def currency3 = new Currency(name:"YUAN")
+				currency3.save(flush:true)
 				
 				ItemUnit itemUnit = new ItemUnit(description: "PZA")
 				itemUnit.save(flush:true)
@@ -591,21 +616,37 @@ class BootStrap {
 				Product product2 = new Product([attribute: "PRUEBA 2" ,"priceCondition.id":1, piecesPerPallet:6000, "unit.id":1, articlesQuantityPerInnerBox:5, "country.id":1, innerBoxQuantity:100, "shipper.id":11, innerBoxWidth:5, "color.id":1, "typeOfPresentation.id":1, netWeightPerBox:70, customerCode:"BBB", "currency.id":1, outerBoxWidth:7, descriptionEN:"B", status:"Stock", hsCode:"0101.01.", supplierCode:"322", quantityPerCarton:600, pricePerUnit: new BigDecimal(600), "consolidationArea.id":15, innerBoxLength:7, innerBoxHeight:5, outerBoxHeight:2, "supplier.id":6, criterionValue:50, tax:12, "port.id":1, descriptionSP:"B", boxesPerPallets:70, "family.id":2, grossWeightPerBox:90, outerBoxLength:10])
 				product2.save(flush: true)
 
-				def productPrice = new ProductPrice( product: product1,price:new BigDecimal(12) )
 
-				PriceList.get(3).addToProductsPrice( productPrice ).addToProductsPrice( new ProductPrice(product: product2,price:new BigDecimal(5)) ).save(flush:true)
-				
-				/* cambio precios para ver si guarda el precio histórico*/
-				if ( productPrice ) {
-					println "por cambiar el precio"
-					productPrice.price = new BigDecimal(11)
-					println "precio cambiado "
-					productPrice.save(flush:true)
-					productPrice.price = new BigDecimal(11)
-					productPrice.save(flush:true)
-					productPrice.price = new BigDecimal(16)
-					productPrice.save(flush:true)
+				ExchangeRate exchangeRate1 = new ExchangeRate([currency: currency1 ,date: new Date(),value: BigDecimal.valueOf(1)])
+				exchangeRate1.save(flush: true)
+				ExchangeRate exchangeRate2 = new ExchangeRate([currency: currency2 ,date: new Date(),value: BigDecimal.valueOf(30)])
+				exchangeRate2.save(flush: true)
+				ExchangeRate exchangeRate3 = new ExchangeRate([currency: currency3 ,date: new Date(),value: BigDecimal.valueOf(1000)])
+				exchangeRate3.save(flush: true)
+
+				PriceVariable priceVariable1 = new PriceVariable([name: "Variable 1",description: "Variable 1"])
+				priceVariable1.save(flush: true)
+				PriceVariable priceVariable2 = new PriceVariable([name: "Variable 2",description: "Variable 2"])
+				priceVariable2.save(flush: true)
+				PriceVariable priceVariable3 = new PriceVariable([name: "Variable 3",description: "Variable 3"])
+				priceVariable3.save(flush: true)
+
+				CustomerPriceCriteria customerPriceCriteria = new CustomerPriceCriteria([customerGroup: customerGroup1,family: family,comission: BigDecimal.valueOf(2),	extra1: BigDecimal.valueOf(3), extra2: BigDecimal.valueOf(4)])
+				customerPriceCriteria.save(flush: true)
+
+				for(customerName in ["AAA","BBB"]){
+					def customer = new Customer(group: customerGroup2 ,prefix: customerName.substring(0,2) ,defaultMargin: new BigDecimal(5),defaultReport:customerReport,defaultLocale:localeEs,name:customerName,country:Country.findByName("Argentina"),address:".",cuit:"30-34948484-4")
+					customer.save(flush:true,failOnError:true)
+					def userCustomer = new User(stakeholder:customer,username:customerName, passwordHash: new Sha256Hash(customerName).toHex())
+					userCustomer.addToRoles(roleExternal)
+					userCustomer.save(flush:true,failOnError:true)
 				}
+
+				new PriceVariableDate([priceVariable: priceVariable1,dateFrom:new Date() ,dateTo:new Date(),price: BigDecimal.valueOf(10)]).save()
+
+				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(5) , priceVariableTo: BigDecimal.valueOf(15), basePrice1: BigDecimal.valueOf(100), basePrice2: BigDecimal.valueOf(120)])
+				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(15) , priceVariableTo: BigDecimal.valueOf(25), basePrice1: BigDecimal.valueOf(122), basePrice2: BigDecimal.valueOf(132)])
+				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(25) , priceVariableTo: BigDecimal.valueOf(35), basePrice1: BigDecimal.valueOf(142), basePrice2: BigDecimal.valueOf(152)])
 			}
 		}
 	}

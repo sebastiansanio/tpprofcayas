@@ -1,7 +1,6 @@
 package stakeholder
 import product.Extra
 import product.Family
-import product.PriceList
 import wish.Wish
 import org.hibernate.envers.Audited
 
@@ -10,7 +9,7 @@ class Supplier extends Stakeholder{
 
 	static final String type = "supplier"
 
-	static hasMany		= [ wishes: Wish, extrasDefault: Extra, priceLists: PriceList]
+	static hasMany		= [ wishes: Wish, extrasDefault: Extra]
 
 	String 		address
 	String 		taxRegistryNumber

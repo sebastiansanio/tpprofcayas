@@ -86,8 +86,6 @@ class ProductImportService {
 				}
 				
 				Product product = new Product(productData)
-				if (product.pricePerUnit != null )
-					product.addToPreviousPrices( new HistoricalPrice(price: product.pricePerUnit, dateFrom: new Date()))
 				if (product.country == null && product.supplier != null )
 					product.country = product.supplier.country
 				product.save(failOnError:true)
@@ -121,8 +119,6 @@ class ProductImportService {
 				def previousPrice = product.pricePerUnit
 				product.properties['pricePerUnit'] = productData
 				product.validate()
-				if (product.pricePerUnit != null && previousPrice != product.pricePerUnit )
-					product.addToPreviousPrices( new HistoricalPrice(price: product.pricePerUnit, dateFrom: new Date()))
 	
 				product.save(failOnError:true)
 				

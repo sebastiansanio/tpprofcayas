@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
 
 import product.Extra
-import product.PriceList
+
 
 @Transactional
 class SupplierController {
