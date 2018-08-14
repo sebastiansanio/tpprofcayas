@@ -13,12 +13,15 @@ class PriceVariable {
 	Date	lastUpdated
 	String name
 	String description
-	
-	
+	Date expireDate
+	BigDecimal price
+
+		
     static mapping = {
     }
     
 	static constraints = {
+		price nullable: true, scale:5
 		name unique: true, blank:false, nullable:false
 		description blank: true, nullable:true
     }

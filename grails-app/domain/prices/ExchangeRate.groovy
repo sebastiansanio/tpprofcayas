@@ -12,7 +12,8 @@ class ExchangeRate {
 	Date	dateCreated
 	Date	lastUpdated
 
-	Currency currency
+	Currency currencyFrom
+	Currency currencyTo
 	Date date
 	BigDecimal value
 
@@ -20,9 +21,10 @@ class ExchangeRate {
 	}
 
 	static constraints = {
-		currency nullable: false
-		date nullable: false, unique: 'currency'
-		value nullable: false
+		currencyFrom nullable: false
+		currencyTo nullable: false
+		date nullable: false, unique: ['currencyFrom','currencyTo']
+		value nullable: true, scale:5
 	}
 
 	public String toString() {

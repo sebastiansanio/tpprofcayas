@@ -17,7 +17,7 @@
 		<thead>
 			<tr>
 			
-				<th><g:message code="exchangeRate.currency.label" default="Currency" /></th>
+				<th><g:message code="exchangeRate.currencyFrom.label" /></th>
 			
 				<g:sortableColumn property="date" title="${message(code: 'exchangeRate.date.label', default: 'Date')}" />
 			
@@ -33,7 +33,7 @@
 		<g:each in="${exchangeRateInstanceList}" status="i" var="exchangeRateInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${exchangeRateInstance.id}">${fieldValue(bean: exchangeRateInstance, field: "currency")}</g:link></td>
+				<td><g:link action="show" id="${exchangeRateInstance.id}">${fieldValue(bean: exchangeRateInstance, field: "currencyFrom")}</g:link></td>
 			
 				<td><g:formatDate date="${exchangeRateInstance.date}" /></td>
 			

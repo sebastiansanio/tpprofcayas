@@ -19,19 +19,9 @@
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
 	<g:render template="/_menu/navbar"/>														
 
-	<g:if test="${ pageProperty(name:'page.header') }">
-   		<g:pageProperty name="page.header" />
-	</g:if>
-	<g:else>
-		<g:render template="/layouts/header"/>														
-	</g:else>
+	<g:render template="/layouts/header"/>													
 
-	<g:if test="${session.layout == 'fluid'}">
-		<g:render template="/layouts/content_${session.layout}"/>														
-	</g:if>
-	<g:else>
-		<g:render template="/layouts/content_grid"/>														
-	</g:else>
+	<g:render template="/layouts/content_grid"/>										
 
 	<g:if test="${ pageProperty(name:'page.footer') }">
 	    <g:pageProperty name="page.footer" />

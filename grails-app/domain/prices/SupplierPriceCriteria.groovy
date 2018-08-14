@@ -23,10 +23,10 @@ class SupplierPriceCriteria {
 	static constraints = {
 		product nullable: false
 		variable nullable: true
-		priceVariableFrom nullable: true
-		priceVariableTo nullable: true
-		basePrice1 nullable: false
-		basePrice2 nullable: false
+		priceVariableFrom nullable: true, scale:5
+		priceVariableTo nullable: true, scale:5
+		basePrice1 nullable: false, scale:5
+		basePrice2 nullable: false, scale:5
 	}
 
 	public String toString() {
