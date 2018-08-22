@@ -5,6 +5,7 @@ import java.math.RoundingMode
 import org.hibernate.envers.Audited
 import stakeholder.Customer
 import wish.LoadUnit
+import stakeholder.Supplier
 
 @Audited
 class Product extends AbstractProduct {
@@ -23,6 +24,8 @@ class Product extends AbstractProduct {
 	String				attribute
 	TypeOfPresentation	typeOfPresentation
 	String				hsCode
+	Supplier 			salesSupplier
+	boolean				requiresSalesSupplier
 	
 	Long				quantityPerCarton
 	Long				innerBoxQuantity
@@ -59,6 +62,7 @@ class Product extends AbstractProduct {
 		innerBoxHeight min:0.0000, scale:4, nullable:true
 		boxesPerPallets min:0L, nullable:true
 		piecesPerPallet min:0L, nullable:true
+		salesSupplier nullable: true
 		hsCode matches: "^[0-9]{4}\\.[0-9]{2}\\..*", nullable: false, blank: false
 		companyCode unique: true
     }

@@ -268,7 +268,7 @@ class BootStrap {
 				rolePrices.addToPermissions("exchangeRate:*")
 				rolePrices.addToPermissions("priceVariable:*")
 				rolePrices.addToPermissions("supplierPriceCriteria:*")
-				
+				rolePrices.addToPermissions("pricesAlerts:*")
 
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
 				localeEs.save(flush:true)
@@ -641,9 +641,9 @@ class BootStrap {
 					userCustomer.save(flush:true,failOnError:true)
 				}
 
-				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(5) , priceVariableTo: BigDecimal.valueOf(15), basePrice1: BigDecimal.valueOf(100), basePrice2: BigDecimal.valueOf(120)]).save(flush:true, , failOnError: true)
-				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(15) , priceVariableTo: BigDecimal.valueOf(25), basePrice1: BigDecimal.valueOf(122), basePrice2: BigDecimal.valueOf(132)]).save(flush:true, , failOnError: true)
-				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(25) , priceVariableTo: BigDecimal.valueOf(35), basePrice1: BigDecimal.valueOf(142), basePrice2: BigDecimal.valueOf(152)]).save(flush:true, , failOnError: true)
+				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(5) , priceVariableTo: BigDecimal.valueOf(15), basePrice1: BigDecimal.valueOf(100), basePrice2: BigDecimal.valueOf(120), 	exchangeRate: exchangeRate1]).save(flush:true, , failOnError: true)
+				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(15) , priceVariableTo: BigDecimal.valueOf(25), basePrice1: BigDecimal.valueOf(122), basePrice2: BigDecimal.valueOf(132), exchangeRate: exchangeRate1]).save(flush:true, , failOnError: true)
+				new SupplierPriceCriteria([product: product1 ,variable: priceVariable1, priceVariableFrom: BigDecimal.valueOf(25) , priceVariableTo: BigDecimal.valueOf(35), basePrice1: BigDecimal.valueOf(142), basePrice2: BigDecimal.valueOf(152), exchangeRate: exchangeRate1]).save(flush:true, , failOnError: true)
 			}
 		}
 	}

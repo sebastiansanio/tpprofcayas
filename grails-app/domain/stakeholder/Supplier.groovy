@@ -15,11 +15,13 @@ class Supplier extends Stakeholder{
 	String 		taxRegistryNumber
 	boolean 	aluminumSupplier
 
+	BigDecimal	sellingFee
+
     static mapping = {
 		
     }
     
 	static constraints = {
-		
+		sellingFee nullable: true
     }
 }

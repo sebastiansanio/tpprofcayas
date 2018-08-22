@@ -23,11 +23,12 @@ class ExchangeRate {
 	static constraints = {
 		currencyFrom nullable: false
 		currencyTo nullable: false
-		date nullable: false, unique: ['currencyFrom','currencyTo']
+		date nullable: false
+		currencyTo unique: 'currencyFrom'
 		value nullable: true, scale:5
 	}
 
 	public String toString() {
-		return currency.toString() + " (" + date.format("dd/MM/yyyy") + ")"
+		return currencyFrom.toString() + " - " + currencyTo.toString()
 	}
 }
