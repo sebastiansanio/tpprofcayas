@@ -81,6 +81,7 @@ class Wish {
 	BigDecimal grossWeight
 	BigDecimal netWeight
 	Integer palletsQuantity
+	String palletsMaterial
 	TypeOfFreight typeOfFreight
 	String blNumber
 	String dispatchNumber
@@ -154,6 +155,7 @@ class Wish {
 		billDate nullable:true
 		finishDate nullable:true
 		forwarderSelectedDate nullable:true
+		palletsMaterial nullable: true, inList: ['plywood','wood','plastic']
 	}
 		
 	def beforeValidate(){

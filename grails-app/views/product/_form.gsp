@@ -292,6 +292,22 @@
 					<span class="help-inline">${hasErrors(bean: productInstance, field: 'piecesPerPallet', 'error')}</span>
 				</div>
 			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'priceVariable', 'error')} ">
+				<label for="unit" class="control-label"><g:message code="product.priceVariable.label" /></label>
+				<div class="controls">
+					<g:select id="unit" name="priceVariable.id" from="${prices.PriceVariable.list()}" optionKey="id" value="${productInstance?.priceVariable?.id}" class="many-to-one" noSelection="['null': '']"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'priceVariable', 'error')}</span>
+				</div>
+			</div>
+
+			<div class="control-group fieldcontain ${hasErrors(bean: productInstance, field: 'priceVariablePercentage', 'error')} ">
+				<label for="priceVariablePercentage" class="control-label"><g:message code="product.priceVariablePercentage.label"  /></label>
+				<div class="controls">
+					<g:field type="number" name="priceVariablePercentage" min="0" value="${productInstance.priceVariablePercentage}"/>
+					<span class="help-inline">${hasErrors(bean: productInstance, field: 'priceVariablePercentage', 'error')}</span>
+				</div>
+			</div>
 						
 			<g:render template="/_note/noteForm" model="['notes': productInstance?.notes, 'notesCount': productInstance?.notes?.size(), 'id': productInstance?.id]"/>
 						

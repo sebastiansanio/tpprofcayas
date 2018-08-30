@@ -269,6 +269,7 @@ class BootStrap {
 				rolePrices.addToPermissions("priceVariable:*")
 				rolePrices.addToPermissions("supplierPriceCriteria:*")
 				rolePrices.addToPermissions("pricesAlerts:*")
+				rolePrices.addToPermissions("product:*")
 
 				def localeEs = new AvailableLocale(language:'es',country:'ES')
 				localeEs.save(flush:true)

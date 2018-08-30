@@ -330,6 +330,13 @@
 				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "palletsQuantity")}</td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="wish.palletsMaterial.label"  /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: wishInstance, field: "palletsMaterial")}</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="wish.typeOfFreight.label" default="Type Of Freight" /></td>

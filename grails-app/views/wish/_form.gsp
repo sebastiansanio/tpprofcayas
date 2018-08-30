@@ -428,6 +428,14 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'palletsQuantity', 'error')}</span>
 						</div>
 					</div>
+
+				<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'palletsMaterial', 'error')} ">
+				<label for="palletsMaterial" class="control-label"><g:message code="wish.palletsMaterial.label"  /></label>
+				<div class="controls">
+					<g:select name="palletsMaterial" from="${wishInstance.constraints.palletsMaterial.inList}" value="${wishInstance?.palletsMaterial}" valueMessagePrefix="wish.palletsMaterial" noSelection="['': '']"/>
+					<span class="help-inline">${hasErrors(bean: wishInstance, field: 'palletsMaterial', 'error')}</span>
+				</div>
+			</div>
 		
 					<div class="control-group fieldcontain ${hasErrors(bean: wishInstance, field: 'typeOfFreight', 'error')} ">
 						<label for="typeOfFreight" class="control-label"><g:message code="wish.typeOfFreight.label" default="Type Of Freight" /></label>
@@ -836,6 +844,8 @@
 							<span class="help-inline">${hasErrors(bean: wishInstance, field: 'finishDate', 'error')}</span>
 						</div>
 					</div>
+
+
 				
 				</div>
 			</div>		

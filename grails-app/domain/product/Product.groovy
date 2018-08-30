@@ -6,6 +6,7 @@ import org.hibernate.envers.Audited
 import stakeholder.Customer
 import wish.LoadUnit
 import stakeholder.Supplier
+import prices.PriceVariable
 
 @Audited
 class Product extends AbstractProduct {
@@ -44,8 +45,13 @@ class Product extends AbstractProduct {
 	String hsFamily
 	int hsInternalNumber
 	String companyCode
+
+	PriceVariable priceVariable
+	BigDecimal	priceVariablePercentage
 	    
 	static constraints = {
+		priceVariable nullable: true
+		priceVariablePercentage nullable: true
 		color nullable:true
 		status inList: ["Stock", "Discontinuado"]
 		family nullable:false
